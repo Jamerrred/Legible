@@ -1,0 +1,18 @@
+{
+ "profile": {
+  "name": "Dana Whitlock",
+  "email": "dana.whitlock.cd02r1@example.com",
+  "phone": "415-555-0177",
+  "address": "742 Example Way, San Francisco, CA",
+  "zip": "94110",
+  "vehicle": "2022 Ford Transit"
+ },
+ "answers": {
+  "approve_submit": false,
+  "free_text": "Nothing else to add."
+ },
+ "shareable_without_asking": [
+  "zip",
+  "vehicle"
+ ]
+}

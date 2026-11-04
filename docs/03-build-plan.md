@@ -1,6 +1,6 @@
 # Build plan
 
-*Last updated 4 November 2026. Nothing has been built yet. There's no time limit, so this plan has no dates.*
+*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../reports/first-demo.md). Everything from the real Muse check onward is still to do.*
 
 ## The order
 
@@ -22,6 +22,27 @@ Two pieces get reused:
 
 - **The hand-written resource** becomes the answer key for the back office agent.
 - **The consumer agent** becomes the simulator inside the back office agent.
+
+## How the first demo changed this
+
+| Topic | Decision |
+|---|---|
+| First business | Mobile detailing, as the fictional Cormorant Mobile Detailing in San Francisco |
+| Order | Facts file first, then the site, resource and agent. The agent is frozen before any benchmark run |
+| Where it runs | Everything is local for now. Exa stays available behind the same search tool for public use |
+| The "before" site | Three pages (Home, FAQ, Book), tidy but not highly polished, with facts left out where a real small site would leave them out |
+| The "after" site | The "before" site plus a visible link to the resource. Nothing else changes |
+| Benchmark queries | About 10, written by a fresh subagent from the facts alone, with the site placement data removed. It saw no site, no resource and no sample queries |
+| Sample queries | Used only to check the agent on the control page before the freeze. They're the start of a discovery set, not part of the benchmark |
+| Resource | Written from the facts file only, with no discovery findings in this round |
+| Profile | Hybrid only so far |
+
+**The real Muse test still needs:**
+
+- **Hosting:** a host that can run a small server, because forms and logs need one. A static-only deploy won't work.
+- **Two live versions:** they differ only by the link and the resource. An optional third run gives Muse the resource URL directly, which separates "can't find it" from "can't use it".
+- **Clean runs:** fresh chats, a clean account or cleared memory if possible, and several repeats of each query.
+- **Who runs it:** the founder, by hand at first, since Muse is logged in on Brave and computer use can't click or type in a browser.
 
 ## Step 1: First mock business site
 
@@ -144,13 +165,12 @@ Add `/mcp` and `/.well-known/poppy.json`, generated from the record. Check Poppy
 
 | When | What |
 |---|---|
-| Step 1 | A hosting account and a domain or two for the mock businesses |
-| Step 2 | API keys for Anthropic, Exa, Tavily and Parallel |
+| Done | API keys for OpenRouter and Exa, in a git-ignored `.env` |
+| Before the real Muse check | A host that can run a small server, and a domain or two for the mock businesses |
 | Step 5 | Time to run the real Muse on the mock site |
 | Step 7 | API keys for Context.dev and Composio, and a demo Google account |
 
 ## Open questions
 
-- **Which business goes first?** Proposed: mobile vehicle detailing, because a real Muse run gives us a baseline. The [demo businesses doc](06-demo-businesses.md) explains why it doesn't limit the roadblocks.
 - **Should public mock sites say they're mock?** Public sites with invented prices could mislead a real person who finds them. Proposed: fictional names, no real contact details, `noindex`, and forms that contact no one. A visible "demo" note is safer for people but could change how agents behave, so the founder should choose.
 - **Which domains?** A realistic domain helps an agent treat the site as the merchant's own. A shared hosting address might not.

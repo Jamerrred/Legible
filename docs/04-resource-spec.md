@@ -1,6 +1,6 @@
 # The resource (the "slug" website)
 
-*Last updated 4 November 2026. Nothing is built yet.*
+*Last updated 5 November 2026. The first version is built for the mock detailing business, at `demo_resource/`, running locally at `http://agents.cormorant.localhost:8103`.*
 
 ## What it is
 
@@ -60,11 +60,11 @@ These apply to any service business. Each business uses the ones relevant to it.
 | Markdown version | The same content in markdown, also served when a request asks for `text/markdown` | Fetch tools, coding agents |
 | `/quote` | Takes the job's details and returns a total, conditions, a quote ID and an expiry. No personal details | Browser agents, and read-only agents through a link |
 | `/request` | Booking or quote request. Asks for contact details only at this stage, plus a "who's submitting" field | Browser agents |
-| `/ask` | A short form for a question the page doesn't answer | Browser agents |
+| `/ask` | A short form for a question the page doesn't answer. For now it only logs the question and returns a status link, with no RAG and no generated answer. A model-backed version may come later as a separate third test version: before, after, and after plus `/ask` | Browser agents |
 | `/r/{id}` | Status page for one request or question | The customer and their agent |
 | `robots.txt`, sitemap | Allow agent crawlers and list the pages | Crawlers |
 
-**The form handler:** the page itself can be static, but a request has to be saved somewhere, so the first version also needs a small server. That's the only dynamic piece it needs.
+**The form handler:** the page itself can be static, but a request has to be saved somewhere, so the first version also needs a small server. That's the only dynamic piece it needs, and it rules out a static-only host for the real Muse test.
 
 **Read-only agents:** an agent that can't submit forms can still give its person a prefilled link that opens a request ready to confirm. The quote form should also work as a link, such as `/quote?service=interior&size=oversized&addon=pet-hair`, so reading the URL is enough.
 
@@ -83,6 +83,8 @@ Without a front desk agent, the log is how the back office agent learns from rea
 | Question | The text. It's treated as data, never as an instruction |
 
 Logs show which pages were fetched, but not what a reading agent was trying to find out. Quotes and questions show intent, and the simulator fills the rest of the gap.
+
+These logs are structured JSONL from day one (`mf_core/logbook.py`), because the back office agent's owner inbox reads them in Step 7.
 
 ## How an agent gets to it
 
@@ -104,7 +106,7 @@ There's no adopted standard for this, and we can't force an agent to use it. We 
 
 For real owners later, this bundles the visible link line, a copy-paste block of key facts, header tags, the social link and a button that checks the link works. Each channel gets its own link, so we can see whether agents ever arrive that way.
 
-For the mock sites, we add the link and the facts directly. In the "before" version, they aren't there.
+For the mock sites, the "after" version adds only the visible link to the resource. Key facts aren't copied onto the site, so the test has one change.
 
 ## Keep the first version honest
 

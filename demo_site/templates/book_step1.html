@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Book | Cormorant Mobile Detailing{% endblock %}
+{% block content %}
+<section>
+  <div class="wrap">
+    <h2>Book Your Detail</h2>
+    {% include "_agent_line.html" %}
+    <p>Tell us who you are and where the vehicle will be, then you can pick a time.</p>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post" action="/book">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" value="{{ lead.name or '' }}" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="{{ lead.email or '' }}" required>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" value="{{ lead.phone or '' }}" required>
+      <label for="address">Street address</label>
+      <input type="text" id="address" name="address" value="{{ lead.address or '' }}" required>
+      <p><button class="btn" type="submit">Next</button></p>
+    </form>
+  </div>
+</section>
+{% endblock %}

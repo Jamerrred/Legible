@@ -1,6 +1,6 @@
 # Consumer agent design
 
-*Last updated 4 November 2026. This is a proposal based on [the research](07-consumer-agent-research.md). Nothing is built and none of these tools has been tried.*
+*Last updated 5 November 2026. Built at `consumer_agent/`. The design below is the original proposal, based on [the research](07-consumer-agent-research.md). [As built](#as-built-first-demo) lists where the build differs.*
 
 ## What it is
 
@@ -199,6 +199,22 @@ Each run writes one JSONL file.
 5. Tune budgets on the control page and freeze.
 
 **Early trial:** run browser-use against a cross-origin iframe, a PDF link, a CAPTCHA and a blocking banner in the first hour. Those are its least verified behaviours. If it does badly on the basics, try Stagehand before going further.
+
+## As built (first demo)
+
+| Part | Proposed above | As built |
+|---|---|---|
+| Model | Claude, swappable | The latest Muse Spark through OpenRouter, with the version resolved at runtime. Muse Wonder is available if Spark isn't good enough |
+| Search | Exa, Tavily or Parallel | Two interchangeable backends behind `search_web`: local search over saved, dated page copies with a mock directory, and Exa for public use |
+| Parallel search | Not specified | `search_web` takes several queries at once, following Muse's whole-intent queries with synonyms |
+| Browser worker | browser-use's own model client | A custom adapter on our client. Forced structured output worked with Spark |
+| Worker budgets | 40 steps | 25 steps, a 3.5-minute cap and at most 2 worker calls per run |
+| Profiles | Four | All four exist as configuration, but only the hybrid has been run |
+
+Control-page runs led to two general fixes before the freeze:
+
+- **Worker brief:** it now says that only elements in view are listed, and that the worker should stop once the objective is met. Before this, one worker submitted a form and then kept hunting for prices until it hit the time limit.
+- **Model errors:** a provider error ended a run with no report. The call now retries, then tries once more without echoed reasoning.
 
 ## What the demo can and can't claim
 

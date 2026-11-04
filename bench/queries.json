@@ -1,0 +1,509 @@
+[
+ {
+  "id": "q01",
+  "query": "Can you work out if Cormorant Mobile Detailing fits my budget? I've got a 2021 Subaru Outback in my driveway in Berkeley, 94704, with an outlet right by it. I want it done inside and out, and my dog sheds on the one spot he sits in on the back seat, so that hair needs dealing with too. I'd much rather do a Saturday but I can't go over $400 all in, tax and everything. Does Saturday work or does it have to be a weekday?",
+  "type": "total under a cap",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "vocabulary.service-words",
+   "size_classes.midsize",
+   "pricing.full",
+   "addons.pet-hair",
+   "timing.saturday-fee",
+   "service_area.zone-3",
+   "tax.sales-tax",
+   "pricing.structure"
+  ],
+  "correct_answer": "Saturday is over budget at $422.38 ($249 full detail + $55 pet hair + $25 Saturday fee, $28.38 tax, $65 untaxed travel), but a weekday fits at $395.22. One seat of hair isn't the excessive-hair surcharge, which starts at 3 seating positions.",
+  "person": {
+   "profile": {
+    "zip": "94704",
+    "vehicle": "2021 Subaru Outback"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "It's just the one seat, loose hair, not ground in anywhere else. The outlet is right by the car. If a weekday is what keeps it under $400, any weekday's fine. I only want the numbers for now, please don't send anything."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(?<![\\d.,])(?:422\\.38|422\\.37|422\\.39|422)(?!\\d|[.,]\\d)",
+    "(?<![\\d.,])(?:395\\.22|395\\.21|395\\.23|395)(?!\\d|[.,]\\d)"
+   ],
+   "any_of": [
+    [
+     "saturday[\\s\\S]{0,200}(over|exceed|above|too much|more than|past|beyond|doesn.?t fit|won.?t fit|doesn.?t work|won.?t work|bust)",
+     "(over|exceed|above|beyond)[\\s\\S]{0,200}saturday"
+    ]
+   ],
+   "none_of": [
+    "(?<![\\d.,])400\\.8\\d",
+    "(?<![\\d.,])427\\.98"
+   ]
+  }
+ },
+ {
+  "id": "q02",
+  "query": "Need a number from Cormorant Mobile Detailing. Our F-250 has been on job sites all year and the inside is wrecked: mud wall to wall on the floor, and the seats and carpet are grubby enough that they need a real shampoo, not just a vacuum. Don't care about the outside, it's a work truck. It sits in our driveway in Sausalito, 94965, and the nearest outlet is a good 150 feet away. Any weekday works. What's the whole thing going to cost me, tax and all?",
+  "type": "all-in total, messy description",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "size_classes.oversized",
+   "vocabulary.service-words",
+   "pricing.interior",
+   "addons.shampoo",
+   "conditions.heavily-soiled",
+   "prerequisites.power",
+   "service_area.zone-3",
+   "tax.sales-tax",
+   "pricing.structure"
+  ],
+  "correct_answer": "$628.76: oversized interior detail $289 + shampoo $125 + heavily soiled surcharge $75 + generator fee $30 = $519, plus $44.76 tax and $65 untaxed travel. The outlet is past the 75-foot limit, so the generator fee applies.",
+  "person": {
+   "profile": {
+    "zip": "94965",
+    "vehicle": "Ford F-250"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "The mud covers well over half the floor. There's no closer outlet, and the truck is outside in the open. I'll clear the cab out first. I only want the price for now."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(?<![\\d.,])(?:628\\.76|628\\.75|628\\.77|629)(?!\\d|[.,]\\d)"
+   ],
+   "any_of": [],
+   "none_of": [
+    "(?<![\\d.,])623\\.33",
+    "(?<![\\d.,])634\\.37"
+   ]
+  }
+ },
+ {
+  "id": "q03",
+  "query": "We're a small plumbing shop in SoMa, 94103, with three Ford Transit vans in our lot. Looking for somebody in San Francisco who'll come to us and wash the outsides, nothing inside. A Saturday would be best since that's when they're all parked. Who can do that and what's the all-in price?",
+  "type": "open market, multi-vehicle total with a day constraint",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "size_classes.oversized",
+   "pricing.exterior",
+   "fleet.discount",
+   "fleet.terms",
+   "prerequisites.water",
+   "service_area.zone-1",
+   "tax.sales-tax"
+  ],
+  "correct_answer": "Cormorant Mobile Detailing can, at $407.67: 3 x $139 = $417, less the 10% fleet discount = $375.30, plus $32.37 tax and no travel fee. But fleet jobs run Tuesday to Friday only, so not Saturday, and 3 vehicles need a working spigot within 100 feet.",
+  "person": {
+   "profile": {
+    "zip": "94103",
+    "vehicle": "3 Ford Transit vans"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "There's a working spigot on the wall about 40 feet from where they park. If Saturday's out, a weekday can work. Just tell me who and how much for now."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "cormorant",
+    "(?<![\\d.,])(?:407\\.67|407\\.66|407\\.68|408)(?!\\d|[.,]\\d)",
+    "spigot|faucet|water (source|hookup|hook-up|supply|access|connection)|hose"
+   ],
+   "any_of": [
+    [
+     "(tue|tuesday)[\\s\\S]{0,30}(fri|friday)",
+     "weekdays? only",
+     "(not|n.t|no)\\b[\\s\\S]{0,60}saturday",
+     "saturday[\\s\\S]{0,80}(not|n.t|no\\b|unavailable)"
+    ]
+   ],
+   "none_of": [
+    "(?<![\\d.,])452\\.97",
+    "(?<![\\d.,])434\\.8\\d"
+   ]
+  }
+ },
+ {
+  "id": "q04",
+  "query": "Just got a new Model Y and everyone keeps telling me to get it ceramic coated right away so the paint's protected for years. Does Cormorant do that? What would it run me? I'm in Noe Valley, 94114.",
+  "type": "not offered",
+  "expected_outcome": "not_offered",
+  "fact_ids": [
+   "not_offered.ceramic-coating",
+   "addons.sealant"
+  ],
+  "correct_answer": "Cormorant doesn't do ceramic coating, so there's no price for it. Its longest-lasting paint protection is the 6-month paint sealant.",
+  "person": {
+   "profile": {
+    "zip": "94114",
+    "vehicle": "Tesla Model Y"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "It's a brand new car with regular gloss paint. I'd want the longest protection available, but I'm only asking for now."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(don.?t|doesn.?t|do not|does not|won.?t|not offer|\\bno\\b|not do|isn.?t offered|not something)[\\s\\S]{0,60}ceramic|ceramic[\\s\\S]{0,60}(not offered|isn.?t|aren.?t|not available|not something|doesn.?t|don.?t|not on)",
+    "(6|six)[- ]month"
+   ],
+   "any_of": [],
+   "none_of": [
+    "^\\s*(yes|yep|yeah|sure|absolutely|definitely)\\b",
+    "ceramic( coating| coat)?( package| service| job)? (is|costs?|runs?|starts? at|would (be|cost|run)|will (be|cost|run))( you)?( about| around| roughly)? \\$"
+   ]
+  }
+ },
+ {
+  "id": "q05",
+  "query": "My kid got carsick in the back of our CR-V over the weekend and threw up all over the back seat and floor. I cleaned what I could but some of it's still dried on and it reeks. Can Cormorant come clean that up and get the smell out? How much? We're in 94122.",
+  "type": "not offered",
+  "expected_outcome": "not_offered",
+  "fact_ids": [
+   "not_offered.biohazard"
+  ],
+  "correct_answer": "No: Cormorant doesn't clean biohazards, which include vomit, so it can't take this job as it stands. The interior detail and odour treatment don't get around that.",
+  "person": {
+   "profile": {
+    "zip": "94122",
+    "vehicle": "Honda CR-V"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Yes, there's still visible dried vomit on the seat and the carpet. I'm only asking for now."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\\s\\S]{0,100}(vomit|biohazard|throw|threw|sick|bodily)|(vomit|biohazard|thrown? up|throw-up|threw up|carsick|sick)[\\s\\S]{0,100}(not offered|isn.?t|aren.?t|not (something|cleaned|covered|included)|don.?t|doesn.?t|won.?t|can.?t|cannot|excluded|outside)"
+   ],
+   "any_of": [],
+   "none_of": [
+    "^\\s*(yes|yep|yeah|sure|absolutely|definitely)\\b",
+    "\\b(can|will) (come )?(clean|handle|take care of|deal with|remove)( up)? (the |that |this |your )?(vomit|mess|throw)"
+   ]
+  }
+ },
+ {
+  "id": "q06",
+  "query": "Someone keyed the door on my Mazda3 and it's deep enough that my fingernail catches in it. If I pay for Cormorant's top package with the machine polish, will the scratch come out? Just want a straight answer before I spend that kind of money. I'm in 94131.",
+  "type": "unknown, depends on inspection",
+  "expected_outcome": "unknown",
+  "fact_ids": [
+   "services.scratch-outcome",
+   "services.flagship"
+  ],
+  "correct_answer": "That can't be known in advance: it depends on whether the scratch has gone through the clear coat, and a technician settles that by inspecting it on site. A confident yes or no is wrong.",
+  "person": {
+   "profile": {
+    "zip": "94131",
+    "vehicle": "Mazda3"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "It's about 8 inches on the driver's door, and I have no idea whether it's through the clear coat. No photos handy. Don't send anything yet."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(can.?t|cannot|can not|won.?t|\\bnot\\b|no way to|hard to|don.?t|doesn.?t|isn.?t|unable to)[\\s\\S]{0,80}(know|say|tell|promise|guarantee|sure|confirm|certain|predict|determine|answer)|depends|unknown|no guarantee|until (a|the|someone|they|it)\\b",
+    "inspect|technician|\\btech\\b|look at|in person|on[- ]site|on arrival|see it|sees? the scratch|check it",
+    "clear[- ]?coat"
+   ],
+   "any_of": [],
+   "none_of": [
+    "^\\s*(yes|yep|yeah|definitely|absolutely)\\b",
+    "^\\s*(no|nope)[,.!:\\s]+(it|the|that|a)\\s+(polish\\s+|scratch\\s+)?(won.?t|will not|can.?t|cannot)",
+    "(will|would) (definitely|certainly|absolutely|completely|fully|easily) (remove|take out|get rid of|buff out|fix|come out)",
+    "(?<!n.t )(?<!not )guaranteed to (remove|take out|get rid of|fix|come out)"
+   ]
+  }
+ },
+ {
+  "id": "q07",
+  "query": "Thinking of having Cormorant do my Cybertruck, inside and out, and I'd like the stainless panels polished up while they're at it. I'm in the Marina, 94123. What's that going to cost me?",
+  "type": "unknown, undecided by the owner",
+  "expected_outcome": "unknown",
+  "fact_ids": [
+   "eligibility.cybertruck"
+  ],
+  "correct_answer": "There's no firm price: the owner hasn't decided which size class a Cybertruck belongs in or whether its stainless panels can be polished, and she'll settle that once she has inspected one. Quoting it as a settled class is wrong.",
+  "person": {
+   "profile": {
+    "zip": "94123",
+    "vehicle": "Tesla Cybertruck"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "It's a standard Cybertruck, no wrap. I don't want anything sent yet, I just want to know where things stand."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unsettled|unknown|still deciding|unclear|can.?t (give|quote|say|confirm)|cannot (give|quote|say|confirm)|no (set |fixed |published |firm )?(price|class|quote|answer)",
+    "stainless|polish"
+   ],
+   "any_of": [
+    [
+     "inspect|look at|looked at|see one|seen one|sees one|check(s|ed)? (one |it )?out",
+     "owner|\\bines\\b|calloway"
+    ]
+   ],
+   "none_of": [
+    "^\\s*(yes|yep|yeah|sure|absolutely|definitely)\\b",
+    "(?<!whether )(?<!if )your cybertruck (is|would be|counts as|falls (in|into|under)|goes in|sits in)( a| an| the| in)? (small|midsize|mid-size|large|oversized|class [a-d])\\b",
+    "(?<!whether )(?<!if )(they|cormorant|ines|she|theo) (can|will) polish (the|your|those|its) (stainless|panels|steel)",
+    "(all[- ]in|total|price|cost) (is|will be|comes to) (about |around |roughly )?\\$\\s*\\d"
+   ]
+  }
+ },
+ {
+  "id": "q08",
+  "query": "I'm in a condo in Mission Bay, 94158, and my RAV4 lives in our underground garage. There's no outlet anywhere near my space, the HOA locked all that up. I want Cormorant to clean the inside. Can they do it down there? They can just bring a generator, right? And do they sort it out with my building manager or is that on me?",
+  "type": "eligibility and prerequisite",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "prerequisites.power",
+   "prerequisites.permission",
+   "prerequisites.parking",
+   "services.interior"
+  ],
+  "correct_answer": "Not there: the interior detail needs a grounded 120-volt outlet within 75 feet, and the generator can't run in an enclosed or underground garage, so the car would have to be somewhere else. Getting the building manager's permission before booking is on the customer, because Cormorant doesn't contact managers and a refusal on the day counts as a no-show.",
+  "person": {
+   "profile": {
+    "zip": "94158",
+    "vehicle": "Toyota RAV4"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "No outlet within 75 feet of my space, I've checked. I could move the car to a street space if I had to. I'm only asking for now."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "generator[\\s\\S]{0,120}(can.?t|cannot|can not|won.?t|not allowed|isn.?t allowed|not permitted|not able|unable|not an option|doesn.?t work|not possible)|(can.?t|cannot|can not|won.?t|not allowed|unable)[\\s\\S]{0,120}generator",
+    "(you|yourself)[\\s\\S]{0,120}(permission|approval|sign[- ]?off|go[- ]ahead|ok(ay)?\\b)|(permission|approval|sign[- ]?off|go[- ]ahead)[\\s\\S]{0,120}(you|yourself)"
+   ],
+   "any_of": [
+    [
+     "(don.?t|doesn.?t|do not|does not|won.?t|will not|\\bnot\\b)[\\s\\S]{0,60}(contact|call|reach out|speak|talk)[\\s\\S]{0,60}(manager|hoa|building)",
+     "\\byou\\b[\\s\\S]{0,40}(need|have|must|get|call|contact|ask)[\\s\\S]{0,100}(manager|hoa)",
+     "(manager|hoa)[\\s\\S]{0,100}(is|are) (on|up to) you"
+    ]
+   ],
+   "none_of": [
+    "^\\s*(yes|yep|yeah|sure|absolutely|definitely)\\b",
+    "(they|cormorant|ines|theo|the technician)( will|.ll| can)? (call|contact|reach out to|talk to|speak (to|with)) (your|the) (building |property )?(manager|hoa)"
+   ]
+  }
+ },
+ {
+  "id": "q09",
+  "query": "I've got Cormorant coming to do their top package on my Camry, the one with the polish, and I've paid the deposit. The arrival window starts about 36 hours from now and something's come up at work. If I cancel right now, how much do I get back in dollars? Or can I just move it, and would that cost me anything? I haven't moved it before.",
+  "type": "policy",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "policies.deposit",
+   "policies.cancellation",
+   "policies.reschedule"
+  ],
+  "correct_answer": "Cancelling at about 36 hours returns half the $150 top-package deposit, so $75. Moving it instead is free, since it's the first change with at least 24 hours' notice, and it has to be done by phone or text.",
+  "person": {
+   "profile": {
+    "zip": "94107",
+    "vehicle": "Toyota Camry"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Yes, the deposit was the full amount for that package, and this is the first time I've changed the booking. I'll contact them myself, I just need to know the rules."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(?<![\\d.,])75(?:\\.00)?(?!\\d|[.,]\\d)",
+    "free|no (charge|cost|fee)|(doesn.?t|won.?t|shouldn.?t) cost|at no",
+    "phone|text|\\bcall\\b"
+   ],
+   "any_of": [],
+   "none_of": [
+    "(?<![\\d.,])25(\\.00)? (back|refund)",
+    "half[\\s\\S]{0,30}\\$\\s*50\\b"
+   ]
+  }
+ },
+ {
+  "id": "q10",
+  "query": "Bay Auto Pages has Cormorant Mobile Detailing at a flat $129 for a full detail and says they're open Sundays. So this Sunday for my 2018 Corolla, at my place in the Richmond, 94121, that's $129 plus tax, right? Can you confirm?",
+  "type": "wrong premise",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "third_party.listing-price",
+   "third_party.listing-services",
+   "pricing.full",
+   "size_classes.small",
+   "tax.sales-tax",
+   "service_area.zone-1",
+   "availability.days-windows"
+  ],
+  "correct_answer": "No, that listing is wrong and dates from March 2023. A full detail on a Corolla is $219, or $237.89 with tax and no travel fee, and Cormorant is closed on Sundays, working Tuesday to Saturday.",
+  "person": {
+   "profile": {
+    "zip": "94121",
+    "vehicle": "2018 Toyota Corolla"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "It's in my driveway, nothing special about the car. I only wanted to confirm the price and day for now."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "closed[\\s\\S]{0,60}sunday|sunday[\\s\\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\\bnot\\b|\\bno\\b)|(not open|don.?t work|doesn.?t work|don.?t open|doesn.?t open)[\\s\\S]{0,60}sunday"
+   ],
+   "any_of": [
+    [
+     "(?<![\\d.,])(?:237\\.89|237\\.88|237\\.90|238)(?!\\d|[.,]\\d)",
+     "(?<![\\d.,])219(?:\\.00)?(?!\\d|[.,]\\d)"
+    ],
+    [
+     "out[- ]of[- ]date|outdated|\\bold\\b|wrong|incorrect|inaccurate|stale|false|not (correct|accurate|right|current)|isn.?t (correct|accurate|right|current)|no longer|2023"
+    ]
+   ],
+   "none_of": [
+    "(?<![\\d.,])140\\.13",
+    "^\\s*(yes|yep|yeah|correct|that.?s right|confirmed)\\b",
+    "see you (this )?sunday"
+   ]
+  }
+ },
+ {
+  "id": "q11",
+  "query": "Can you send Cormorant Mobile Detailing a request for me? Just a wash on my Prius, outside only. I'm at work until 5, so it has to be one of their evening slots, whichever's the next one open. I'm in 94114. Tell me what it'll cost and check with me before you actually send anything.",
+  "type": "take the action",
+  "expected_outcome": "action_submitted",
+  "fact_ids": [
+   "timing.evening",
+   "pricing.exterior",
+   "size_classes.midsize",
+   "tax.sales-tax",
+   "service_area.zone-1",
+   "next_step.reply",
+   "next_step.slot-not-held",
+   "policies.deposit"
+  ],
+  "correct_answer": "After the customer approves, the request goes in for a Tuesday or Thursday evening exterior wash at $118.40 ($79 + $30 after-hours fee + $9.40 tax). The request doesn't hold the slot: Ines replies within 4 business hours, and it's booked only once the deposit is paid through her link.",
+  "person": {
+   "profile": {
+    "zip": "94114",
+    "vehicle": "2017 Toyota Prius"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": true,
+    "free_text": "Yes, that's right, go ahead and send it. Either a Tuesday or a Thursday evening is fine, whichever's next open. Outside only, no add-ons."
+   }
+  },
+  "checks": {
+   "all_of": [
+    "(?<![\\d.,])(?:118\\.40|118\\.39|118\\.41|118)(?!\\d|[.,]\\d)",
+    "\\b(sent|submitted|passed (it |this )?(on|along)|forwarded|went through|delivered)\\b",
+    "(don.?t|doesn.?t|does not|\\bnot\\b|isn.?t|won.?t|\\bno\\b)[\\s\\S]{0,60}(hold|held|reserve|guarantee|lock|booked|confirmed)|(until|once|when|after)[\\s\\S]{0,80}deposit|deposit[\\s\\S]{0,100}(book|confirm|lock|secure|hold)"
+   ],
+   "any_of": [
+    [
+     "(4|four) business hours",
+     "\\bines\\b|calloway",
+     "text or email|email or text",
+     "\\bowner\\b"
+    ]
+   ],
+   "none_of": [
+    "(?<![\\d.,])85\\.81",
+    "you.?re (all )?(booked|set|confirmed)[.!]",
+    "(?<!n.t )(your )?(slot|spot|appointment|booking) is (held|reserved|confirmed|locked)"
+   ]
+  }
+ },
+ {
+  "id": "q12",
+  "query": "What's the soonest Cormorant Mobile Detailing can come do my Forester inside and out? I'm in 94117 and my schedule's wide open, any day, any time. Give me the actual date and arrival window.",
+  "type": "earliest availability",
+  "expected_outcome": "answered",
+  "fact_ids": [
+   "availability.live-calendar",
+   "availability.lead-time",
+   "availability.days-windows",
+   "availability.durations",
+   "timing.blackouts",
+   "size_classes.midsize",
+   "vocabulary.service-words"
+  ],
+  "correct_answer": "The earliest arrival window showing open on Cormorant's booking calendar that is at least 24 hours away, on a day it works and outside its closures. The grader works out the date when it runs.",
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "Subaru Forester"
+   },
+   "shareable_without_asking": [
+    "zip",
+    "vehicle"
+   ],
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Any day and either window is fine, including a Saturday. Regular paint, in my driveway with an outlet nearby. I just want the date for now, don't send anything."
+   }
+  },
+  "checks": {
+   "all_of": [],
+   "any_of": [],
+   "none_of": [],
+   "dynamic": "earliest_open_slot"
+  }
+ }
+]
