@@ -363,6 +363,40 @@ wheels = [
 ]
 
 [[package]]
+name = "composio"
+version = "0.18.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "composio-client" },
+    { name = "json-schema-to-pydantic" },
+    { name = "openai" },
+    { name = "pydantic" },
+    { name = "pysher" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ba/80/0071e855e9b8e06d2a5f4d87b9f5a65e2a7b3573b72e707256c4b6ee4fc3/composio-0.18.0.tar.gz", hash = "sha256:d8277412eabbb29e357025f1611d59dbb8f410ded5a1bed9a3a8fad09c630366", size = 239594, upload-time = "2026-07-15T20:40:09.609Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/42/8f/0f08f2698cfcdc03d53d8e4810256fbe16e4731c41b70b1fdbb9897f13f8/composio-0.18.0-py3-none-any.whl", hash = "sha256:8cf09b5f9494ae8b3f14103bab2a820a744e9007b0ed2cf9c36f575f9b63a522", size = 155940, upload-time = "2026-07-15T20:39:56.498Z" },
+]
+
+[[package]]
+name = "composio-client"
+version = "1.42.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "distro" },
+    { name = "httpx" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/12/d3/c47df669397e672172ff31090d186ff36e2158d33cc6c07cf5ec7dd05c39/composio_client-1.42.0.tar.gz", hash = "sha256:74f4635befaa4761e0ca83ed68ff63b0a62312ebea08cf0a2088a47cfe9d5154", size = 246045, upload-time = "2026-06-30T18:14:22.206Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fe/b5/f43e74632a91ae6516b713f7d2918391c98276967aa332bd8360457ec940/composio_client-1.42.0-py3-none-any.whl", hash = "sha256:4edfe2b3753fbf63fe2739a4f6705ffc8d4313f7fc98192efb12bac7990600a5", size = 277044, upload-time = "2026-06-30T18:14:20.857Z" },
+]
+
+[[package]]
 name = "cryptography"
 version = "50.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -798,6 +832,18 @@ wheels = [
 ]
 
 [[package]]
+name = "json-schema-to-pydantic"
+version = "0.5.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/e2/5c5263ead9368da59121c83ab7a47f9206f70ba1c81d89084bfbe804e851/json_schema_to_pydantic-0.5.0.tar.gz", hash = "sha256:fb115538fe32d28e5689632d0b61da8a4135bbe994313869372a57a3d0aa2cc9", size = 54977, upload-time = "2026-10-21T08:25:31.36Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3a/b3/c82dbd4872634405a07c281dd51b7bb175b4a762937f65ea0e4635da212b/json_schema_to_pydantic-0.5.0-py3-none-any.whl", hash = "sha256:c484aa2a0f05ac22bc1866762bdaf563faa13f7641ba59e89fb73ff7cb460a27", size = 18302, upload-time = "2026-10-21T08:25:30.093Z" },
+]
+
+[[package]]
 name = "jsonschema"
 version = "4.26.0"
 source = { registry = "https://pypi.org/simple" }
@@ -981,6 +1027,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "browser-use" },
+    { name = "composio" },
     { name = "fastapi" },
     { name = "httpx" },
     { name = "jinja2" },
@@ -1000,6 +1047,7 @@ dev = [
 requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "browser-use", specifier = ">=0.13.14" },
+    { name = "composio", specifier = ">=0.18.0" },
     { name = "fastapi", specifier = ">=0.162.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "jinja2", specifier = ">=3.1.6" },
@@ -3669,6 +3717,16 @@ wheels = [
 ]
 
 [[package]]
+name = "pysher"
+version = "1.0.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+    { name = "websocket-client" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/12/a0/d0638470df605ce266991fb04f74c69ab1bed3b90ac3838e9c3c8b69b66a/Pysher-1.0.8.tar.gz", hash = "sha256:7849c56032b208e49df67d7bd8d49029a69042ab0bb45b2ed59fa08f11ac5988", size = 9071, upload-time = "2022-10-10T13:41:09.936Z" }
+
+[[package]]
 name = "pytest"
 version = "9.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -4116,6 +4174,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/d6/f1/c123f902bc2ff9e9c2ab66241b8872204df87cbb18ecdf035e120860fedc/wcwidth-0.9.4-cp310-abi3-win_amd64.whl", hash = "sha256:f28d77153303450ee13ebbe888297e75cf532c754555b6cabafc9bdda16c421c", size = 597780, upload-time = "2026-10-24T18:11:36.952Z" },
     { url = "https://files.pythonhosted.org/packages/4b/88/1cb5ddaf5510b918e01aa95fc4b68df91dead784b63e4931037c5673e85f/wcwidth-0.9.4-cp310-abi3-win_arm64.whl", hash = "sha256:2b58fc8cf2de1bf9cdb68b8beaa5be198742414a7c8cd97aa51ec039783ffa49", size = 598786, upload-time = "2026-10-24T18:11:30.886Z" },
     { url = "https://files.pythonhosted.org/packages/6f/0c/309b1813b230d1dbbd6f2c2ab2bb21ef68992358977605d9ef289bbfedcc/wcwidth-0.9.4-py3-none-any.whl", hash = "sha256:901eace6d2dd25ebb917d0ce5db18e5c537e1504c905cf32f0d006c12098b05d", size = 301806, upload-time = "2026-10-24T18:10:52.651Z" },
+]
+
+[[package]]
+name = "websocket-client"
+version = "1.9.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/cb/a5abcc2891249f393827c650c6296660ce40374ac22d99ab9aea41f9d2a2/websocket_client-1.9.2.tar.gz", hash = "sha256:0fcb57545848be86992e128218fd96dd87a6769ffdb1a968dff79632b85604d0", size = 84110, upload-time = "2026-08-31T14:08:40.964Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d5/d2/cc4dc1271e464942db7ee278baae2daa99ee77cb2af744025c04da585a3e/websocket_client-1.9.2-py3-none-any.whl", hash = "sha256:e1a673830a9c7bfa47b1cd3d5e4178f4c9651d80a4eab02c9c23a1c3ec6250ce", size = 95786, upload-time = "2026-08-31T14:08:39.899Z" },
 ]
 
 [[package]]
