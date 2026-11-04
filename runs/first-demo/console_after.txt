@@ -1,0 +1,27 @@
+12 runs on after
+q01 done 41.95
+q02 done 33.55
+q03 done 49.04
+q04 done 26.61
+q05 done 26.53
+q06 done 28.46
+q07 done 40.37
+q08 done 20.97
+q09 done 24.29
+q10 done 35.2
+q11 done 207.73
+q12 done 37.84
+
+after: valid runs 12/12, correct 12/12, acceptable 12/12, partial 0, cost $1.40
+  q01 r1: verified_correct     resource  41.95s  
+  q02 r1: verified_correct     resource  33.55s  
+  q03 r1: verified_correct     resource  49.04s  
+  q04 r1: verified_correct     resource  26.61s  
+  q05 r1: verified_correct     resource  26.53s  
+  q06 r1: verified_correct     resource  28.46s  
+  q07 r1: verified_correct     resource  40.37s  
+  q08 r1: verified_correct               20.97s  
+  q09 r1: verified_correct     resource  24.29s  
+  q10 r1: verified_correct     resource  35.2s  
+  q11 r1: verified_correct     resource  207.73s  
+  q12 r1: verified_correct     resource  37.84s  

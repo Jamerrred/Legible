@@ -1,0 +1,66 @@
+{
+  "answer": "No — Cormorant Mobile Detailing does NOT do ceramic coating, so they can't do a multi-year ceramic coating on your Model Y.\n\nTheir own booking-info site says explicitly:\n\n> \"Cormorant Mobile Detailing doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant.\"\n\nThat also means the old Bay Auto Pages directory listing that says \"ceramic coating\" is wrong — Cormorant's own site flags that listing as false (last updated March 2023, also wrong on price, boats, and Sundays).\n\nWhat they DO offer for paint protection:\n\nYour words \"ceramic coated / paint's protected\" map to their \"paint sealant / wax / paint protection\" = 6-month paint sealant add-on.\n\nYour Model Y maps to their midsize / Class B (they list Tesla Model Y as midsize).\n\nOptions for a Model Y in 94114 (which is in their no-travel-fee San Francisco zone):\n\n1. Closest to \"protection for years\" — still only 6 months:\n**The Flagship (polish-and-seal detail)** — includes full detail + clay bar + one-step machine polish + 6-month sealant + upholstery shampoo\n- $629 + 8.625% tax = $683.25 total, $0 travel fee in 94114\n- $150 deposit counts toward total, ~6.5 hrs, must start morning window\n\n2. Cheaper protection option:\n**Full detail (The Schooner) + clay bar + 6-month sealant**\n- $249 + $70 clay + $115 sealant = $434 + $37.43 tax = $471.43 total, $0 travel fee in 94114\n- $50 deposit, ~5 hrs\n\nNotes:\n- Sealant can only be bought together with clay bar on a Skiff or Schooner; both are already included in Flagship.\n- If you want true multi-year ceramic coating, you'll need a different shop — Cormorant doesn't offer it, PPF, multi-stage correction, or engine work either.\n- They are mobile-only, come to you in Noe Valley, need a 120V outlet within 75ft for Cutter/Schooner/Flagship or $30 generator fee (can't use generator in enclosed/underground garage).",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Cormorant does not do ceramic coating, longest protection is 6-month sealant",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "doesn't do ceramic coating, longest-lasting paint protection is the 6-month paint sealant"
+    },
+    {
+      "claim": "Tesla Model Y is midsize Class B",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "midsize class covers Tesla Model Y"
+    },
+    {
+      "claim": "Flagship midsize $629 before tax, $683.25 total in 94114",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=flagship&vehicle=Tesla%20Model%20Y&zip=94114&format=json",
+      "value": "$683.25 including tax and travel"
+    },
+    {
+      "claim": "Full detail midsize + clay + sealant $471.43 total in 94114",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Tesla%20Model%20Y&zip=94114&addons=clay%2Csealant&format=json",
+      "value": "$471.43 including tax and travel"
+    },
+    {
+      "claim": "94114 has no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "94114 in $0 San Francisco zone"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "items": [
+        "ceramic, ceramic coating -> NOT OFFERED, closest is 6-month paint sealant (paint protection / wax)"
+      ],
+      "question": "ceramic coating"
+    }
+  ],
+  "next_steps": [
+    "If you want true multi-year ceramic, I can search for other San Francisco shops that do offer it"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4913-881d",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 6,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 5,
+    "prompt_tokens": 60420,
+    "completion_tokens": 1928,
+    "reasoning_tokens": 299,
+    "total_tokens": 62348,
+    "cost": 0.077325
+  },
+  "cost": 0.077325,
+  "wall_s": 26.61,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q04_r1/run-20261104T212216-4913-881d.jsonl",
+  "error": null
+}

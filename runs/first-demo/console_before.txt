@@ -1,0 +1,27 @@
+12 runs on before
+q01 done 362.16
+q02 done 252.75
+q03 done 228.64
+q04 done 124.31
+q05 done 147.37
+q06 done None
+q07 done None
+q08 done 17.07
+q09 done 25.94
+q10 done None
+q11 done None
+q12 done None
+
+before: valid runs 7/12, correct 3/7, acceptable 3/7, partial 0, cost $1.84
+  q01 r1: gave_up                        362.16s  no report: model timeout; missing: (?<![\d.,])(?:422\.38|422\.37|422\.39|422)(?!\d|[.,]\d); missing: (?<![\d.,])(?:395\.22|395\.21|395\.23|3
+  q02 r1: wrong                          252.75s  missing: (?<![\d.,])(?:628\.76|628\.75|628\.77|629)(?!\d|[.,]\d)
+  q03 r1: wrong                          228.64s  missing: (?<![\d.,])(?:407\.67|407\.66|407\.68|408)(?!\d|[.,]\d)
+  q04 r1: verified_correct               124.31s  
+  q05 r1: wrong                          147.37s  missing: (don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\s\S]{
+  q06 r1: invalid_api_failure            Nones  not run: balance $0.21 is under the $0.30 floor
+  q07 r1: invalid_api_failure            Nones  not run: balance $0.21 is under the $0.30 floor
+  q08 r1: verified_correct               17.07s  
+  q09 r1: verified_correct               25.94s  
+  q10 r1: invalid_api_failure            Nones  not run: balance $0.21 is under the $0.30 floor
+  q11 r1: invalid_api_failure            Nones  not run: balance $0.21 is under the $0.30 floor
+  q12 r1: invalid_api_failure            Nones  not run: balance $0.21 is under the $0.30 floor

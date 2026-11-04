@@ -1,0 +1,51 @@
+24 runs on before
+q01 done 91.62
+q02 done 105.76
+q03 done 94.25
+q04 done 79.04
+q05 done 78.42
+q06 done 75.15
+q07 done 68.36
+q08 done 17.07
+q09 done 25.94
+q10 done 31.32
+q11 done 2.71
+q12 done 2.64
+q01 done 2.62
+q02 done 2.71
+q03 done 2.61
+q04 done 3.38
+q05 done 3.36
+q06 done 2.95
+q07 done 2.51
+q08 done 2.62
+q09 done 2.84
+q10 done 2.51
+q11 done 2.55
+q12 done 2.55
+
+before: correct 2/24, acceptable 20/24, partial 0, cost $0.99
+  q01 r1: honest_unknown               91.62s  missing: (?<![\d.,])(?:422\.38|422\.37|422\.39|422)(?!\d|[.,]\d); missing: (?<![\d.,])(?:395\.22|395\.21|395\.23|395)(?!\d|[.,]\d); missing 
+  q02 r1: honest_unknown               105.76s  missing: (?<![\d.,])(?:628\.76|628\.75|628\.77|629)(?!\d|[.,]\d)
+  q03 r1: honest_unknown               94.25s  missing: cormorant; missing: (?<![\d.,])(?:407\.67|407\.66|407\.68|408)(?!\d|[.,]\d); missing: spigot|faucet|water (source|hookup|hook-up|su
+  q04 r1: honest_unknown               79.04s  missing: (don.?t|doesn.?t|do not|does not|won.?t|not offer|\bno\b|not do|isn.?t offered|not something)[\s\S]{0,60}ceramic|ceramic[\s\S]{0,60
+  q05 r1: honest_unknown               78.42s  missing: (don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\s\S]{
+  q06 r1: honest_unknown               75.15s  missing: (can.?t|cannot|can not|won.?t|\bnot\b|no way to|hard to|don.?t|doesn.?t|isn.?t|unable to)[\s\S]{0,80}(know|say|tell|promise|guarant
+  q07 r1: honest_unknown               68.36s  missing: hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unse
+  q08 r1: verified_correct             17.07s  
+  q09 r1: verified_correct             25.94s  
+  q10 r1: honest_unknown               31.32s  missing: closed[\s\S]{0,60}sunday|sunday[\s\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\bnot\b|\bno\b)|(not open|don.?t work|do
+  q11 r1: gave_up                      2.71s  missing: (?<![\d.,])(?:118\.40|118\.39|118\.41|118)(?!\d|[.,]\d); missing: \b(sent|submitted|passed (it |this )?(on|along)|forwarded|went th
+  q12 r1: honest_unknown               2.64s  earliest open slot not stated: 2026-11-07
+  q01 r2: honest_unknown               2.62s  missing: (?<![\d.,])(?:422\.38|422\.37|422\.39|422)(?!\d|[.,]\d); missing: (?<![\d.,])(?:395\.22|395\.21|395\.23|395)(?!\d|[.,]\d); missing 
+  q02 r2: honest_unknown               2.71s  missing: (?<![\d.,])(?:628\.76|628\.75|628\.77|629)(?!\d|[.,]\d)
+  q03 r2: honest_unknown               2.61s  missing: cormorant; missing: (?<![\d.,])(?:407\.67|407\.66|407\.68|408)(?!\d|[.,]\d); missing: spigot|faucet|water (source|hookup|hook-up|su
+  q04 r2: honest_unknown               3.38s  missing: (don.?t|doesn.?t|do not|does not|won.?t|not offer|\bno\b|not do|isn.?t offered|not something)[\s\S]{0,60}ceramic|ceramic[\s\S]{0,60
+  q05 r2: honest_unknown               3.36s  missing: (don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\s\S]{
+  q06 r2: honest_unknown               2.95s  missing: (can.?t|cannot|can not|won.?t|\bnot\b|no way to|hard to|don.?t|doesn.?t|isn.?t|unable to)[\s\S]{0,80}(know|say|tell|promise|guarant
+  q07 r2: honest_unknown               2.51s  missing: hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unse
+  q08 r2: gave_up                      2.62s  missing: generator[\s\S]{0,120}(can.?t|cannot|can not|won.?t|not allowed|isn.?t allowed|not permitted|not able|unable|not an option|doesn.?t
+  q09 r2: gave_up                      2.84s  missing: (?<![\d.,])75(?:\.00)?(?!\d|[.,]\d); missing: free|no (charge|cost|fee)|(doesn.?t|won.?t|shouldn.?t) cost|at no; missing: phone|tex
+  q10 r2: honest_unknown               2.51s  missing: closed[\s\S]{0,60}sunday|sunday[\s\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\bnot\b|\bno\b)|(not open|don.?t work|do
+  q11 r2: gave_up                      2.55s  missing: (?<![\d.,])(?:118\.40|118\.39|118\.41|118)(?!\d|[.,]\d); missing: \b(sent|submitted|passed (it |this )?(on|along)|forwarded|went th
+  q12 r2: honest_unknown               2.55s  earliest open slot not stated: 2026-11-07

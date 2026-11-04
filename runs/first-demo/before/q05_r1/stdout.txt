@@ -1,0 +1,79 @@
+ly be treated as heavily soiled — expect possible extra, confirmed on arrival.\n- Odour treatment outcome isn't guaranteed — FAQ says \"Usually\" for smoke smell.\n- Practical needs: take out child seats/belongings/cargo before they arrive (areas still full don't get cleaned, no discount), adult to hand over keys and stay reachable. Cutter needs a grounded 120V outlet within 75ft of car or $30 generator fee, and generator can't run in enclosed/underground garage. Need driveway/private lot/open garage or legal street space with 3ft clear both sides + room for their van within 100ft. Apartment/HOA lot needs manager permission in advance.\n- Hours: work Tue-Sat, closed Sun/Mon. Morning 8-9:30am, afternoon 1-2:30pm Tue-Fri, Sat morning only. Need 24hrs notice; same-day only Skiff/Cutter afternoon if free + call before 10am + $40 fee.\n- Deposit $50 to book ($150 Flagship), counts to total. Cancel 48hrs+ full refund, 24-48hrs half, under 24hrs none.\n\nI couldn't verify a travel fee for 94122 without entering your address in the booking form — site only says \"Based in San Francisco. We also travel further for a fee, see map.\" Since you're in San Francisco, you're in their base area, but confirm no travel fee when you book at 415-555-0142.\n\nNo budget was given, so I didn't compare to a cap.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "CR-V is Class B, Cutter Class B $179 starting",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Class B includes CR-V; Cutter Class B $179"
+    },
+    {
+      "claim": "Upholstery shampoo add-on Class B $75, addable to Cutter/Schooner",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "$75"
+    },
+    {
+      "claim": "Odour treatment $90 1hr or $140 2hr, tech chooses after smell test, only on Cutter/Schooner/Flagship",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "$90 / $140"
+    },
+    {
+      "claim": "Cutter does not include shampoo",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "Cutter doesn't include shampoo"
+    },
+    {
+      "claim": "Heavily soiled may cost extra, final price confirmed at vehicle",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "heavily soiled may cost extra"
+    },
+    {
+      "claim": "Mobile only, based in San Francisco, travel further for fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Mobile only San Francisco + fee further"
+    },
+    {
+      "claim": "Travel fee for 94122",
+      "evidence": "unknown",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "unknown - requires booking form"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "items": [
+        "back seat and floor vomit cleanup = Cutter interior detail + upholstery and carpet shampoo add-on",
+        "get the smell out = odour treatment ozone add-on"
+      ],
+      "question": "mapped_terms"
+    }
+  ],
+  "next_steps": [
+    "Confirm no travel fee for 94122 and heavily-soiled upcharge for dried vomit when booking at 415-555-0142",
+    "Remove child seats and belongings, arrange outlet access or $30 generator, and ensure legal parking with clearance"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T214238-5988-9fcb",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 8,
+  "browse_tasks": 1,
+  "approved": false,
+  "usage": {
+    "calls": 22,
+    "prompt_tokens": 273932,
+    "completion_tokens": 8727,
+    "reasoning_tokens": 1738,
+    "total_tokens": 282659,
+    "cost": 0.275403
+  },
+  "cost": 0.275403,
+  "wall_s": 147.37,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/before/q05_r1/run-20261104T214238-5988-9fcb.jsonl",
+  "error": null
+}

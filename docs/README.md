@@ -1,12 +1,14 @@
 # MuseFront docs
 
-*Last updated 4 November 2026. Nothing has been built yet: this folder holds the project's decisions, research and plan.*
+*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. The first local demo is built: see [its report](../reports/first-demo.md).*
 
 ## Current position
 
 MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps it accurate. The goal is a compelling, functional demo on four mock service businesses.
 
-**Next step:** build the first mock site, then the consumer agent, then run the before-and-after test ([plan](03-build-plan.md)).
+**Done so far:** the first mock business (mobile detailing), its resource, the consumer agent and a local before-and-after test ([report](../reports/first-demo.md)).
+
+**Next steps:** finish the 5 "before" queries that ran out of OpenRouter credit, then test on real Muse, which can't reach localhost, so it needs a public host and two live versions ([plan](03-build-plan.md#how-the-first-demo-changed-this)).
 
 ## Read these in order
 
@@ -31,7 +33,7 @@ Older material may say something different. These positions are current:
 - **The front desk agent and the connector application are dropped.**
 - **MCP and Poppy are optional**, and come only after the back office agent.
 - **The first resource is written by hand**, by Claude. It's the answer key for the back office agent.
-- **The consumer agent is ours**, built on a tool loop with browser-use, and it doubles as the simulator.
+- **The consumer agent is ours**, built on a tool loop with browser-use, and it doubles as the simulator. It runs on Muse Spark through OpenRouter.
 - **The demo set is four service businesses**, not a car wash, HVAC company and online store.
 - **Roadblocks and queries are long-tail.** The van cleaning query is one example only.
 - **The earlier in-chat PRD is out of date.** These docs replace it.

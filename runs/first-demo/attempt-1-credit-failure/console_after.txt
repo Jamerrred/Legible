@@ -1,0 +1,51 @@
+24 runs on after
+q01 done 41.95
+q02 done 33.55
+q03 done 49.04
+q04 done 26.61
+q05 done 26.53
+q06 done 28.46
+q07 done 34.03
+q08 done 20.97
+q09 done 24.29
+q10 done 38.32
+q11 done 43.36
+q12 done 18.85
+q01 done 13.75
+q02 done 21.26
+q03 done 2.63
+q04 done 2.9
+q05 done 7.07
+q06 done 2.61
+q07 done 2.67
+q08 done 2.83
+q09 done 2.8
+q10 done 2.63
+q11 done 2.59
+q12 done 2.57
+
+after: correct 8/24, acceptable 8/24, partial 0, cost $0.95
+  q01 r1: verified_correct   resource  41.95s  
+  q02 r1: verified_correct   resource  33.55s  
+  q03 r1: verified_correct   resource  49.04s  
+  q04 r1: verified_correct   resource  26.61s  
+  q05 r1: verified_correct   resource  26.53s  
+  q06 r1: verified_correct   resource  28.46s  
+  q07 r1: gave_up            resource  34.03s  missing: hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unse
+  q08 r1: verified_correct             20.97s  
+  q09 r1: verified_correct   resource  24.29s  
+  q10 r1: gave_up                      38.32s  missing: closed[\s\S]{0,60}sunday|sunday[\s\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\bnot\b|\bno\b)|(not open|don.?t work|do
+  q11 r1: gave_up            resource  43.36s  missing: (?<![\d.,])(?:118\.40|118\.39|118\.41|118)(?!\d|[.,]\d); missing: \b(sent|submitted|passed (it |this )?(on|along)|forwarded|went th
+  q12 r1: gave_up            resource  18.85s  earliest open slot not stated: 2026-11-07
+  q01 r2: gave_up            resource  13.75s  missing: (?<![\d.,])(?:422\.38|422\.37|422\.39|422)(?!\d|[.,]\d); missing: (?<![\d.,])(?:395\.22|395\.21|395\.23|395)(?!\d|[.,]\d); missing 
+  q02 r2: gave_up            resource  21.26s  missing: (?<![\d.,])(?:628\.76|628\.75|628\.77|629)(?!\d|[.,]\d)
+  q03 r2: gave_up                      2.63s  missing: cormorant; missing: (?<![\d.,])(?:407\.67|407\.66|407\.68|408)(?!\d|[.,]\d); missing: spigot|faucet|water (source|hookup|hook-up|su
+  q04 r2: gave_up                      2.9s  missing: (don.?t|doesn.?t|do not|does not|won.?t|not offer|\bno\b|not do|isn.?t offered|not something)[\s\S]{0,60}ceramic|ceramic[\s\S]{0,60
+  q05 r2: gave_up                      7.07s  missing: (don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\s\S]{
+  q06 r2: gave_up                      2.61s  missing: (can.?t|cannot|can not|won.?t|\bnot\b|no way to|hard to|don.?t|doesn.?t|isn.?t|unable to)[\s\S]{0,80}(know|say|tell|promise|guarant
+  q07 r2: gave_up                      2.67s  missing: hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unse
+  q08 r2: gave_up                      2.83s  missing: generator[\s\S]{0,120}(can.?t|cannot|can not|won.?t|not allowed|isn.?t allowed|not permitted|not able|unable|not an option|doesn.?t
+  q09 r2: gave_up                      2.8s  missing: (?<![\d.,])75(?:\.00)?(?!\d|[.,]\d); missing: free|no (charge|cost|fee)|(doesn.?t|won.?t|shouldn.?t) cost|at no; missing: phone|tex
+  q10 r2: gave_up                      2.63s  missing: closed[\s\S]{0,60}sunday|sunday[\s\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\bnot\b|\bno\b)|(not open|don.?t work|do
+  q11 r2: gave_up                      2.59s  missing: (?<![\d.,])(?:118\.40|118\.39|118\.41|118)(?!\d|[.,]\d); missing: \b(sent|submitted|passed (it |this )?(on|along)|forwarded|went th
+  q12 r2: gave_up                      2.57s  earliest open slot not stated: 2026-11-07

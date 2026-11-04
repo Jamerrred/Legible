@@ -1,0 +1,68 @@
+75 ft, or a different location: driveway, private lot, open garage or street space that stays legal for the whole job, with 3 ft clear on both sides, plus room within 100 ft for their 20-ft long, 7-ft 2-in tall work van.\n\n* Building manager: that's on you. A customer parked at an apartment / condo / HOA-managed lot must get the building manager's permission before booking. Cormorant doesn't contact managers, and a refusal on the day counts as a no-show (deposit kept).\n\nOther notes for you:\n* Your ZIP 94158 is in their no-travel-fee San Francisco zone.\n* Your RAV4 is not named on their size list. Their midsize class (Class B) covers sedans, crossovers and two-row SUVs such as Camry, Model 3/Y, CR-V or Outback — if your RAV4 is classed as midsize, interior is $179 before add-ons/fees/tax. A technician checks size class before starting and shows photos/new price if it differs; if you decline, no job and no deposit back. Ask them to confirm RAV4 = midsize when you contact them.\n\nWhat would make it possible: an outdoor / open-air spot with manager permission + outlet within 75 ft (or generator allowed outdoors for $30), with legal parking and clearances above.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "interior detail power / generator ban underground",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "interior detail, full detail and Flagship need grounded 120V outlet within 75 ft or $30 generator fee, generator can't run in enclosed/underground garage so can't be done there without outlet"
+    },
+    {
+      "claim": "building manager permission is customer's job, Cormorant doesn't contact managers",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "customer at apartment/condo/HOA lot must get manager permission before booking, Cormorant doesn't contact managers, refusal counts as no-show"
+    },
+    {
+      "claim": "ZIP 94158 no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "94158 in no-travel-fee list"
+    },
+    {
+      "claim": "interior = The Cutter definition",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "The Cutter vacuums seats/carpets/mats/trunk, wipes dash/console/door panels, inside glass, spot-cleaning; no shampoo, pet hair or exterior"
+    },
+    {
+      "claim": "location / clearance / van size",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "needs driveway/private lot/open garage/street legal for whole job, 3 ft clear both sides, van space within 100 ft, van 20 ft long 7 ft 2 in tall"
+    },
+    {
+      "claim": "RAV4 size price",
+      "evidence": "unknown",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "RAV4 not listed; crossovers/two-row SUVs are midsize Class B at $179 for interior, but technician confirms on site"
+    }
+  ],
+  "mapped_terms": [
+    "just the inside / clean the inside = interior detail (The Cutter)",
+    "crossover two-row SUV type = midsize Class B (to be confirmed for RAV4)"
+  ],
+  "next_steps": [
+    "If you can get an outdoor/open-air spot with an outlet within 75 ft and manager permission, re-check availability",
+    "Confirm RAV4 size class with Ines Calloway when requesting"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212304-5186-aff2",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 2,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 17363,
+    "completion_tokens": 1821,
+    "reasoning_tokens": 547,
+    "total_tokens": 19184,
+    "cost": 0.027521
+  },
+  "cost": 0.027521,
+  "wall_s": 25.38,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q08_r1/run-20261104T212304-5186-aff2.jsonl",
+  "error": null
+}

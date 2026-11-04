@@ -1,0 +1,82 @@
+{
+  "answer": "Who fits: Cormorant Mobile Detailing is mobile-only in San Francisco and will come to your lot. Your ask maps to their The Skiff - exterior wash, outside-only:\n\n- Wash / just the outside = The Skiff: foam hand wash, wheels/tires, door jambs, outside glass, hand dry, nothing inside\n- Ford Transit (full-size van) = oversized / Class D\n- 94103 = in their no-travel-fee San Francisco zone\n\nCatch on Saturday: 3 vans together counts as a fleet job, and fleet jobs run Tuesday to Friday only. So they cannot do all 3 in one visit on a Saturday.\n\nYour options with them:\n\n1) All 3 together on a weekday - Tuesday-Friday - $407.67 all-in\nThat is: $139 x 3 = $417.00 minus 10% fleet discount for 3-4 vehicles (-$41.70) = $375.30 + 8.625% tax ($32.37) + $0 travel in 94103. $50 deposit counts toward total. About 4.5 hours on site. Next open weekday in their calendar is Tue 11/10 afternoon.\n\nYou will need a working spigot within 100 ft for 3+ vehicles - they only carry 65 gallons for up to 2 vehicles. The Skiff needs no power outlet. Vehicles need to be in a driveway / private lot / open garage / legal street space with 3 ft clear on both sides, plus room within 100 ft for their 20-ft work van.\n\n2) Saturday morning is possible, but max 2 vans per day under their rules:\n- 1 Transit on Sat morning: $178.15 all-in ($139 + $25 Saturday fee = $164 + $14.15 tax)\n- 2 Transits same Saturday morning: $329.13 all-in ($278 + $25 Saturday fee = $303 + $26.13 tax)\nSaturday is morning window only 8:00-9:30am arrival, + $25 Saturday fee per visit. Next open Saturdays shown: Nov 7 and Nov 21 morning.\n\nThey work Tue-Sat, closed Sun/Mon. Need 24hrs notice. If rain >=50% forecast they move exterior work and you don't lose deposit.\n\nOthers checked and ruled out:\n- Peninsula Suds: Peninsula only, not serving San Francisco\n- Sunset Shine Auto Spa: shop drop-off, not mobile\n- Ferry Point Auto Care: partner garages only, not your lot\n\nTo book 3 vans you'd need a Tue-Fri fleet slot. If Saturday is firm, you'd have to split - e.g. 2 on one Saturday + 1 on another Saturday - or ask the owner if she'd make an exception for 3 on Saturday (booking goes via request form, she replies by text/email within 4 business hours Mon-Sat 8am-6pm, job booked only when $50 deposit link paid).\n\nNo budget was given, so no budget comparison made.\n",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "exterior wash = The Skiff outside-only, Transit = oversized Class D, $139 per van before fees/tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+      "value": "$139 oversized"
+    },
+    {
+      "claim": "94103 no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+      "value": "$0 travel"
+    },
+    {
+      "claim": "3 vans weekday fleet total $407.67 incl tax and travel",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+      "value": "$407.67"
+    },
+    {
+      "claim": "fleet 3-4 vehicles 10% off service, fleet Tue-Fri only",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-07+morning&format=json",
+      "value": "Fleet jobs run Tuesday to Friday only"
+    },
+    {
+      "claim": "3 vans Saturday cannot be booked as entered",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-07+morning&format=json",
+      "value": "invalid_combination"
+    },
+    {
+      "claim": "1 van Saturday total $178.15 incl $25 Saturday fee + tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=1&when=2026-11-07+morning&format=json",
+      "value": "$178.15"
+    },
+    {
+      "claim": "2 vans Saturday total $329.13 incl $25 Saturday fee + tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=2&when=2026-11-07+morning&format=json",
+      "value": "$329.13"
+    },
+    {
+      "claim": "Saturday morning window only, sales tax 8.625%, spigot needed for 3+ vehicles",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "morning 8-9:30am Sat, 8.625% tax, spigot within 100ft"
+    }
+  ],
+  "mapped_terms": [
+    "wash the outsides, nothing inside -> exterior wash / The Skiff (service=exterior)",
+    "3 Ford Transit vans -> full-size van -> oversized / Class D",
+    "come to us in 94103 -> mobile in San Francisco no-travel-fee zone, private lot"
+  ],
+  "next_steps": [
+    "Pick weekday Tue-Fri for all 3 together, or split across 2 Saturdays, then submit request form with 3x Transit, exterior, 94103, date/window",
+    "Ensure spigot within 100ft and 3ft clearance + room for work van, adult with keys reachable"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4901-e0fe",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 9,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 7,
+    "prompt_tokens": 114094,
+    "completion_tokens": 3343,
+    "reasoning_tokens": 857,
+    "total_tokens": 117437,
+    "cost": 0.118925
+  },
+  "cost": 0.118925,
+  "wall_s": 49.04,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q03_r1/run-20261104T212216-4901-e0fe.jsonl",
+  "error": null
+}

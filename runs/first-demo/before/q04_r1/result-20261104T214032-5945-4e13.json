@@ -1,0 +1,64 @@
+{
+  "answer": "No — Cormorant Mobile Detailing does not list a multi-year ceramic coating for your Model Y.\n\nI checked Cormorant's own site (homepage + FAQ):\n\n- No mention of “ceramic” anywhere on the homepage. Their paint protection tops out at:\n  - Schooner Full Detail with spray wax (short-term), and\n  - Flagship top package with clay bar + one-step machine polish + 6-month paint sealant\n- FAQ “How long does the wax last?” says: “If you want something longer we have a 6-month paint sealant, but it can only be bought together with the clay bar, on a Skiff or a Schooner. Both are already in the Flagship.” That is months, not years.\n\nWhat it would run you for a Model Y in Noe Valley 94114:\n\n- Model Y is listed as Class B on Cormorant’s price board image.\n- Class B prices: Skiff (exterior wash) $79 / Cutter (interior) $179 / Schooner (full detail + spray wax) $249 / Flagship (full + clay + polish + 6-month sealant + shampoo) $629\n- So the closest to ceramic — Flagship with 6-month sealant — would start at $629 for your Model Y.\n- You’re in their San Francisco base zone (94114), so no travel fee is indicated — they say “We also travel further for a fee, see the map” for outside SF.\n- Note: homepage says “Starting prices are for Class A… Any larger vehicle costs more. Excessive pet hair or heavily soiled vehicles may cost extra” and final price confirmed when they see the vehicle. Add-on prices for buying sealant + clay separately on a Skiff/Schooner aren’t listed in text.\n\nConfusion to ignore: Bay Auto Pages (unclaimed listing, last updated March 2023) lists Cormorant under “ceramic coating” and “Full detail: flat $129.” Cormorant’s own site outranks that directory — its current starting full detail (Schooner) is $219 for Class A / $249 for your Class B Model Y, and it shows no ceramic offering.\n\nIf you specifically want years-long ceramic protection, Cormorant as currently listed won’t do it — you’d need a different shop. If 6-month sealant is enough, Flagship at $629 starting is the package to book.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Cormorant does not offer ceramic coating - longest protection is 6-month sealant",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "We have a 6-month paint sealant, but it can only be bought together with the clay bar, on a Skiff or a Schooner. Both are already in the Flagship."
+    },
+    {
+      "claim": "Flagship includes clay bar, one-step polish, 6-month sealant, shampoo - starting at $549",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Everything in the Schooner plus a clay bar treatment, one-step machine polish, 6-month paint sealant and upholstery and carpet shampoo. Starting at $549"
+    },
+    {
+      "claim": "Model Y is Class B - Flagship $629, Schooner $249, Cutter $179, Skiff $79",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Flagship Class B $629; Model Y listed Class B on price board"
+    },
+    {
+      "claim": "94114 in San Francisco base zone - no travel fee indicated",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "We're based in San Francisco. We also travel further for a fee, see the map."
+    },
+    {
+      "claim": "Directory lists ceramic coating and $129 full detail",
+      "evidence": "listed_unverified",
+      "source_url": "http://bayautopages.localhost:8105/cormorant-mobile-detailing",
+      "value": "Services: ceramic coating, Full detail: flat $129 - unclaimed listing March 2023"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "term": "ceramic coated for years = multi-year ceramic coating"
+    }
+  ],
+  "next_steps": [
+    "If you want true multi-year ceramic, look at a different detailer - Cormorant maxes at 6-month sealant",
+    "To book Flagship for Model Y, use Cormorant Book page - $50-$150 deposit applies"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T214032-5945-4e13",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 5,
+  "browse_tasks": 1,
+  "approved": false,
+  "usage": {
+    "calls": 18,
+    "prompt_tokens": 198588,
+    "completion_tokens": 8586,
+    "reasoning_tokens": 2763,
+    "total_tokens": 207174,
+    "cost": 0.264988
+  },
+  "cost": 0.264988,
+  "wall_s": 124.31,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/before/q04_r1/run-20261104T214032-5945-4e13.jsonl",
+  "error": null
+}

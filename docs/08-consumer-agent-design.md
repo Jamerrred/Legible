@@ -216,6 +216,8 @@ Control-page runs led to two general fixes before the freeze:
 - **Worker brief:** it now says that only elements in view are listed, and that the worker should stop once the objective is met. Before this, one worker submitted a form and then kept hunting for prices until it hit the time limit.
 - **Model errors:** a provider error ended a run with no report. The call now retries, then tries once more without echoed reasoning.
 
+The benchmark found two more problems, left unfixed because the agent is frozen. A run that hits its time limit produces no partial report, and the agent can treat a site's silence as a yes. OpenRouter also holds budget for requests in flight, so keep parallelism low on a small balance.
+
 ## What the demo can and can't claim
 
 - **Can say:** this is a stand-in built from common open-source parts, following patterns real agents describe.

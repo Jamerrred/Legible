@@ -1,0 +1,823 @@
+[
+ {
+  "query_id": "q01",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])(?:422\\.38|422\\.37|422\\.39|422)(?!\\d|[.,]\\d)",
+   "missing: (?<![\\d.,])(?:395\\.22|395\\.21|395\\.23|395)(?!\\d|[.,]\\d)",
+   "missing one of: ['saturday[\\\\s\\\\S]{0,200}(over|exceed|above|too much|more than|past|beyond|doesn.?t fit|won.?t fit|doesn.?t work|won.?t work|bust)', '(over|exceed|above|beyond)[\\\\s\\\\S]{0,200}saturday']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q01_r1",
+  "cost": 0.129602,
+  "seconds": 91.62,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q02",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])(?:628\\.76|628\\.75|628\\.77|629)(?!\\d|[.,]\\d)"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q02_r1",
+  "cost": 0.170961,
+  "seconds": 105.76,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q03",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: cormorant",
+   "missing: (?<![\\d.,])(?:407\\.67|407\\.66|407\\.68|408)(?!\\d|[.,]\\d)",
+   "missing: spigot|faucet|water (source|hookup|hook-up|supply|access|connection)|hose",
+   "missing one of: ['(tue|tuesday)[\\\\s\\\\S]{0,30}(fri|friday)', 'weekdays? only', '(not|n.t|no)\\\\b[\\\\s\\\\S]{0,60}saturday', 'saturday[\\\\s\\\\S]{0,80}(not|n.t|no\\\\b|unavailable)']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q03_r1",
+  "cost": 0.119107,
+  "seconds": 94.25,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q04",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (don.?t|doesn.?t|do not|does not|won.?t|not offer|\\bno\\b|not do|isn.?t offered|not something)[\\s\\S]{0,60}ceramic|ceramic[\\s\\S]{0,60}(not offered|isn.?t|aren.?t|not available|not something|doesn.?t|don.?t|not on)",
+   "missing: (6|six)[- ]month"
+  ],
+  "outcome": "unknown",
+  "expected": "not_offered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q04_r1",
+  "cost": 0.122031,
+  "seconds": 79.04,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q05",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\\s\\S]{0,100}(vomit|biohazard|throw|threw|sick|bodily)|(vomit|biohazard|thrown? up|throw-up|threw up|carsick|sick)[\\s\\S]{0,100}(not offered|isn.?t|aren.?t|not (something|cleaned|covered|included)|don.?t|doesn.?t|won.?t|can.?t|cannot|excluded|outside)"
+  ],
+  "outcome": "unknown",
+  "expected": "not_offered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q05_r1",
+  "cost": 0.120585,
+  "seconds": 78.42,
+  "used_resource": false,
+  "tool_calls": 6,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q06",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (can.?t|cannot|can not|won.?t|\\bnot\\b|no way to|hard to|don.?t|doesn.?t|isn.?t|unable to)[\\s\\S]{0,80}(know|say|tell|promise|guarantee|sure|confirm|certain|predict|determine|answer)|depends|unknown|no guarantee|until (a|the|someone|they|it)\\b",
+   "missing: inspect|technician|\\btech\\b|look at|in person|on[- ]site|on arrival|see it|sees? the scratch|check it",
+   "missing: clear[- ]?coat"
+  ],
+  "outcome": "unknown",
+  "expected": "unknown",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q06_r1",
+  "cost": 0.126665,
+  "seconds": 75.15,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q07",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unsettled|unknown|still deciding|unclear|can.?t (give|quote|say|confirm)|cannot (give|quote|say|confirm)|no (set |fixed |published |firm )?(price|class|quote|answer)",
+   "missing: stainless|polish",
+   "missing one of: ['inspect|look at|looked at|see one|seen one|sees one|check(s|ed)? (one |it )?out', 'owner|\\\\bines\\\\b|calloway']"
+  ],
+  "outcome": "unknown",
+  "expected": "unknown",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q07_r1",
+  "cost": 0.103456,
+  "seconds": 68.36,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q08",
+  "variant": "before",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q08_r1",
+  "cost": 0.025188,
+  "seconds": 17.07,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 Cormorant can't do an interior clean in your underground garage as you describe it.\n\nWhat you want maps to **The Cutter - Interior detail** (vacuum seats, carpets, mats and trunk, wipe dash/console/door panels, inside glass and spot-clean).\n\nCormorant's own FAQ says:\n\n* The Cutter, Schooner and Flagship **need a grounded 120-volt outlet within 75 feet of the vehicle, or we run our generator for a $30 fee.**\n* **The generator can't run in an enclosed or underground garage, so without an outlet we can't do those packages in there.**\n\nOnly The Skiff (exterior wash, doesn't touch the inside) doesn't need power.\n\nWith no outlet near your space and HOA outlets locked, they cannot just bring a generator down there to get around it.\n\nBuilding manager is on you:\n\n* **You do need to get the building manager's permission for the work before you book, this goes for HOA-managed lots too.**\n* **We don't contact managers, and if we get refused on the day it counts as a no-show.**\n\nOther location rules from the same FAQ that would apply if you move the RAV4 elsewhere for the job:\nVehicle can be in a driveway, private lot, open garage or street space, as long as it stays legal for the whole job and there's at least 3 feet clear on both sides. They also need somewhere within 100 feet for their work van.\n\nWhat would work: move the RAV4 to an open / above-ground spot where you have permission and either an outlet within 75 ft or open-air where they can run the generator (+$30), or find a different provider set up for enclosed garages.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "interior clean is The Cutter package",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/",
+     "value": "The Cutter Interior detail We vacuum the seats, carpets, mats and trunk, wipe down the dash, console and door panels, do the inside glass and spot-clean. Starting at $159"
+    },
+    {
+     "claim": "Cutter/Schooner/Flagship need outlet within 75ft or generator $30, generator cannot run enclosed/underground so without outlet cannot do those packages there",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "The Cutter, Schooner and Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or we run our generator for a $30 fee. The generator can't run in an enclosed or underground garage, so without an outlet we can't do those packages in there."
+    },
+    {
+     "claim": "customer must get building manager permission, Cormorant does not contact managers, refusal counts as no-show",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "You do need to get the building manager's permission for the work before you book, this goes for HOA-managed lots too. We don't contact managers, and if we get refused on the day it counts as a no-show."
+    },
+    {
+     "claim": "parking location requirements 3ft clear and van within 100ft",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "Your vehicle can be in a driveway, private lot, open garage or a street space, as long as it stays legal for the whole job and there's at least 3 feet clear on both sides. We also need somewhere within 100 feet for our work van."
+    }
+   ],
+   "mapped_terms": [
+    "inside cleaning = The Cutter - Interior detail",
+    "underground garage with no outlet = enclosed/underground garage without outlet where Cutter/Schooner/Flagship cannot be done"
+   ],
+   "next_steps": [
+    "Move RAV4 to open garage/driveway/street space with permission for the job",
+    "Secure outlet within 75ft or open-air spot for $30 generator use",
+    "Get building/HOA permission yourself before booking"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q09",
+  "variant": "before",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q09_r1",
+  "cost": 0.032682,
+  "seconds": 25.94,
+  "used_resource": false,
+  "tool_calls": 6,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "You have the Flagship - Cormorant's top package with the one-step machine polish. Your deposit was $150.\n\n36 hours from now is in the 24-48 hour band before your arrival window:\n\n* Cancel right now: you get half back = $75 back.\n  Policy: full refund 48h+, half 24-48h, nothing under 24h.\n\n* Move it instead: you can do it for free.\n  Policy: one free reschedule with at least 24h notice, by phone or text only. You haven't moved it before and you're at ~36h, so you qualify. Any later/shorter-notice change or a second move counts as a cancellation under the rule above.\n\nTo move it you must call/text 415-555-0142 - not online. Office hours Mon-Sat 8am-6pm.\n\nNote: your job is ~6-8 hours, so it must be in the morning window 8:00-9:30am Tue-Fri, or Saturday morning only.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "top package with polish is The Flagship",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/",
+     "value": "The Flagship Our top package Everything in the Schooner plus a clay bar treatment, one-step machine polish, 6-month paint sealant"
+    },
+    {
+     "claim": "deposit for Flagship is $150 counts toward total",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "$150 for the Flagship"
+    },
+    {
+     "claim": "cancel 24-48h before window gets half back",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "Between 24 and 48 hours you get half back"
+    },
+    {
+     "claim": "cancel amount at ~36h = $75",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "$75 = half of $150 Flagship deposit for 24-48h cancellation"
+    },
+    {
+     "claim": "reschedule once free with 24h+ notice by phone/text only, later/shorter counts as cancellation",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8101/faq",
+     "value": "You can reschedule once for free with at least 24 hours' notice, by phone or text only."
+    }
+   ],
+   "mapped_terms": [
+    {
+     "items": [
+      "top package with the polish = The Flagship"
+     ]
+    }
+   ],
+   "next_steps": [
+    "To reschedule for free, call/text 415-555-0142 before you hit 24h before the window start"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q10",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: closed[\\s\\S]{0,60}sunday|sunday[\\s\\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\\bnot\\b|\\bno\\b)|(not open|don.?t work|doesn.?t work|don.?t open|doesn.?t open)[\\s\\S]{0,60}sunday",
+   "missing one of: ['(?<![\\\\d.,])(?:237\\\\.89|237\\\\.88|237\\\\.90|238)(?!\\\\d|[.,]\\\\d)', '(?<![\\\\d.,])219(?:\\\\.00)?(?!\\\\d|[.,]\\\\d)']",
+   "missing one of: ['out[- ]of[- ]date|outdated|\\\\bold\\\\b|wrong|incorrect|inaccurate|stale|false|not (correct|accurate|right|current)|isn.?t (correct|accurate|right|current)|no longer|2023']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q10_r1",
+  "cost": 0.035217,
+  "seconds": 31.32,
+  "used_resource": false,
+  "tool_calls": 6,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q11",
+  "variant": "before",
+  "result": "gave_up",
+  "correct": false,
+  "acceptable": false,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])(?:118\\.40|118\\.39|118\\.41|118)(?!\\d|[.,]\\d)",
+   "missing: \\b(sent|submitted|passed (it |this )?(on|along)|forwarded|went through|delivered)\\b",
+   "missing: (don.?t|doesn.?t|does not|\\bnot\\b|isn.?t|won.?t|\\bno\\b)[\\s\\S]{0,60}(hold|held|reserve|guarantee|lock|booked|confirmed)|(until|once|when|after)[\\s\\S]{0,80}deposit|deposit[\\s\\S]{0,100}(book|confirm|lock|secure|hold)",
+   "missing one of: ['(4|four) business hours', '\\\\bines\\\\b|calloway', 'text or email|email or text', '\\\\bowner\\\\b']",
+   "request not in the site log"
+  ],
+  "outcome": "unknown",
+  "expected": "action_submitted",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q11_r1",
+  "cost": null,
+  "seconds": 2.71,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q12",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "earliest open slot not stated: 2026-11-07"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/before/q12_r1",
+  "cost": null,
+  "seconds": 2.64,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q01",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])(?:422\\.38|422\\.37|422\\.39|422)(?!\\d|[.,]\\d)",
+   "missing: (?<![\\d.,])(?:395\\.22|395\\.21|395\\.23|395)(?!\\d|[.,]\\d)",
+   "missing one of: ['saturday[\\\\s\\\\S]{0,200}(over|exceed|above|too much|more than|past|beyond|doesn.?t fit|won.?t fit|doesn.?t work|won.?t work|bust)', '(over|exceed|above|beyond)[\\\\s\\\\S]{0,200}saturday']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q01_r2",
+  "cost": null,
+  "seconds": 2.62,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q02",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])(?:628\\.76|628\\.75|628\\.77|629)(?!\\d|[.,]\\d)"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q02_r2",
+  "cost": null,
+  "seconds": 2.71,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q03",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: cormorant",
+   "missing: (?<![\\d.,])(?:407\\.67|407\\.66|407\\.68|408)(?!\\d|[.,]\\d)",
+   "missing: spigot|faucet|water (source|hookup|hook-up|supply|access|connection)|hose",
+   "missing one of: ['(tue|tuesday)[\\\\s\\\\S]{0,30}(fri|friday)', 'weekdays? only', '(not|n.t|no)\\\\b[\\\\s\\\\S]{0,60}saturday', 'saturday[\\\\s\\\\S]{0,80}(not|n.t|no\\\\b|unavailable)']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q03_r2",
+  "cost": null,
+  "seconds": 2.61,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q04",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (don.?t|doesn.?t|do not|does not|won.?t|not offer|\\bno\\b|not do|isn.?t offered|not something)[\\s\\S]{0,60}ceramic|ceramic[\\s\\S]{0,60}(not offered|isn.?t|aren.?t|not available|not something|doesn.?t|don.?t|not on)",
+   "missing: (6|six)[- ]month"
+  ],
+  "outcome": "unknown",
+  "expected": "not_offered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q04_r2",
+  "cost": null,
+  "seconds": 3.38,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q05",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (don.?t|doesn.?t|do not|does not|won.?t|will not|can.?t|cannot|not able|unable|not (offer|clean|handle|take)|isn.?t|aren.?t)[\\s\\S]{0,100}(vomit|biohazard|throw|threw|sick|bodily)|(vomit|biohazard|thrown? up|throw-up|threw up|carsick|sick)[\\s\\S]{0,100}(not offered|isn.?t|aren.?t|not (something|cleaned|covered|included)|don.?t|doesn.?t|won.?t|can.?t|cannot|excluded|outside)"
+  ],
+  "outcome": "unknown",
+  "expected": "not_offered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q05_r2",
+  "cost": null,
+  "seconds": 3.36,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q06",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: (can.?t|cannot|can not|won.?t|\\bnot\\b|no way to|hard to|don.?t|doesn.?t|isn.?t|unable to)[\\s\\S]{0,80}(know|say|tell|promise|guarantee|sure|confirm|certain|predict|determine|answer)|depends|unknown|no guarantee|until (a|the|someone|they|it)\\b",
+   "missing: inspect|technician|\\btech\\b|look at|in person|on[- ]site|on arrival|see it|sees? the scratch|check it",
+   "missing: clear[- ]?coat"
+  ],
+  "outcome": "unknown",
+  "expected": "unknown",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q06_r2",
+  "cost": null,
+  "seconds": 2.95,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q07",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: hasn.?t|has not|haven.?t|have not|not yet|undecided|not decided|isn.?t decided|not (been )?(settled|set|determined|classified)|unsettled|unknown|still deciding|unclear|can.?t (give|quote|say|confirm)|cannot (give|quote|say|confirm)|no (set |fixed |published |firm )?(price|class|quote|answer)",
+   "missing: stainless|polish",
+   "missing one of: ['inspect|look at|looked at|see one|seen one|sees one|check(s|ed)? (one |it )?out', 'owner|\\\\bines\\\\b|calloway']"
+  ],
+  "outcome": "unknown",
+  "expected": "unknown",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q07_r2",
+  "cost": null,
+  "seconds": 2.51,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q08",
+  "variant": "before",
+  "result": "gave_up",
+  "correct": false,
+  "acceptable": false,
+  "partial": false,
+  "problems": [
+   "missing: generator[\\s\\S]{0,120}(can.?t|cannot|can not|won.?t|not allowed|isn.?t allowed|not permitted|not able|unable|not an option|doesn.?t work|not possible)|(can.?t|cannot|can not|won.?t|not allowed|unable)[\\s\\S]{0,120}generator",
+   "missing: (you|yourself)[\\s\\S]{0,120}(permission|approval|sign[- ]?off|go[- ]ahead|ok(ay)?\\b)|(permission|approval|sign[- ]?off|go[- ]ahead)[\\s\\S]{0,120}(you|yourself)",
+   "missing one of: ['(don.?t|doesn.?t|do not|does not|won.?t|will not|\\\\bnot\\\\b)[\\\\s\\\\S]{0,60}(contact|call|reach out|speak|talk)[\\\\s\\\\S]{0,60}(manager|hoa|building)', '\\\\byou\\\\b[\\\\s\\\\S]{0,40}(need|have|must|get|call|contact|ask)[\\\\s\\\\S]{0,100}(manager|hoa)', '(manager|hoa)[\\\\s\\\\S]{0,100}(is|are) (on|up to) you']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q08_r2",
+  "cost": null,
+  "seconds": 2.62,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q09",
+  "variant": "before",
+  "result": "gave_up",
+  "correct": false,
+  "acceptable": false,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])75(?:\\.00)?(?!\\d|[.,]\\d)",
+   "missing: free|no (charge|cost|fee)|(doesn.?t|won.?t|shouldn.?t) cost|at no",
+   "missing: phone|text|\\bcall\\b"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q09_r2",
+  "cost": null,
+  "seconds": 2.84,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q10",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "missing: closed[\\s\\S]{0,60}sunday|sunday[\\s\\S]{0,80}(closed|not open|isn.?t|aren.?t|don.?t|doesn.?t|\\bnot\\b|\\bno\\b)|(not open|don.?t work|doesn.?t work|don.?t open|doesn.?t open)[\\s\\S]{0,60}sunday",
+   "missing one of: ['(?<![\\\\d.,])(?:237\\\\.89|237\\\\.88|237\\\\.90|238)(?!\\\\d|[.,]\\\\d)', '(?<![\\\\d.,])219(?:\\\\.00)?(?!\\\\d|[.,]\\\\d)']",
+   "missing one of: ['out[- ]of[- ]date|outdated|\\\\bold\\\\b|wrong|incorrect|inaccurate|stale|false|not (correct|accurate|right|current)|isn.?t (correct|accurate|right|current)|no longer|2023']"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q10_r2",
+  "cost": null,
+  "seconds": 2.51,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q11",
+  "variant": "before",
+  "result": "gave_up",
+  "correct": false,
+  "acceptable": false,
+  "partial": false,
+  "problems": [
+   "missing: (?<![\\d.,])(?:118\\.40|118\\.39|118\\.41|118)(?!\\d|[.,]\\d)",
+   "missing: \\b(sent|submitted|passed (it |this )?(on|along)|forwarded|went through|delivered)\\b",
+   "missing: (don.?t|doesn.?t|does not|\\bnot\\b|isn.?t|won.?t|\\bno\\b)[\\s\\S]{0,60}(hold|held|reserve|guarantee|lock|booked|confirmed)|(until|once|when|after)[\\s\\S]{0,80}deposit|deposit[\\s\\S]{0,100}(book|confirm|lock|secure|hold)",
+   "missing one of: ['(4|four) business hours', '\\\\bines\\\\b|calloway', 'text or email|email or text', '\\\\bowner\\\\b']",
+   "request not in the site log"
+  ],
+  "outcome": "unknown",
+  "expected": "action_submitted",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q11_r2",
+  "cost": null,
+  "seconds": 2.55,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ },
+ {
+  "query_id": "q12",
+  "variant": "before",
+  "result": "honest_unknown",
+  "correct": false,
+  "acceptable": true,
+  "partial": false,
+  "problems": [
+   "earliest open slot not stated: 2026-11-07"
+  ],
+  "outcome": "unknown",
+  "expected": "answered",
+  "repeat": 2,
+  "out": "runs/first-demo/before/q12_r2",
+  "cost": null,
+  "seconds": 2.55,
+  "used_resource": false,
+  "tool_calls": 0,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits."
+  }
+ }
+]

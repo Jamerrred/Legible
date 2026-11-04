@@ -2,7 +2,12 @@
 
 Usage:
   uv run python -m bench.run_benchmark --variant before --queries bench/queries.json \
-      --repeats 2 --concurrency 6 --name first-demo [--tier spark] [--only q01,q02]
+      --repeats 1 --concurrency 1 --name first-demo [--tier spark] [--only q01,q02] [--resume]
+
+--resume keeps runs that already finished with no API failure. A run the API refused for
+credit is retried once, then recorded as invalid and left out of the rates. No new run
+starts once the OpenRouter balance is under --credit-floor dollars. Keep concurrency low
+on a small balance, because OpenRouter holds budget for requests in flight.
 
 Each run gets a fresh process, a fresh browser profile and its own fake contact
 email. The email is how a form submission in the site's log is joined back to a
@@ -19,6 +24,9 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+import httpx
+from dotenv import dotenv_values
 
 from bench.grade import grade, read_run
 from mf_core.logbook import read_events
@@ -47,8 +55,27 @@ def person_for(query: dict, run_tag: str) -> dict:
     return person
 
 
-def one_run(query: dict, variant: str, repeat: int, name: str, tier: str) -> dict:
+def credit_left() -> float | None:
+    key = dotenv_values(ROOT / ".env").get("OPENROUTER_API_KEY")
+    try:
+        data = httpx.get("https://openrouter.ai/api/v1/credits", headers={"Authorization": f"Bearer {key}"}, timeout=20).json()["data"]
+        return float(data["total_credits"]) - float(data["total_usage"])
+    except (httpx.HTTPError, KeyError, ValueError):
+        return None
+
+
+def one_run(query: dict, variant: str, repeat: int, name: str, tier: str, resume: bool = False, floor: float = 0.3, retried: bool = False) -> dict:
     out = ROOT / "runs" / name / variant / f"{query['id']}_r{repeat}"
+    if resume and out.exists():
+        info = read_run(out)
+        if info.get("report") and not info.get("api_failure"):
+            person = json.loads((out / "person.json").read_text())
+            info.update(person=person, crashed=False, repeat=repeat, reused=True)
+            return {"query": query, "run": info, "out": str(out.relative_to(ROOT))}
+    left = credit_left()
+    if left is not None and left < floor:
+        info = {"api_failure": f"not run: balance ${left:.2f} is under the ${floor:.2f} floor", "repeat": repeat, "person": {}, "crashed": False}
+        return {"query": query, "run": info, "out": str(out.relative_to(ROOT))}
     shutil.rmtree(out, ignore_errors=True)
     out.mkdir(parents=True)
     run_tag = f"{variant[0]}{query['id']}r{repeat}".replace("-", "")
@@ -67,6 +94,9 @@ def one_run(query: dict, variant: str, repeat: int, name: str, tier: str) -> dic
         crashed = True
         (out / "stderr.txt").write_text("timed out after 480s")
     info = read_run(out)
+    if info.get("api_failure") and not retried:
+        time.sleep(45)  # let in-flight requests settle
+        return one_run(query, variant, repeat, name, tier, resume=False, floor=floor, retried=True)
     info.update(person=person, crashed=crashed, repeat=repeat, seconds=info.get("seconds") or round(time.time() - started, 1))
     return {"query": query, "run": info, "out": str(out.relative_to(ROOT))}
 
@@ -80,6 +110,8 @@ def main() -> None:
     parser.add_argument("--name", default="first-demo")
     parser.add_argument("--tier", default="spark")
     parser.add_argument("--only", default="")
+    parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--credit-floor", type=float, default=0.3)
     args = parser.parse_args()
 
     queries = json.loads((ROOT / args.queries).read_text())
@@ -91,7 +123,7 @@ def main() -> None:
 
     outputs = []
     with ThreadPoolExecutor(args.concurrency) as pool:
-        futures = [pool.submit(one_run, q, args.variant, r, args.name, args.tier) for q, r in jobs]
+        futures = [pool.submit(one_run, q, args.variant, r, args.name, args.tier, args.resume, args.credit_floor) for q, r in jobs]
         for future in futures:
             item = future.result()
             outputs.append(item)
@@ -103,7 +135,7 @@ def main() -> None:
         graded = grade(item["query"], item["run"], args.variant, events)
         graded.update(
             repeat=item["run"]["repeat"], out=item["out"], cost=item["run"].get("cost"), seconds=item["run"].get("seconds"),
-            used_resource=item["run"].get("used_resource"), tool_calls=item["run"].get("tool_calls"),
+            used_resource=item["run"].get("used_resource"), tool_calls=item["run"].get("tool_calls"), reused=item["run"].get("reused", False),
             browser_calls=item["run"].get("browser_calls"), crashed=item["run"].get("crashed"),
             report=item["run"].get("report"),
         )
@@ -118,13 +150,14 @@ def main() -> None:
         if source.exists():
             shutil.copy(source, logs / source.name)
 
-    n = len(results)
-    print(f"\n{args.variant}: correct {sum(r['correct'] for r in results)}/{n}, "
-          f"acceptable {sum(r['acceptable'] for r in results)}/{n}, partial {sum(r['partial'] for r in results)}, "
-          f"cost ${sum(float(r['cost'] or 0) for r in results):.2f}")
+    valid = [r for r in results if r.get("valid", True)]
+    n = len(valid)
+    print(f"\n{args.variant}: valid runs {n}/{len(results)}, correct {sum(r['correct'] for r in valid)}/{n}, "
+          f"acceptable {sum(r['acceptable'] for r in valid)}/{n}, partial {sum(r['partial'] for r in valid)}, "
+          f"cost ${sum(float(r['cost'] or 0) for r in valid):.2f}")
     for r in results:
         flag = "resource" if r["used_resource"] else ""
-        print(f"  {r['query_id']} r{r['repeat']}: {r['result']:18} {flag:9} {r['seconds']}s  {'; '.join(r['problems'])[:140]}")
+        print(f"  {r['query_id']} r{r['repeat']}: {r['result']:20} {flag:9} {r['seconds']}s  {'; '.join(r['problems'])[:140]}")
     sys.exit(0)
 
 

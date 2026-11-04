@@ -1,0 +1,81 @@
+g. 2 on one Saturday + 1 on another Saturday - or ask the owner if she'd make an exception for 3 on Saturday (booking goes via request form, she replies by text/email within 4 business hours Mon-Sat 8am-6pm, job booked only when $50 deposit link paid).\n\nNo budget was given, so no budget comparison made.\n",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "exterior wash = The Skiff outside-only, Transit = oversized Class D, $139 per van before fees/tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+      "value": "$139 oversized"
+    },
+    {
+      "claim": "94103 no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+      "value": "$0 travel"
+    },
+    {
+      "claim": "3 vans weekday fleet total $407.67 incl tax and travel",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+      "value": "$407.67"
+    },
+    {
+      "claim": "fleet 3-4 vehicles 10% off service, fleet Tue-Fri only",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-07+morning&format=json",
+      "value": "Fleet jobs run Tuesday to Friday only"
+    },
+    {
+      "claim": "3 vans Saturday cannot be booked as entered",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-07+morning&format=json",
+      "value": "invalid_combination"
+    },
+    {
+      "claim": "1 van Saturday total $178.15 incl $25 Saturday fee + tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=1&when=2026-11-07+morning&format=json",
+      "value": "$178.15"
+    },
+    {
+      "claim": "2 vans Saturday total $329.13 incl $25 Saturday fee + tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=2&when=2026-11-07+morning&format=json",
+      "value": "$329.13"
+    },
+    {
+      "claim": "Saturday morning window only, sales tax 8.625%, spigot needed for 3+ vehicles",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "morning 8-9:30am Sat, 8.625% tax, spigot within 100ft"
+    }
+  ],
+  "mapped_terms": [
+    "wash the outsides, nothing inside -> exterior wash / The Skiff (service=exterior)",
+    "3 Ford Transit vans -> full-size van -> oversized / Class D",
+    "come to us in 94103 -> mobile in San Francisco no-travel-fee zone, private lot"
+  ],
+  "next_steps": [
+    "Pick weekday Tue-Fri for all 3 together, or split across 2 Saturdays, then submit request form with 3x Transit, exterior, 94103, date/window",
+    "Ensure spigot within 100ft and 3ft clearance + room for work van, adult with keys reachable"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4901-e0fe",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 9,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 7,
+    "prompt_tokens": 114094,
+    "completion_tokens": 3343,
+    "reasoning_tokens": 857,
+    "total_tokens": 117437,
+    "cost": 0.118925
+  },
+  "cost": 0.118925,
+  "wall_s": 49.04,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q03_r1/run-20261104T212216-4901-e0fe.jsonl",
+  "error": null
+}

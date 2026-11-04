@@ -1,0 +1,70 @@
+ems": {
+        "type": "string"
+      },
+      "title": "Form Fields Found",
+      "type": "array"
+    },
+    "submitted": {
+      "default": false,
+      "description": "True only if a form was sent and the page confirmed it",
+      "title": "Submitted",
+      "type": "boolean"
+    },
+    "confirmation_text": {
+      "default": "",
+      "description": "The exact confirmation wording on the page",
+      "title": "Confirmation Text",
+      "type": "string"
+    },
+    "blockers": {
+      "description": "Login, payment, errors, or anything else in the way",
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "where_stuck": {
+      "default": "",
+      "description": "Where you got stuck, if you did",
+      "title": "Where Stuck",
+      "type": "string"
+    },
+    "other_findings": {
+      "description": "Anything else asked for, as 'field: value'",
+      "items": {
+        "type": "string"
+      },
+      "title": "Other Findings",
+      "type": "array"
+    }
+  },
+  "title": "WorkerReport",
+  "type": "object"
+}[0m
+INFO     [Agent] Starting a browser-use agent with version 0.13.14, with provider=openrouter and model=meta/muse-spark-1.3
+INFO     [BrowserSession] Setting viewport to 1470x956 with device scale factor 1.0 whereas original device scale factor was 1.0
+INFO     [Agent]   ▶️   [34mnavigate[0m: [35murl[0m: http://cormorant.localhost:8101/static/img/area.png, [35mnew_tab[0m: False
+WARNING  [BrowserSession] ⚠️ Empty DOM detected after navigation to http://cormorant.localhost:8101/static/img/area.png, waiting 3s and rechecking...
+WARNING  [BrowserSession] ⚠️ Still empty after 3s, attempting page reload for http://cormorant.localhost:8101/static/img/area.png...
+INFO     [tools] 🔗 Navigated to http://cormorant.localhost:8101/static/img/area.png
+INFO     [Agent] 
+
+INFO     [Agent] 📍 Step 1:
+INFO     [Agent]   [32m👍 Eval: Navigated to area.png and viewed service-area map image. Verdict: Success[0m
+INFO     [Agent]   🧠 Memory: Viewed area.png image. Contains 5 zone labels and no prices, fees, legend, or numbers. Ready to report.
+INFO     [Agent]   [34m🎯 Next goal: Return WorkerReport with transcription and fee findings.[0m
+INFO     [Agent]   ▶️   [34mdone[0m: [35mdata[0m: {'prices': [], 'availability': [], 'form_fields_found': [], 'submitted': False, 'confirmation_text': '', 'blockers': [], 'where_stuck': '', 'other_findings': ['full verbatim transcription: Marin, Treasure Island, San Francisco, Peninsula, East Bay', 'travel fee for Sausalito / Marin / 94965 zone: not shown - no dollar amount visible in area.png', 'all zone fees listed: none - no fees listed in image', 'legend: none visible in image', 'numbers / dollar amounts in image: none', 'source url: http://cormorant.localhost:8101/static/img/area.png']}
+INFO     [Agent] 
+📄 [32m Final Result:[0m 
+{"prices": [], "availability": [], "form_fields_found": [], "submitted": false, "confirmation_text": "", "blockers": [], "where_stuck": "", "other_findings": ["full verbatim transcription: Marin, Treasure Island, San Francisco, Peninsula, East Bay", "travel fee for Sausalito / Marin / 94965 zone: not shown - no dollar amount visible in area.png", "all zone fees listed: none - no fees listed in image", "legend: none visible in image", "numbers / dollar amounts in image: none", "source url: http://cormorant.localhost:8101/static/img/area.png"]}
+
+
+INFO     [Agent] ✅ Task completed successfully
+INFO     [BrowserSession] 📢 on_BrowserStopEvent - Calling reset() (force=True, keep_alive=False)
+INFO     [BrowserSession] [SessionManager] Cleared all owned data (targets, sessions, mappings)
+INFO     [BrowserSession] ✅ Browser session reset complete
+INFO     [BrowserSession] ✅ Browser session reset complete
+INFO     [BrowserSession] 📢 on_BrowserStopEvent - Calling reset() (force=True, keep_alive=False)
+INFO     [BrowserSession] ✅ Browser session reset complete
+INFO     [BrowserSession] ✅ Browser session reset complete

@@ -1,0 +1,59 @@
+{
+  "answer": "Straight answer: No — Cormorant will not promise that The Flagship will remove your scratch.\n\nTheir own rule for The Flagship says: whether the one-step polish will remove a particular scratch isn't known until a technician inspects it, because it depends on whether the scratch has gone through the clear coat.\n\nThat means paying $596.35 total for your Mazda3 in 94131 ( $549 small/Class A + $47.35 tax, no travel fee) does not guarantee the key mark comes out. A fingernail-catching scratch is exactly the kind that needs that in-person inspection.\n\nTwo other straight facts before you spend:\n\n- The Flagship's one-step machine polish is their ONLY polish — they don't do multi-stage / two-stage paint correction / compounding.\n- If the scratch is still there after, their free redo does NOT cover it — the redo policy explicitly doesn't cover stains or scratches that were already there.\n\nIf scratch removal is the whole reason for booking, don't book the Flagship for that reason alone — you'll need a technician to look at the door first to see if it's through the clear coat.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Flagship includes one-step machine polish, top package price small $549",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/services/flagship",
+      "value": "$549 small, includes one-step machine polish"
+    },
+    {
+      "claim": "Whether Flagship polish will remove a particular scratch unknown until inspection, depends on clear coat",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/services/flagship",
+      "value": "Unknown until technician inspects; depends whether through clear coat"
+    },
+    {
+      "claim": "No multi-stage paint correction, only one-step polish in Flagship",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/services/flagship",
+      "value": "doesn't do multi-stage paint correction"
+    },
+    {
+      "claim": "Redo policy doesn't cover pre-existing scratches",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/faq",
+      "value": "doesn't cover stains or scratches that were already there"
+    },
+    {
+      "claim": "Mazda3 is small Class A, 94131 no travel fee, total $596.35",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=flagship&vehicle=Mazda3&zip=94131",
+      "value": "$596.35 total"
+    }
+  ],
+  "mapped_terms": [
+    "top package with machine polish = The Flagship, polish-and-seal detail"
+  ],
+  "next_steps": [],
+  "gate_note": null,
+  "run_id": "20261104T212216-4906-94e7",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 6,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 6,
+    "prompt_tokens": 82818,
+    "completion_tokens": 1646,
+    "reasoning_tokens": 397,
+    "total_tokens": 84464,
+    "cost": 0.07878
+  },
+  "cost": 0.07878,
+  "wall_s": 28.46,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q06_r1/run-20261104T212216-4906-94e7.jsonl",
+  "error": null
+}

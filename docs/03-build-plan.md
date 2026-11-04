@@ -166,6 +166,7 @@ Add `/mcp` and `/.well-known/poppy.json`, generated from the record. Check Poppy
 | When | What |
 |---|---|
 | Done | API keys for OpenRouter and Exa, in a git-ignored `.env` |
+| Now | More OpenRouter credit. The first demo used almost all of the $10, and a "before" run costs about $0.26 |
 | Before the real Muse check | A host that can run a small server, and a domain or two for the mock businesses |
 | Step 5 | Time to run the real Muse on the mock site |
 | Step 7 | API keys for Context.dev and Composio, and a demo Google account |

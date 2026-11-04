@@ -86,6 +86,10 @@ def reachable_on_variant(query: dict, variant: str) -> bool:
 
 
 def grade(query: dict, run: dict, variant: str, site_events: list[dict]) -> dict:
+    if run.get("api_failure"):
+        # The model API refused calls, so this run says nothing about the site or the agent.
+        return {"query_id": query["id"], "variant": variant, "result": "invalid_api_failure", "correct": False, "acceptable": False,
+                "partial": False, "valid": False, "problems": [run["api_failure"]], "outcome": None, "expected": query.get("expected_outcome", "answered")}
     report = run.get("report") or {}
     text = report_text(report)
     outcome = report.get("outcome")
@@ -102,6 +106,10 @@ def grade(query: dict, run: dict, variant: str, site_events: list[dict]) -> dict
     elif not report:
         result = "gave_up"
         problems.append("no final report")
+    elif report.get("stopped_early"):
+        # A run that ran out of time or lost the model has no answer, which isn't an honest "unknown".
+        result = "gave_up"
+        problems.insert(0, f"no report: {report['stopped_early']}")
     elif expected == "action_submitted" and not submitted:
         problems.append("request not in the site log")
         result = "gave_up" if outcome in UNSETTLED else "wrong"
@@ -124,6 +132,7 @@ def grade(query: dict, run: dict, variant: str, site_events: list[dict]) -> dict
         "correct": correct,
         "acceptable": acceptable,
         "partial": result == "correct_unsourced" and not correct,
+        "valid": True,
         "problems": problems,
         "outcome": outcome,
         "expected": expected,
@@ -141,6 +150,8 @@ def read_run(out_dir: Path) -> dict:
             kind = event.get("event") or event.get("type")
             if kind == "approval" and event.get("approved"):
                 info["approved"] = True
+            elif kind == "turn_end" and "status 402" in str(event.get("error") or ""):
+                info["api_failure"] = "OpenRouter refused a call: status 402, credit limit"
             elif kind == "tool_result" and event.get("forced_note"):
                 info["gate_forced"] = True
             elif kind == "tool_call":

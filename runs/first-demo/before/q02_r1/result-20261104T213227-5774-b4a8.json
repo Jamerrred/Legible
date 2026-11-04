@@ -1,0 +1,93 @@
+{
+  "answer": "For your F-250 in Sausalito you want The Cutter (Interior detail) + Upholstery and carpet shampoo add-on. No exterior.\n\n- Your truck is Class D on their board (board lists Ford F-250 as Class D). Cutter Class D is $289, shampoo Class D is $125 = $414 base.\n- Power: Cutter needs a grounded 120V outlet within 75 ft, or they run their generator for $30. Your outlet at 150 ft is beyond that, and it's a driveway (generator OK - it's only banned in enclosed/underground garages), so add $30 = $444 before travel/tax/condition.\n- Travel: They are based in San Francisco and travel further for a fee - their map shows Marin / Sausalito as a travel zone, but I could not find a dollar amount for 94965 on the home page, FAQ, price-board image, area-map image, or first booking step.\n- Condition: Home page and FAQ both say heavily soiled vehicles may cost extra, final price confirmed when they see the vehicle. Wall-to-wall mud + grubby seats/carpet needing shampoo fits that, so expect a possible extra decided on arrival - no fixed amount listed.\n- Tax: No tax rate or tax handling found on their pages.\n- When: They work Tuesday to Saturday, closed Sunday and Monday. Weekday windows Tue-Fri are Morning 8:00-9:30am and Afternoon 1:00-2:30pm. Interior-only jobs still go ahead if rain is forecast. Normal need is 24h notice; same-day ($40 fee) is Cutter-only afternoon if you call before 10am and they're free. Jobs 5h+ with add-ons must start in morning window - Cutter is listed 2-4h.\n- Deposit is $50 to book, counts toward total.\n\nSo verified subtotal is $444 + travel fee (unknown) + possible heavily-soiled extra (unknown) + tax if any (unknown). Not $129 full-detail listing you may see on directories - their own site outranks that old 2023 unclaimed listing.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "F-250 = Class D",
+      "evidence": "listed_unverified",
+      "source_url": "http://cormorant.localhost:8101/static/img/packages.png",
+      "value": "Class D includes Ford F-250"
+    },
+    {
+      "claim": "Cutter Class D price",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/static/img/packages.png",
+      "value": "$289"
+    },
+    {
+      "claim": "shampoo add-on Class D price, can be added to Cutter",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/static/img/packages.png",
+      "value": "$125"
+    },
+    {
+      "claim": "Cutter+shampoo base total",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/static/img/packages.png",
+      "value": "$414"
+    },
+    {
+      "claim": "generator fee for Cutter without outlet within 75ft",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "$30"
+    },
+    {
+      "claim": "subtotal with generator",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "$444"
+    },
+    {
+      "claim": "work days Tue-Sat closed Sun Mon, weekday windows",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "Morning 8:00-9:30am, Afternoon 1:00-2:30pm Tue-Fri"
+    },
+    {
+      "claim": "travel fee to 94965 Sausalito amount",
+      "evidence": "unknown",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "unknown - travel further for a fee, amount not listed"
+    },
+    {
+      "claim": "tax amount",
+      "evidence": "unknown",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "unknown - no tax rate found"
+    },
+    {
+      "claim": "heavily soiled extra amount",
+      "evidence": "unknown",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "unknown - may cost extra, confirmed on arrival"
+    }
+  ],
+  "mapped_terms": [
+    "Your 'inside wrecked, need real shampoo not just vacuum' = The Cutter (vacuum + wipe + spot-clean, no shampoo included) + Upholstery and carpet shampoo add-on",
+    "Your 'don't care about outside' = skip The Skiff exterior and The Schooner full detail",
+    "Your Ford F-250 = Class D (largest class on price board)"
+  ],
+  "next_steps": [
+    "To settle travel fee + tax + heavily-soiled extra, go one step further in Book flow past address entry (requires submitting name/email/phone/address) or call/text 415-555-0142 - mention F-250 Class D Cutter+shampoo, 94965 driveway, 150ft outlet, weekday"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T213227-5774-b4a8",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 8,
+  "browse_tasks": 2,
+  "approved": false,
+  "usage": {
+    "calls": 31,
+    "prompt_tokens": 383916,
+    "completion_tokens": 14345,
+    "reasoning_tokens": 4179,
+    "total_tokens": 398261,
+    "cost": 0.352304
+  },
+  "cost": 0.352304,
+  "wall_s": 252.75,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/before/q02_r1/run-20261104T213227-5774-b4a8.jsonl",
+  "error": null
+}

@@ -1,0 +1,59 @@
+{
+  "answer": "No — Cormorant Mobile Detailing does NOT do ceramic coating.\n\nTheir own site says explicitly: \"doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant.\"\n\nWhat that means for your new Model Y in 94114:\n\nYour Model Y is in their midsize / Class B group — the site lists Tesla Model Y as the example for Class B (sedans, crossovers and two-row SUVs).\n\nClosest thing to multi-year protection they offer is:\n\n1. The Flagship (polish-and-seal detail) — everything in the full detail + clay bar, one-step machine polish, 6-month paint sealant, plus upholstery/carpet shampoo.\n- $629 for midsize, before fees/tax. In 94114 there is $0 travel fee.\n- With 8.625% sales tax = ~$683.25 total, assuming no surcharges, generator / Saturday fees.\n- Takes 6-8 hours, must start in morning window, and owner Ines does every Flagship herself on Wed/Thu/Fri mornings only.\n- $150 deposit to book, counts toward total.\n\n2. Cheaper shorter option — Full detail (The Schooner) + clay + sealant add-ons:\n- $249 (full, midsize) + $70 clay + $115 sealant = $434 before tax, ~$471.43 with tax. Sealant can only be bought together with clay on an exterior wash or full detail.\n\nImportant limits:\n- They don't clay / polish / seal matte, satin paint or vinyl wraps — if your Y has one of those, Flagship and sealant aren't available.\n- They don't do multi-stage paint correction / swirl removal — only the one-step polish in The Flagship.\n- They serve 94114 with no travel fee.\n\nThe Bay Auto Pages directory listing that says \"ceramic coating\" is out of date (last updated March 2023) — Cormorant's own site is current as of Sept 2026 and says not offered, so go with the site.\n\nIf you want true multi-year ceramic, you'll need a different shop — Cormorant can only do the 6-month sealant.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Cormorant doesn't do ceramic coating, longest protection is 6-month sealant",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant"
+    },
+    {
+      "claim": "Tesla Model Y is midsize Class B",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "midsize class, shown as Class B, covers sedans, crossovers and two-row SUVs such as a Toyota Camry, Tesla Model 3, Tesla Model Y"
+    },
+    {
+      "claim": "Flagship midsize price $629 before fees/tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$629 for a midsize vehicle, before any add-ons, fees and tax"
+    },
+    {
+      "claim": "94114 in no-travel-fee area",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "serves these San Francisco ZIP codes with no travel fee: 94102, 94103, 94104, 94105, 94107, 94108, 94109, 94110, 94111, 94112, 94114"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "terms": [
+        "ceramic coated",
+        "paint's protected for years",
+        "polish and seal"
+      ]
+    }
+  ],
+  "next_steps": [],
+  "gate_note": null,
+  "run_id": "20261104T212216-4907-6404",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 4,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 5,
+    "prompt_tokens": 38274,
+    "completion_tokens": 1595,
+    "reasoning_tokens": 341,
+    "total_tokens": 39869,
+    "cost": 0.035696
+  },
+  "cost": 0.035696,
+  "wall_s": 24.1,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q04_r1/run-20261104T212216-4907-6404.jsonl",
+  "error": null
+}

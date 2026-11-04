@@ -1,0 +1,90 @@
+t.\n\nAll-in totals (no add-ons, no contamination surcharge, no travel fee):\n\n- **Saturday (no fleet discount allowed): 3 x $139 = $417 + $25 Saturday fee = $442 + 8.625% tax = $480.12 all-in.** $50 deposit to book, counts toward total.\n- For comparison, same 3 washes on Tue-Fri as a fleet job: $417 less 10% = $375.30 + 8.625% tax = $407.67 all-in, one travel fee per visit ($0 in 94103).\n\nOthers ruled out:\n- Peninsula Suds Mobile Wash — Peninsula only, “Not serving San Francisco at this time”\n- Sunset Shine Auto Spa — drop your car off at shop, not mobile\n- Ferry Point Auto Care — partner parking garages only, not to-your-lot\n\nTo book, you’ll request via their form and owner Ines replies by text/email within 4 business hours (Mon-Sat 8am-6pm), then pay deposit link within 12 hours to hold slot. Needs 24-hours notice. 3 exterior washes take ~1-1.5 hrs each.\n\nIf Saturday is firm, confirm with them that they will do 3 vans on Saturday at full price despite the “fleet Tue-Fri only” rule before paying deposit — that rule could also mean they’ll ask you to split to a weekday.\n",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Cormorant exterior wash oversized price $139",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$139 for oversized"
+    },
+    {
+      "claim": "Ford Transit = oversized Class D",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Ford Transit oversized"
+    },
+    {
+      "claim": "exterior wash is outside-only",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "doesn't touch inside"
+    },
+    {
+      "claim": "94103 no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "94103 no travel fee list"
+    },
+    {
+      "claim": "$25 Saturday fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$25 Saturday fee"
+    },
+    {
+      "claim": "8.625% sales tax on services and timing fees not travel",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "8.625%"
+    },
+    {
+      "claim": "fleet 3-4 vehicles 10% off but Tue-Fri only",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "10% off 3-4 vehicles Tue-Fri only"
+    },
+    {
+      "claim": "Saturday morning window only + open Nov 7 and Nov 21",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Sat morning 08:00-09:30 open 2026-11-07 2026-11-21"
+    },
+    {
+      "claim": "3+ vehicles needs spigot within 100ft, exterior needs no power",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "spigot requirement"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "items": [
+        "wash the outsides nothing inside = The Skiff exterior wash",
+        "3 Ford Transit vans = oversized Class D full-size van",
+        "come to us SoMa 94103 = no-travel-fee SF zone"
+      ]
+    }
+  ],
+  "next_steps": [
+    "Confirm with Cormorant that 3 vans can be done Saturday at full price given fleet Tue-Fri only rule, then pay $50 deposit link to hold Sat 11-07 or 11-21 morning"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4910-77cc",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 4,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 29040,
+    "completion_tokens": 2400,
+    "reasoning_tokens": 773,
+    "total_tokens": 31440,
+    "cost": 0.040793
+  },
+  "cost": 0.040793,
+  "wall_s": 28.23,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q03_r1/run-20261104T212216-4910-77cc.jsonl",
+  "error": null
+}

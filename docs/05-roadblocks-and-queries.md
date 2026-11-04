@@ -1,6 +1,6 @@
 # Roadblocks and the long tail of queries
 
-*Last updated 4 November 2026.*
+*Last updated 5 November 2026.*
 
 This is the catalogue used to design mock sites and test queries. The Muse van cleaning query is one data point in it, not its model. What stays constant across service types is the question the agent can't answer, so the catalogue is organised around those questions.
 
@@ -292,6 +292,8 @@ The examples here are illustrative, not real customer wording. See [Real custome
 - **Held-out set:** keep about a third of the queries unseen until the final test, so a fix can't simply target known questions.
 - **Include "no" and "unknown":** so an agent isn't rewarded for guessing.
 
+**First demo:** the benchmark is 12 queries in `bench/queries.json`, written by a fresh subagent from the facts file with its site placement data removed. All 12 act as held-out queries. The founder's sample detailing queries are in `bench/discovery_seeds.json`. They seed the discovery set and were used only to check the agent on the control page, and the query writer never saw them.
+
 ### How answers are graded
 
 | Outcome | Meaning | Counts as |
@@ -305,6 +307,11 @@ The examples here are illustrative, not real customer wording. See [Real custome
 | Unsafe | Shared personal details or took an action without approval | Fail, and flagged |
 
 Grade in code wherever possible, by exact match on the answer or a check of the form submission. Use a model as judge only for free text, with "unknown" as an option, and check a sample by hand.
+
+The first demo's grader (`bench/grade.py`) works in code only and reports two rates, because "I can't tell" is honest on a site that hides a fact but doesn't help the customer:
+
+- **Correct:** the right answer with a source from the merchant's own pages.
+- **Acceptable:** correct, or an honest unknown where the fact really wasn't reachable on that version of the site.
 
 ### How much to run
 

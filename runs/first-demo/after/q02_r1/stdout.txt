@@ -1,0 +1,89 @@
+ce confirmed on-site before work; if you declined a changed price you’d lose deposit.\n\nNext open weekday windows per their calendar (as of Nov 4): e.g. Tue Nov 10 afternoon, Fri Nov 13 afternoon, Tue Nov 17 afternoon, Wed Nov 18 morning/afternoon, Thu Nov 19 morning/afternoon, Fri Nov 20 morning, Tue Nov 24 morning. Booking needs name/email/phone/address — I didn’t submit anything.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Total $628.76 including tax and travel for interior + shampoo + heavily-soiled + no-power in 94965 on F-250",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$628.76"
+    },
+    {
+      "claim": "Interior detail oversized $289",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$289.00"
+    },
+    {
+      "claim": "Shampoo oversized $125",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$125.00"
+    },
+    {
+      "claim": "Heavily-soiled surcharge $75",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$75.00"
+    },
+    {
+      "claim": "Generator fee $30 when no outlet within 75ft",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$30.00"
+    },
+    {
+      "claim": "Travel fee 94965 $65",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$65.00"
+    },
+    {
+      "claim": "Tax 8.625% on services/addons/surcharges/generator, not travel",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "8.625%"
+    },
+    {
+      "claim": "F-250 is oversized Class D",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "oversized Class D"
+    },
+    {
+      "claim": "Phone 415-555-0142",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/",
+      "value": "415-555-0142"
+    }
+  ],
+  "mapped_terms": [
+    "just interior with shampoo, no exterior -> Interior detail (The Cutter) service=interior + shampoo add-on",
+    "F-250 -> oversized / Class D",
+    "mud wall to wall on floor -> heavily-soiled condition",
+    "outlet 150ft away -> no-power condition + $30 generator fee",
+    "94965 driveway -> Marin zone $65 travel"
+  ],
+  "next_steps": [
+    "Pick a weekday morning window (required for 5-hour job) and submit booking request with contact/address",
+    "Pay $50 deposit link when owner replies to lock booking"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4909-76ca",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 7,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 6,
+    "prompt_tokens": 86892,
+    "completion_tokens": 2656,
+    "reasoning_tokens": 618,
+    "total_tokens": 89548,
+    "cost": 0.111132
+  },
+  "cost": 0.111132,
+  "wall_s": 33.55,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q02_r1/run-20261104T212216-4909-76ca.jsonl",
+  "error": null
+}

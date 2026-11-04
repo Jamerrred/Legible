@@ -1,0 +1,69 @@
+{
+  "answer": "You have The Flagship on a Camry — Cormorant's top package with the one-step machine polish, and Camry = midsize / Class B.\n\nArrival is ~36 hours from now, so you are in the 24-to-48-hour band right now:\n\n**If you cancel right now: you get $75 back.**\n\nYour deposit was $150 for The Flagship, and cancelling between 24 and 48 hours before the start of the arrival window gets half back: $150 / 2 = $75.\n\n**If you move it instead: $0 cost to move this time.**\n\nYou haven't moved it before, and you are still >24 hours out, so you qualify for the one free reschedule. You must do it by phone or text only — 415-555-0142. Any later / shorter-notice change, or a second move, counts as a cancellation under the cancellation tiers above.\n\nAct quickly — if you wait until you are under 24 hours out, cancellation gets $0 back and a move is no longer free.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Top package is The Flagship includes one-step machine polish",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "top package, sold as The Flagship, is everything in the full detail plus a clay bar treatment, a one-step machine polish, a 6-month paint sealant"
+    },
+    {
+      "claim": "Camry is midsize Class B",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "midsize class, shown as Class B, covers sedans... such as a Toyota Camry"
+    },
+    {
+      "claim": "Deposit $150 for The Flagship",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$150 for The Flagship"
+    },
+    {
+      "claim": "Cancel 24-48 hours gets half back, under 24h gets nothing",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "cancels at least 48 hours before the start of the arrival window gets the full deposit back, between 24 and 48 hours gets half back, and under 24 hours gets nothing back"
+    },
+    {
+      "claim": "Reschedule once free with 24h notice by phone/text only",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "can reschedule once for free with at least 24 hours' notice, by phone or text only"
+    },
+    {
+      "claim": "Cancel refund at 36 hours = $75",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$75"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "term": "top package with the polish = The Flagship"
+    }
+  ],
+  "next_steps": [
+    "Call or text 415-555-0142 now to cancel or reschedule — do not wait past the 24-hour mark"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212700-5577-cc12",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 3,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 29039,
+    "completion_tokens": 1818,
+    "reasoning_tokens": 768,
+    "total_tokens": 30857,
+    "cost": 0.039586
+  },
+  "cost": 0.039586,
+  "wall_s": 21.54,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q09_r1/run-20261104T212700-5577-cc12.jsonl",
+  "error": null
+}

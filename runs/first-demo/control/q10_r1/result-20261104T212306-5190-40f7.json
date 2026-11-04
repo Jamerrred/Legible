@@ -1,0 +1,68 @@
+{
+  "answer": "No — Bay Auto Pages is out of date on price and Sundays. Its listing says flat $129 and open Sundays, but it is unclaimed and last updated March 2023.\n\nCormorant's own site (which outranks the directory) says:\n\n- Closed Sunday and Monday — works Tuesday to Saturday only. So this Sunday, Sunday 2026-11-08, is not available. Next open slot listed is Saturday 2026-11-07 morning 08:00-09:30 (with a $25 Saturday fee).\n- Full detail = The Schooner (exterior wash + interior detail + spray wax) costs $219 for a small vehicle, $249 midsize, $299 large, $399 oversized, before fees and tax — not flat $129.\n- Your 2018 Corolla is small / Class A (Corolla is listed as example small car), so full detail base is $219.\n- Your ZIP 94121 IS served with no travel fee — it is in the no-fee San Francisco list.\n- Total math for Corolla full detail with no add-ons/fees in 94121: $219 + 8.625% sales tax = $237.89, not $129 + tax. Total = service + add-ons/surcharges + generator/timing fees + travel fee + tax.\n- Bay Auto Pages also lists boat detailing and ceramic coating — Cormorant's own site says it does NOT detail boats/jet skis/motorcycles and does NOT do ceramic coating (longest protection is 6-month sealant).\n\nIf you want Saturday 11/7 morning in 94121 for the Corolla full detail, base would be $219 + $25 Saturday fee = $244 before tax, + 8.625% tax on $244 = ~$265.04, plus $50 deposit to book. Power needed: grounded 120V outlet within 75ft or $30 generator fee.\n\nI have not booked anything.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Bay Auto Pages listing says $129 and open Sundays",
+      "evidence": "listed_unverified",
+      "source_url": "http://bayautopages.localhost:8107/cormorant-mobile-detailing",
+      "value": "Full detail: flat $129, open Sundays, unclaimed, last updated March 2023"
+    },
+    {
+      "claim": "Works Tue-Sat, closed Sun-Mon",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "works Tuesday to Saturday and is closed Sunday and Monday"
+    },
+    {
+      "claim": "Full detail price small vehicle $219",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$219 for a small vehicle before add-ons, fees and tax"
+    },
+    {
+      "claim": "Corolla is small class",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "small class covers compact cars such as Toyota Corolla"
+    },
+    {
+      "claim": "94121 no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "serves 94121 with no travel fee"
+    },
+    {
+      "claim": "sales tax 8.625%",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "adds 8.625% sales tax to services, add-ons, surcharges, generator and timing fees, not travel fee"
+    }
+  ],
+  "mapped_terms": [
+    "customer 'full detail' = business 'full detail (The Schooner)'",
+    "customer '2018 Corolla' = business 'small class / Class A'"
+  ],
+  "next_steps": [
+    "Pick a Tue-Sat slot (e.g. Sat 2026-11-07 morning) if you want to proceed"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212306-5190-40f7",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 5,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 29399,
+    "completion_tokens": 1651,
+    "reasoning_tokens": 308,
+    "total_tokens": 31050,
+    "cost": 0.037777
+  },
+  "cost": 0.037777,
+  "wall_s": 19.99,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q10_r1/run-20261104T212306-5190-40f7.jsonl",
+  "error": null
+}
