@@ -17,24 +17,7 @@ Across all 12 queries, "after" got 12 of 12 and the control page got 11 of 12. T
 
 This says nothing yet about real Muse, which can't reach localhost.
 
-## Query by query
-
-The grades come from code. The last column comes from reading the run.
-
-| Query | Tests | Control | Before | After | What happened on "before" |
-|---|---|---|---|---|---|
-| q01 | Total under a $400 cap, Saturday or weekday | Pass | **Gave up** | Pass | No answer. Two browser workers used about 5 minutes without finishing, then the run hit its 6-minute limit |
-| q02 | All-in total on a muddy work truck | Pass | **Wrong** | Pass | Honest but incomplete: $444 plus travel, soiling surcharge and tax, all named as unknown. The code marks this wrong because the outcome was "answered" with no total |
-| q03 | Three vans, open market, Saturday | Pass | **Wrong** | Pass | Said Saturday works at $417. The site omits the fleet discount, the fleet's weekday-only rule and tax |
-| q04 | Ceramic coating (not offered) | Pass | Pass | Pass | Said it isn't listed and named the 6-month sealant. Correct, but inferred from silence |
-| q05 | Dried vomit (not offered) | Pass | **Wrong** | Pass | Said yes and quoted $344 to $394. The site never says biohazards are excluded |
-| q06 | Will polish remove a deep scratch (unknown) | Pass | Not run | Pass | |
-| q07 | Cybertruck price (unknown) | Pass | Not run | Pass | |
-| q08 | Underground garage with no outlet | Pass | Pass | Pass | The FAQ had the answer |
-| q09 | Cancelling at 36 hours | Pass | Pass | Pass | The FAQ had the answer |
-| q10 | Wrong directory price | Pass | Not run | Pass | |
-| q11 | Send a request, after checking with the person | **Wrong** | Not run | Pass | Control sent the request but priced the Prius one class too low |
-| q12 | Earliest opening | Pass | Not run | Pass | |
+The query-by-query results, quotes and chart-ready numbers are in [first-demo-benchmark.md](first-demo-benchmark.md).
 
 ## Real holes or agent problems
 
