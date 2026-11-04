@@ -9,6 +9,7 @@ say the price is a range. Subtotal, tax and total are None unless status is "ok"
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import re
@@ -88,10 +89,7 @@ def slots(slug="cormorant", now=None, days=21):
             continue
         for name in rules["weekday_windows"].get(weekday, []):
             window = rules["windows"][name]
-            is_open = (
-                _at(day, window["start"], tz) >= earliest
-                and not _is_booked(rules, day, name, days_out)
-            )
+            is_open = _at(day, window["start"], tz) >= earliest and not _is_booked(rules, day, name, days_out)
             listed.append(
                 {
                     "date": day.isoformat(),
@@ -183,9 +181,7 @@ def _parse_when(when, current, rules):
         return None
     if "t" in head and window is None:
         clock = moment.strftime("%H:%M")
-        window = next(
-            (n for n, w in windows.items() if w["start"] <= clock <= w["end"]), "outside"
-        )
+        window = next((n for n, w in windows.items() if w["start"] <= clock <= w["end"]), "outside")
     return moment.date(), window
 
 
@@ -262,9 +258,7 @@ def quote(
             "fact_ids": cited,
         }
         if status in ("ok", "needs_info"):
-            result["lines"] = [
-                {"label": item["label"], "amount": _out(item["amount"])} for item in items
-            ]
+            result["lines"] = [{"label": item["label"], "amount": _out(item["amount"])} for item in items]
             result["deposit_due"] = float(deposit) if deposit is not None else None
         if status == "ok":
             low, high = Decimal(0), Decimal(0)
@@ -279,9 +273,7 @@ def quote(
             rate = Decimal(str(model["tax"]["rate"]))
             tax_low, tax_high = _money(taxable_low * rate), _money(taxable_high * rate)
             if low == high:
-                result.update(
-                    subtotal=_out(low), tax=_out(tax_low), total=_out(low + tax_low)
-                )
+                result.update(subtotal=_out(low), tax=_out(tax_low), total=_out(low + tax_low))
             else:
                 result.update(
                     subtotal=_out((low, high)),
@@ -333,8 +325,7 @@ def quote(
         elif kind == "size":
             if size_id and size_id != match["size"]:
                 notes.append(
-                    f"The vehicle '{vehicle}' is {model['sizes'][match['size']]['label']}, "
-                    "so that class is used instead of the size given."
+                    f"The vehicle '{vehicle}' is {model['sizes'][match['size']]['label']}, so that class is used instead of the size given."
                 )
             size_id = match["size"]
             cite(f"size_classes.{size_id}")
@@ -385,10 +376,9 @@ def quote(
             notes.append(f"'{text}' isn't a defined condition, so nothing was charged for it.")
     for condition_id in wanted_conditions:
         condition = model["conditions"][condition_id]
-        if condition.get("forces_addon") and has_interior:
-            if condition["forces_addon"] not in addon_ids:
-                addon_ids.append(condition["forces_addon"])
-                notes.append(f"{condition['label']} also needs the {condition['forces_addon']} add-on, so it was added.")
+        if condition.get("forces_addon") and has_interior and condition["forces_addon"] not in addon_ids:
+            addon_ids.append(condition["forces_addon"])
+            notes.append(f"{condition['label']} also needs the {condition['forces_addon']} add-on, so it was added.")
 
     # Recurring plan and fleet counts.
     count = int(vehicle_count or 1)
@@ -519,9 +509,7 @@ def quote(
             notes.append(camper["note"])
 
     # Price lines.
-    priced_by_size = bool(service_id) or any(
-        "prices" in model["addons"][a] for a in chargeable
-    )
+    priced_by_size = bool(service_id) or any("prices" in model["addons"][a] for a in chargeable)
     if priced_by_size and not size_id and not undecided_vehicle:
         still_needed.append("vehicle size class, or the make and model")
     times = f" x {count}" if count > 1 else ""
@@ -614,16 +602,12 @@ def quote(
     if when is None:
         if service_id or is_standalone_visit:
             fees = model["timing_fees"]
-            notes.append(
-                f"No date given: a Saturday adds ${fees['saturday']} and the evening window adds ${fees['evening']}."
-            )
+            notes.append(f"No date given: a Saturday adds ${fees['saturday']} and the evening window adds ${fees['evening']}.")
             cite("timing.saturday-fee", "timing.evening")
     else:
         parsed = None
-        try:
+        with contextlib.suppress(TypeError, ValueError, AttributeError, KeyError):
             parsed = _parse_when(when, current, rules)
-        except (TypeError, ValueError, AttributeError, KeyError):
-            pass
         if not parsed or parsed[0] is None:
             still_needed.append("when, as a date and optionally a window")
         else:
@@ -631,8 +615,21 @@ def quote(
             if isinstance(day, datetime):
                 day = day.date()
             _apply_timing(
-                model, rules, tz, current, day, window, service_id, chargeable, zone, count,
-                minutes, statuses, notes, cited, items,
+                model,
+                rules,
+                tz,
+                current,
+                day,
+                window,
+                service_id,
+                chargeable,
+                zone,
+                count,
+                minutes,
+                statuses,
+                notes,
+                cited,
+                items,
             )
 
     # Deposit.
@@ -660,8 +657,21 @@ def quote(
 
 
 def _apply_timing(
-    model, rules, tz, current, day, window, service_id, chargeable, zone, count, minutes,
-    statuses, notes, cited, items,
+    model,
+    rules,
+    tz,
+    current,
+    day,
+    window,
+    service_id,
+    chargeable,
+    zone,
+    count,
+    minutes,
+    statuses,
+    notes,
+    cited,
+    items,
 ):
     def cite(*ids):
         for fact_id in ids:

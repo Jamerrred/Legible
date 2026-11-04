@@ -1,4 +1,5 @@
 """Draw the price board and the service-area map. Run: uv run python -m demo_site.make_assets"""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -40,7 +41,7 @@ def price_board() -> None:
     def header(y: int, title: str) -> int:
         draw.rectangle((40, y, 1060, y + 48), fill=TEAL)
         draw.text((58, y + 24), title, font=font(25, True), fill="white", anchor="lm")
-        for x, label in zip(columns, ["Class A", "Class B", "Class C", "Class D"]):
+        for x, label in zip(columns, ["Class A", "Class B", "Class C", "Class D"], strict=True):
             draw.text((x, y + 24), label, font=font(23, True), fill="white", anchor="mm")
         return y + 48
 
@@ -49,7 +50,7 @@ def price_board() -> None:
         if index % 2:
             draw.rectangle((40, y, 1060, y + 54), fill=STRIPE)
         draw.text((58, y + 27), service["marketing_name"], font=font(27, True), fill=INK, anchor="lm")
-        for x, size in zip(columns, SIZES):
+        for x, size in zip(columns, SIZES, strict=True):
             draw.text((x, y + 27), f"${service['prices'][size]}", font=font(27), fill=INK, anchor="mm")
         y += 54
 
@@ -59,7 +60,7 @@ def price_board() -> None:
             draw.rectangle((40, y, 1060, y + 50), fill=STRIPE)
         draw.text((58, y + 25), addon["label"].split(",")[0], font=font(24), fill=INK, anchor="lm")
         if "prices" in addon:
-            for x, size in zip(columns, SIZES):
+            for x, size in zip(columns, SIZES, strict=True):
                 draw.text((x, y + 25), f"${addon['prices'][size]}", font=font(24), fill=INK, anchor="mm")
         elif "range" in addon:
             low, high = addon["range"]["low"], addon["range"]["high"]

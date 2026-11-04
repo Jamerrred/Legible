@@ -5,18 +5,21 @@ Crawls the site and the mock directory and competitors for that variant into
 corpus/<variant>/. The resource is left out on purpose, so in the "after" runs
 the only way to reach it is the visible link on the site.
 """
+
 from __future__ import annotations
 
 import hashlib
 import json
 import shutil
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urldefrag, urljoin, urlparse
 
 import httpx
 from bs4 import BeautifulSoup
+
+from bench.world import WORLD_HOSTS
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = {"before": 8101, "after": 8102, "control": 8104}
@@ -62,10 +65,8 @@ def snapshot(variant: str) -> int:
     out = ROOT / "corpus" / variant
     shutil.rmtree(out, ignore_errors=True)
     out.mkdir(parents=True)
-    fetched_at = datetime.now(timezone.utc).date().isoformat()
+    fetched_at = datetime.now(UTC).date().isoformat()
     total = crawl(f"http://cormorant.localhost:{SITE[variant]}/", out, fetched_at)
-    from bench.world import WORLD_HOSTS  # the mock directory and competitors, each on its own host
-
     for host in WORLD_HOSTS:
         total += crawl(f"http://{host}:{WORLD[variant]}/", out, fetched_at)
     return total

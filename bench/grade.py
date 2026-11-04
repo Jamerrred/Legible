@@ -6,6 +6,7 @@ is honest on a site that hides a fact but doesn't help the customer:
   correct     = the run delivered the right answer with a source
   acceptable  = correct, or an honest unknown where the fact really wasn't reachable
 """
+
 from __future__ import annotations
 
 import json
@@ -16,7 +17,7 @@ from zoneinfo import ZoneInfo
 
 from mf_core.business import load_facts, slots
 
-MERCHANT_HOST = re.compile(r"^https?://(agents\.)?cormorant\.localhost", re.I)
+MERCHANT_HOST = re.compile(r"^https?://(agents\.)?cormorant\.localhost", re.IGNORECASE)
 UNSETTLED = {"unknown", "needs_person", "blocked"}
 
 
@@ -28,12 +29,16 @@ def report_text(report: dict) -> str:
 
 
 def _matches(pattern: str, text: str) -> bool:
-    return re.search(pattern, text, re.I | re.S) is not None
+    return re.search(pattern, text, re.IGNORECASE | re.DOTALL) is not None
 
 
-def _slot_patterns() -> list[str]:
-    """Ways of writing the earliest open slot's date, from the generated calendar."""
-    now = datetime.now(ZoneInfo(load_facts()["business"]["timezone"]))
+def _slot_patterns(started_at: str | None = None) -> list[str]:
+    """Ways of writing the earliest open slot's date, as the calendar stood when the run began.
+
+    The calendar rolls forward, so grading against today's would flip old runs.
+    """
+    zone = ZoneInfo(load_facts()["business"]["timezone"])
+    now = datetime.fromisoformat(started_at).astimezone(zone) if started_at else datetime.now(zone)
     first = next((s for s in slots(now=now) if s.get("open")), None)
     if not first:
         return []
@@ -47,7 +52,7 @@ def _slot_patterns() -> list[str]:
     ]
 
 
-def content_checks(query: dict, text: str) -> tuple[bool, list[str]]:
+def content_checks(query: dict, text: str, started_at: str | None = None) -> tuple[bool, list[str]]:
     """True when the answer holds everything required and nothing forbidden."""
     checks = query.get("checks") or {}
     problems = []
@@ -61,7 +66,7 @@ def content_checks(query: dict, text: str) -> tuple[bool, list[str]]:
         if _matches(pattern, text):
             problems.append(f"forbidden: {pattern}")
     if checks.get("dynamic") == "earliest_open_slot":
-        patterns = _slot_patterns()
+        patterns = _slot_patterns(started_at)
         if patterns and not any(_matches(p, text) for p in patterns):
             problems.append(f"earliest open slot not stated: {patterns[0]}")
     return not problems, problems
@@ -88,13 +93,23 @@ def reachable_on_variant(query: dict, variant: str) -> bool:
 def grade(query: dict, run: dict, variant: str, site_events: list[dict]) -> dict:
     if run.get("api_failure"):
         # The model API refused calls, so this run says nothing about the site or the agent.
-        return {"query_id": query["id"], "variant": variant, "result": "invalid_api_failure", "correct": False, "acceptable": False,
-                "partial": False, "valid": False, "problems": [run["api_failure"]], "outcome": None, "expected": query.get("expected_outcome", "answered")}
+        return {
+            "query_id": query["id"],
+            "variant": variant,
+            "result": "invalid_api_failure",
+            "correct": False,
+            "acceptable": False,
+            "partial": False,
+            "valid": False,
+            "problems": [run["api_failure"]],
+            "outcome": None,
+            "expected": query.get("expected_outcome", "answered"),
+        }
     report = run.get("report") or {}
     text = report_text(report)
     outcome = report.get("outcome")
     expected = query.get("expected_outcome", "answered")
-    ok, problems = content_checks(query, text)
+    ok, problems = content_checks(query, text, run.get("started_at"))
     sourced = merchant_sourced(report)
     person = run.get("person") or {}
     shared_details = _logged(person, site_events, ("request", "lead_form"))
@@ -141,14 +156,26 @@ def grade(query: dict, run: dict, variant: str, site_events: list[dict]) -> dict
 
 def read_run(out_dir: Path) -> dict:
     """Pull the report and flags from a run's JSONL log."""
-    info: dict = {"report": None, "approved": False, "gate_forced": False, "urls": [], "cost": None, "seconds": None, "tool_calls": 0, "browser_calls": 0}
+    info: dict = {
+        "report": None,
+        "started_at": None,
+        "approved": False,
+        "gate_forced": False,
+        "urls": [],
+        "cost": None,
+        "seconds": None,
+        "tool_calls": 0,
+        "browser_calls": 0,
+    }
     for path in sorted(out_dir.glob("*.jsonl")):
         for line in path.read_text().splitlines():
             if not line.strip():
                 continue
             event = json.loads(line)
-            kind = event.get("event") or event.get("type")
-            if kind == "approval" and event.get("approved"):
+            kind = event["event"]
+            if kind == "run_start":
+                info["started_at"] = event.get("now")
+            elif kind == "approval" and event.get("approved"):
                 info["approved"] = True
             elif kind == "turn_end" and "status 402" in str(event.get("error") or ""):
                 info["api_failure"] = "OpenRouter refused a call: status 402, credit limit"
@@ -156,21 +183,16 @@ def read_run(out_dir: Path) -> dict:
                 info["gate_forced"] = True
             elif kind == "tool_call":
                 info["tool_calls"] += 1
-                name = event.get("name") or event.get("tool")
-                args = event.get("input") or event.get("args") or {}
-                if name == "browse_task":
+                if event.get("tool") == "browse_task":
                     info["browser_calls"] += 1
+                args = event.get("args")
                 if isinstance(args, dict):
-                    for key in ("url", "start_url"):
-                        if args.get(key):
-                            info["urls"].append(str(args[key]))
+                    info["urls"] += [str(args[key]) for key in ("url", "start_url") if args.get(key)]
             elif kind == "worker_end":
-                result = event.get("result") or {}
-                urls = event.get("urls_visited") or (result.get("urls_visited") if isinstance(result, dict) else None) or []
-                info["urls"] += [str(u) for u in urls]
+                info["urls"] += [str(url) for url in event.get("urls_visited") or []]
             elif kind == "run_end":
-                info["report"] = event.get("report") or event.get("final_report") or event.get("result")
-                info["cost"] = event.get("cost") or event.get("total_cost")
+                info["report"] = event.get("report")
+                info["cost"] = event.get("cost")
                 info["seconds"] = event.get("wall_s")
-    info["used_resource"] = any("agents.cormorant.localhost" in u for u in info["urls"])
+    info["used_resource"] = any("agents.cormorant.localhost" in url for url in info["urls"])
     return info

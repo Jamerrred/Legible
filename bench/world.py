@@ -5,6 +5,7 @@ has to build queries, filter results and tell the merchant's own pages from a
 listing. The directory's wrong claims come from the facts file, where they're
 recorded as false.
 """
+
 from __future__ import annotations
 
 from fastapi import FastAPI, Request
@@ -41,14 +42,15 @@ def _shell(title: str, body: str) -> str:
     )
 
 
-def _directory_home(site_url: str, listing: str) -> str:
+def _directory_home(listing: str, port: str) -> str:
     return _shell(
         "Bay Auto Pages: car care listings in the San Francisco Bay Area",
-        "<h1>Bay Auto Pages</h1><p>Local listings for car care around the San Francisco Bay Area. Listings are submitted by users and may be out of date.</p>"
+        "<h1>Bay Auto Pages</h1><p>Local listings for car care around the San Francisco Bay Area. "
+        "Listings are submitted by users and may be out of date.</p>"
         f"<h2>Detailing and car wash</h2><ul>{listing}"
-        "<li><a href='http://sunsetshine.localhost:{port}/'>Sunset Shine Auto Spa</a>, Outer Sunset</li>"
-        "<li><a href='http://ferrybuildingautocare.localhost:{port}/'>Ferry Point Auto Care</a>, Downtown</li>"
-        "<li><a href='http://peninsulasuds.localhost:{port}/'>Peninsula Suds Mobile Wash</a>, Peninsula</li>"
+        f"<li><a href='http://sunsetshine.localhost:{port}/'>Sunset Shine Auto Spa</a>, Outer Sunset</li>"
+        f"<li><a href='http://ferrybuildingautocare.localhost:{port}/'>Ferry Point Auto Care</a>, Downtown</li>"
+        f"<li><a href='http://peninsulasuds.localhost:{port}/'>Peninsula Suds Mobile Wash</a>, Peninsula</li>"
         "</ul>",
     )
 
@@ -67,8 +69,7 @@ def create_world_app(site_url: str) -> FastAPI:
 
     @app.get("/{path:path}", response_class=HTMLResponse)
     def page(path: str, request: Request):
-        host = (request.headers.get("host") or "").split(":")[0]
-        port = (request.headers.get("host") or "").split(":")[-1]
+        host, _, port = (request.headers.get("host") or "").partition(":")
         if host in COMPETITORS:
             title, text = COMPETITORS[host]
             return _shell(title, f"<h1>{title}</h1><p>{text}</p>")
@@ -81,6 +82,6 @@ def create_world_app(site_url: str) -> FastAPI:
                 f"<p>Website: <a href='{site_url}/'>{site_url}</a></p>",
             )
         listing = f"<li><a href='/cormorant-mobile-detailing'>{name}</a>, mobile, San Francisco. Full detail ${price['claimed_price']}</li>"
-        return _directory_home(site_url, listing).replace("{port}", port)
+        return _directory_home(listing, port)
 
     return app

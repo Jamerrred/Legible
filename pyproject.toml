@@ -17,3 +17,27 @@ dependencies = [
 
 [tool.uv]
 package = false
+
+[tool.ruff]
+line-length = 140
+target-version = "py312"
+# consumer_agent/ stays byte-identical to the tag first-demo-agent-freeze, so the benchmark's
+# remaining runs use the same agent. Lint it only when the agent is deliberately changed.
+extend-exclude = ["consumer_agent", "research_notes"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# These hold long runs of page text, where wrapping would hurt more than it helps.
+"demo_resource/*" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]

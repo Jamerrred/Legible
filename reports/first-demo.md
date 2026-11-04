@@ -1,6 +1,6 @@
-# First demo: benchmark report
+# First demo: build report
 
-*Run on 5 November 2026 (India time), on the fictional Cormorant Mobile Detailing, with everything local. The agent was frozen at commit `2c319fc`.*
+*Run on 5 November 2026 (India time), on the fictional Cormorant Mobile Detailing, with everything local. The agent was frozen at commit `2c319fc`, tagged `first-demo-agent-freeze`. This report covers what was built, what passed, what failed and how to run it. For the numbers, see [first-demo-benchmark.md](first-demo-benchmark.md).*
 
 ## The result
 
@@ -49,8 +49,8 @@ The query-by-query results, quotes and chart-ready numbers are in [first-demo-be
 ## What failed
 
 - **The 30-minute target:** this took about 95 minutes, including two changes of direction on the site and the credit failure.
-- **The first benchmark attempt:** 18 parallel runs exceeded the balance OpenRouter would hold for requests in flight, and most then failed with a 402 error. Those failed runs are excluded. The 18 runs that finished cleanly were kept, and the rest were rerun with lower parallelism. The first attempt's results and logs are in `runs/first-demo/attempt-1-credit-failure/`.
-- **Finishing "before":** 5 queries didn't run, because the balance fell under the $0.30 floor. It's now $0.21.
+- **The first benchmark attempt:** 18 parallel runs exceeded the balance OpenRouter would hold for requests in flight, and most then failed with a 402 error. Those failed runs are excluded. The 18 runs that finished cleanly were kept, and the rest were rerun with lower parallelism. The first attempt's results are in `runs/first-demo/attempt-1-credit-failure/`, and the logs of refused "before" runs are in `runs/first-demo/invalid-runs/`.
+- **Finishing "before":** 5 queries didn't run, because the balance fell to $0.21, under the $0.30 floor.
 - **Grader bug, now fixed:** a run with no report counted as an honest unknown, which flattered "before". q01 is now graded as gave up.
 
 ## What was skipped
@@ -95,10 +95,20 @@ uv run python scripts/serve.py
 In another terminal, check the booking flow:
 
 ```bash
-uv run python demo_site/check_booking.py http://cormorant.localhost:8101
+uv run python scripts/check_booking.py http://cormorant.localhost:8101
 ```
 
-Save fresh page copies for local search:
+Re-grade the saved runs and print their tables. Neither of these calls a model, so they're free:
+
+```bash
+uv run python -m bench.run_benchmark --variant before --name first-demo --regrade
+```
+
+```bash
+uv run python -m bench.summarize --name first-demo
+```
+
+**The rest spend OpenRouter credit.** Save fresh page copies only if the site has changed, since a benchmark's runs should all use the same copies:
 
 ```bash
 uv run python -m bench.snapshot before after control
@@ -107,7 +117,7 @@ uv run python -m bench.snapshot before after control
 Finish the "before" runs. `--resume` keeps every clean run, so this spends only on the missing queries:
 
 ```bash
-uv run python -m bench.run_benchmark --variant before --repeats 1 --concurrency 1 --name first-demo --resume
+uv run python -m bench.run_benchmark --variant before --name first-demo --resume
 ```
 
 Run one query by hand on the local web:

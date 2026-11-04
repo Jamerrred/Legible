@@ -16,10 +16,11 @@ Templates the site must provide, with the context each receives:
 Call register_booking(app, stream, render, packages, addons), where
 render(request, template_name, status_code=200, **context) returns a response.
 """
+
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import date
-from typing import Callable
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -80,8 +81,15 @@ def register_booking(app: FastAPI, stream: str, render: Callable, packages: list
         if not has_open:
             log_event(stream, "dead_end", reason="no open slot", path=str(request.url.path), email=lead.get("email"))
         return render(
-            request, "book_step2.html", lead=lead, days=days, has_open=has_open, error=error,
-            packages=packages, addons=addons, values=values or {},
+            request,
+            "book_step2.html",
+            lead=lead,
+            days=days,
+            has_open=has_open,
+            error=error,
+            packages=packages,
+            addons=addons,
+            values=values or {},
         )
 
     @app.get("/book", response_class=HTMLResponse)
@@ -95,8 +103,9 @@ def register_booking(app: FastAPI, stream: str, render: Callable, packages: list
         complete = all(lead.values()) and "@" in lead["email"]
         log_event(stream, "lead_form", form="book", complete=complete, **lead)
         if not complete:
-            return render(request, "book_step1.html", status_code=422, lead=lead,
-                          error="Please fill in all four fields so we can continue.")
+            return render(
+                request, "book_step1.html", status_code=422, lead=lead, error="Please fill in all four fields so we can continue."
+            )
         return step_two(request, lead)
 
     @app.get("/book/request")
@@ -119,14 +128,22 @@ def register_booking(app: FastAPI, stream: str, render: Callable, packages: list
         is_open = values["slot"] in open_slot_values()
         outcome = "received" if not missing and is_open else ("incomplete" if missing else "slot_unavailable")
         log_event(
-            stream, "request", **lead, package=values["package"], vehicle=values["vehicle"],
-            addons=values["addons"], notes=values["notes"], slot_date=slot_date or None,
-            slot_window=slot_window or None, outcome=outcome,
+            stream,
+            "request",
+            **lead,
+            package=values["package"],
+            vehicle=values["vehicle"],
+            addons=values["addons"],
+            notes=values["notes"],
+            slot_date=slot_date or None,
+            slot_window=slot_window or None,
+            outcome=outcome,
         )
         if outcome == "incomplete":
             return step_two(request, lead, error="Please choose a package, tell us your vehicle and pick an arrival window.", values=values)
         if outcome == "slot_unavailable":
-            log_event(stream, "dead_end", reason="chosen slot not available", path="/book/request",
-                      email=lead.get("email"), slot=values["slot"])
+            log_event(
+                stream, "dead_end", reason="chosen slot not available", path="/book/request", email=lead.get("email"), slot=values["slot"]
+            )
             return step_two(request, lead, error="That arrival window isn't available. Please pick another.", values=values)
         return render(request, "book_done.html")

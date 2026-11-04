@@ -3,6 +3,7 @@
 If the agent fails here the fault is the agent's, not a hole in the site. It is
 generated from the facts file's statements with no design and no resource logic.
 """
+
 from __future__ import annotations
 
 import html
@@ -66,11 +67,31 @@ def create_control_app() -> FastAPI:
         return _page(facts)
 
     @app.post("/request", response_class=HTMLResponse)
-    def request_form(name: str = Form(""), email: str = Form(""), phone: str = Form(""), address: str = Form(""),
-                     vehicle: str = Form(""), details: str = Form(""), submitted_by: str = Form("")):
-        log_event(STREAM, "request", name=name, email=email, phone=phone, address=address, vehicle=vehicle,
-                  details=details, submitted_by=submitted_by, outcome="received")
-        return "<!doctype html><title>Request received</title><h1>Request received</h1><p>Your request was received. The owner replies by email.</p>"
+    def request_form(
+        name: str = Form(""),
+        email: str = Form(""),
+        phone: str = Form(""),
+        address: str = Form(""),
+        vehicle: str = Form(""),
+        details: str = Form(""),
+        submitted_by: str = Form(""),
+    ):
+        log_event(
+            STREAM,
+            "request",
+            name=name,
+            email=email,
+            phone=phone,
+            address=address,
+            vehicle=vehicle,
+            details=details,
+            submitted_by=submitted_by,
+            outcome="received",
+        )
+        return (
+            "<!doctype html><title>Request received</title><h1>Request received</h1>"
+            "<p>Your request was received. The owner replies by email.</p>"
+        )
 
     @app.get("/robots.txt", response_class=PlainTextResponse)
     def robots():
