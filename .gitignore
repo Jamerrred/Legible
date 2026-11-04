@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+build/
+.next/
+
+# Editors
+.vscode/
+.idea/
+
+# Logs
+*.log

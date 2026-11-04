@@ -1,0 +1,53 @@
+# MuseFront docs
+
+*Last updated 4 November 2026. Nothing has been built yet: this folder holds the project's decisions, research and plan.*
+
+## Current position
+
+MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps it accurate. The goal is a compelling, functional demo on four mock service businesses.
+
+**Next step:** build the first mock site, then the consumer agent, then run the before-and-after test ([plan](03-build-plan.md)).
+
+## Read these in order
+
+| Doc | What's in it |
+|---|---|
+| [01 Project overview](01-project-overview.md) | The product, decisions made, what replaced what, parts, demo story, validation status, glossary |
+| [02 Muse findings](02-muse-findings.md) | What the founder's Muse test showed, and how far to trust it |
+| [03 Build plan](03-build-plan.md) | The step-by-step plan, test rules, and what's needed from the founder |
+| [04 Resource spec](04-resource-spec.md) | What the "slug" website contains, how it's written, and how agents reach it |
+| [05 Roadblocks and queries](05-roadblocks-and-queries.md) | The long-tail catalogue of what stops agents, query types, and grading |
+| [06 Demo businesses](06-demo-businesses.md) | The four proposed businesses, their roadblocks, and the facts file |
+| [07 Consumer agent research](07-consumer-agent-research.md) | How research agents, browser agents and harnesses are built, with sources |
+| [08 Consumer agent design](08-consumer-agent-design.md) | What we'd build as our stand-in agent, including draft instructions |
+| [09 Back office agent](09-back-office-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
+
+Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names real businesses, so don't publish it as is.
+
+## If you're coming from another chat
+
+Older material may say something different. These positions are current:
+
+- **The front desk agent and the connector application are dropped.**
+- **MCP and Poppy are optional**, and come only after the back office agent.
+- **The first resource is written by hand**, by Claude. It's the answer key for the back office agent.
+- **The consumer agent is ours**, built on a tool loop with browser-use, and it doubles as the simulator.
+- **The demo set is four service businesses**, not a car wash, HVAC company and online store.
+- **Roadblocks and queries are long-tail.** The van cleaning query is one example only.
+- **The earlier in-chat PRD is out of date.** These docs replace it.
+
+[01 Project overview](01-project-overview.md#what-replaced-what) has the full list and the reasons.
+
+## Decided or proposed
+
+| Status | Where to look |
+|---|---|
+| Decided by the founder | [Decisions](01-project-overview.md#decisions) |
+| Proposed, awaiting confirmation | [Proposed](01-project-overview.md#proposed-not-yet-confirmed), [Test rules](03-build-plan.md#test-rules), [Open questions](03-build-plan.md#open-questions), and all of docs 06 and 08 |
+
+## Earlier research
+
+| Folder | Status |
+|---|---|
+| `research_notes/Consumer agents/` | Raw notes behind docs 05, 07 and 08 |
+| `research_notes/Agentic commerce for long tail/` | Older notes. `competitors.md` and `harness_inbox_trust.md` were finished, while `protocols.md`, `consumer_agents.md` and `connectors_and_delivery.md` may be partial, since those tracks were stopped early |
