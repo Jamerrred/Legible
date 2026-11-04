@@ -13,23 +13,16 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
-
-# Node
-node_modules/
-dist/
-build/
-.next/
+.ruff_cache/
 
 # Editors
 .vscode/
 .idea/
 
-# Logs
+# Live server logs. Each benchmark keeps its own copy under runs/<name>/site-logs/
+logs/
 *.log
 
-# Benchmark scratch output (browser histories, screenshots)
+# Browser histories and screenshots from runs
 runs/**/browser/
 .browser-profiles/
-
-# Live server logs (a copy of each benchmark's logs is kept under runs/)
-logs/
