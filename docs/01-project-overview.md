@@ -1,6 +1,6 @@
 # MuseFront project overview
 
-*Last updated 4 November 2026. Nothing has been built yet.*
+*Last updated 5 November 2026. The first local demo is built on one mock business: see [the benchmark](../reports/first-demo-benchmark.md). The back office agent isn't built yet.*
 
 ## In one sentence
 
@@ -134,7 +134,7 @@ Not yet.
 | Question | Status | Why |
 |---|---|---|
 | Do agents struggle with these businesses? | Supported, but thin | Muse couldn't verify a price and slot, though that's one query, one agent and its own account |
-| Would an agent use a MuseFront resource? | Not tested | Nothing is built |
+| Would an agent use a MuseFront resource? | Partly tested | Our stand-in reached it in 11 of 12 local runs without being told it exists. Real agents haven't been tested |
 | Would an agent treat it as the merchant's own information? | Not tested | It might read as a third-party listing |
 | Would owners set it up and keep it updated? | Not tested | No owner has seen it |
 | Would businesses get more customers? | Not tested | There's no data |

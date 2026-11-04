@@ -1,6 +1,6 @@
 # The back office agent
 
-*Last updated 4 November 2026. Nothing is built yet. It comes after the before-and-after test works, as set out in the [build plan](03-build-plan.md).*
+*Last updated 5 November 2026. This agent isn't built yet. It comes after the before-and-after test works, as set out in the [build plan](03-build-plan.md).*
 
 ## What it does
 

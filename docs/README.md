@@ -1,12 +1,12 @@
 # MuseFront docs
 
-*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. The first local demo is built: see [its report](../reports/first-demo.md).*
+*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. The first local demo is built: see [its benchmark](../reports/first-demo-benchmark.md) and [build report](../reports/first-demo.md).*
 
 ## Current position
 
 MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps it accurate. The goal is a compelling, functional demo on four mock service businesses.
 
-**Done so far:** the first mock business (mobile detailing), its resource, the consumer agent and a local before-and-after test ([report](../reports/first-demo.md)).
+**Done so far:** the first mock business (mobile detailing), its resource, the consumer agent and a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)).
 
 **Next steps:** finish the 5 "before" queries that ran out of OpenRouter credit, then test on real Muse, which can't reach localhost, so it needs a public host and two live versions ([plan](03-build-plan.md#how-the-first-demo-changed-this)).
 
