@@ -26,3 +26,9 @@ logs/
 # Browser histories and screenshots from runs
 runs/**/browser/
 .browser-profiles/
+
+# Back office MVP
+edge/.wrangler/
+edge/node_modules/
+back_office/*.db*
+runs/back-office/

@@ -1,0 +1,12 @@
+name = "musefront"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[observability]
+enabled = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "musefront"
+database_id = "5334280f-96a2-443e-a690-32b264e385c5"
