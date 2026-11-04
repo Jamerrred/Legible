@@ -39,6 +39,13 @@ def test_after_differs_from_before_only_by_the_link_line(before, after, path):
     assert LINK_LINE.sub("", with_link).split() == before.get(path).text.split()
 
 
+def test_link_line_uses_the_configured_address(monkeypatch):
+    monkeypatch.setenv("MF_RESOURCE_BASE_URL", "https://example.test")
+    page = TestClient(create_app("after")).get("/").text
+    assert '<a href="https://example.test">https://example.test</a>' in page
+    assert "localhost" not in page
+
+
 def test_booking_steps_differ_only_by_the_link_line(before, after):
     first, second = before.post("/book", data=LEAD).text, after.post("/book", data=LEAD).text
     assert LINK_LINE.sub("", second).split() == first.split()
