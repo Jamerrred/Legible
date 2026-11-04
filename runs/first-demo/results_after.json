@@ -1,0 +1,855 @@
+[
+ {
+  "query_id": "q01",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q01_r1",
+  "cost": 0.075743,
+  "seconds": 41.95,
+  "used_resource": true,
+  "tool_calls": 9,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "For your 2021 Subaru Outback in driveway in 94704 with outlet nearby, wanting inside + out + dog hair from one back-seat spot, with $400 all-in cap:\n\n**Mapping:** \"inside and out\" = Full detail (The Schooner). Your one-spot shed = Pet hair removal add-on, NOT excessive. Subaru Outback = midsize / Class B.\n\n**Saturday?** Yes, they work Saturdays \u2014 morning arrival window 8:00am-9:30am only \u2014 and Sat Nov 7 morning and Sat Nov 21 morning are currently open. But Saturday adds a $25 Saturday fee, which pushes you OVER budget.\n\n- Saturday total: $422.38 all-in (Schooner midsize $249 + pet hair $55 + Saturday $25 = $329 taxable + $28.38 tax at 8.625% + $65 East Bay travel, no generator fee because you have outlet). That's $22.38 over your $400 cap.\n\n**Weekday?** Has to be weekday to stay under $400:\n\n- Tue-Fri total: $395.22 all-in (same $249 + $55 = $304 taxable + $26.22 tax + $65 travel). Within your $400 cap, by $4.78.\n- Example open weekday: Tue Nov 10 afternoon 1:00-2:30pm is open. Other weekdays open too.\n\nNotes:\n- No $30 generator fee because you have a grounded outlet within 75ft. Without it they'd add $30 + tax, or couldn't do it in enclosed garage.\n- Your single-seat hair does not trigger the $60 excessive-pet-hair surcharge \u2014 that only applies if embedded hair is in 3+ seats or >half cargo floor. Technician confirms on arrival; if they judged it excessive, weekday would also go over budget.\n- Driveway is fine if legal for ~4 hours, 3ft clear both sides, plus room for their van within 100ft.\n- $50 deposit to book, counts toward total. Quote expires in 7 days, doesn't hold slot.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Inside and out maps to Schooner full detail, Outback is midsize Class B, pet hair is add-on",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "Full $249 midsize, Pet hair $55 midsize"
+    },
+    {
+     "claim": "Saturday total $422.38 over $400 budget",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Subaru+Outback&addons=pet-hair&zip=94704&when=2026-11-07+morning&budget=400&format=json",
+     "value": "$422.38 including tax and travel"
+    },
+    {
+     "claim": "Weekday total $395.22 within $400 budget",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Subaru+Outback&addons=pet-hair&zip=94704&when=2026-11-10+afternoon&budget=400&format=json",
+     "value": "$395.22 including tax and travel"
+    },
+    {
+     "claim": "Saturday fee $25, Saturday morning window only",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "$25 Saturday fee, morning 8-9:30am only on Saturday"
+    },
+    {
+     "claim": "94704 travel fee $65, tax 8.625% on service+addons+timing but not travel",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "$65 East Bay, 8.625% tax"
+    },
+    {
+     "claim": "Sat Nov 7 morning and Sat Nov 21 morning open, Tue Nov 10 afternoon open",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "open windows listed as of Nov 4"
+    }
+   ],
+   "mapped_terms": [
+    "inside and out -> Full detail (The Schooner) service=full",
+    "dog sheds on one spot -> Pet hair removal add-on addons=pet-hair, not excessive-pet-hair condition",
+    "2021 Subaru Outback -> midsize / Class B",
+    "Saturday preference -> Saturday fee $25 timing rule"
+   ],
+   "next_steps": [
+    "Book a Tue-Fri window to stay under $400, e.g. Tue Nov 10 afternoon via /request link",
+    "Ensure outlet within 75ft, driveway clear, belongings/child seats removed, adult with keys"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q02",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q02_r1",
+  "cost": 0.111132,
+  "seconds": 33.55,
+  "used_resource": true,
+  "tool_calls": 8,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "Total for your job is **$628.76, tax and travel included**.\n\nFor Cormorant Mobile Detailing \u2014 mobile only, San Francisco CA, phone/text 415-555-0142:\n\nWhat fits your description:\n- You want interior-only with a real shampoo, no exterior = **Interior detail (The Cutter) + Upholstery and carpet shampoo add-on**. The Cutter alone is vacuum/wipe-down/spot-clean only, shampoo is extra.\n- Your F-250 = **oversized / Class D** (heavy-duty pickup). Technician confirms size on arrival.\n- Mud wall-to-wall = **heavily soiled interior** (mud/sand over more than half the floor = $75 surcharge). Technician checks and shows photos if it differs.\n- Outlet 150 ft away = **no outlet within 75 ft**, so $30 generator fee. Driveway is fine if 3 ft clear both sides + room for work van within 100 ft.\n- Sausalito 94965 = Marin zone, **$65 travel fee** per visit, toll included. Not taxed.\n- Weekday = no Saturday $25 fee. Note: this job is about 5 hours, so it must start in the **morning window 8:00-9:30am Tue-Fri**.\n\nBreakdown from live quote quote-21a9a0c3b073:\n- Interior detail oversized: $289.00\n- Shampoo oversized: $125.00\n- Heavily-soiled surcharge: $75.00\n- Generator fee: $30.00\n- Taxable subtotal $519.00 x 8.625% = $44.76 tax\n- Travel 94965: $65.00 (no tax)\n- Total $628.76\n\n$50 deposit to book, counts toward total, balance due on completion. Final price confirmed on-site before work; if you declined a changed price you\u2019d lose deposit.\n\nNext open weekday windows per their calendar (as of Nov 4): e.g. Tue Nov 10 afternoon, Fri Nov 13 afternoon, Tue Nov 17 afternoon, Wed Nov 18 morning/afternoon, Thu Nov 19 morning/afternoon, Fri Nov 20 morning, Tue Nov 24 morning. Booking needs name/email/phone/address \u2014 I didn\u2019t submit anything.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Total $628.76 including tax and travel for interior + shampoo + heavily-soiled + no-power in 94965 on F-250",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+     "value": "$628.76"
+    },
+    {
+     "claim": "Interior detail oversized $289",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+     "value": "$289.00"
+    },
+    {
+     "claim": "Shampoo oversized $125",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+     "value": "$125.00"
+    },
+    {
+     "claim": "Heavily-soiled surcharge $75",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+     "value": "$75.00"
+    },
+    {
+     "claim": "Generator fee $30 when no outlet within 75ft",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+     "value": "$30.00"
+    },
+    {
+     "claim": "Travel fee 94965 $65",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+     "value": "$65.00"
+    },
+    {
+     "claim": "Tax 8.625% on services/addons/surcharges/generator, not travel",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "8.625%"
+    },
+    {
+     "claim": "F-250 is oversized Class D",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "oversized Class D"
+    },
+    {
+     "claim": "Phone 415-555-0142",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/",
+     "value": "415-555-0142"
+    }
+   ],
+   "mapped_terms": [
+    "just interior with shampoo, no exterior -> Interior detail (The Cutter) service=interior + shampoo add-on",
+    "F-250 -> oversized / Class D",
+    "mud wall to wall on floor -> heavily-soiled condition",
+    "outlet 150ft away -> no-power condition + $30 generator fee",
+    "94965 driveway -> Marin zone $65 travel"
+   ],
+   "next_steps": [
+    "Pick a weekday morning window (required for 5-hour job) and submit booking request with contact/address",
+    "Pay $50 deposit link when owner replies to lock booking"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q03",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q03_r1",
+  "cost": 0.118925,
+  "seconds": 49.04,
+  "used_resource": true,
+  "tool_calls": 10,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "Who fits: Cormorant Mobile Detailing is mobile-only in San Francisco and will come to your lot. Your ask maps to their The Skiff - exterior wash, outside-only:\n\n- Wash / just the outside = The Skiff: foam hand wash, wheels/tires, door jambs, outside glass, hand dry, nothing inside\n- Ford Transit (full-size van) = oversized / Class D\n- 94103 = in their no-travel-fee San Francisco zone\n\nCatch on Saturday: 3 vans together counts as a fleet job, and fleet jobs run Tuesday to Friday only. So they cannot do all 3 in one visit on a Saturday.\n\nYour options with them:\n\n1) All 3 together on a weekday - Tuesday-Friday - $407.67 all-in\nThat is: $139 x 3 = $417.00 minus 10% fleet discount for 3-4 vehicles (-$41.70) = $375.30 + 8.625% tax ($32.37) + $0 travel in 94103. $50 deposit counts toward total. About 4.5 hours on site. Next open weekday in their calendar is Tue 11/10 afternoon.\n\nYou will need a working spigot within 100 ft for 3+ vehicles - they only carry 65 gallons for up to 2 vehicles. The Skiff needs no power outlet. Vehicles need to be in a driveway / private lot / open garage / legal street space with 3 ft clear on both sides, plus room within 100 ft for their 20-ft work van.\n\n2) Saturday morning is possible, but max 2 vans per day under their rules:\n- 1 Transit on Sat morning: $178.15 all-in ($139 + $25 Saturday fee = $164 + $14.15 tax)\n- 2 Transits same Saturday morning: $329.13 all-in ($278 + $25 Saturday fee = $303 + $26.13 tax)\nSaturday is morning window only 8:00-9:30am arrival, + $25 Saturday fee per visit. Next open Saturdays shown: Nov 7 and Nov 21 morning.\n\nThey work Tue-Sat, closed Sun/Mon. Need 24hrs notice. If rain >=50% forecast they move exterior work and you don't lose deposit.\n\nOthers checked and ruled out:\n- Peninsula Suds: Peninsula only, not serving San Francisco\n- Sunset Shine Auto Spa: shop drop-off, not mobile\n- Ferry Point Auto Care: partner garages only, not your lot\n\nTo book 3 vans you'd need a Tue-Fri fleet slot. If Saturday is firm, you'd have to split - e.g. 2 on one Saturday + 1 on another Saturday - or ask the owner if she'd make an exception for 3 on Saturday (booking goes via request form, she replies by text/email within 4 business hours Mon-Sat 8am-6pm, job booked only when $50 deposit link paid).\n\nNo budget was given, so no budget comparison made.\n",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "exterior wash = The Skiff outside-only, Transit = oversized Class D, $139 per van before fees/tax",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+     "value": "$139 oversized"
+    },
+    {
+     "claim": "94103 no travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+     "value": "$0 travel"
+    },
+    {
+     "claim": "3 vans weekday fleet total $407.67 incl tax and travel",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-10+afternoon&format=json",
+     "value": "$407.67"
+    },
+    {
+     "claim": "fleet 3-4 vehicles 10% off service, fleet Tue-Fri only",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-07+morning&format=json",
+     "value": "Fleet jobs run Tuesday to Friday only"
+    },
+    {
+     "claim": "3 vans Saturday cannot be booked as entered",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=3&when=2026-11-07+morning&format=json",
+     "value": "invalid_combination"
+    },
+    {
+     "claim": "1 van Saturday total $178.15 incl $25 Saturday fee + tax",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=1&when=2026-11-07+morning&format=json",
+     "value": "$178.15"
+    },
+    {
+     "claim": "2 vans Saturday total $329.13 incl $25 Saturday fee + tax",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Ford+Transit&zip=94103&vehicle_count=2&when=2026-11-07+morning&format=json",
+     "value": "$329.13"
+    },
+    {
+     "claim": "Saturday morning window only, sales tax 8.625%, spigot needed for 3+ vehicles",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "morning 8-9:30am Sat, 8.625% tax, spigot within 100ft"
+    }
+   ],
+   "mapped_terms": [
+    "wash the outsides, nothing inside -> exterior wash / The Skiff (service=exterior)",
+    "3 Ford Transit vans -> full-size van -> oversized / Class D",
+    "come to us in 94103 -> mobile in San Francisco no-travel-fee zone, private lot"
+   ],
+   "next_steps": [
+    "Pick weekday Tue-Fri for all 3 together, or split across 2 Saturdays, then submit request form with 3x Transit, exterior, 94103, date/window",
+    "Ensure spigot within 100ft and 3ft clearance + room for work van, adult with keys reachable"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q04",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "not_offered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q04_r1",
+  "cost": 0.077325,
+  "seconds": 26.61,
+  "used_resource": true,
+  "tool_calls": 7,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 Cormorant Mobile Detailing does NOT do ceramic coating, so they can't do a multi-year ceramic coating on your Model Y.\n\nTheir own booking-info site says explicitly:\n\n> \"Cormorant Mobile Detailing doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant.\"\n\nThat also means the old Bay Auto Pages directory listing that says \"ceramic coating\" is wrong \u2014 Cormorant's own site flags that listing as false (last updated March 2023, also wrong on price, boats, and Sundays).\n\nWhat they DO offer for paint protection:\n\nYour words \"ceramic coated / paint's protected\" map to their \"paint sealant / wax / paint protection\" = 6-month paint sealant add-on.\n\nYour Model Y maps to their midsize / Class B (they list Tesla Model Y as midsize).\n\nOptions for a Model Y in 94114 (which is in their no-travel-fee San Francisco zone):\n\n1. Closest to \"protection for years\" \u2014 still only 6 months:\n**The Flagship (polish-and-seal detail)** \u2014 includes full detail + clay bar + one-step machine polish + 6-month sealant + upholstery shampoo\n- $629 + 8.625% tax = $683.25 total, $0 travel fee in 94114\n- $150 deposit counts toward total, ~6.5 hrs, must start morning window\n\n2. Cheaper protection option:\n**Full detail (The Schooner) + clay bar + 6-month sealant**\n- $249 + $70 clay + $115 sealant = $434 + $37.43 tax = $471.43 total, $0 travel fee in 94114\n- $50 deposit, ~5 hrs\n\nNotes:\n- Sealant can only be bought together with clay bar on a Skiff or Schooner; both are already included in Flagship.\n- If you want true multi-year ceramic coating, you'll need a different shop \u2014 Cormorant doesn't offer it, PPF, multi-stage correction, or engine work either.\n- They are mobile-only, come to you in Noe Valley, need a 120V outlet within 75ft for Cutter/Schooner/Flagship or $30 generator fee (can't use generator in enclosed/underground garage).",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Cormorant does not do ceramic coating, longest protection is 6-month sealant",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "doesn't do ceramic coating, longest-lasting paint protection is the 6-month paint sealant"
+    },
+    {
+     "claim": "Tesla Model Y is midsize Class B",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "midsize class covers Tesla Model Y"
+    },
+    {
+     "claim": "Flagship midsize $629 before tax, $683.25 total in 94114",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=flagship&vehicle=Tesla%20Model%20Y&zip=94114&format=json",
+     "value": "$683.25 including tax and travel"
+    },
+    {
+     "claim": "Full detail midsize + clay + sealant $471.43 total in 94114",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Tesla%20Model%20Y&zip=94114&addons=clay%2Csealant&format=json",
+     "value": "$471.43 including tax and travel"
+    },
+    {
+     "claim": "94114 has no travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "94114 in $0 San Francisco zone"
+    }
+   ],
+   "mapped_terms": [
+    {
+     "items": [
+      "ceramic, ceramic coating -> NOT OFFERED, closest is 6-month paint sealant (paint protection / wax)"
+     ],
+     "question": "ceramic coating"
+    }
+   ],
+   "next_steps": [
+    "If you want true multi-year ceramic, I can search for other San Francisco shops that do offer it"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q05",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "not_offered",
+  "expected": "not_offered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q05_r1",
+  "cost": 0.044509,
+  "seconds": 26.53,
+  "used_resource": true,
+  "tool_calls": 6,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 Cormorant Mobile Detailing says it will not clean this job up, even though you are in its service area.\n\nWhat you described \u2014 dried vomit on the back seat and floor with lingering smell in a Honda CR-V in 94122 \u2014 falls under their explicit biohazard exclusion. Their site says they don't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste.\n\nThat means they cannot do the interior cleaning + shampoo + odour treatment for this mess, and there is no price to quote for vomit cleanup.\n\nFor context only, not as an offer for this job:\n- 94122 IS in their San Francisco no-travel-fee area.\n- A Honda CR-V is listed as their midsize / Class B size.\n- Normally an interior detail (The Cutter) + shampoo + odour treatment would be the relevant combo for stains/smell, but vomit is excluded, so those don't apply here.\n\nYou will need a different provider that handles biohazard / vomit cleanup. I did not submit anything to Cormorant.",
+   "outcome": "not_offered",
+   "claims": [
+    {
+     "claim": "Cormorant does not clean vomit / biohazards",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "doesn't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste"
+    },
+    {
+     "claim": "94122 is in San Francisco no-fee service area",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "94122 in $0 travel fee list"
+    },
+    {
+     "claim": "Honda CR-V is midsize Class B",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "Honda CR-V listed under midsize class"
+    }
+   ],
+   "mapped_terms": [
+    "interior clean = Interior detail (The Cutter)",
+    "smell out = Odour treatment add-on, but not offered for vomit"
+   ],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q06",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "unknown",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q06_r1",
+  "cost": 0.07878,
+  "seconds": 28.46,
+  "used_resource": true,
+  "tool_calls": 7,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "Straight answer: No \u2014 Cormorant will not promise that The Flagship will remove your scratch.\n\nTheir own rule for The Flagship says: whether the one-step polish will remove a particular scratch isn't known until a technician inspects it, because it depends on whether the scratch has gone through the clear coat.\n\nThat means paying $596.35 total for your Mazda3 in 94131 ( $549 small/Class A + $47.35 tax, no travel fee) does not guarantee the key mark comes out. A fingernail-catching scratch is exactly the kind that needs that in-person inspection.\n\nTwo other straight facts before you spend:\n\n- The Flagship's one-step machine polish is their ONLY polish \u2014 they don't do multi-stage / two-stage paint correction / compounding.\n- If the scratch is still there after, their free redo does NOT cover it \u2014 the redo policy explicitly doesn't cover stains or scratches that were already there.\n\nIf scratch removal is the whole reason for booking, don't book the Flagship for that reason alone \u2014 you'll need a technician to look at the door first to see if it's through the clear coat.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Flagship includes one-step machine polish, top package price small $549",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/services/flagship",
+     "value": "$549 small, includes one-step machine polish"
+    },
+    {
+     "claim": "Whether Flagship polish will remove a particular scratch unknown until inspection, depends on clear coat",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/services/flagship",
+     "value": "Unknown until technician inspects; depends whether through clear coat"
+    },
+    {
+     "claim": "No multi-stage paint correction, only one-step polish in Flagship",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/services/flagship",
+     "value": "doesn't do multi-stage paint correction"
+    },
+    {
+     "claim": "Redo policy doesn't cover pre-existing scratches",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "doesn't cover stains or scratches that were already there"
+    },
+    {
+     "claim": "Mazda3 is small Class A, 94131 no travel fee, total $596.35",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=flagship&vehicle=Mazda3&zip=94131",
+     "value": "$596.35 total"
+    }
+   ],
+   "mapped_terms": [
+    "top package with machine polish = The Flagship, polish-and-seal detail"
+   ],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q07",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "unknown",
+  "expected": "unknown",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q07_r1",
+  "cost": 0.130123,
+  "seconds": 40.37,
+  "used_resource": true,
+  "tool_calls": 9,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "I checked Cormorant Mobile Detailing's own site + their official prices/rules page for your job in 94123:\n\n**What you asked maps to:**\n* \"inside and out\" = The Schooner - Full detail (everything in exterior wash + interior detail + spray wax)\n* \"polished up\" = polish = The Flagship - polish-and-seal detail (everything in Schooner + clay bar, one-step machine polish, 6-month sealant + shampoo). That is their only machine polish.\n\n**What I can tell you for 94123:**\n* You are in their no-fee zone - $0 travel fee for 94123.\n* Deposit $50 for Schooner, $150 for Flagship, counts toward total.\n* + 8.625% sales tax on service/add-ons/fees (not on travel fee).\n* Your prerequisites: grounded 120v outlet within 75ft or $30 generator fee; legal parking with 3ft clear both sides + room for work van; apartment/HOA permission must be yours before booking.\n\n**What I cannot give you - Cormorant has not decided this yet:**\n\n1. No exact total for a Tesla Cybertruck - owner has not assigned it a size class. Quote tool returns \"needs_info: the owner's decision on the Tesla Cybertruck's size class\" for both full and flagship in 94123.\n\n2. No answer on whether they will polish stainless panels - owner \"hasn't decided... whether its stainless steel panels can be polished, and that will be settled once she has inspected one.\"\n\nPossible range only for inside-and-out if you want a sense:\nSchooner is $219 small / $249 midsize / $299 large / $399 oversized before tax/fees. With $0 travel + 8.625% tax = ~$237.89 to ~$433.41 before any Saturday ($25), generator ($30), condition surcharges, or add-ons. Flagship for reference is $549 / $629 / $759 / $949 before tax/fees.\n\nThat range is NOT a quote - technician checks size on arrival and confirms final price.\n\nTo settle it: ask Ines Calloway via their /ask page or 415-555-0142 for Cybertruck size class + stainless polish decision and an inspection. I did not submit anything or share your contact info.",
+   "outcome": "unknown",
+   "claims": [
+    {
+     "claim": "inside-and-out maps to Schooner full detail",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "Full detail (The Schooner) is everything in exterior wash + interior detail plus spray wax; customer's words: inside and out = full detail"
+    },
+    {
+     "claim": "polish maps to Flagship, only machine polish",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "Flagship is everything in full detail plus clay bar, one-step machine polish, 6-month sealant; only machine polish is one-step polish in Flagship"
+    },
+    {
+     "claim": "Schooner prices by size",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "$219 small, $249 midsize, $299 large, $399 oversized before add-ons/fees/tax"
+    },
+    {
+     "claim": "Flagship prices by size",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "$549 small, $629 midsize, $759 large, $949 oversized before add-ons/fees/tax"
+    },
+    {
+     "claim": "94123 has $0 travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "94123 in San Francisco no-fee zone, $0 per visit"
+    },
+    {
+     "claim": "tax 8.625% not on travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "8.625% on services, add-ons, surcharges, generator and timing fees, not travel fee"
+    },
+    {
+     "claim": "Cybertruck size class undecided, stainless polish undecided",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "Owner hasn't decided which size class a Tesla Cybertruck belongs in or whether stainless panels can be polished, settled once she has inspected one"
+    },
+    {
+     "claim": "quote for Cybertruck full in 94123 returns needs_info, no total",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Tesla+Cybertruck&zip=94123&format=json",
+     "value": "status needs_info, still_needed owner's decision on size class, total null"
+    }
+   ],
+   "mapped_terms": [
+    "inside and out -> Full detail (The Schooner)",
+    "polished up / polish -> Polish-and-seal detail (The Flagship) one-step machine polish"
+   ],
+   "next_steps": [
+    "Ask owner via /ask or 415-555-0142 for Cybertruck size class and stainless polish inspection to get exact total"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q08",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q08_r1",
+  "cost": 0.024962,
+  "seconds": 20.97,
+  "used_resource": false,
+  "tool_calls": 4,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "For your exact setup \u2014 RAV4 in an underground garage in Mission Bay 94158 with no outlet near your space \u2014 Cormorant cannot do the interior cleaning down there, and they will not bring a generator as a workaround.\n\n* What you want = The Cutter - Interior detail: vacuum seats, carpets, mats and trunk, wipe dash/console/door panels, inside glass and spot-clean. Starting at $159.\n\n* Power rule, from Cormorant's own FAQ:\nThe Cutter, Schooner and Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or they run a generator for a $30 fee. The generator can't run in an enclosed or underground garage, so without an outlet we can't do those packages in there.\n\nWith no usable outlet and an underground/enclosed garage, you don't meet either option. The generator idea is explicitly ruled out for that location.\n\n* Only package that doesn't need power is The Skiff - exterior wash only, starting at $69 \u2014 and it doesn't touch the inside, so it doesn't solve your request.\n\n* Building manager / HOA: That's on you. For apartments/condos: You do need to get the building manager's permission before you book, this goes for HOA-managed lots too. We don't contact managers, and if we get refused on the day it counts as a no-show.\n\nWhat would make it possible:\n- A different spot that meets their parking rules \u2014 driveway, private lot, open garage or legal street space with 3 ft clear on both sides + room for their work van within 100 ft \u2014 AND either an outlet within 75 ft or an open-air location where they can run the generator (+$30).\n- Get permission first if it's still an HOA-managed lot.\n\nI did not book anything or share your details.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Cutter interior-detail package description and starting price",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/",
+     "value": "The Cutter Interior detail - vacuum seats, carpets, mats and trunk, wipe down dash, console and door panels, inside glass and spot-clean. Starting at $159"
+    },
+    {
+     "claim": "Cutter/Schooner/Flagship need outlet within 75ft or generator for $30, generator cannot run enclosed/underground so can't do those packages there without outlet",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "The Cutter, Schooner and Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or we run our generator for a $30 fee. The generator can't run in an enclosed or underground garage, so without an outlet we can't do those packages in there."
+    },
+    {
+     "claim": "Skiff doesn't need power and doesn't touch inside",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "The Skiff doesn't need power"
+    },
+    {
+     "claim": "customer must get building manager permission, Cormorant doesn't contact managers, refusal counts as no-show",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "You do need to get the building manager's permission for the work before you book, this goes for HOA-managed lots too. We don't contact managers, and if we get refused on the day it counts as a no-show."
+    }
+   ],
+   "mapped_terms": [
+    "customer 'clean the inside' = Cormorant 'The Cutter - Interior detail'",
+    "customer 'underground garage with no outlet' = Cormorant 'enclosed or underground garage without outlet' where Cutter/Schooner/Flagship cannot be done"
+   ],
+   "next_steps": [
+    "If you can move the RAV4 to an open-air spot with permission and an outlet within 75ft (or open air for generator +$30), re-check price for your size class and book",
+    "Get HOA/building manager permission yourself before booking"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q09",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q09_r1",
+  "cost": 0.046435,
+  "seconds": 24.29,
+  "used_resource": true,
+  "tool_calls": 6,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "You booked The Flagship \u2014 Cormorant's top package with the one-step machine polish.\n\nDeposit for The Flagship is $150. At about 36 hours before your arrival window you are in the 24-to-48-hour band:\n\n* Cancel now: you get half the deposit back = $75 back, $75 kept.\n  Rule: full back 48h+, half back 24-48h, nothing back under 24h.\n\n* Move it instead: you can reschedule once for free because you have more than 24 hours notice and you haven't moved it before. Cost $0.\n  You must do it by phone or text only \u2014 call/text 415-555-0142. Any later than 24h notice or shorter-notice change counts as a cancellation under the rule above.\n\nOffice hours are Monday-Saturday 8am-6pm if you need to reach them now.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "top package with polish is The Flagship",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "The Flagship is everything in the full detail plus clay bar, one-step machine polish, 6-month sealant and shampoo"
+    },
+    {
+     "claim": "Flagship deposit is $150 and counts toward total",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "$150 for the Flagship"
+    },
+    {
+     "claim": "cancel 24-48h gets half deposit back",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "Between 24 and 48 hours you get half back"
+    },
+    {
+     "claim": "cancel refund dollars at 36h",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "$75 back (half of $150)"
+    },
+    {
+     "claim": "reschedule once free with 24h+ notice by phone/text only",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "reschedule once for free with at least 24 hours notice, by phone or text only"
+    }
+   ],
+   "mapped_terms": [
+    "polish / top package with polish -> The Flagship (polish-and-seal detail)"
+   ],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q10",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q10_r1",
+  "cost": 0.112588,
+  "seconds": 35.2,
+  "used_resource": true,
+  "tool_calls": 11,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 that Bay Auto Pages info is outdated and wrong on both price and Sunday. The business's own site controls.\n\n- Bay Auto Pages says flat $129 full detail, open Sundays, boat detailing, ceramic coating. That listing is unclaimed and last updated March 2023.\n- Cormorant's own site and booking rules say:\n  - Full detail = The Schooner (everything in exterior + interior + spray wax) \u2014 Starting at $219, not flat $129. Your 2018 Corolla is Class A / small.\n  - So base $219 + 8.625% tax = $237.89 total in 94121, with $0 travel fee. $50 deposit counts toward total. I ran a live quote: $219 + $0 travel + $18.89 tax = $237.89.\n  - They work Tuesday-Saturday only, closed Sunday and Monday. Office Mon-Sat 8am-6pm. This Sunday Nov 8, 2026 cannot be booked \u2014 quote tool returns \"The business is closed on Sundays.\"\n  - They also do NOT do boats or ceramic coating.\n\nIf you want a full detail at home in 94121, nearest open window in the calendar is Saturday Nov 7 morning (adds $25 Saturday fee, so ($219+$25)*1.08625 = ~$265.05), then Tuesday Nov 10 afternoon, etc. Sunday is not available.\n\nWant me to check a Saturday or weekday slot / request it?",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Bay Auto Pages lists flat $129 full detail and open Sundays",
+     "evidence": "verified_at_source",
+     "source_url": "http://bayautopages.localhost:8106/cormorant-mobile-detailing",
+     "value": "Full detail: flat $129, Services: boat detailing, ceramic coating, open Sundays - unclaimed, March 2023"
+    },
+    {
+     "claim": "Full detail (Schooner) small price $219 before tax/fees",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/",
+     "value": "$219 starting at - small Class A"
+    },
+    {
+     "claim": "2018 Toyota Corolla = small Class A",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "small class covers Toyota Corolla"
+    },
+    {
+     "claim": "Closed Sunday and Monday, works Tue-Sat",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8102/faq",
+     "value": "We work Tuesday to Saturday and we're closed Sunday and Monday"
+    },
+    {
+     "claim": "Sunday 2026-11-08 cannot be booked - closed Sundays",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=2018%20Toyota%20Corolla&zip=94121&when=2026-11-08&format=json",
+     "value": "invalid_combination: The business is closed on Sundays"
+    },
+    {
+     "claim": "Total $237.89 including tax and travel for Corolla full detail in 94121",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=2018%20Toyota%20Corolla&zip=94121&format=json",
+     "value": "$237.89 = $219 + $0 travel + $18.89 tax (8.625%)"
+    },
+    {
+     "claim": "94121 has $0 travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "94121 in San Francisco no-fee list"
+    }
+   ],
+   "mapped_terms": [
+    {
+     "items": [
+      "full detail"
+     ],
+     "type": "string"
+    }
+   ],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q11",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "action_submitted",
+  "expected": "action_submitted",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q11_r1",
+  "cost": 0.508974,
+  "seconds": 207.73,
+  "used_resource": true,
+  "tool_calls": 10,
+  "reused": true,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "Sent a booking request to Cormorant Mobile Detailing as approved:\n\n- Service: Exterior wash only (The Skiff) \u2014 foam hand wash, wheels/tires, door jambs, outside glass, hand dry, no interior \u2014 for 2017 Toyota Prius\n- When: Tuesday 10 November 2026, evening arrival 5:00pm-6:00pm \u2014 the next open evening slot (evenings are Tue/Thu only, exterior-only)\n- Where: 94114 (no travel fee zone)\n- Total $118.40 including tax/travel ($79 midsize wash + $30 after-hours fee + $9.40 tax). $50 deposit to book, counts toward total.\n- Status: Received 4 Nov 2026 at 1:30pm Pacific, waiting for owner's reply. No slot held until deposit paid. Owner Ines Calloway replies by text/email within 4 business hours (Mon-Sat 8am-6pm); deposit link lasts 12 hours.\n- Status page: http://agents.cormorant.localhost:8103/r/req-6effa30afaf4bd8d (req-6effa30afaf4bd8d)\n\nWatch for the reply to pay the $50 deposit to confirm. Exterior work moves if rain \u226550% forecast (told by 7pm evening before, free new date or refund).",
+   "outcome": "action_submitted",
+   "claims": [
+    {
+     "claim": "exterior wash for Prius is midsize $79 and total $118.40 with evening fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=exterior&vehicle=Toyota+Prius&zip=94114&when=2026-11-10+evening&format=json",
+     "value": "$118.40 total, $79 service + $30 evening fee + $9.40 tax"
+    },
+    {
+     "claim": "next open evening slot is 2026-11-10 5-6pm",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "10 November 2026 Tuesday evening 5:00pm-6:00pm"
+    },
+    {
+     "claim": "evening window rules: exterior only, no add-ons, no-fee ZIPs, $30 fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "After-hours evening 5-6pm Tue/Thu exterior wash only $30 fee"
+    },
+    {
+     "claim": "booking request submitted and awaiting owner reply",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/r/req-6effa30afaf4bd8d",
+     "value": "Received 4 Nov 2026 1:30pm PT, waiting for reply, no slot held"
+    }
+   ],
+   "mapped_terms": [
+    {
+     "type": "service",
+     "value": "wash outside only -> exterior wash (The Skiff) service=exterior"
+    },
+    {
+     "type": "vehicle",
+     "value": "2017 Toyota Prius -> midsize Class B"
+    }
+   ],
+   "next_steps": [
+    "Wait for Ines Calloway reply by text/email and pay $50 deposit link within 12 hours to hold 10 Nov evening slot"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "q12",
+  "variant": "after",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "valid": true,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/first-demo/after/q12_r1",
+  "cost": 0.068855,
+  "seconds": 37.84,
+  "used_resource": true,
+  "tool_calls": 7,
+  "reused": true,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "Soonest for inside + out on your Forester in 94117 is:\n\n**Saturday, 7 November 2026 \u2014 morning arrival window 8:00 am to 9:30 am**\n\nHow this maps:\n- Your words \"inside and out\" = The Schooner / Full detail (everything in exterior wash + interior detail plus spray wax)\n- Your Subaru Forester = midsize / Class B (two-row SUV)\n\nThis window is listed as open on their live calendar as of 4 Nov 1:31pm Pacific, and a quote check for full + Forester + 94117 + 2026-11-07 morning returns has_open=true with no missing items.\n\nPrice for that slot (verified in quote):\n- Full detail midsize $249 + Saturday fee $25 = $274 subtotal + $23.63 tax (8.625%) + $0 travel (94117 is no-fee San Francisco zone) = **$297.63 total**, $50 deposit to book. About 3.5 hours on site.\n\nWhy not earlier:\n- They work Tue-Sat only, closed Sun/Mon. They need 24h notice. Nov 5 morning is inside 24h, and Nov 6 (Fri) is not listed as open \u2014 the next open window after the cutoff is Nov 7 morning.\n- The Nov 10 and Nov 12 evening windows are exterior-wash only, so they can't do inside-and-out.\n\nTo hold it you'll need to request + pay the $50 deposit link (12-hour link) \u2014 a request alone doesn't hold the slot. You'll also need a grounded 120V outlet within 75ft or $30 generator fee, 3ft clear each side, and keys + an adult reachable. Let me know if you want me to start the booking request.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "inside and out = full detail (Schooner)",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "full detail (The Schooner) is everything in exterior wash and interior detail plus spray wax; Customer's words: inside and out means full detail"
+    },
+    {
+     "claim": "Subaru Forester = midsize Class B",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Subaru+Forester&zip=94117&when=2026-11-07+morning&format=json",
+     "value": "Full detail (The Schooner), midsize (Class B) $249.00 for Subaru Forester"
+    },
+    {
+     "claim": "Soonest open window: 7 Nov 2026 Saturday morning 8-9:30am, Saturday fee $25",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103",
+     "value": "7 November 2026 Saturday morning 8:00 am to 9:30 am Saturday fee $25 - first entry in Next open arrival windows as of 4 Nov 1:31pm Pacific"
+    },
+    {
+     "claim": "Total $297.63 for that job/window",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Subaru+Forester&zip=94117&when=2026-11-07+morning&format=json",
+     "value": "$297.63 total ($249 service + $25 Saturday fee + $23.63 tax + $0 travel), $50 deposit, ~3.5 hours"
+    },
+    {
+     "claim": "94117 no travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=Subaru+Forester&zip=94117&when=2026-11-07+morning&format=json",
+     "value": "Travel fee (San Francisco, no fee) $0.00"
+    }
+   ],
+   "mapped_terms": [
+    {
+     "items": [
+      "inside and out -> full detail (The Schooner) service=full",
+      "Subaru Forester -> midsize Class B size=midsize"
+     ]
+    }
+   ],
+   "next_steps": [
+    "To book: submit /request for 2026-11-07 morning with contact/address, then pay $50 deposit link within 12 hours",
+    "Have outlet within 75ft or budget $30 generator; ensure parking with 3ft clearance and manager permission if HOA/apartment"
+   ],
+   "gate_note": null
+  }
+ }
+]

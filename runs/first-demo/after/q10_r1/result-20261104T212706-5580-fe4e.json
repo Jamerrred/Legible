@@ -1,0 +1,76 @@
+{
+  "answer": "No — that Bay Auto Pages info is outdated and wrong on both price and Sunday. The business's own site controls.\n\n- Bay Auto Pages says flat $129 full detail, open Sundays, boat detailing, ceramic coating. That listing is unclaimed and last updated March 2023.\n- Cormorant's own site and booking rules say:\n  - Full detail = The Schooner (everything in exterior + interior + spray wax) — Starting at $219, not flat $129. Your 2018 Corolla is Class A / small.\n  - So base $219 + 8.625% tax = $237.89 total in 94121, with $0 travel fee. $50 deposit counts toward total. I ran a live quote: $219 + $0 travel + $18.89 tax = $237.89.\n  - They work Tuesday-Saturday only, closed Sunday and Monday. Office Mon-Sat 8am-6pm. This Sunday Nov 8, 2026 cannot be booked — quote tool returns \"The business is closed on Sundays.\"\n  - They also do NOT do boats or ceramic coating.\n\nIf you want a full detail at home in 94121, nearest open window in the calendar is Saturday Nov 7 morning (adds $25 Saturday fee, so ($219+$25)*1.08625 = ~$265.05), then Tuesday Nov 10 afternoon, etc. Sunday is not available.\n\nWant me to check a Saturday or weekday slot / request it?",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Bay Auto Pages lists flat $129 full detail and open Sundays",
+      "evidence": "verified_at_source",
+      "source_url": "http://bayautopages.localhost:8106/cormorant-mobile-detailing",
+      "value": "Full detail: flat $129, Services: boat detailing, ceramic coating, open Sundays - unclaimed, March 2023"
+    },
+    {
+      "claim": "Full detail (Schooner) small price $219 before tax/fees",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/",
+      "value": "$219 starting at - small Class A"
+    },
+    {
+      "claim": "2018 Toyota Corolla = small Class A",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "small class covers Toyota Corolla"
+    },
+    {
+      "claim": "Closed Sunday and Monday, works Tue-Sat",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/faq",
+      "value": "We work Tuesday to Saturday and we're closed Sunday and Monday"
+    },
+    {
+      "claim": "Sunday 2026-11-08 cannot be booked - closed Sundays",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=2018%20Toyota%20Corolla&zip=94121&when=2026-11-08&format=json",
+      "value": "invalid_combination: The business is closed on Sundays"
+    },
+    {
+      "claim": "Total $237.89 including tax and travel for Corolla full detail in 94121",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=full&vehicle=2018%20Toyota%20Corolla&zip=94121&format=json",
+      "value": "$237.89 = $219 + $0 travel + $18.89 tax (8.625%)"
+    },
+    {
+      "claim": "94121 has $0 travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "94121 in San Francisco no-fee list"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "items": [
+        "full detail"
+      ],
+      "type": "string"
+    }
+  ],
+  "next_steps": [],
+  "gate_note": null,
+  "run_id": "20261104T212706-5580-fe4e",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 10,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 7,
+    "prompt_tokens": 113123,
+    "completion_tokens": 2237,
+    "reasoning_tokens": 437,
+    "total_tokens": 115360,
+    "cost": 0.112588
+  },
+  "cost": 0.112588,
+  "wall_s": 35.2,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q10_r1/run-20261104T212706-5580-fe4e.jsonl",
+  "error": null
+}

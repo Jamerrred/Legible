@@ -1,0 +1,73 @@
+{
+  "answer": "Number for Cormorant Mobile Detailing: 415-555-0142.\n\nFor your F-250 in driveway in 94965, inside-only with real shampoo:\n\n- Service is The Cutter (interior detail - \"just the inside\") + Upholstery and carpet shampoo add-on. The Cutter alone is vacuum + wipe-down + spot-clean and doesn't include shampoo, so you need the add-on. You don't need The Schooner (full inside+out) or The Flagship since you don't care about outside.\n- Your F-250 is Oversized / Class D - heavy-duty pickups like Ford F-250.\n- Weekday morning or afternoon Tue-Fri works, no Saturday / after-hours / same-day fee. They work Tue-Sat, closed Sun-Mon. Interior-only jobs go ahead even if rain.\n\nWhole-thing cost, tax and all (using their prices + tax math):\n\n- Interior detail oversized: $289\n- Shampoo add-on oversized: $125\n- Heavily soiled surcharge: $75 - mud wall-to-wall = mud covering more than half floor area\n- Generator fee: $30 - interior jobs need grounded 120V outlet within 75 ft, yours is 150 ft away\n- Subtotal taxable: $519.00\n- Sales tax 8.625% on services/add-ons/surcharges/generator: $44.76\n- Travel fee for 94965 (Marin/East Bay list, includes bridge toll): $65.00 - no tax on travel\n- TOTAL DUE: $628.76 (519 + 44.76 + 65)\n\n$50 deposit to book (counts toward total), balance due when finished. They take Visa/Mastercard/Amex/Discover/Apple Pay/Google Pay, deposit by card link.\n\nTo book, send request via their site with your name, phone, address, vehicle (Ford F-250 oversized), service (Cutter interior + shampoo, heavily soiled, generator needed, driveway, weekday) - owner Ines replies by text/email within 4 business hours (Mon-Sat 8am-6pm), job booked when deposit link (12-hour link) is paid.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "phone number",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "415-555-0142"
+    },
+    {
+      "claim": "interior detail oversized price",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$289 for oversized"
+    },
+    {
+      "claim": "shampoo add-on oversized price",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$125 for oversized"
+    },
+    {
+      "claim": "heavily soiled surcharge",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$75"
+    },
+    {
+      "claim": "generator fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$30"
+    },
+    {
+      "claim": "travel fee for 94965",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$65"
+    },
+    {
+      "claim": "sales tax rate and scope",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "8.625%"
+    }
+  ],
+  "mapped_terms": [
+    "just the inside / wrecked inside / don't care outside = interior detail The Cutter + shampoo add-on"
+  ],
+  "next_steps": [
+    "Send booking request with address, vehicle, and weekday window, then pay $50 deposit link within 12 hours to hold slot"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212215-4904-a055",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 4,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 6,
+    "prompt_tokens": 52475,
+    "completion_tokens": 2998,
+    "reasoning_tokens": 738,
+    "total_tokens": 55473,
+    "cost": 0.060271
+  },
+  "cost": 0.060271,
+  "wall_s": 38.33,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q02_r1/run-20261104T212215-4904-a055.jsonl",
+  "error": null
+}

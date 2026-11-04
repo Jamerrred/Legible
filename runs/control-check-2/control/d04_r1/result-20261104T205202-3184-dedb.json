@@ -1,0 +1,51 @@
+{
+  "answer": "Yes — Cormorant Mobile Detailing does work in street spaces, including for apartment customers, but you have to meet their set-up rules:\n\n* Street space is explicitly allowed: driveway, private lot, open garage **or street space that stays legal for the whole job**, with at least 3 feet clear on both sides.\n* They need somewhere within 100 feet for their work van (20 feet long, 7'2\" tall).\n* Water: they bring their own 65-gallon tank, so you don't need to provide water for 1-2 vehicles.\n* Power: exterior wash (The Skiff) needs no power. Interior detail (The Cutter), full detail (The Schooner) and The Flagship need a grounded 120-volt outlet within 75 feet, or you pay a $30 generator fee.\n* Apartment rule: if you're parked at an apartment building / condo / HOA-managed lot, **you must get the building manager's permission before booking** — Cormorant won't contact the manager, and a refusal on the day counts as a no-show (deposit kept).\n* You must remove belongings/child seats/cargo, hand over keys at start, and have an adult reachable until the end.\n\nYour ZIP 94117 is in their no-travel-fee San Francisco zone, so no travel fee for that part.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "street space allowed if legal for whole job with 3ft clear both sides plus space within 100ft for 20ft work van",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "needs vehicle in driveway, private lot, open garage or street space that stays legal for whole job, with at least 3 feet clear on both sides, plus somewhere within 100 feet for work van 20 feet long and 7ft 2in tall"
+    },
+    {
+      "claim": "brings own water for up to 2 vehicles",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "brings own water in 65-gallon tank, no need to provide water for up to 2 vehicles"
+    },
+    {
+      "claim": "interior/full/Flagship need outlet within 75ft or $30 generator, exterior needs no power",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "interior detail, full detail and Flagship need grounded 120-volt outlet within 75 feet or $30 generator fee, exterior wash needs no power"
+    },
+    {
+      "claim": "apartment customers must get manager permission before booking, refusal = no-show",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "customer parked at apartment building, condo or HOA lot must get building manager permission before booking, Cormorant doesn't contact managers and refusal counts as no-show"
+    }
+  ],
+  "mapped_terms": [],
+  "next_steps": [],
+  "gate_note": null,
+  "run_id": "20261104T205202-3184-dedb",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 2,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 15944,
+    "completion_tokens": 1100,
+    "reasoning_tokens": 181,
+    "total_tokens": 17044,
+    "cost": 0.017615
+  },
+  "cost": 0.017615,
+  "wall_s": 19.16,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/control-check-2/control/d04_r1/run-20261104T205202-3184-dedb.jsonl",
+  "error": null
+}

@@ -1,0 +1,65 @@
+{
+  "answer": "You have the Flagship - Cormorant's top package with the one-step machine polish. Your deposit was $150.\n\n36 hours from now is in the 24-48 hour band before your arrival window:\n\n* Cancel right now: you get half back = $75 back.\n  Policy: full refund 48h+, half 24-48h, nothing under 24h.\n\n* Move it instead: you can do it for free.\n  Policy: one free reschedule with at least 24h notice, by phone or text only. You haven't moved it before and you're at ~36h, so you qualify. Any later/shorter-notice change or a second move counts as a cancellation under the rule above.\n\nTo move it you must call/text 415-555-0142 - not online. Office hours Mon-Sat 8am-6pm.\n\nNote: your job is ~6-8 hours, so it must be in the morning window 8:00-9:30am Tue-Fri, or Saturday morning only.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "top package with polish is The Flagship",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "The Flagship Our top package Everything in the Schooner plus a clay bar treatment, one-step machine polish, 6-month paint sealant"
+    },
+    {
+      "claim": "deposit for Flagship is $150 counts toward total",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "$150 for the Flagship"
+    },
+    {
+      "claim": "cancel 24-48h before window gets half back",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "Between 24 and 48 hours you get half back"
+    },
+    {
+      "claim": "cancel amount at ~36h = $75",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "$75 = half of $150 Flagship deposit for 24-48h cancellation"
+    },
+    {
+      "claim": "reschedule once free with 24h+ notice by phone/text only, later/shorter counts as cancellation",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "You can reschedule once for free with at least 24 hours' notice, by phone or text only."
+    }
+  ],
+  "mapped_terms": [
+    {
+      "items": [
+        "top package with the polish = The Flagship"
+      ]
+    }
+  ],
+  "next_steps": [
+    "To reschedule for free, call/text 415-555-0142 before you hit 24h before the window start"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212234-4944-0058",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 5,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 5,
+    "prompt_tokens": 29140,
+    "completion_tokens": 1452,
+    "reasoning_tokens": 339,
+    "total_tokens": 30592,
+    "cost": 0.032682
+  },
+  "cost": 0.032682,
+  "wall_s": 25.94,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/before/q09_r1/run-20261104T212234-4944-0058.jsonl",
+  "error": null
+}

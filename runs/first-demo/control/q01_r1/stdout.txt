@@ -1,0 +1,105 @@
+, 11/19, 11/20, 11/24.\n\nIf on arrival the tech judged hair/soiling worse than described (embedded in 3+ seats, or heavily soiled interior / contaminated exterior), surcharges of $60 / $75 / $50 could push even the weekday over $400, and declining after re-price loses the $50 deposit.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Subaru Outback is midsize Class B",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "midsize class covers sedans, crossovers and two-row SUVs such as Subaru Outback"
+    },
+    {
+      "claim": "inside and out means full detail The Schooner",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "inside and out means full detail (The Schooner)"
+    },
+    {
+      "claim": "full detail midsize $249 before fees/tax",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$249 for a midsize vehicle"
+    },
+    {
+      "claim": "pet hair removal midsize $55, required with full detail",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$55 for a midsize vehicle, can only be added to interior detail, full detail or Flagship"
+    },
+    {
+      "claim": "excessive pet hair surcharge $60 only if 3+ seating positions",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "embedded in 3 or more seating positions adds $60 surcharge on top of add-on"
+    },
+    {
+      "claim": "travel fee $65 for 94704",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Marin and East Bay ZIPs including 94704 for $65 travel fee"
+    },
+    {
+      "claim": "Saturday fee $25",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$25 Saturday fee"
+    },
+    {
+      "claim": "sales tax 8.625% on services/add-ons/timing fees but not travel",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "8.625% sales tax, not to travel fee"
+    },
+    {
+      "claim": "outlet within 75ft avoids $30 generator fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "need outlet within 75 feet or $30 generator fee"
+    },
+    {
+      "claim": "Saturday total computed",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "422.37625"
+    },
+    {
+      "claim": "weekday total computed",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "395.22"
+    },
+    {
+      "claim": "open Saturday mornings 11/7 and 11/21",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Saturday 2026-11-07 morning: 08:00 to 09:30, Saturday 2026-11-21 morning"
+    }
+  ],
+  "mapped_terms": [
+    "inside and out -> full detail (The Schooner)",
+    "2021 Subaru Outback -> midsize / Class B",
+    "dog sheds on one spot -> pet hair removal add-on ($55), not excessive"
+  ],
+  "next_steps": [
+    "Book a weekday morning arrival window to stay under $400",
+    "Clear personal belongings and have keys/adult available at start"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4902-8607",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 6,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 6,
+    "prompt_tokens": 53490,
+    "completion_tokens": 3932,
+    "reasoning_tokens": 852,
+    "total_tokens": 57422,
+    "cost": 0.061708
+  },
+  "cost": 0.061708,
+  "wall_s": 49.31,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q01_r1/run-20261104T212216-4902-8607.jsonl",
+  "error": null
+}

@@ -1,0 +1,200 @@
+[
+ {
+  "id": "d01",
+  "query": "Clean pet hair out of my van for under $150 in the next 2 days. I'm asking about Cormorant Mobile Detailing.",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94110",
+    "vehicle": "2022 Ford Transit"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d02",
+  "query": "What's the all-in price for a full detail on a Ford Transit at Cormorant Mobile Detailing?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94110",
+    "vehicle": "2022 Ford Transit"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d03",
+  "query": "My dog sheds a lot. Will Cormorant Mobile Detailing charge extra?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d04",
+  "query": "I live in an apartment with street parking. Can Cormorant Mobile Detailing still come?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d05",
+  "query": "Does Cormorant Mobile Detailing cover ZIP 94110?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94110",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d06",
+  "query": "Can someone from Cormorant Mobile Detailing come tomorrow morning?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d07",
+  "query": "Does Cormorant Mobile Detailing do ceramic coating on boats?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d08",
+  "query": "Yelp says pet hair removal is $50 at Cormorant Mobile Detailing. Can I get that?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d09",
+  "query": "What if I cancel my Cormorant Mobile Detailing appointment the day before? Is the deposit refundable?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d10",
+  "query": "Which Cormorant Mobile Detailing package fits a family SUV with a spilled milk smell?",
+  "type": "discovery seed",
+  "expected_outcome": "answered",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": false,
+    "free_text": "Nothing else to add."
+   }
+  }
+ },
+ {
+  "id": "d11",
+  "query": "Book the earliest slot at Cormorant Mobile Detailing for a wash, but check with me first.",
+  "type": "discovery seed",
+  "expected_outcome": "action_submitted",
+  "fact_ids": [],
+  "checks": {},
+  "person": {
+   "profile": {
+    "zip": "94117",
+    "vehicle": "2021 Toyota RAV4"
+   },
+   "answers": {
+    "approve_submit": true,
+    "free_text": "Nothing else to add."
+   }
+  }
+ }
+]

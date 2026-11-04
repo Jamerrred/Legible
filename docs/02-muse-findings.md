@@ -99,4 +99,10 @@ Once a mock site is public, give Muse the URL so search indexing isn't a factor,
 3. Does its browser agent use the quote form and report a verified total?
 4. Does it answer the "who's submitting" field honestly?
 
+**How to run it fairly:**
+
+- **Two live versions** that differ only by the link and the resource. An optional third run gives Muse the resource URL directly, which separates "can't find it" from "can't use it".
+- **Clean runs:** fresh chats, and a clean account or cleared memory if possible, because Muse searches its memory at the start of a task.
+- **Repeats:** run each query several times.
+
 Real Muse behaviour outranks anything our stand-in does, because the stand-in is only an approximation.

@@ -26,3 +26,10 @@ build/
 
 # Logs
 *.log
+
+# Benchmark scratch output (browser histories, screenshots)
+runs/**/browser/
+.browser-profiles/
+
+# Live server logs (a copy of each benchmark's logs is kept under runs/)
+logs/

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Book | Cormorant Mobile Detailing{% endblock %}
+{% block content %}
+<section>
+  <div class="wrap">
+    <h2>Pick Your Package and Time</h2>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form method="post" action="/book/request">
+      <input type="hidden" name="name" value="{{ lead.name }}">
+      <input type="hidden" name="email" value="{{ lead.email }}">
+      <input type="hidden" name="phone" value="{{ lead.phone }}">
+      <input type="hidden" name="address" value="{{ lead.address }}">
+
+      <label for="package">Package</label>
+      <select id="package" name="package">
+        <option value="">Choose one</option>
+        {% for package in packages %}
+        <option value="{{ package }}"{% if values.package == package %} selected{% endif %}>{{ package }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="vehicle">Your vehicle (year, make and model)</label>
+      <input type="text" id="vehicle" name="vehicle" value="{{ values.vehicle or '' }}">
+
+      <label>Add-ons</label>
+      {% for addon in addons %}
+      <label class="check"><input type="checkbox" name="addons" value="{{ addon }}"{% if addon in (values.addons or []) %} checked{% endif %}> {{ addon }}</label>
+      {% endfor %}
+
+      <label>Arrival window</label>
+      {% if not has_open %}
+      <p>We don't have any open times right now. Please call us.</p>
+      {% endif %}
+      {% for day in days %}
+      <div class="day">
+        <strong>{{ day.label }}{% if day.saturday %} <span class="fee">$25 Saturday fee</span>{% endif %}</strong>
+        {% for window in day.windows %}
+        {% if window.open %}
+        <label class="check"><input type="radio" name="slot" value="{{ window.value }}"{% if values.slot == window.value %} checked{% endif %}> {{ window.label }}, {{ window.time }}{% if window.evening %} <span class="fee">after-hours fee applies</span>{% endif %}</label>
+        {% else %}
+        <label class="check closed"><input type="radio" disabled> {{ window.label }}, {{ window.time }} (not available)</label>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+
+      <label for="notes">Anything else we should know?</label>
+      <textarea id="notes" name="notes" rows="4">{{ values.notes or '' }}</textarea>
+      <p><button class="btn" type="submit">Send request</button></p>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,57 @@
+r for a $30 fee.**\n* **The generator can't run in an enclosed or underground garage, so without an outlet we can't do those packages in there.**\n\nOnly The Skiff (exterior wash, doesn't touch the inside) doesn't need power.\n\nWith no outlet near your space and HOA outlets locked, they cannot just bring a generator down there to get around it.\n\nBuilding manager is on you:\n\n* **You do need to get the building manager's permission for the work before you book, this goes for HOA-managed lots too.**\n* **We don't contact managers, and if we get refused on the day it counts as a no-show.**\n\nOther location rules from the same FAQ that would apply if you move the RAV4 elsewhere for the job:\nVehicle can be in a driveway, private lot, open garage or street space, as long as it stays legal for the whole job and there's at least 3 feet clear on both sides. They also need somewhere within 100 feet for their work van.\n\nWhat would work: move the RAV4 to an open / above-ground spot where you have permission and either an outlet within 75 ft or open-air where they can run the generator (+$30), or find a different provider set up for enclosed garages.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "interior clean is The Cutter package",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "The Cutter Interior detail We vacuum the seats, carpets, mats and trunk, wipe down the dash, console and door panels, do the inside glass and spot-clean. Starting at $159"
+    },
+    {
+      "claim": "Cutter/Schooner/Flagship need outlet within 75ft or generator $30, generator cannot run enclosed/underground so without outlet cannot do those packages there",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "The Cutter, Schooner and Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or we run our generator for a $30 fee. The generator can't run in an enclosed or underground garage, so without an outlet we can't do those packages in there."
+    },
+    {
+      "claim": "customer must get building manager permission, Cormorant does not contact managers, refusal counts as no-show",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "You do need to get the building manager's permission for the work before you book, this goes for HOA-managed lots too. We don't contact managers, and if we get refused on the day it counts as a no-show."
+    },
+    {
+      "claim": "parking location requirements 3ft clear and van within 100ft",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "Your vehicle can be in a driveway, private lot, open garage or a street space, as long as it stays legal for the whole job and there's at least 3 feet clear on both sides. We also need somewhere within 100 feet for our work van."
+    }
+  ],
+  "mapped_terms": [
+    "inside cleaning = The Cutter - Interior detail",
+    "underground garage with no outlet = enclosed/underground garage without outlet where Cutter/Schooner/Flagship cannot be done"
+  ],
+  "next_steps": [
+    "Move RAV4 to open garage/driveway/street space with permission for the job",
+    "Secure outlet within 75ft or open-air spot for $30 generator use",
+    "Get building/HOA permission yourself before booking"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4918-3a61",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 3,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 3,
+    "prompt_tokens": 16913,
+    "completion_tokens": 1603,
+    "reasoning_tokens": 375,
+    "total_tokens": 18516,
+    "cost": 0.025188
+  },
+  "cost": 0.025188,
+  "wall_s": 17.07,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/before/q08_r1/run-20261104T212216-4918-3a61.jsonl",
+  "error": null
+}

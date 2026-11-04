@@ -1,0 +1,77 @@
+penings.\n- Full detail takes 3-5 hours, so a morning start works. No after-hours or same-day restriction applies (after-hours Tue/Thu evenings are exterior-wash only).\n- 24-hours notice is met.\n\nWhat to expect for that slot:\n- Service price for a 2-row crossover SUV like the Forester maps to Midsize / Class B (listed examples: Honda CR-V, Subaru Outback, Tesla Model Y) — $249 + $25 Saturday fee = $274 before 8.625% tax = ~$297.63 total, assuming no add-ons/surcharges/generator. Technician confirms size class on arrival with photos if different.\n- $50 deposit to book, credited to total. Deposit link lasts 12 hours and does not hold the slot until paid.\n- You'll need: legal parking with 3ft clear both sides + room for 20ft work van within 100ft, grounded 120V outlet within 75ft or $30 generator fee (can't do full detail in enclosed/underground garage without outlet), car cleared of belongings, adult with keys at start and reachable throughout.\n\nTo book it you must send a request with name, phone, email, address, vehicle and service + preferred slot, then pay the deposit link Ines sends within 4 business hours (Mon-Sat 8am-6pm).\n\nIf Sat morning fills, next full-detail-capable openings are Tue 11-10 afternoon 1:00-2:30pm and Fri 11-13 afternoon 1:00-2:30pm (Tue/Thu 5-6pm windows are exterior-only).",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "inside and out means full detail The Schooner",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "inside and out means the full detail (The Schooner)"
+    },
+    {
+      "claim": "soonest open arrival window",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Saturday 2026-11-07, morning: 08:00 to 09:30"
+    },
+    {
+      "claim": "works Tue-Sat, Sat only morning window; morning 8-9:30am, afternoon 1-2:30pm",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "works Tuesday to Saturday, morning 8:00-9:30 and afternoon 1:00-2:30 Tue-Fri, only morning Saturday"
+    },
+    {
+      "claim": "94117 no travel fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "94117 in no-travel-fee list"
+    },
+    {
+      "claim": "full detail midsize price",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$249 for midsize full detail before fees/tax"
+    },
+    {
+      "claim": "Saturday fee",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "$25 Saturday fee"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "claim": "inside and out -> The Schooner full detail",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "inside and out means full detail"
+    },
+    {
+      "claim": "Subaru Forester -> midsize Class B",
+      "evidence": "listed_unverified",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "midsize covers crossovers and two-row SUVs e.g. Honda CR-V, Subaru Outback; Forester not named but same type"
+    }
+  ],
+  "next_steps": [
+    "Send booking request naming The Schooner full detail for Subaru Forester and preferred slot Sat 2026-11-07 08:00-09:30, then pay $50 deposit link within 12 hours to lock it"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T213207-5773-b2d3",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 3,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 29239,
+    "completion_tokens": 2332,
+    "reasoning_tokens": 943,
+    "total_tokens": 31571,
+    "cost": 0.04202
+  },
+  "cost": 0.04202,
+  "wall_s": 28.2,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/control/q12_r1/run-20261104T213207-5773-b2d3.jsonl",
+  "error": null
+}

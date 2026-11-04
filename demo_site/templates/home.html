@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Cormorant Mobile Detailing | Mobile Car Detailing San Francisco{% endblock %}
+{% block content %}
+<div class="hero">
+  <div class="wrap">
+    <h1>Showroom shine, wherever you park.</h1>
+    <p>Mobile car detailing in San Francisco. We come to you!</p>
+    <a class="btn" href="/book">Book now</a>
+    <a class="btn alt" href="tel:415-555-0142">Call us</a>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>Our Packages</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>The Skiff</h3>
+        <p class="kind">Exterior wash</p>
+        <p>Foam hand wash, wheels and tires, door jambs, outside glass and a hand dry. This one doesn't touch the inside of the vehicle.</p>
+        <p class="price">Starting at ${{ starting.exterior }}</p>
+      </div>
+      <div class="card">
+        <h3>The Cutter</h3>
+        <p class="kind">Interior detail</p>
+        <p>We vacuum the seats, carpets, mats and trunk, wipe down the dash, console and door panels, do the inside glass and spot-clean.</p>
+        <p class="price">Starting at ${{ starting.interior }}</p>
+      </div>
+      <div class="card">
+        <h3>The Schooner</h3>
+        <p class="kind">Full detail</p>
+        <p>Everything in the Skiff and the Cutter plus a spray wax.</p>
+        <p class="price">Starting at ${{ starting.full }}</p>
+      </div>
+      <div class="card">
+        <h3>The Flagship</h3>
+        <p class="kind">Our top package</p>
+        <p>Everything in the Schooner plus a clay bar treatment, one-step machine polish, 6-month paint sealant and upholstery and carpet shampoo. Pet hair removal and odour treatment still cost extra.</p>
+        <p class="price">Starting at ${{ starting.flagship }}</p>
+      </div>
+    </div>
+    <p>Starting prices are for Class A, our smallest vehicles. Any larger vehicle costs more. Excessive pet hair or heavily soiled vehicles may cost extra.</p>
+  </div>
+</section>
+
+<section class="shade">
+  <div class="wrap">
+    <h2>Prices</h2>
+    {% include "_agent_line.html" %}
+    <img class="board" src="/static/img/packages.png" alt="Our packages" width="1100" height="1051">
+    <h2>Add-ons</h2>
+    <p>Want a bit more? We also do {{ addons | join(", ") | replace(", per pair", "") }}. Ask us when you book, or check the <a href="/faq">FAQ</a>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Why Cormorant?</h2>
+    <ul>
+      <li>We come to you. Mobile only, there's no shop to drive to.</li>
+      <li>Licensed and insured.</li>
+      <li>Owner-run. Ines Calloway and Theo do all the work themselves.</li>
+      <li>Missed a spot? Send us a photo within 48 hours and we'll come back and redo it for free.</li>
+      <li>Got more than one car, or want us to come regularly? Ask about discounts.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="shade">
+  <div class="wrap">
+    <h2>Where We Go</h2>
+    <img class="map" src="/static/img/area.png" alt="Where we go" width="900" height="620">
+    <p>We're based in San Francisco. We also travel further for a fee, see the map.</p>
+    <a class="btn" href="/book">Book now</a>
+  </div>
+</section>
+{% endblock %}
+{% block popup %}
+<div class="promo" id="promo" hidden>
+  <div class="promo-box">
+    <button type="button" class="promo-close" aria-label="Close">&times;</button>
+    <h2>Holiday gift card bonus!</h2>
+    <p>Buy a gift card of $200 or more by December 31, 2026 and we'll add a free $25 bonus gift card.</p>
+    <p>Call <a href="tel:415-555-0142">415-555-0142</a> or email <a href="mailto:cormorant@example.com">cormorant@example.com</a></p>
+  </div>
+</div>
+{% endblock %}

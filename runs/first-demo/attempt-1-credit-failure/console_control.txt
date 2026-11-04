@@ -1,0 +1,27 @@
+12 runs on control
+q01 done 49.31
+q02 done 38.33
+q03 done 28.23
+q04 done 24.1
+q05 done 17.61
+q06 done 19.49
+q07 done 42.48
+q08 done 25.38
+q09 done 15.62
+q10 done 19.99
+q11 done 2.66
+q12 done 2.62
+
+control: correct 9/12, acceptable 9/12, partial 0, cost $0.41
+  q01 r1: verified_correct             49.31s  
+  q02 r1: verified_correct             38.33s  
+  q03 r1: verified_correct             28.23s  
+  q04 r1: verified_correct             24.1s  
+  q05 r1: verified_correct             17.61s  
+  q06 r1: verified_correct             19.49s  
+  q07 r1: verified_correct             42.48s  
+  q08 r1: verified_correct             25.38s  
+  q09 r1: gave_up                      15.62s  missing: (?<![\d.,])75(?:\.00)?(?!\d|[.,]\d); missing: free|no (charge|cost|fee)|(doesn.?t|won.?t|shouldn.?t) cost|at no; missing: phone|tex
+  q10 r1: verified_correct             19.99s  
+  q11 r1: gave_up                      2.66s  missing: (?<![\d.,])(?:118\.40|118\.39|118\.41|118)(?!\d|[.,]\d); missing: \b(sent|submitted|passed (it |this )?(on|along)|forwarded|went th
+  q12 r1: gave_up                      2.62s  earliest open slot not stated: 2026-11-07

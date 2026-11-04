@@ -1,0 +1,41 @@
+uld exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.) but no fallback_llm configured
+WARNING  [Agent] ❌ Result failed 1/6 times: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.
+INFO     [Agent] 
+
+INFO     [Agent] 📍 Step 7:
+WARNING  [Agent] ⚠️ LLM error (ModelProviderError: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.) but no fallback_llm configured
+WARNING  [Agent] ❌ Result failed 2/6 times: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.
+INFO     [Agent] 
+
+INFO     [Agent] 📍 Step 8:
+WARNING  [Agent] ⚠️ LLM error (ModelProviderError: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.) but no fallback_llm configured
+WARNING  [Agent] ❌ Result failed 3/6 times: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.
+INFO     [Agent] 
+
+INFO     [Agent] 📍 Step 9:
+INFO     [Agent] 📋 Replan nudge injected after 3 consecutive failures
+WARNING  [Agent] ⚠️ LLM error (ModelProviderError: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.) but no fallback_llm configured
+WARNING  [Agent] ❌ Result failed 4/6 times: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.
+INFO     [Agent] 
+
+INFO     [Agent] 📍 Step 10:
+INFO     [Agent] 📋 Replan nudge injected after 4 consecutive failures
+WARNING  [Agent] ⚠️ LLM error (ModelProviderError: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.) but no fallback_llm configured
+WARNING  [Agent] ❌ Result failed 5/6 times: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.
+INFO     [Agent] 
+
+INFO     [Agent] 📍 Step 11:
+INFO     [Agent] 📋 Replan nudge injected after 5 consecutive failures
+WARNING  [Agent] ⚠️ LLM error (ModelProviderError: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.) but no fallback_llm configured
+ERROR    [Agent] ❌ Result failed 6/6 times: unusable model reply: status 402: This request would exceed your available credits given your current in-flight requests. Retry after in-flight requests settle, or add credits.
+ERROR    [Agent] ❌ Stopping due to 5 consecutive failures
+INFO     [Agent] 
+INFO     [Agent] Did the Agent not work as expected? Let us fix this!
+INFO     [Agent]    Open a short issue on GitHub: https://github.com/browser-use/browser-use/issues
+INFO     [BrowserSession] 📢 on_BrowserStopEvent - Calling reset() (force=True, keep_alive=False)
+INFO     [BrowserSession] [SessionManager] Cleared all owned data (targets, sessions, mappings)
+INFO     [BrowserSession] ✅ Browser session reset complete
+INFO     [BrowserSession] ✅ Browser session reset complete
+INFO     [BrowserSession] 📢 on_BrowserStopEvent - Calling reset() (force=True, keep_alive=False)
+INFO     [BrowserSession] ✅ Browser session reset complete
+INFO     [BrowserSession] ✅ Browser session reset complete

@@ -1,0 +1,59 @@
+{
+  "answer": "You booked The Flagship — Cormorant's top package with the one-step machine polish.\n\nDeposit for The Flagship is $150. At about 36 hours before your arrival window you are in the 24-to-48-hour band:\n\n* Cancel now: you get half the deposit back = $75 back, $75 kept.\n  Rule: full back 48h+, half back 24-48h, nothing back under 24h.\n\n* Move it instead: you can reschedule once for free because you have more than 24 hours notice and you haven't moved it before. Cost $0.\n  You must do it by phone or text only — call/text 415-555-0142. Any later than 24h notice or shorter-notice change counts as a cancellation under the rule above.\n\nOffice hours are Monday-Saturday 8am-6pm if you need to reach them now.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "top package with polish is The Flagship",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "The Flagship is everything in the full detail plus clay bar, one-step machine polish, 6-month sealant and shampoo"
+    },
+    {
+      "claim": "Flagship deposit is $150 and counts toward total",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/faq",
+      "value": "$150 for the Flagship"
+    },
+    {
+      "claim": "cancel 24-48h gets half deposit back",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/faq",
+      "value": "Between 24 and 48 hours you get half back"
+    },
+    {
+      "claim": "cancel refund dollars at 36h",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/faq",
+      "value": "$75 back (half of $150)"
+    },
+    {
+      "claim": "reschedule once free with 24h+ notice by phone/text only",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/faq",
+      "value": "reschedule once for free with at least 24 hours notice, by phone or text only"
+    }
+  ],
+  "mapped_terms": [
+    "polish / top package with polish -> The Flagship (polish-and-seal detail)"
+  ],
+  "next_steps": [],
+  "gate_note": null,
+  "run_id": "20261104T212246-5076-83fb",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 5,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 35039,
+    "completion_tokens": 1698,
+    "reasoning_tokens": 650,
+    "total_tokens": 36737,
+    "cost": 0.046435
+  },
+  "cost": 0.046435,
+  "wall_s": 24.29,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q09_r1/run-20261104T212246-5076-83fb.jsonl",
+  "error": null
+}

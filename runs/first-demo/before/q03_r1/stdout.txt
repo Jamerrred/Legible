@@ -1,0 +1,90 @@
+eninsula Suds — \"Not serving San Francisco at this time\"\n- Sunset Shine Auto Spa — drop your car off at shop, not mobile\n- Ferry Point Auto Care — partner parking garages only\n\nTo book: call/text 415-555-0142, office Mon-Sat 8am-6pm. Need 24hrs notice before window. Ask about multi-car discount when you book — homepage says \"Got more than one car... Ask about discounts\" but no amount is published, so $417 could drop. Also confirm if 1x $50 deposit covers all 3 vans or is per-van, and that you have a spigot available.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Skiff is exterior-only, no interior, starting at $69 Class A",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "The Skiff Exterior wash Starting at $69 - foam hand wash, wheels/tires, door jambs, outside glass, hand dry. Doesn't touch inside"
+    },
+    {
+      "claim": "Ford Transit full-size = Class D, Skiff $139 per van",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Skiff Class D $139 - full-size vans incl Ford Transit"
+    },
+    {
+      "claim": "3 vans total $417",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "$417 = 3 x $139 Skiff Class D"
+    },
+    {
+      "claim": "Mobile-only, works on vans in San Francisco, comes to you",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Mobile only, San Francisco, We come to you. Works on cars, SUVs, pickups, minivans and vans"
+    },
+    {
+      "claim": "Open Saturday morning window only 8-9:30am, Tue-Sat, closed Sun-Mon",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "Tuesday to Saturday, Saturday morning window only 8:00am to 9:30am"
+    },
+    {
+      "claim": "3+ vehicles need spigot within 100ft, Skiff needs no power",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "65-gallon tank covers up to 2 vehicles. For 3 or more need spigot within 100 feet. Skiff doesn't need power"
+    },
+    {
+      "claim": "$50 deposit counts toward total",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8101/faq",
+      "value": "$50 to book any job counts toward total"
+    },
+    {
+      "claim": "No travel fee for 94103 San Francisco base zone",
+      "evidence": "listed_unverified",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Based in San Francisco, travel further for a fee - 94103 inferred base $0, no dollar schedule published"
+    },
+    {
+      "claim": "Multi-vehicle discount amount",
+      "evidence": "unknown",
+      "source_url": "http://cormorant.localhost:8101/",
+      "value": "Ask about discounts - no amount published"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "items": [
+        "exterior wash = The Skiff (foam hand wash, wheels/tires, door jambs, outside glass, hand dry, no interior)",
+        "full-size Ford Transit vans = Class D vehicles"
+      ]
+    }
+  ],
+  "next_steps": [
+    "Call/text 415-555-0142 to book Saturday 8-9:30am window, confirm $417 for 3x Transit Skiff, ask about multi-car discount",
+    "Ensure working spigot within 100ft and 3ft clearance + space for work van, adult with keys reachable"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T213642-5865-1280",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 5,
+  "browse_tasks": 1,
+  "approved": false,
+  "usage": {
+    "calls": 30,
+    "prompt_tokens": 364426,
+    "completion_tokens": 15135,
+    "reasoning_tokens": 4656,
+    "total_tokens": 379561,
+    "cost": 0.331001
+  },
+  "cost": 0.331001,
+  "wall_s": 228.64,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/before/q03_r1/run-20261104T213642-5865-1280.jsonl",
+  "error": null
+}

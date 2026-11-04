@@ -1,0 +1,90 @@
+{
+  "answer": "Total for your job is **$628.76, tax and travel included**.\n\nFor Cormorant Mobile Detailing — mobile only, San Francisco CA, phone/text 415-555-0142:\n\nWhat fits your description:\n- You want interior-only with a real shampoo, no exterior = **Interior detail (The Cutter) + Upholstery and carpet shampoo add-on**. The Cutter alone is vacuum/wipe-down/spot-clean only, shampoo is extra.\n- Your F-250 = **oversized / Class D** (heavy-duty pickup). Technician confirms size on arrival.\n- Mud wall-to-wall = **heavily soiled interior** (mud/sand over more than half the floor = $75 surcharge). Technician checks and shows photos if it differs.\n- Outlet 150 ft away = **no outlet within 75 ft**, so $30 generator fee. Driveway is fine if 3 ft clear both sides + room for work van within 100 ft.\n- Sausalito 94965 = Marin zone, **$65 travel fee** per visit, toll included. Not taxed.\n- Weekday = no Saturday $25 fee. Note: this job is about 5 hours, so it must start in the **morning window 8:00-9:30am Tue-Fri**.\n\nBreakdown from live quote quote-21a9a0c3b073:\n- Interior detail oversized: $289.00\n- Shampoo oversized: $125.00\n- Heavily-soiled surcharge: $75.00\n- Generator fee: $30.00\n- Taxable subtotal $519.00 x 8.625% = $44.76 tax\n- Travel 94965: $65.00 (no tax)\n- Total $628.76\n\n$50 deposit to book, counts toward total, balance due on completion. Final price confirmed on-site before work; if you declined a changed price you’d lose deposit.\n\nNext open weekday windows per their calendar (as of Nov 4): e.g. Tue Nov 10 afternoon, Fri Nov 13 afternoon, Tue Nov 17 afternoon, Wed Nov 18 morning/afternoon, Thu Nov 19 morning/afternoon, Fri Nov 20 morning, Tue Nov 24 morning. Booking needs name/email/phone/address — I didn’t submit anything.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "Total $628.76 including tax and travel for interior + shampoo + heavily-soiled + no-power in 94965 on F-250",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$628.76"
+    },
+    {
+      "claim": "Interior detail oversized $289",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$289.00"
+    },
+    {
+      "claim": "Shampoo oversized $125",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$125.00"
+    },
+    {
+      "claim": "Heavily-soiled surcharge $75",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$75.00"
+    },
+    {
+      "claim": "Generator fee $30 when no outlet within 75ft",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$30.00"
+    },
+    {
+      "claim": "Travel fee 94965 $65",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103/quote?service=interior&vehicle=Ford+F-250&addons=shampoo&conditions=heavily-soiled%2Cno-power&zip=94965&format=json",
+      "value": "$65.00"
+    },
+    {
+      "claim": "Tax 8.625% on services/addons/surcharges/generator, not travel",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "8.625%"
+    },
+    {
+      "claim": "F-250 is oversized Class D",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "oversized Class D"
+    },
+    {
+      "claim": "Phone 415-555-0142",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8102/",
+      "value": "415-555-0142"
+    }
+  ],
+  "mapped_terms": [
+    "just interior with shampoo, no exterior -> Interior detail (The Cutter) service=interior + shampoo add-on",
+    "F-250 -> oversized / Class D",
+    "mud wall to wall on floor -> heavily-soiled condition",
+    "outlet 150ft away -> no-power condition + $30 generator fee",
+    "94965 driveway -> Marin zone $65 travel"
+  ],
+  "next_steps": [
+    "Pick a weekday morning window (required for 5-hour job) and submit booking request with contact/address",
+    "Pay $50 deposit link when owner replies to lock booking"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T212216-4909-76ca",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 7,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 6,
+    "prompt_tokens": 86892,
+    "completion_tokens": 2656,
+    "reasoning_tokens": 618,
+    "total_tokens": 89548,
+    "cost": 0.111132
+  },
+  "cost": 0.111132,
+  "wall_s": 33.55,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q02_r1/run-20261104T212216-4909-76ca.jsonl",
+  "error": null
+}

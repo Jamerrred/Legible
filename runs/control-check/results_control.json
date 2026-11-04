@@ -1,0 +1,300 @@
+[
+ {
+  "query_id": "d02",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check/control/d02_r1",
+  "cost": 0.039575,
+  "seconds": 21.79,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "All-in price for a full detail (The Schooner) on your 2022 Ford Transit at Cormorant Mobile Detailing:\n\n**Base mapping:**\n- Your \"full detail\" = The Schooner (exterior wash + interior detail + spray wax)\n- Your Ford Transit (full-size van, not Transit Connect) = Oversized / Class D\n\n**Standard all-in total in 94110 with no extras: $433.41**\n- Service price (Oversized full detail): $399.00\n- Travel fee for 94110: $0 (94110 is in their no-travel-fee San Francisco list)\n- Sales tax 8.625% on service: $34.41\n- Total: $399 x 1.08625 = $433.41\n\nThis assumes: weekday Tue-Fri daytime slot, you provide a grounded 120V outlet within 75ft (otherwise +$30 generator fee + tax), no add-ons, and no condition surcharges.\n\n**What could add to that total (all + 8.625% tax except travel):**\n- No outlet: +$30 generator fee\n- Saturday job: +$25 Saturday fee\n- Same-day (exterior/interior only, phone before 10am): +$40 - note full detail is not eligible for same-day per their rules\n- After-hours evening 5-6pm Tue/Thu: exterior wash only, so not applicable to full detail\n- Add-ons if you want them (Oversized prices): pet hair $95, shampoo $125, clay $110, sealant $175 (only with clay), odour $90 (1-hr) / $140 (2-hr)\n- Condition surcharges if tech finds them on arrival: heavily soiled interior $75, heavily contaminated exterior $50, excessive pet hair $60 on top of required pet hair add-on\n- Travel fee only if outside 94110: $35 Peninsula/Treasure Island, $65 Marin/East Bay (no tax on travel)\n\nBooking needs $50 deposit (counts toward total), balance due at finish. They take Visa/MC/Amex/Discover/Apple Pay/Google Pay, cash for balance OK.\n\nBay Auto Pages listing showing \"flat $129 full detail\" is out of date - the business's own site charges $219 small / $249 midsize / $299 large / $399 oversized for full detail.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "full detail = The Schooner",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "full detail, sold as The Schooner, is everything in exterior wash and interior detail plus spray wax"
+    },
+    {
+     "claim": "Ford Transit = oversized Class D",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "oversized class covers full-size cargo vans such as Ford Transit; van with no detail means full-size van such as Ford Transit = oversized"
+    },
+    {
+     "claim": "oversized full detail $399 before fees/tax",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "$399 for oversized vehicle, before add-ons, fees and tax"
+    },
+    {
+     "claim": "94110 no travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "94110 in no travel fee San Francisco ZIP list"
+    },
+    {
+     "claim": "tax 8.625% on services/fees not travel",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "adds 8.625% sales tax to services, add-ons, surcharges, generator and timing fees, but not travel fee"
+    },
+    {
+     "claim": "total formula",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "total is service price plus add-ons, surcharges, generator fee, Saturday/after-hours/same-day fee, travel fee and sales tax"
+    }
+   ],
+   "mapped_terms": [
+    {
+     "items": [
+      "full detail -> The Schooner (full detail)"
+     ],
+     "type": "array"
+    }
+   ],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d03",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check/control/d03_r1",
+  "cost": 0.019274,
+  "seconds": 16.02,
+  "used_resource": false,
+  "tool_calls": 3,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "Yes \u2014 Cormorant Mobile Detailing charges extra for dog / pet hair. It is never included:\n\n- The interior detail (The Cutter) does not include pet hair removal.\n- The top package (The Flagship) also still charges extra for pet hair removal.\n- Full detail (The Schooner) = exterior wash + interior detail, so pet hair is also extra there.\n\nPet hair removal add-on:\n- $55 small, $55 midsize, $75 large, $95 oversized, adds about 30 minutes\n- Can only be added to interior detail, full detail, or The Flagship \u2014 never to an exterior wash alone or on its own.\n\nIf shedding is heavy, expect more:\n- Counts as \u201cexcessive\u201d when hair is embedded in 3+ seating positions OR across more than half the cargo/trunk floor = $60 surcharge on top of the required add-on.\n\nExample: large vehicle with excessive hair = $75 add-on + $60 surcharge, plus tax.\n\nTechnician checks surcharges before starting and shows photos/new price \u2014 if you decline, no job and deposit is kept.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "pet hair removal is extra, not included in interior or Flagship",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "interior detail doesn't include pet hair removal; Flagship pet hair removal still costs extra"
+    },
+    {
+     "claim": "pet hair add-on price and time limit",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "$55 small, $55 midsize, $75 large, $95 oversized, ~30 min, only with interior/full/Flagship"
+    },
+    {
+     "claim": "excessive pet hair surcharge",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "embedded in 3+ seats or >half cargo floor = $60 on top of required add-on"
+    }
+   ],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d06",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check/control/d06_r1",
+  "cost": 0.03686,
+  "seconds": 28.45,
+  "used_resource": false,
+  "tool_calls": 5,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 Cormorant Mobile Detailing cannot come tomorrow morning.\n\nTomorrow is Thursday 2026-11-05. Their site lists for that day only:\n\n* Thursday 2026-11-05, afternoon: 13:00 to 14:30\n\nNo morning 8:00-9:30 window is listed as open for tomorrow. Their normal morning window is 8:00 am to 9:30 am Tue-Fri, but open windows are where at least one technician is free, and tomorrow morning is not listed.\n\nNext morning opening listed is Saturday 2026-11-07, morning 08:00 to 09:30.\n\nA request does not hold a slot \u2014 the job is booked only when you pay the $50 deposit ($150 for The Flagship) via the link in owner Ines Calloway's reply, which she sends within 4 business hours (Mon-Sat 8am-6pm) and which lasts 12 hours.\n\nIf you want tomorrow afternoon instead, tell me what service you want and I can help submit the request.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "open slots for Thursday 2026-11-05 - afternoon only",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "Thursday 2026-11-05, afternoon: 13:00 to 14:30"
+    },
+    {
+     "claim": "morning arrival window hours",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "8:00 am to 9:30 am Tuesday to Friday, only morning window Saturday"
+    },
+    {
+     "claim": "next morning opening",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "Saturday 2026-11-07, morning: 08:00 to 09:30"
+    },
+    {
+     "claim": "booking only on deposit via link, reply timing",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "request doesn't hold slot, booked only when deposit paid through link, reply within 4 business hours Mon-Sat 8am-6pm, link lasts 12 hours"
+    }
+   ],
+   "mapped_terms": [
+    {
+     "term": "tomorrow morning"
+    }
+   ],
+   "next_steps": [
+    "Tell me service + address/vehicle if you want to request Thu 11-05 afternoon or Sat 11-07 morning"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d07",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check/control/d07_r1",
+  "cost": 0.022796,
+  "seconds": 12.28,
+  "used_resource": false,
+  "tool_calls": 3,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 Cormorant Mobile Detailing does not do ceramic coating on boats.\n\nTheir own site states:\n- They don't detail boats, jet skis or motorcycles.\n- They don't do ceramic coating \u2014 their longest-lasting paint protection is the 6-month paint sealant.\n\nA third-party directory (Bay Auto Pages, last updated March 2023) lists them for \"boat detailing\" and \"ceramic coating,\" but the business's own current pages say otherwise, and the business's own statement takes precedence.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Cormorant Mobile Detailing doesn't detail boats",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "Not offered: Cormorant Mobile Detailing doesn't detail boats, jet skis or motorcycles. (Confirmed 2026-09-03.)"
+    },
+    {
+     "claim": "Cormorant Mobile Detailing doesn't do ceramic coating",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "Not offered: Cormorant Mobile Detailing doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant. (Confirmed 2026-09-03.)"
+    },
+    {
+     "claim": "Third-party directory lists boat detailing and ceramic coating",
+     "evidence": "listed_unverified",
+     "source_url": "http://bayautopages.localhost:8107/cormorant-mobile-detailing",
+     "value": "Services: boat detailing, ceramic coating"
+    }
+   ],
+   "mapped_terms": [
+    "ceramic coating -> business category: Not offered, longest protection is 6-month paint sealant",
+    "boats -> business category: Not offered (boats, jet skis or motorcycles)"
+   ],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d09",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check/control/d09_r1",
+  "cost": 0.020761,
+  "seconds": 15.49,
+  "used_resource": false,
+  "tool_calls": 3,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "If you cancel the day before, your refund depends on the exact hours before the start of your arrival window:\n\n- 48+ hours before window start: full deposit back ($50, or $150 for The Flagship)\n- 24 to 48 hours before: half back ($25, or $75 for The Flagship)\n- Under 24 hours before: nothing back\n\nSo a \"day before\" cancellation is usually in the 24-48 hour band = half refund, but if your appointment is in the morning and you cancel late the evening before (e.g. <24h before the 8:00-9:30am window), it falls in the under-24-hour band = no refund.\n\nOther rules:\n- One free reschedule allowed with at least 24 hours notice, by phone or text only. Any later/shorter-notice change counts as a cancellation under the rules above.\n- No-show after 20-min wait = whole deposit kept.\n\nSource is Cormorant Mobile Detailing's own Policies page.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "cancellation 48+ hours gets full deposit back, 24-48 hours half back, under 24 hours nothing back",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "cancels at least 48 hours before start of arrival window gets full deposit back, between 24 and 48 hours gets half back, under 24 hours gets nothing back"
+    },
+    {
+     "claim": "deposit is $50 any job or $150 for The Flagship",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "$50 deposit any job, $150 for The Flagship"
+    },
+    {
+     "claim": "one free reschedule with at least 24h notice by phone/text only, later/shorter counts as cancellation",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "reschedule once for free with at least 24 hours notice by phone or text only"
+    }
+   ],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d11",
+  "variant": "control",
+  "result": "correct_unsourced",
+  "correct": false,
+  "acceptable": false,
+  "partial": true,
+  "problems": [],
+  "outcome": "unknown",
+  "expected": "action_submitted",
+  "repeat": 1,
+  "out": "runs/control-check/control/d11_r1",
+  "cost": 0.473331,
+  "seconds": 315.79,
+  "used_resource": false,
+  "tool_calls": 7,
+  "browser_calls": 2,
+  "crashed": false,
+  "report": {
+   "answer": "The model stopped responding before a report was finished.\n\nNote: nothing in this report was checked by the evidence gate, so treat all of it as unverified.",
+   "outcome": "unknown",
+   "claims": [],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null,
+   "stopped_early": "status 400: Provider returned error"
+  }
+ }
+]

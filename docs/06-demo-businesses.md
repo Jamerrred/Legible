@@ -1,6 +1,6 @@
 # Demo businesses
 
-*Last updated 4 November 2026. These are proposals. All names and details will be fictional.*
+*Last updated 5 November 2026. Mobile detailing is confirmed as the first business and is built as the fictional Cormorant Mobile Detailing. The other three are still proposals. All names and details are fictional.*
 
 ## How they were chosen
 
@@ -29,6 +29,8 @@ Each is medium complexity: enough rules and options to defeat a quick read, but 
 - Service area shown as a map image, with a travel fee mentioned elsewhere
 - Calendar behind a name, address and phone form
 - A mock third-party listing that shows a wrong, older price
+
+**As built:** three pages (Home, FAQ, Book), with prices in a PNG, "starting at" text, vague conditions, rules in collapsed FAQ answers, a map image, a pop-up and a calendar behind a lead form. The exact list is in `demo_site/holes.json`, tagged with catalogue IDs. Those IDs never appear in the served pages.
 
 ## 2. HVAC and plumbing
 
@@ -105,7 +107,7 @@ Each business has one facts file, written before anything else. It's the single 
 
 **It contains:** offerings, price rules, add-ons and their dependencies, defined conditions, eligibility, prerequisites, service area, staff differences, policies, hours, blackout dates and availability rules.
 
-**Each fact also records:** where it appears on the "before" site (plain, hidden and how, or absent).
+**Each fact also records:** when the owner last confirmed it, and where it appears on the "before" site (plain, hidden and how, or missing). This structure lets the file become the business record later.
 
 **Availability is generated, not written by hand.** Requests such as "in the next 2 days" depend on today's date, so slots need to roll forward. Otherwise the test goes stale.
 
@@ -113,7 +115,8 @@ Each business has one facts file, written before anything else. It's the single 
 
 ## Making a "before" site look real
 
-- Build it the way a small business would: a template look, stock photos and uneven writing.
+- Build it the way a small business would: a few pages, tidy but not highly polished, with slightly uneven writing. Detailing has only Home, FAQ and Book.
+- Don't pack the facts in. Leave a fact out where a real small site would leave it out, and record that in the facts file.
 - Use the same third-party patterns real sites use. Where we can't embed a real platform, imitate the mechanics, such as a cross-origin iframe on another domain.
 - Don't make it absurdly bad. A roadblock should be something a reasonable owner would do without thinking about agents.
 - Use fictional names, and no real addresses or phone numbers.

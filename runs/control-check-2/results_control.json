@@ -1,0 +1,189 @@
+[
+ {
+  "query_id": "d01",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check-2/control/d01_r1",
+  "cost": 0.038046,
+  "seconds": 25.36,
+  "used_resource": false,
+  "tool_calls": 4,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "No \u2014 Cormorant Mobile Detailing cannot clean pet hair out of your 2022 Ford Transit for under $150.\n\nWhy:\n- Your van maps to their oversized class (Class D): their site says a \"van\" with no other detail means a full-size van such as a Ford Transit, which is the oversized class.\n- Pet hair removal is an add-on only \u2014 $95 for oversized \u2014 and it can only be added to the interior detail (The Cutter), full detail (The Schooner) or The Flagship, never to an exterior wash or on its own.\n- The cheapest eligible base service for your van is the interior detail (The Cutter) at $289 for oversized, before add-ons, fees and tax.\n- Minimum before tax/fees: $289 + $95 = $384. With 8.625% sales tax on services/add-ons that is ~$417.12, plus $0 travel fee in 94110 (your ZIP is in their no-fee list), plus any $60 excessive-pet-hair / $75 heavily-soiled surcharges if found, plus $30 generator fee if no outlet. This is well over your $150 cap.\n\nOn timing: there IS a slot in the next 2 days \u2014 Thursday 2026-11-05 afternoon 13:00-14:30 is listed as open, and they work Tue-Sat. That would just meet their 24-hour notice rule, but price still fails. No interior-only pet-hair option under $150 exists even before tax.\n\nIf you want to proceed anyway, booking needs a $50 deposit (counts toward total) via the link in the owner's reply (replies within 4 business hours Mon-Sat 8am-6pm), and the job is only booked when deposit is paid.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "Ford Transit = oversized Class D",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "van with no other detail means full-size van such as Ford Transit, oversized class; Class D covers Ford Transit, Sprinter etc."
+    },
+    {
+     "claim": "interior detail oversized price $289",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "$289 for oversized vehicle, before add-ons, fees and tax"
+    },
+    {
+     "claim": "pet hair removal oversized $95 add-on only with interior/full/Flagship",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "$95 for oversized, can only be added to interior detail, full detail or Flagship, never exterior wash or on its own"
+    },
+    {
+     "claim": "sales tax 8.625% on services/add-ons",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "8.625% sales tax in every ZIP to services, add-ons, surcharges etc, not travel fee"
+    },
+    {
+     "claim": "94110 no travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "94110 in no-travel-fee San Francisco ZIP list"
+    },
+    {
+     "claim": "open slot Thu 2026-11-05 afternoon",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "Thursday 2026-11-05, afternoon: 13:00 to 14:30"
+    }
+   ],
+   "mapped_terms": [
+    "van (2022 Ford Transit) -> oversized class / Class D (full-size van)",
+    "clean pet hair -> pet hair removal add-on (must be added to interior detail The Cutter minimum)",
+    "just the inside / interior clean -> The Cutter"
+   ],
+   "next_steps": [
+    "Increase budget to ~$420+ or choose a different business if $150 is firm",
+    "If proceeding, submit request with vehicle, service (Cutter + pet hair), and Thu 11-05 afternoon slot and pay $50 deposit link within 12 hours"
+   ],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d04",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "answered",
+  "expected": "answered",
+  "repeat": 1,
+  "out": "runs/control-check-2/control/d04_r1",
+  "cost": 0.017615,
+  "seconds": 19.16,
+  "used_resource": false,
+  "tool_calls": 3,
+  "browser_calls": 0,
+  "crashed": false,
+  "report": {
+   "answer": "Yes \u2014 Cormorant Mobile Detailing does work in street spaces, including for apartment customers, but you have to meet their set-up rules:\n\n* Street space is explicitly allowed: driveway, private lot, open garage **or street space that stays legal for the whole job**, with at least 3 feet clear on both sides.\n* They need somewhere within 100 feet for their work van (20 feet long, 7'2\" tall).\n* Water: they bring their own 65-gallon tank, so you don't need to provide water for 1-2 vehicles.\n* Power: exterior wash (The Skiff) needs no power. Interior detail (The Cutter), full detail (The Schooner) and The Flagship need a grounded 120-volt outlet within 75 feet, or you pay a $30 generator fee.\n* Apartment rule: if you're parked at an apartment building / condo / HOA-managed lot, **you must get the building manager's permission before booking** \u2014 Cormorant won't contact the manager, and a refusal on the day counts as a no-show (deposit kept).\n* You must remove belongings/child seats/cargo, hand over keys at start, and have an adult reachable until the end.\n\nYour ZIP 94117 is in their no-travel-fee San Francisco zone, so no travel fee for that part.",
+   "outcome": "answered",
+   "claims": [
+    {
+     "claim": "street space allowed if legal for whole job with 3ft clear both sides plus space within 100ft for 20ft work van",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "needs vehicle in driveway, private lot, open garage or street space that stays legal for whole job, with at least 3 feet clear on both sides, plus somewhere within 100 feet for work van 20 feet long and 7ft 2in tall"
+    },
+    {
+     "claim": "brings own water for up to 2 vehicles",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "brings own water in 65-gallon tank, no need to provide water for up to 2 vehicles"
+    },
+    {
+     "claim": "interior/full/Flagship need outlet within 75ft or $30 generator, exterior needs no power",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "interior detail, full detail and Flagship need grounded 120-volt outlet within 75 feet or $30 generator fee, exterior wash needs no power"
+    },
+    {
+     "claim": "apartment customers must get manager permission before booking, refusal = no-show",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "customer parked at apartment building, condo or HOA lot must get building manager permission before booking, Cormorant doesn't contact managers and refusal counts as no-show"
+    }
+   ],
+   "mapped_terms": [],
+   "next_steps": [],
+   "gate_note": null
+  }
+ },
+ {
+  "query_id": "d11",
+  "variant": "control",
+  "result": "verified_correct",
+  "correct": true,
+  "acceptable": true,
+  "partial": false,
+  "problems": [],
+  "outcome": "action_submitted",
+  "expected": "action_submitted",
+  "repeat": 1,
+  "out": "runs/control-check-2/control/d11_r1",
+  "cost": 0.378442,
+  "seconds": 183.79,
+  "used_resource": false,
+  "tool_calls": 7,
+  "browser_calls": 1,
+  "crashed": false,
+  "report": {
+   "answer": "Request SUBMITTED (check-only booking request) for earliest wash slot \u2014 action needed: pay $50 deposit link within 12 hours when owner replies to lock it.\n\n- Business: Cormorant Mobile Detailing\n- Service mapped: your \"wash\" = exterior wash = The Skiff (foam hand wash, wheels/tires, jambs, outside glass, hand dry, no interior)\n- Vehicle mapped: 2021 Toyota RAV4 = midsize / Class B (two-row crossover/SUV like CR-V on their list)\n- Slot requested: Thursday Nov 5, 2026, afternoon arrival window 1:00-2:30pm \u2014 listed as open on their calendar. Meets 24h notice (now ~12:52pm Wed local, ~24h+ before start). Works Tue-Sat, closed Sun-Mon.\n- Price: $79 + 8.625% tax = ~$85.81, no travel fee in 94117, no power needed for exterior wash. $50 deposit counts toward total (link lasts 12h). Owner Ines replies by text/email within 4 business hours (Mon-Sat 8am-6pm).\n- Confirmation from site after submit: \"Request received - Your request was received. The owner replies by email.\"\n- This is a request only, not a held slot \u2014 job is booked only when deposit paid.\n\nWatch for: technician checks size/surcharge (heavily contaminated exterior +$50 if sap/tar/bird on 3+ panels) before starting; rain 50%+ moves exterior work with free rebook/refund; 20-min wait no-show keeps deposit.",
+   "outcome": "action_submitted",
+   "claims": [
+    {
+     "claim": "earliest open slot Thu 2026-11-05 afternoon 13:00-14:30",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "Thursday 2026-11-05, afternoon: 13:00 to 14:30"
+    },
+    {
+     "claim": "wash = The Skiff exterior wash",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "wash means the exterior wash (The Skiff)"
+    },
+    {
+     "claim": "midsize exterior wash price $79 before fees/tax",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "$79 for a midsize vehicle"
+    },
+    {
+     "claim": "94117 no travel fee",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/",
+     "value": "94117 with no travel fee"
+    },
+    {
+     "claim": "request submitted confirmation",
+     "evidence": "verified_at_source",
+     "source_url": "http://cormorant.localhost:8104/request",
+     "value": "Request received - Your request was received."
+    }
+   ],
+   "mapped_terms": [
+    "wash -> The Skiff exterior wash",
+    "2021 Toyota RAV4 -> midsize Class B two-row SUV/crossover"
+   ],
+   "next_steps": [
+    "Watch for owner's reply text/email and pay $50 deposit link within 12 hours to lock Thu Nov 5 1-2:30pm",
+    "Ensure vehicle in legal space with 3ft clear each side, adult with keys at start"
+   ],
+   "gate_note": null
+  }
+ }
+]

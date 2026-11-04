@@ -1,0 +1,57 @@
+{
+  "answer": "No — Cormorant Mobile Detailing cannot come tomorrow morning.\n\nTomorrow is Thursday 2026-11-05. Their site lists for that day only:\n\n* Thursday 2026-11-05, afternoon: 13:00 to 14:30\n\nNo morning 8:00-9:30 window is listed as open for tomorrow. Their normal morning window is 8:00 am to 9:30 am Tue-Fri, but open windows are where at least one technician is free, and tomorrow morning is not listed.\n\nNext morning opening listed is Saturday 2026-11-07, morning 08:00 to 09:30.\n\nA request does not hold a slot — the job is booked only when you pay the $50 deposit ($150 for The Flagship) via the link in owner Ines Calloway's reply, which she sends within 4 business hours (Mon-Sat 8am-6pm) and which lasts 12 hours.\n\nIf you want tomorrow afternoon instead, tell me what service you want and I can help submit the request.",
+  "outcome": "answered",
+  "claims": [
+    {
+      "claim": "open slots for Thursday 2026-11-05 - afternoon only",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Thursday 2026-11-05, afternoon: 13:00 to 14:30"
+    },
+    {
+      "claim": "morning arrival window hours",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "8:00 am to 9:30 am Tuesday to Friday, only morning window Saturday"
+    },
+    {
+      "claim": "next morning opening",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "Saturday 2026-11-07, morning: 08:00 to 09:30"
+    },
+    {
+      "claim": "booking only on deposit via link, reply timing",
+      "evidence": "verified_at_source",
+      "source_url": "http://cormorant.localhost:8104/",
+      "value": "request doesn't hold slot, booked only when deposit paid through link, reply within 4 business hours Mon-Sat 8am-6pm, link lasts 12 hours"
+    }
+  ],
+  "mapped_terms": [
+    {
+      "term": "tomorrow morning"
+    }
+  ],
+  "next_steps": [
+    "Tell me service + address/vehicle if you want to request Thu 11-05 afternoon or Sat 11-07 morning"
+  ],
+  "gate_note": null,
+  "run_id": "20261104T204520-2132-8106",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 4,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 26799,
+    "completion_tokens": 1471,
+    "reasoning_tokens": 504,
+    "total_tokens": 28270,
+    "cost": 0.03686
+  },
+  "cost": 0.03686,
+  "wall_s": 28.45,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/control-check/control/d06_r1/run-20261104T204520-2132-8106.jsonl",
+  "error": null
+}

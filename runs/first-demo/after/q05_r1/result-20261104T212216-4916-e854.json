@@ -1,0 +1,48 @@
+{
+  "answer": "No — Cormorant Mobile Detailing says it will not clean this job up, even though you are in its service area.\n\nWhat you described — dried vomit on the back seat and floor with lingering smell in a Honda CR-V in 94122 — falls under their explicit biohazard exclusion. Their site says they don't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste.\n\nThat means they cannot do the interior cleaning + shampoo + odour treatment for this mess, and there is no price to quote for vomit cleanup.\n\nFor context only, not as an offer for this job:\n- 94122 IS in their San Francisco no-travel-fee area.\n- A Honda CR-V is listed as their midsize / Class B size.\n- Normally an interior detail (The Cutter) + shampoo + odour treatment would be the relevant combo for stains/smell, but vomit is excluded, so those don't apply here.\n\nYou will need a different provider that handles biohazard / vomit cleanup. I did not submit anything to Cormorant.",
+  "outcome": "not_offered",
+  "claims": [
+    {
+      "claim": "Cormorant does not clean vomit / biohazards",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "doesn't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste"
+    },
+    {
+      "claim": "94122 is in San Francisco no-fee service area",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "94122 in $0 travel fee list"
+    },
+    {
+      "claim": "Honda CR-V is midsize Class B",
+      "evidence": "verified_at_source",
+      "source_url": "http://agents.cormorant.localhost:8103",
+      "value": "Honda CR-V listed under midsize class"
+    }
+  ],
+  "mapped_terms": [
+    "interior clean = Interior detail (The Cutter)",
+    "smell out = Odour treatment add-on, but not offered for vomit"
+  ],
+  "next_steps": [],
+  "gate_note": null,
+  "run_id": "20261104T212216-4916-e854",
+  "profile": "hybrid",
+  "model": "meta/muse-spark-1.3",
+  "tool_calls": 5,
+  "browse_tasks": 0,
+  "approved": false,
+  "usage": {
+    "calls": 4,
+    "prompt_tokens": 38745,
+    "completion_tokens": 1480,
+    "reasoning_tokens": 478,
+    "total_tokens": 40225,
+    "cost": 0.044509
+  },
+  "cost": 0.044509,
+  "wall_s": 26.53,
+  "log_path": "/Users/jamesgeorge/Documents/Claude/Musefront/runs/first-demo/after/q05_r1/run-20261104T212216-4916-e854.jsonl",
+  "error": null
+}

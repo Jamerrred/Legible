@@ -1,0 +1,3170 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-05",
+  "business": {
+    "name": "Cormorant Mobile Detailing",
+    "slug": "cormorant",
+    "owner": "Ines Calloway",
+    "tagline": "Showroom shine, wherever you park.",
+    "timezone": "America/Los_Angeles",
+    "phone": "415-555-0142",
+    "email": "cormorant@example.com",
+    "hours": {
+      "office": {
+        "days": "Monday to Saturday",
+        "open": "08:00",
+        "close": "18:00"
+      },
+      "service_days": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ]
+    },
+    "base_area": "San Francisco, CA",
+    "service_model": "Mobile only, with no shop address.",
+    "fictional": true
+  },
+  "facts": [
+    {
+      "id": "vocabulary.service-words",
+      "category": "vocabulary",
+      "status": "known",
+      "statement": "At Cormorant Mobile Detailing, a \"wash\" or \"just the outside\" means the exterior wash (The Skiff), \"just the inside\" or an \"interior clean\" means the interior detail (The Cutter), \"inside and out\" means the full detail (The Schooner), and a \"polish and seal\" means The Flagship.",
+      "value": {
+        "exterior": [
+          "wash",
+          "just the outside"
+        ],
+        "interior": [
+          "just the inside",
+          "interior clean"
+        ],
+        "full": [
+          "inside and out",
+          "full detail"
+        ],
+        "flagship": [
+          "polish and seal"
+        ]
+      },
+      "confirmed_on": "2026-09-14",
+      "before_site": {
+        "placement": "missing",
+        "how": "Cards label the first three packages exterior wash, interior detail and full detail, but the everyday phrases people say are never listed and \"polish and seal\" never appears. The owner doesn't think of it.",
+        "where": "/",
+        "holes": [
+          "D1",
+          "D2"
+        ]
+      }
+    },
+    {
+      "id": "vocabulary.van",
+      "category": "vocabulary",
+      "status": "known",
+      "statement": "At Cormorant Mobile Detailing, a \"van\" with no other detail means a full-size van such as a Ford Transit or Mercedes Sprinter, which is the oversized class, while a minivan or a compact van such as a Ford Transit Connect is the large class.",
+      "value": {
+        "van": "oversized",
+        "minivan": "large",
+        "compact_van": "large"
+      },
+      "confirmed_on": "2026-09-14",
+      "before_site": {
+        "placement": "missing",
+        "how": "The board image lists full-size and compact vans in different classes, but nothing says what a plain \"van\" means. It hasn't occurred to the owner.",
+        "where": "/",
+        "holes": [
+          "D1",
+          "B2"
+        ]
+      }
+    },
+    {
+      "id": "services.exterior",
+      "category": "services",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's exterior wash, sold as The Skiff, is a foam hand wash with wheels and tires, door jambs, outside glass and a hand dry, and it doesn't touch the inside of the vehicle.",
+      "value": {
+        "marketing_name": "The Skiff",
+        "includes": [
+          "foam hand wash",
+          "wheels and tires",
+          "door jambs",
+          "outside glass",
+          "hand dry"
+        ],
+        "excludes": [
+          "interior"
+        ]
+      },
+      "confirmed_on": "2026-08-18",
+      "before_site": {
+        "placement": "plain",
+        "how": null,
+        "where": "/",
+        "holes": []
+      }
+    },
+    {
+      "id": "services.interior",
+      "category": "services",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's interior detail, sold as The Cutter, covers vacuuming the seats, carpets, mats and trunk, wiping down the dash, console and door panels, inside glass and spot-cleaning, and it doesn't include shampoo, pet hair removal or any exterior work.",
+      "value": {
+        "marketing_name": "The Cutter",
+        "includes": [
+          "vacuum seats, carpets, mats and trunk",
+          "wipe dash, console and door panels",
+          "inside glass",
+          "spot-cleaning"
+        ],
+        "excludes": [
+          "shampoo",
+          "pet hair removal",
+          "exterior"
+        ]
+      },
+      "confirmed_on": "2026-08-18",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Contents are on the / package card, but the exclusions (shampoo, pet hair removal, exterior) are only in FAQ accordion 'Does the Cutter include shampoo?'.",
+        "where": "/faq",
+        "holes": [
+          "D5",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "services.full",
+      "category": "services",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's full detail, sold as The Schooner, is everything in the exterior wash and the interior detail plus a spray wax.",
+      "value": {
+        "marketing_name": "The Schooner",
+        "includes": [
+          "exterior",
+          "interior",
+          "spray wax"
+        ]
+      },
+      "confirmed_on": "2026-08-18",
+      "before_site": {
+        "placement": "plain",
+        "how": null,
+        "where": "/",
+        "holes": []
+      }
+    },
+    {
+      "id": "services.flagship",
+      "category": "services",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's top package, sold as The Flagship, is everything in the full detail plus a clay bar treatment, a one-step machine polish, a 6-month paint sealant and an upholstery and carpet shampoo, while pet hair removal and odour treatment still cost extra.",
+      "value": {
+        "marketing_name": "The Flagship",
+        "includes": [
+          "full",
+          "clay",
+          "one-step machine polish",
+          "sealant",
+          "shampoo"
+        ],
+        "sealant_months": 6,
+        "extra_cost": [
+          "pet-hair",
+          "odor"
+        ]
+      },
+      "confirmed_on": "2026-08-18",
+      "before_site": {
+        "placement": "plain",
+        "how": null,
+        "where": "/",
+        "holes": []
+      }
+    },
+    {
+      "id": "services.scratch-outcome",
+      "category": "services",
+      "status": "unknown",
+      "statement": "Whether The Flagship's one-step polish at Cormorant Mobile Detailing will remove a particular scratch isn't known until a technician inspects it, because the answer depends on whether the scratch has gone through the clear coat.",
+      "value": {
+        "unknown": "whether a given scratch comes out",
+        "settled_by": "a technician inspecting the scratch on site"
+      },
+      "confirmed_on": "2026-10-20",
+      "before_site": {
+        "placement": "missing",
+        "how": "It can't be known without seeing the vehicle, so the owner doesn't address it.",
+        "where": null,
+        "holes": [
+          "E4"
+        ]
+      }
+    },
+    {
+      "id": "size_classes.small",
+      "category": "size_classes",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's small class, shown as Class A on its site, covers coupes, hatchbacks and compact cars such as a Honda Civic, Toyota Corolla, Mini Cooper or Mazda3.",
+      "value": {
+        "site_label": "Class A",
+        "examples": [
+          "coupe",
+          "hatchback",
+          "compact car",
+          "subcompact",
+          "honda civic",
+          "civic",
+          "toyota corolla",
+          "corolla",
+          "mini cooper",
+          "mazda3",
+          "mazda 3",
+          "volkswagen golf",
+          "vw golf",
+          "chevrolet bolt",
+          "chevy bolt",
+          "nissan leaf",
+          "miata",
+          "ford mustang",
+          "mustang"
+        ]
+      },
+      "confirmed_on": "2026-08-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in the key at the bottom of the price-board image on /. The text on the site uses the Class letters at most.",
+        "where": "/",
+        "holes": [
+          "B2",
+          "D1"
+        ]
+      }
+    },
+    {
+      "id": "size_classes.midsize",
+      "category": "size_classes",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's midsize class, shown as Class B on its site, covers sedans, crossovers and two-row SUVs such as a Toyota Camry, Tesla Model 3, Tesla Model Y, Honda CR-V or Subaru Outback.",
+      "value": {
+        "site_label": "Class B",
+        "examples": [
+          "sedan",
+          "crossover",
+          "two-row suv",
+          "2-row suv",
+          "small suv",
+          "compact suv",
+          "toyota camry",
+          "camry",
+          "honda accord",
+          "accord",
+          "tesla model 3",
+          "model 3",
+          "tesla model y",
+          "model y",
+          "prius",
+          "honda cr-v",
+          "cr-v",
+          "crv",
+          "toyota rav4",
+          "rav4",
+          "subaru outback",
+          "outback",
+          "subaru forester",
+          "forester",
+          "mazda cx-5",
+          "cx-5",
+          "hyundai tucson",
+          "tucson",
+          "jeep wrangler",
+          "wrangler",
+          "jeep grand cherokee",
+          "grand cherokee"
+        ]
+      },
+      "confirmed_on": "2026-08-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in the key at the bottom of the price-board image on /. The text on the site uses the Class letters at most.",
+        "where": "/",
+        "holes": [
+          "B2",
+          "D1"
+        ]
+      }
+    },
+    {
+      "id": "size_classes.large",
+      "category": "size_classes",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's large class, shown as Class C on its site, covers three-row SUVs, minivans, compact vans and standard pickups such as a Toyota Highlander, Chevrolet Tahoe, Honda Odyssey, Ford Transit Connect, Toyota Tacoma, Ford F-150 or Ram 1500.",
+      "value": {
+        "site_label": "Class C",
+        "examples": [
+          "minivan",
+          "mini van",
+          "three-row suv",
+          "3-row suv",
+          "compact van",
+          "small van",
+          "half-ton pickup",
+          "toyota highlander",
+          "highlander",
+          "honda pilot",
+          "pilot",
+          "ford explorer",
+          "explorer",
+          "kia telluride",
+          "telluride",
+          "chevrolet tahoe",
+          "chevy tahoe",
+          "tahoe",
+          "gmc yukon",
+          "yukon",
+          "ford expedition",
+          "expedition",
+          "toyota 4runner",
+          "4runner",
+          "tesla model x",
+          "model x",
+          "rivian r1s",
+          "r1s",
+          "rivian r1t",
+          "r1t",
+          "honda odyssey",
+          "odyssey",
+          "toyota sienna",
+          "sienna",
+          "chrysler pacifica",
+          "pacifica",
+          "kia carnival",
+          "carnival",
+          "ford transit connect",
+          "transit connect",
+          "ram promaster city",
+          "promaster city",
+          "mercedes metris",
+          "metris",
+          "toyota tacoma",
+          "tacoma",
+          "ford ranger",
+          "ranger",
+          "chevrolet colorado",
+          "colorado",
+          "nissan frontier",
+          "frontier",
+          "ford f-150",
+          "f-150",
+          "f150",
+          "chevrolet silverado 1500",
+          "silverado 1500",
+          "gmc sierra 1500",
+          "sierra 1500",
+          "ram 1500",
+          "toyota tundra",
+          "tundra"
+        ]
+      },
+      "confirmed_on": "2026-08-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in the key at the bottom of the price-board image on /. The text on the site uses the Class letters at most.",
+        "where": "/",
+        "holes": [
+          "B2",
+          "D1"
+        ]
+      }
+    },
+    {
+      "id": "size_classes.oversized",
+      "category": "size_classes",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's oversized class, shown as Class D on its site, covers full-size cargo and passenger vans, extended-length SUVs and heavy-duty pickups such as a Ford Transit, Mercedes Sprinter, Ram ProMaster, Chevrolet Express, Chevrolet Suburban, Ford F-250 or Ram 2500.",
+      "value": {
+        "site_label": "Class D",
+        "examples": [
+          "van",
+          "cargo van",
+          "passenger van",
+          "full-size van",
+          "full size van",
+          "high-roof van",
+          "high roof van",
+          "extended-length suv",
+          "heavy-duty pickup",
+          "heavy duty pickup",
+          "ford transit",
+          "transit",
+          "mercedes sprinter",
+          "sprinter",
+          "ram promaster",
+          "promaster",
+          "chevrolet express",
+          "chevy express",
+          "gmc savana",
+          "savana",
+          "ford econoline",
+          "econoline",
+          "nissan nv",
+          "chevrolet suburban",
+          "chevy suburban",
+          "suburban",
+          "yukon xl",
+          "expedition max",
+          "escalade esv",
+          "ford f-250",
+          "f-250",
+          "f250",
+          "ford f-350",
+          "f-350",
+          "f350",
+          "chevrolet silverado 2500",
+          "silverado 2500",
+          "chevrolet silverado 3500",
+          "silverado 3500",
+          "gmc sierra 2500",
+          "sierra 2500",
+          "ram 2500",
+          "ram 3500"
+        ]
+      },
+      "confirmed_on": "2026-08-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in the key at the bottom of the price-board image on /. The text on the site uses the Class letters at most.",
+        "where": "/",
+        "holes": [
+          "B2",
+          "D1"
+        ]
+      }
+    },
+    {
+      "id": "pricing.exterior",
+      "category": "pricing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's exterior wash (The Skiff) costs $69 for a small vehicle, $79 for a midsize vehicle, $99 for a large vehicle and $139 for an oversized vehicle, before any add-ons, fees and tax.",
+      "value": {
+        "prices": {
+          "small": 69,
+          "midsize": 79,
+          "large": 99,
+          "oversized": 139
+        },
+        "type": "fixed"
+      },
+      "confirmed_on": "2026-10-12",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Per-size prices only in the price-board image on /. The text there gives only \"starting at $69\".",
+        "where": "/",
+        "holes": [
+          "B2",
+          "E1"
+        ]
+      }
+    },
+    {
+      "id": "pricing.interior",
+      "category": "pricing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's interior detail (The Cutter) costs $159 for a small vehicle, $179 for a midsize vehicle, $219 for a large vehicle and $289 for an oversized vehicle, before any add-ons, fees and tax.",
+      "value": {
+        "prices": {
+          "small": 159,
+          "midsize": 179,
+          "large": 219,
+          "oversized": 289
+        },
+        "type": "fixed"
+      },
+      "confirmed_on": "2026-10-12",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Per-size prices only in the price-board image on /. The text there gives only \"starting at $159\".",
+        "where": "/",
+        "holes": [
+          "B2",
+          "E1"
+        ]
+      }
+    },
+    {
+      "id": "pricing.full",
+      "category": "pricing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's full detail (The Schooner) costs $219 for a small vehicle, $249 for a midsize vehicle, $299 for a large vehicle and $399 for an oversized vehicle, before any add-ons, fees and tax.",
+      "value": {
+        "prices": {
+          "small": 219,
+          "midsize": 249,
+          "large": 299,
+          "oversized": 399
+        },
+        "type": "fixed"
+      },
+      "confirmed_on": "2026-10-12",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Per-size prices only in the price-board image on /. The text there gives only \"starting at $219\".",
+        "where": "/",
+        "holes": [
+          "B2",
+          "E1"
+        ]
+      }
+    },
+    {
+      "id": "pricing.flagship",
+      "category": "pricing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's polish-and-seal detail (The Flagship) costs $549 for a small vehicle, $629 for a midsize vehicle, $759 for a large vehicle and $949 for an oversized vehicle, before any add-ons, fees and tax.",
+      "value": {
+        "prices": {
+          "small": 549,
+          "midsize": 629,
+          "large": 759,
+          "oversized": 949
+        },
+        "type": "fixed"
+      },
+      "confirmed_on": "2026-10-12",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Per-size prices only in the price-board image on /. The text there gives only \"starting at $549\".",
+        "where": "/",
+        "holes": [
+          "B2",
+          "E1"
+        ]
+      }
+    },
+    {
+      "id": "pricing.starting-at",
+      "category": "pricing",
+      "status": "known",
+      "statement": "The \"starting at\" prices on Cormorant Mobile Detailing's site are the small-class prices of $69 for the exterior wash, $159 for the interior detail, $219 for the full detail and $549 for The Flagship, and any larger vehicle costs more.",
+      "value": {
+        "exterior": 69,
+        "interior": 159,
+        "full": 219,
+        "flagship": 549
+      },
+      "confirmed_on": "2026-10-12",
+      "before_site": {
+        "placement": "plain",
+        "how": null,
+        "where": "/",
+        "holes": [
+          "E1"
+        ]
+      }
+    },
+    {
+      "id": "pricing.structure",
+      "category": "pricing",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing total is the service price for the vehicle's size class plus add-ons, condition surcharges, any generator fee, any Saturday, after-hours or same-day fee, the travel fee and sales tax, and every part is a fixed amount except odour treatment, which is a range.",
+      "value": {
+        "order": [
+          "service",
+          "addons",
+          "condition surcharges",
+          "generator fee",
+          "timing fees",
+          "travel fee",
+          "sales tax"
+        ],
+        "range_items": [
+          "odor"
+        ]
+      },
+      "confirmed_on": "2026-10-12",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site says \"starting at\" and, in the FAQ, that add-ons and some fees are on top. The owner prices each job as it comes and has never written out the formula.",
+        "where": "/faq",
+        "holes": [
+          "E1",
+          "E5",
+          "C3",
+          "E15"
+        ]
+      }
+    },
+    {
+      "id": "pricing.2027-prices",
+      "category": "pricing",
+      "status": "unknown",
+      "statement": "Cormorant Mobile Detailing's owner hasn't decided whether prices will change for jobs from 1 January 2027, and that will be settled when she finishes the 2027 price sheet.",
+      "value": {
+        "unknown": "whether prices change",
+        "affects_jobs_from": "2027-01-01",
+        "settled_by": "the owner finishing the 2027 price sheet"
+      },
+      "confirmed_on": "2026-11-02",
+      "before_site": {
+        "placement": "missing",
+        "how": "She hasn't decided yet, so there's nothing to publish.",
+        "where": null,
+        "holes": [
+          "E8",
+          "I3"
+        ]
+      }
+    },
+    {
+      "id": "addons.pet-hair",
+      "category": "addons",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's pet hair removal add-on (dog hair, cat hair) costs $55 for a small vehicle, $55 for a midsize vehicle, $75 for a large vehicle and $95 for an oversized vehicle, adds about 30 minutes, and can only be added to the interior detail, full detail or The Flagship, never to an exterior wash or on its own.",
+      "value": {
+        "prices": {
+          "small": 55,
+          "midsize": 55,
+          "large": 75,
+          "oversized": 95
+        },
+        "minutes": 30,
+        "requires_service_with": "interior",
+        "standalone": false
+      },
+      "confirmed_on": "2026-09-22",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Named on /. Prices only in the price-board image on /. The package requirement is only in FAQ accordion 'I have a dog. Can you get the hair out?'. The 30 minutes isn't published.",
+        "where": "/faq",
+        "holes": [
+          "B2",
+          "E6",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "addons.shampoo",
+      "category": "addons",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's upholstery and carpet shampoo add-on costs $65 for a small vehicle, $75 for a midsize vehicle, $95 for a large vehicle and $125 for an oversized vehicle, adds about 60 minutes, can only be added to the interior detail or full detail, and is already included in The Flagship.",
+      "value": {
+        "prices": {
+          "small": 65,
+          "midsize": 75,
+          "large": 95,
+          "oversized": 125
+        },
+        "minutes": 60,
+        "requires_service_with": "interior",
+        "included_in": [
+          "flagship"
+        ],
+        "standalone": false
+      },
+      "confirmed_on": "2026-09-22",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Named on /. Prices only in the price-board image on /. The package requirement is only in FAQ accordion 'Does the Cutter include shampoo?'. The 60 minutes isn't published.",
+        "where": "/faq",
+        "holes": [
+          "B2",
+          "E6",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "addons.odor",
+      "category": "addons",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's odour treatment add-on (smoke smell, mildew smell, musty car) costs $90 for a 1-hour ozone treatment or $140 for a 2-hour ozone treatment, which the technician chooses after a smell test on arrival, and it can only be added to the interior detail, full detail or The Flagship.",
+      "value": {
+        "low": 90,
+        "high": 140,
+        "ozone_hours": [
+          1,
+          2
+        ],
+        "requires_service_with": "interior",
+        "standalone": false
+      },
+      "confirmed_on": "2026-09-22",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Named on /. The two prices are only in the price-board image on /. The smell test, ozone and package requirement are only in FAQ accordion 'Can you get rid of a smoke smell?'.",
+        "where": "/faq",
+        "holes": [
+          "B2",
+          "E2",
+          "E6",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "addons.clay",
+      "category": "addons",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's clay bar add-on, which lifts bonded grit off the paint, costs $60 for a small vehicle, $70 for a midsize vehicle, $85 for a large vehicle and $110 for an oversized vehicle, adds about 45 minutes, can only be added to the exterior wash or full detail, and is already included in The Flagship.",
+      "value": {
+        "prices": {
+          "small": 60,
+          "midsize": 70,
+          "large": 85,
+          "oversized": 110
+        },
+        "minutes": 45,
+        "requires_service_with": "exterior",
+        "included_in": [
+          "flagship"
+        ],
+        "standalone": false
+      },
+      "confirmed_on": "2026-09-22",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Named on /. Prices only in the price-board image on /. The package requirement is only in FAQ accordion 'How long does the wax last?'. The 45 minutes isn't published.",
+        "where": "/faq",
+        "holes": [
+          "B2",
+          "E6",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "addons.sealant",
+      "category": "addons",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's 6-month paint sealant add-on (wax, paint protection) costs $95 for a small vehicle, $115 for a midsize vehicle, $135 for a large vehicle and $175 for an oversized vehicle, adds about 45 minutes, can only be bought together with the clay bar add-on on an exterior wash or full detail, and is already included in The Flagship.",
+      "value": {
+        "prices": {
+          "small": 95,
+          "midsize": 115,
+          "large": 135,
+          "oversized": 175
+        },
+        "minutes": 45,
+        "months": 6,
+        "requires_service_with": "exterior",
+        "requires_addons": [
+          "clay"
+        ],
+        "included_in": [
+          "flagship"
+        ],
+        "standalone": false
+      },
+      "confirmed_on": "2026-09-22",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Named on /. Prices only in the price-board image on /. The clay bar requirement is only in FAQ accordion 'How long does the wax last?'. The 45 minutes isn't published.",
+        "where": "/faq",
+        "holes": [
+          "B2",
+          "E6",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "addons.headlights",
+      "category": "addons",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's headlight restoration (foggy or yellowed headlights) costs $85 per pair at any vehicle size, takes about 45 minutes, can be booked on its own with no other service, and carries the usual travel fee but no deposit.",
+      "value": {
+        "flat": 85,
+        "unit": "pair",
+        "minutes": 45,
+        "standalone": true,
+        "deposit": 0
+      },
+      "confirmed_on": "2026-09-22",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Named on /. The price is only in the price-board image on /. Booking it alone, the time, no deposit and the travel fee are only in FAQ accordion 'My headlights are foggy, can you help?'.",
+        "where": "/faq",
+        "holes": [
+          "B2",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "conditions.excessive-pet-hair",
+      "category": "conditions",
+      "status": "known",
+      "statement": "At Cormorant Mobile Detailing, pet hair counts as excessive when it's embedded in the fabric of 3 or more seating positions or across more than half of the cargo or trunk floor, which adds a $60 surcharge on top of the required pet hair removal add-on.",
+      "value": {
+        "seating_positions_min": 3,
+        "cargo_floor_share_over": "half",
+        "surcharge": 60,
+        "requires_addon": "pet-hair"
+      },
+      "confirmed_on": "2026-10-06",
+      "before_site": {
+        "placement": "missing",
+        "how": "/ and the FAQ say only \"excessive pet hair ... may cost extra\". The owner keeps the definition and amount internal so technicians can use judgement.",
+        "where": "/",
+        "holes": [
+          "D4",
+          "E1",
+          "E5"
+        ]
+      }
+    },
+    {
+      "id": "conditions.heavily-soiled",
+      "category": "conditions",
+      "status": "known",
+      "statement": "At Cormorant Mobile Detailing, an interior counts as heavily soiled when mud or sand covers more than half of the floor area, dried spills mark 2 or more seats, or loose trash fills more than one 13-gallon bag, which adds a $75 surcharge.",
+      "value": {
+        "floor_share_over": "half",
+        "seats_with_spills_min": 2,
+        "trash_bags_over": 1,
+        "bag_gallons": 13,
+        "surcharge": 75,
+        "applies_to": "interior"
+      },
+      "confirmed_on": "2026-10-06",
+      "before_site": {
+        "placement": "missing",
+        "how": "/ and the FAQ say only \"heavily soiled vehicles may cost extra\". The owner doesn't publish the definition or amount.",
+        "where": "/",
+        "holes": [
+          "D4",
+          "E1",
+          "E5"
+        ]
+      }
+    },
+    {
+      "id": "conditions.heavy-contamination",
+      "category": "conditions",
+      "status": "known",
+      "statement": "At Cormorant Mobile Detailing, an exterior counts as heavily contaminated when tree sap, road tar or etched bird droppings are on 3 or more body panels, which adds a $50 surcharge to any service that includes the exterior.",
+      "value": {
+        "panels_min": 3,
+        "surcharge": 50,
+        "applies_to": "exterior"
+      },
+      "confirmed_on": "2026-10-06",
+      "before_site": {
+        "placement": "missing",
+        "how": "The owner treats this as something to explain on arrival, so the site doesn't mention it.",
+        "where": null,
+        "holes": [
+          "D4",
+          "E5"
+        ]
+      }
+    },
+    {
+      "id": "conditions.assessed-on-arrival",
+      "category": "conditions",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing technician checks the size class and any surcharge condition before starting, shows the customer photos and the new price if anything differs from the booking, and a customer who declines doesn't get the job done and doesn't get the deposit back.",
+      "value": {
+        "checked_before_start": true,
+        "photos_shown": true,
+        "deposit_kept_if_declined": true
+      },
+      "confirmed_on": "2026-10-06",
+      "before_site": {
+        "placement": "missing",
+        "how": "FAQ accordion 'How much does it cost?' says only that the final price is confirmed on seeing the vehicle. Photos, the new price and losing the deposit if you decline are left to the conversation on the day.",
+        "where": "/faq",
+        "holes": [
+          "E1",
+          "E11",
+          "C1"
+        ]
+      }
+    },
+    {
+      "id": "eligibility.served",
+      "category": "eligibility",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing serves passenger cars, SUVs, pickups, minivans and cargo or passenger vans up to 24 feet long, 10 feet tall and a 14,000 lb gross weight rating, including electric vehicles and soft-top convertibles, and it will wash the outside of a camper van conversion at the oversized price.",
+      "value": {
+        "max_length_feet": 24,
+        "max_height_feet": 10,
+        "max_gvwr_lb": 14000,
+        "electric": true,
+        "soft_tops": true,
+        "camper_van_exterior": "oversized"
+      },
+      "confirmed_on": "2026-08-27",
+      "before_site": {
+        "placement": "missing",
+        "how": "FAQ accordion 'What do you work on?' lists vehicle types, electric and soft-tops only. The length, height and weight limits and camper van pricing aren't published, because few customers need them.",
+        "where": "/faq",
+        "holes": [
+          "F3",
+          "F4"
+        ]
+      }
+    },
+    {
+      "id": "eligibility.matte-wrap",
+      "category": "eligibility",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing doesn't clay, polish or seal matte paint, satin paint or vinyl wraps, so The Flagship and the clay bar and paint sealant add-ons aren't available on those vehicles, while the exterior wash, interior detail and full detail are.",
+      "value": {
+        "blocked_services": [
+          "flagship"
+        ],
+        "blocked_addons": [
+          "clay",
+          "sealant"
+        ],
+        "allowed_services": [
+          "exterior",
+          "interior",
+          "full"
+        ]
+      },
+      "confirmed_on": "2026-08-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Can you do matte paint or a wrap?'.",
+        "where": "/faq",
+        "holes": [
+          "F3",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "eligibility.camper-interior",
+      "category": "eligibility",
+      "status": "unknown",
+      "statement": "Cormorant Mobile Detailing's owner hasn't decided whether to clean the living quarters of camper van conversions, and that will be settled once she has tried one and worked out the time it takes.",
+      "value": {
+        "unknown": "whether camper van living quarters are cleaned",
+        "settled_by": "the owner trying one and timing it"
+      },
+      "confirmed_on": "2026-10-20",
+      "before_site": {
+        "placement": "missing",
+        "how": "She hasn't decided, so the site says nothing.",
+        "where": null,
+        "holes": [
+          "F3",
+          "F6"
+        ]
+      }
+    },
+    {
+      "id": "eligibility.cybertruck",
+      "category": "eligibility",
+      "status": "unknown",
+      "statement": "Cormorant Mobile Detailing's owner hasn't decided which size class a Tesla Cybertruck belongs in or whether its stainless steel panels can be polished, and that will be settled once she has inspected one.",
+      "value": {
+        "unknown": [
+          "size class",
+          "whether stainless steel panels can be polished"
+        ],
+        "settled_by": "the owner inspecting one"
+      },
+      "confirmed_on": "2026-10-20",
+      "before_site": {
+        "placement": "missing",
+        "how": "None has been booked yet, so it hasn't come up.",
+        "where": null,
+        "holes": [
+          "F3",
+          "D1"
+        ]
+      }
+    },
+    {
+      "id": "prerequisites.water",
+      "category": "prerequisites",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing brings its own water in a 65-gallon tank, so a customer doesn't need to provide water for up to 2 vehicles, but a job of 3 or more vehicles needs a working spigot within 100 feet.",
+      "value": {
+        "tank_gallons": 65,
+        "no_water_needed_up_to_vehicles": 2,
+        "spigot_needed_from_vehicles": 3,
+        "spigot_within_feet": 100
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Do I need to give you water or power?'.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "F5",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "prerequisites.power",
+      "category": "prerequisites",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's interior detail, full detail and The Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or a $30 generator fee, and because the generator can't run in an enclosed or underground garage those services can't be done there without an outlet, while the exterior wash needs no power.",
+      "value": {
+        "outlet_volts": 120,
+        "outlet_within_feet": 75,
+        "generator_fee": 30,
+        "generator_allowed_enclosed": false,
+        "exterior_needs_power": false
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Do I need to give you water or power?'.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "F5",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "prerequisites.parking",
+      "category": "prerequisites",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing needs the vehicle in a driveway, private lot, open garage or street space that stays legal for the whole job, with at least 3 feet clear on both sides, plus somewhere within 100 feet for its work van, which is 20 feet long and 7 feet 2 inches tall.",
+      "value": {
+        "clear_feet_each_side": 3,
+        "van_within_feet": 100,
+        "van_length_feet": 20,
+        "van_height": {
+          "feet": 7,
+          "inches": 2
+        },
+        "street_allowed": true
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Where will you park?'. The van's length and height aren't published.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "F5",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "prerequisites.permission",
+      "category": "prerequisites",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing customer parked at an apartment building, condo or HOA-managed lot must get the building manager's permission for the work before booking, because Cormorant doesn't contact managers and a refusal on the day counts as a no-show.",
+      "value": {
+        "customer_gets_permission": true,
+        "refusal_counts_as": "no-show"
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'I live in an apartment or condo, is that OK?'.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "F9",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "prerequisites.belongings-keys",
+      "category": "prerequisites",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing customer must remove personal belongings, child seats and cargo before arrival, and an adult must hand over the keys at the start and stay reachable until the end, because areas still full of belongings aren't cleaned and the price doesn't drop.",
+      "value": {
+        "customer_clears": [
+          "belongings",
+          "child seats",
+          "cargo"
+        ],
+        "adult_hands_over_keys": true,
+        "price_reduced_for_uncleaned_areas": false
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'What should I do before you get here?'.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "F5",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "service_area.zone-1",
+      "category": "service_area",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing serves these San Francisco ZIP codes with no travel fee: 94102, 94103, 94104, 94105, 94107, 94108, 94109, 94110, 94111, 94112, 94114, 94115, 94116, 94117, 94118, 94121, 94122, 94123, 94124, 94127, 94129, 94131, 94132, 94133, 94134, 94158.",
+      "value": {
+        "zips": [
+          "94102",
+          "94103",
+          "94104",
+          "94105",
+          "94107",
+          "94108",
+          "94109",
+          "94110",
+          "94111",
+          "94112",
+          "94114",
+          "94115",
+          "94116",
+          "94117",
+          "94118",
+          "94121",
+          "94122",
+          "94123",
+          "94124",
+          "94127",
+          "94129",
+          "94131",
+          "94132",
+          "94133",
+          "94134",
+          "94158"
+        ],
+        "travel_fee": 0
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "missing",
+        "how": "The map image on / shows region names only, with no ZIP list. A small owner draws a map and doesn't publish ZIP codes.",
+        "where": "/",
+        "holes": [
+          "B6",
+          "F1"
+        ]
+      }
+    },
+    {
+      "id": "service_area.zone-2",
+      "category": "service_area",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing serves these Peninsula and Treasure Island ZIP codes for a $35 travel fee per visit: 94005, 94010, 94014, 94015, 94030, 94044, 94066, 94080, 94130.",
+      "value": {
+        "zips": [
+          "94005",
+          "94010",
+          "94014",
+          "94015",
+          "94030",
+          "94044",
+          "94066",
+          "94080",
+          "94130"
+        ],
+        "travel_fee": 35,
+        "per": "visit"
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "missing",
+        "how": "The map image on / shows region names only, with no ZIP list and no fee amount. A small owner draws a map and doesn't publish ZIP codes.",
+        "where": "/",
+        "holes": [
+          "B6",
+          "F1",
+          "C3",
+          "E5"
+        ]
+      }
+    },
+    {
+      "id": "service_area.zone-3",
+      "category": "service_area",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing serves these Marin and East Bay ZIP codes for a $65 travel fee per visit, which includes the bridge toll: 94607, 94608, 94609, 94610, 94611, 94612, 94618, 94704, 94705, 94920, 94941, 94965.",
+      "value": {
+        "zips": [
+          "94607",
+          "94608",
+          "94609",
+          "94610",
+          "94611",
+          "94612",
+          "94618",
+          "94704",
+          "94705",
+          "94920",
+          "94941",
+          "94965"
+        ],
+        "travel_fee": 65,
+        "per": "visit",
+        "toll_included": true
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "missing",
+        "how": "The map image on / shows region names only, with no ZIP list and no fee amount or toll detail. A small owner draws a map and doesn't publish ZIP codes.",
+        "where": "/",
+        "holes": [
+          "B6",
+          "F1",
+          "C3",
+          "E5"
+        ]
+      }
+    },
+    {
+      "id": "service_area.outside",
+      "category": "service_area",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing doesn't go to any ZIP code outside its list of 47, for example 94401 in San Mateo, 94501 in Alameda or 94901 in San Rafael, and it makes no exceptions for one-off jobs.",
+      "value": {
+        "listed_zip_count": 47,
+        "examples_outside": [
+          "94401",
+          "94501",
+          "94901"
+        ],
+        "exceptions": false
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "missing",
+        "how": "The map image's shaded regions are the only clue, with a loose \"we also travel further for a fee\". The ZIP count, the limit and the no-exceptions rule aren't stated, since the owner would rather handle it when people ask.",
+        "where": "/",
+        "holes": [
+          "B6",
+          "F1"
+        ]
+      }
+    },
+    {
+      "id": "availability.days-windows",
+      "category": "availability",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing works Tuesday to Saturday and is closed Sunday and Monday, with a morning arrival window of 8:00 am to 9:30 am and an afternoon arrival window of 1:00 pm to 2:30 pm on Tuesday to Friday, and only the morning window on Saturday.",
+      "value": {
+        "closed": [
+          "Sunday",
+          "Monday"
+        ],
+        "morning": {
+          "start": "08:00",
+          "end": "09:30"
+        },
+        "afternoon": {
+          "start": "13:00",
+          "end": "14:30"
+        },
+        "saturday_windows": [
+          "morning"
+        ]
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'What time will you get here?', and in the /book calendar after the lead form.",
+        "where": "/faq",
+        "holes": [
+          "G9",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "availability.durations",
+      "category": "availability",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing job takes about 1 to 1.5 hours for the exterior wash, 2 to 4 hours for the interior detail, 3 to 5 hours for the full detail and 6 to 8 hours for The Flagship depending on size, and any job of 5 hours or more including add-ons must start in the morning window.",
+      "value": {
+        "hours": {
+          "exterior": {
+            "small": 1,
+            "midsize": 1,
+            "large": 1.25,
+            "oversized": 1.5
+          },
+          "interior": {
+            "small": 2,
+            "midsize": 2.5,
+            "large": 3,
+            "oversized": 4
+          },
+          "full": {
+            "small": 3,
+            "midsize": 3.5,
+            "large": 4,
+            "oversized": 5
+          },
+          "flagship": {
+            "small": 6,
+            "midsize": 6.5,
+            "large": 7,
+            "oversized": 8
+          }
+        },
+        "morning_only_from_hours": 5
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'How long does it take?'.",
+        "where": "/faq",
+        "holes": [
+          "G9",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "availability.lead-time",
+      "category": "availability",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing needs at least 24 hours' notice before the start of an arrival window, apart from its same-day phone rule.",
+      "value": {
+        "lead_time_hours": 24
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Can you come today?'.",
+        "where": "/faq",
+        "holes": [
+          "G4",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "availability.same-day",
+      "category": "availability",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing takes same-day work only by phone before 10:00 am, only for the exterior wash or interior detail, only in that day's afternoon window and only if a technician is free, and it adds a $40 same-day fee.",
+      "value": {
+        "cutoff": "10:00",
+        "services": [
+          "exterior",
+          "interior"
+        ],
+        "window": "afternoon",
+        "fee": 40,
+        "phone_only": true,
+        "guaranteed": false
+      },
+      "confirmed_on": "2026-09-29",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Can you come today?'.",
+        "where": "/faq",
+        "holes": [
+          "E8",
+          "G8",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "availability.live-calendar",
+      "category": "availability",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's current open arrival windows are shown on its booking calendar, where a window is open when at least one of its technicians is free.",
+      "value": {
+        "source": "booking calendar",
+        "open_means": "at least one technician free"
+      },
+      "confirmed_on": "2026-09-29",
+      "before_site": {
+        "placement": "hidden",
+        "how": "The calendar appears only after the step 1 form on /book asks for name, email, phone and address. What an open window means isn't explained.",
+        "where": "/book",
+        "holes": [
+          "G2",
+          "H3"
+        ]
+      }
+    },
+    {
+      "id": "staff.who",
+      "category": "staff",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing has 2 technicians, owner Ines Calloway and Theo Brandt, and Ines does every Flagship herself on Wednesday, Thursday and Friday mornings only, while either technician does all other work at the same price and customers can't choose which one comes.",
+      "value": {
+        "technicians": 2,
+        "names": [
+          "Ines Calloway",
+          "Theo Brandt"
+        ],
+        "flagship_by": "Ines Calloway",
+        "flagship_weekdays": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "flagship_window": "morning",
+        "price_varies_by_staff": false,
+        "customer_chooses": false
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "missing",
+        "how": "/ says only that Ines Calloway and Theo do the work. The owner's Flagship days and the no-choice rule aren't published; she sorts that out in her reply.",
+        "where": "/",
+        "holes": [
+          "G6"
+        ]
+      }
+    },
+    {
+      "id": "policies.deposit",
+      "category": "policies",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing takes a $50 deposit to book any job, or $150 for The Flagship, with no deposit on a headlight-only visit, and the deposit counts toward the total.",
+      "value": {
+        "standard": 50,
+        "flagship": 150,
+        "headlight_only": 0,
+        "counts_toward_total": true
+      },
+      "confirmed_on": "2026-08-25",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Do you take a deposit?'.",
+        "where": "/faq",
+        "holes": [
+          "E11",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "policies.cancellation",
+      "category": "policies",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing customer who cancels at least 48 hours before the start of the arrival window gets the full deposit back, between 24 and 48 hours gets half back, and under 24 hours gets nothing back.",
+      "value": {
+        "full_refund_hours": 48,
+        "half_refund_hours": 24,
+        "refund_under_24_hours": 0
+      },
+      "confirmed_on": "2026-08-25",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'What if I need to cancel or change the date?'.",
+        "where": "/faq",
+        "holes": [
+          "J5",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "policies.reschedule",
+      "category": "policies",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing customer can reschedule once for free with at least 24 hours' notice, by phone or text only, and any later or shorter-notice change counts as a cancellation.",
+      "value": {
+        "free_reschedules": 1,
+        "notice_hours": 24,
+        "how": [
+          "phone",
+          "text"
+        ]
+      },
+      "confirmed_on": "2026-08-25",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'What if I need to cancel or change the date?'.",
+        "where": "/faq",
+        "holes": [
+          "J4",
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "policies.no-show",
+      "category": "policies",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing technician waits 20 minutes at the appointment, and if the vehicle, the keys or access still aren't available the visit counts as a no-show and the whole deposit is kept.",
+      "value": {
+        "wait_minutes": 20,
+        "deposit_kept": "all"
+      },
+      "confirmed_on": "2026-08-25",
+      "before_site": {
+        "placement": "missing",
+        "how": "The FAQ says only that you could lose your deposit if the car can't be reached, and uses \"no-show\" undefined. The 20-minute wait isn't published.",
+        "where": "/faq",
+        "holes": [
+          "D4",
+          "J5"
+        ]
+      }
+    },
+    {
+      "id": "policies.weather",
+      "category": "policies",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing moves exterior work when the National Weather Service forecast shows a 50% or higher chance of rain for the job's ZIP code, tells the customer by 7:00 pm the evening before, and offers a free new date or a full deposit refund, while interior-only jobs go ahead.",
+      "value": {
+        "rain_chance_pct": 50,
+        "decided_by": "19:00",
+        "remedy": [
+          "free new date",
+          "full deposit refund"
+        ],
+        "interior_only_goes_ahead": true
+      },
+      "confirmed_on": "2026-11-02",
+      "before_site": {
+        "placement": "missing",
+        "how": "FAQ accordion 'What if it rains?' says rain moves exterior work, with word the evening before, and the deposit is safe. The forecast source, the threshold, the 7:00 pm deadline and the remedy options aren't published.",
+        "where": "/faq",
+        "holes": [
+          "J5",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "policies.guarantee",
+      "category": "policies",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing comes back and redoes a missed area for free if the customer sends a photo within 48 hours of the job, with no cash refunds, and this doesn't cover stains or scratches that were already there.",
+      "value": {
+        "report_within_hours": 48,
+        "remedy": "redo missed area free",
+        "cash_refund": false,
+        "excludes": [
+          "existing stains",
+          "existing scratches"
+        ]
+      },
+      "confirmed_on": "2026-08-25",
+      "before_site": {
+        "placement": "hidden",
+        "how": "/ gives the photo within 48 hours and the free redo. No cash refunds and the existing stains and scratches exclusion are only in FAQ accordion 'What if I'm not happy with the job?'.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "payment.methods",
+      "category": "payment",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing takes Visa, Mastercard, American Express, Discover, Apple Pay and Google Pay, with the deposit paid by card link and the balance due when the job is finished, in cash if the customer prefers, and it doesn't take checks from non-fleet customers, doesn't offer financing or payment plans, and never adds a tip to the total.",
+      "value": {
+        "cards": [
+          "Visa",
+          "Mastercard",
+          "American Express",
+          "Discover"
+        ],
+        "wallets": [
+          "Apple Pay",
+          "Google Pay"
+        ],
+        "deposit_by": "card link",
+        "balance_due": "on completion",
+        "cash_for_balance": true,
+        "checks": "fleet invoices only",
+        "financing": false,
+        "tip_included": false
+      },
+      "confirmed_on": "2026-09-08",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'How do I pay?'. Checks, financing and tips aren't addressed.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "tax.sales-tax",
+      "category": "tax",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing adds 8.625% sales tax in every ZIP code to services, add-ons, surcharges, the generator fee and timing fees, but not to the travel fee or to gift card purchases.",
+      "value": {
+        "rate_pct": 8.625,
+        "taxable": [
+          "service",
+          "addons",
+          "surcharges",
+          "generator fee",
+          "timing fees"
+        ],
+        "not_taxable": [
+          "travel fee",
+          "gift card purchases"
+        ]
+      },
+      "confirmed_on": "2026-09-08",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site never mentions tax. It first appears on the invoice, because the owner thinks of the board prices as the prices.",
+        "where": null,
+        "holes": [
+          "E5",
+          "C3"
+        ]
+      }
+    },
+    {
+      "id": "timing.saturday-fee",
+      "category": "timing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing adds a $25 Saturday fee to any job done on a Saturday.",
+      "value": {
+        "fee": 25,
+        "per": "visit"
+      },
+      "confirmed_on": "2026-09-29",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Shown only beside Saturday dates on the booking calendar, /book step 2, after the lead form.",
+        "where": "/book",
+        "holes": [
+          "E8",
+          "G2",
+          "H3"
+        ]
+      }
+    },
+    {
+      "id": "timing.evening",
+      "category": "timing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing offers an after-hours evening arrival window of 5:00 pm to 6:00 pm on Tuesdays and Thursdays, for the exterior wash only with no add-ons, only in its no-travel-fee San Francisco ZIP codes, for a $30 after-hours fee.",
+      "value": {
+        "start": "17:00",
+        "end": "18:00",
+        "weekdays": [
+          "Tuesday",
+          "Thursday"
+        ],
+        "services": [
+          "exterior"
+        ],
+        "addons_allowed": false,
+        "zones": [
+          "zone-1"
+        ],
+        "fee": 30
+      },
+      "confirmed_on": "2026-09-29",
+      "before_site": {
+        "placement": "missing",
+        "how": "The /book calendar shows the Tuesday and Thursday evening window with only \"after-hours fee applies\". The amount, the Skiff-only and no-add-on rules and the zone limit aren't published; the owner sorts these out in her reply.",
+        "where": "/book",
+        "holes": [
+          "E8",
+          "G2"
+        ]
+      }
+    },
+    {
+      "id": "timing.blackouts",
+      "category": "timing",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing is closed on 11 November 2026, 26 to 27 November 2026, 24 December 2026 to 1 January 2027, and 16 to 18 February 2027.",
+      "value": {
+        "ranges": [
+          {
+            "start": "2026-11-11",
+            "end": "2026-11-11",
+            "reason": "Veterans Day"
+          },
+          {
+            "start": "2026-11-26",
+            "end": "2026-11-27",
+            "reason": "Thanksgiving"
+          },
+          {
+            "start": "2026-12-24",
+            "end": "2027-01-01",
+            "reason": "winter closure"
+          },
+          {
+            "start": "2027-02-16",
+            "end": "2027-02-18",
+            "reason": "van servicing and staff training"
+          }
+        ]
+      },
+      "confirmed_on": "2026-11-02",
+      "before_site": {
+        "placement": "missing",
+        "how": "FAQ accordion 'Are you open on holidays?' says only that they close for some holidays and over the winter, and the calendar silently leaves those dates out. The owner hasn't written the dates on the site.",
+        "where": "/faq",
+        "holes": [
+          "G5",
+          "G7"
+        ]
+      }
+    },
+    {
+      "id": "recurring.plan",
+      "category": "recurring",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's recurring plan takes 15% off the service price for visits every 2 weeks or 10% off for visits every 4 weeks, on the exterior wash, interior detail or full detail for one vehicle at one address, with the first visit at full price, at least 3 visits, and no discount on add-ons or fees.",
+      "value": {
+        "every_2_weeks_pct": 15,
+        "every_4_weeks_pct": 10,
+        "frequencies_weeks": [
+          2,
+          4
+        ],
+        "services": [
+          "exterior",
+          "interior",
+          "full"
+        ],
+        "first_visit_discounted": false,
+        "min_visits": 3,
+        "discounts_addons_or_fees": false
+      },
+      "confirmed_on": "2026-09-17",
+      "before_site": {
+        "placement": "missing",
+        "how": "/ says only \"Ask about discounts\". The owner quotes these when people call and hasn't written the terms up.",
+        "where": "/",
+        "holes": [
+          "E10"
+        ]
+      }
+    },
+    {
+      "id": "fleet.discount",
+      "category": "fleet",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing treats 3 or more vehicles at one address on one day as a fleet job, taking 10% off the service price for 3 to 4 vehicles and 15% off for 5 to 10 vehicles, on the exterior wash, interior detail or full detail only, and discounts don't combine.",
+      "value": {
+        "min_vehicles": 3,
+        "tiers": [
+          {
+            "min": 3,
+            "max": 4,
+            "pct": 10
+          },
+          {
+            "min": 5,
+            "max": 10,
+            "pct": 15
+          }
+        ],
+        "services": [
+          "exterior",
+          "interior",
+          "full"
+        ],
+        "combines": false
+      },
+      "confirmed_on": "2026-09-17",
+      "before_site": {
+        "placement": "missing",
+        "how": "/ says only \"Ask about discounts\". The owner quotes these when people call and hasn't written the terms up.",
+        "where": "/",
+        "holes": [
+          "E10",
+          "E3"
+        ]
+      }
+    },
+    {
+      "id": "fleet.terms",
+      "category": "fleet",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing's fleet jobs run Tuesday to Friday only, pay one travel fee per visit however many vehicles are done, and can be invoiced at net 15 for accounts of 5 or more vehicles with a signed agreement.",
+      "value": {
+        "weekdays": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "travel_fees_per_visit": 1,
+        "invoice_net_days": 15,
+        "invoice_min_vehicles": 5,
+        "signed_agreement": true
+      },
+      "confirmed_on": "2026-09-17",
+      "before_site": {
+        "placement": "missing",
+        "how": "A 3-page site has no room for account terms, so the owner handles them directly with fleet customers.",
+        "where": null,
+        "holes": [
+          "E10"
+        ]
+      }
+    },
+    {
+      "id": "fleet.over-10",
+      "category": "fleet",
+      "status": "unknown",
+      "statement": "Cormorant Mobile Detailing's owner hasn't set a price or discount for more than 10 vehicles at once, and that will be settled by her reply to the specific request.",
+      "value": {
+        "unknown": "price and discount above the limit",
+        "limit_vehicles": 10,
+        "settled_by": "the owner's reply to the request"
+      },
+      "confirmed_on": "2026-10-20",
+      "before_site": {
+        "placement": "missing",
+        "how": "It has never come up, so she hasn't worked it out.",
+        "where": null,
+        "holes": [
+          "E3"
+        ]
+      }
+    },
+    {
+      "id": "gift_cards.basics",
+      "category": "gift_cards",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing sells emailed gift cards in any whole-dollar amount from $50 to $1,000 that never expire, can pay for any job including deposits and fees, and are cashed out only when the remaining balance is under $10.",
+      "value": {
+        "min": 50,
+        "max": 1000,
+        "format": "email",
+        "expires": false,
+        "covers": [
+          "services",
+          "deposits",
+          "fees"
+        ],
+        "cash_out_under": 10
+      },
+      "confirmed_on": "2026-10-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only in FAQ accordion 'Do you sell gift cards?'. The under-$10 cash-out rule isn't published.",
+        "where": "/faq",
+        "holes": [
+          "C1",
+          "B5"
+        ]
+      }
+    },
+    {
+      "id": "gift_cards.holiday-bonus",
+      "category": "gift_cards",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing adds a free $25 bonus gift card to any gift card purchase of $200 or more made by 31 December 2026.",
+      "value": {
+        "bonus": 25,
+        "min_purchase": 200,
+        "ends": "2026-12-31"
+      },
+      "confirmed_on": "2026-10-27",
+      "before_site": {
+        "placement": "hidden",
+        "how": "Only inside the promo pop-up that opens over / a few seconds after it loads, and it disappears once closed.",
+        "where": "/",
+        "holes": [
+          "A5",
+          "E10"
+        ]
+      }
+    },
+    {
+      "id": "not_offered.boats-motorcycles",
+      "category": "not_offered",
+      "status": "not_offered",
+      "statement": "Cormorant Mobile Detailing doesn't detail boats, jet skis or motorcycles.",
+      "value": {
+        "items": [
+          "boats",
+          "jet skis",
+          "motorcycles"
+        ]
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site just doesn't mention it, because the owner doesn't want to sound negative.",
+        "where": null,
+        "holes": [
+          "F6"
+        ]
+      }
+    },
+    {
+      "id": "not_offered.rvs-large-trucks",
+      "category": "not_offered",
+      "status": "not_offered",
+      "statement": "Cormorant Mobile Detailing doesn't detail RVs, motorhomes, trailers, buses, box trucks or semi trucks.",
+      "value": {
+        "items": [
+          "RVs",
+          "motorhomes",
+          "trailers",
+          "buses",
+          "box trucks",
+          "semi trucks"
+        ]
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site just doesn't mention it, because the owner doesn't want to sound negative.",
+        "where": null,
+        "holes": [
+          "F6"
+        ]
+      }
+    },
+    {
+      "id": "not_offered.ceramic-coating",
+      "category": "not_offered",
+      "status": "not_offered",
+      "statement": "Cormorant Mobile Detailing doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant.",
+      "value": {
+        "items": [
+          "ceramic coating"
+        ],
+        "alternative": "sealant",
+        "sealant_months": 6
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site just doesn't mention it, because the owner doesn't want to sound negative.",
+        "where": null,
+        "holes": [
+          "F6"
+        ]
+      }
+    },
+    {
+      "id": "not_offered.paint-correction",
+      "category": "not_offered",
+      "status": "not_offered",
+      "statement": "Cormorant Mobile Detailing doesn't do multi-stage paint correction, and for anyone asking for buffing, polish or swirl removal, its only machine polish is the one-step polish in The Flagship.",
+      "value": {
+        "items": [
+          "multi-stage paint correction"
+        ],
+        "alternative": "flagship"
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site just doesn't mention it, because the owner doesn't want to sound negative.",
+        "where": null,
+        "holes": [
+          "F6",
+          "D6"
+        ]
+      }
+    },
+    {
+      "id": "not_offered.other-work",
+      "category": "not_offered",
+      "status": "not_offered",
+      "statement": "Cormorant Mobile Detailing doesn't clean engine bays, apply paint protection film, tint windows or repair dents.",
+      "value": {
+        "items": [
+          "engine bay cleaning",
+          "paint protection film",
+          "window tinting",
+          "dent repair"
+        ]
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site just doesn't mention it, because the owner doesn't want to sound negative.",
+        "where": null,
+        "holes": [
+          "F6"
+        ]
+      }
+    },
+    {
+      "id": "not_offered.biohazard",
+      "category": "not_offered",
+      "status": "not_offered",
+      "statement": "Cormorant Mobile Detailing doesn't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste.",
+      "value": {
+        "items": [
+          "visible mould",
+          "blood",
+          "vomit",
+          "human or animal waste"
+        ]
+      },
+      "confirmed_on": "2026-09-03",
+      "before_site": {
+        "placement": "missing",
+        "how": "The site just doesn't mention it, because the owner doesn't want to sound negative.",
+        "where": null,
+        "holes": [
+          "F6"
+        ]
+      }
+    },
+    {
+      "id": "credentials.licence-insurance",
+      "category": "credentials",
+      "status": "known",
+      "statement": "Cormorant Mobile Detailing holds San Francisco business licence FICTIONAL-SFBL-0142 and carries $1,000,000 of general liability and garagekeepers insurance per occurrence with Pelican Harbor Mutual under policy FICTIONAL-GL-0142, both fictional records.",
+      "value": {
+        "licence": "FICTIONAL-SFBL-0142",
+        "insurer": "Pelican Harbor Mutual",
+        "policy": "FICTIONAL-GL-0142",
+        "coverage_per_occurrence": 1000000,
+        "types": [
+          "general liability",
+          "garagekeepers"
+        ],
+        "fictional": true
+      },
+      "confirmed_on": "2026-08-11",
+      "before_site": {
+        "placement": "missing",
+        "how": "/ says only \"Licensed and insured\". Few small owners publish licence numbers, the insurer or coverage amounts.",
+        "where": "/",
+        "holes": [
+          "F8"
+        ]
+      }
+    },
+    {
+      "id": "next_step.reply",
+      "category": "next_step",
+      "status": "known",
+      "statement": "After a request, Cormorant Mobile Detailing's owner Ines Calloway replies by text or email within 4 business hours, with business hours being Monday to Saturday from 8:00 am to 6:00 pm.",
+      "value": {
+        "replied_by": "Ines Calloway",
+        "channels": [
+          "text",
+          "email"
+        ],
+        "within_business_hours": 4,
+        "office": {
+          "days": "Monday to Saturday",
+          "open": "08:00",
+          "close": "18:00"
+        }
+      },
+      "confirmed_on": "2026-10-13",
+      "before_site": {
+        "placement": "missing",
+        "how": "The form ends with \"Thanks! We'll be in touch soon.\" The owner doesn't want to promise a response time in public.",
+        "where": "/book",
+        "holes": [
+          "J1",
+          "J2"
+        ]
+      }
+    },
+    {
+      "id": "next_step.slot-not-held",
+      "category": "next_step",
+      "status": "known",
+      "statement": "A Cormorant Mobile Detailing request doesn't hold a slot, the job is booked only when the deposit is paid through the link in the owner's reply, and that link lasts 12 hours.",
+      "value": {
+        "slot_held_by_request": false,
+        "booked_when": "deposit paid",
+        "link_valid_hours": 12
+      },
+      "confirmed_on": "2026-10-13",
+      "before_site": {
+        "placement": "missing",
+        "how": "The form never says what the request means. The owner explains it in her reply to each customer.",
+        "where": "/book",
+        "holes": [
+          "J2",
+          "J3"
+        ]
+      }
+    },
+    {
+      "id": "third_party.listing-price",
+      "category": "third_party",
+      "status": "false_third_party_claim",
+      "statement": "The Bay Auto Pages directory listing for Cormorant Mobile Detailing, last updated in March 2023, says a full detail costs a flat $129, which is false because the real full detail costs $219 to $399 depending on size class.",
+      "value": {
+        "listing": "Bay Auto Pages",
+        "listing_url": "https://bay-auto-pages.example.com/cormorant-mobile-detailing",
+        "last_updated": "March 2023",
+        "last_updated_year": 2023,
+        "claimed_price": 129,
+        "real_low": 219,
+        "real_high": 399
+      },
+      "confirmed_on": "2026-11-02",
+      "before_site": {
+        "placement": "missing",
+        "how": "The claim is on the directory, not the owner's site. She has never claimed the listing and her site doesn't correct it.",
+        "where": null,
+        "holes": [
+          "I1",
+          "I3"
+        ]
+      }
+    },
+    {
+      "id": "third_party.listing-services",
+      "category": "third_party",
+      "status": "false_third_party_claim",
+      "statement": "The Bay Auto Pages directory listing for Cormorant Mobile Detailing, last updated in March 2023, says the business details boats, does ceramic coating and opens on Sundays, all of which is false.",
+      "value": {
+        "listing": "Bay Auto Pages",
+        "listing_url": "https://bay-auto-pages.example.com/cormorant-mobile-detailing",
+        "last_updated": "March 2023",
+        "last_updated_year": 2023,
+        "claimed": [
+          "boat detailing",
+          "ceramic coating",
+          "open Sundays"
+        ]
+      },
+      "confirmed_on": "2026-11-02",
+      "before_site": {
+        "placement": "missing",
+        "how": "The claim is on the directory, not the owner's site. She has never claimed the listing and her site doesn't correct it.",
+        "where": null,
+        "holes": [
+          "I1",
+          "I3"
+        ]
+      }
+    }
+  ],
+  "pricing_model": {
+    "currency": "USD",
+    "sizes": {
+      "small": {
+        "label": "small (Class A)",
+        "aliases": [
+          "class a",
+          "a",
+          "compact"
+        ]
+      },
+      "midsize": {
+        "label": "midsize (Class B)",
+        "aliases": [
+          "class b",
+          "b",
+          "medium",
+          "mid-size",
+          "mid size"
+        ]
+      },
+      "large": {
+        "label": "large (Class C)",
+        "aliases": [
+          "class c",
+          "c"
+        ]
+      },
+      "oversized": {
+        "label": "oversized (Class D)",
+        "aliases": [
+          "class d",
+          "d",
+          "oversize",
+          "over-sized"
+        ]
+      }
+    },
+    "services": {
+      "exterior": {
+        "marketing_name": "The Skiff",
+        "plain_name": "Exterior wash",
+        "includes_interior": false,
+        "includes_exterior": true,
+        "prices": {
+          "small": 69,
+          "midsize": 79,
+          "large": 99,
+          "oversized": 139
+        },
+        "duration_hours": {
+          "small": 1,
+          "midsize": 1,
+          "large": 1.25,
+          "oversized": 1.5
+        },
+        "aliases": [
+          "the skiff",
+          "skiff",
+          "exterior wash",
+          "wash",
+          "car wash",
+          "hand wash",
+          "exterior only",
+          "outside only",
+          "just the outside"
+        ]
+      },
+      "interior": {
+        "marketing_name": "The Cutter",
+        "plain_name": "Interior detail",
+        "includes_interior": true,
+        "includes_exterior": false,
+        "prices": {
+          "small": 159,
+          "midsize": 179,
+          "large": 219,
+          "oversized": 289
+        },
+        "duration_hours": {
+          "small": 2,
+          "midsize": 2.5,
+          "large": 3,
+          "oversized": 4
+        },
+        "aliases": [
+          "the cutter",
+          "cutter",
+          "interior detail",
+          "interior clean",
+          "interior only",
+          "inside only",
+          "just the inside"
+        ]
+      },
+      "full": {
+        "marketing_name": "The Schooner",
+        "plain_name": "Full detail",
+        "includes_interior": true,
+        "includes_exterior": true,
+        "prices": {
+          "small": 219,
+          "midsize": 249,
+          "large": 299,
+          "oversized": 399
+        },
+        "duration_hours": {
+          "small": 3,
+          "midsize": 3.5,
+          "large": 4,
+          "oversized": 5
+        },
+        "aliases": [
+          "the schooner",
+          "schooner",
+          "full detail",
+          "inside and out",
+          "complete detail"
+        ]
+      },
+      "flagship": {
+        "marketing_name": "The Flagship",
+        "plain_name": "Polish-and-seal detail",
+        "includes_interior": true,
+        "includes_exterior": true,
+        "prices": {
+          "small": 549,
+          "midsize": 629,
+          "large": 759,
+          "oversized": 949
+        },
+        "duration_hours": {
+          "small": 6,
+          "midsize": 6.5,
+          "large": 7,
+          "oversized": 8
+        },
+        "aliases": [
+          "the flagship",
+          "polish and seal",
+          "polish-and-seal detail",
+          "polish",
+          "buffing",
+          "swirl removal"
+        ]
+      }
+    },
+    "addons": {
+      "pet-hair": {
+        "label": "Pet hair removal",
+        "prices": {
+          "small": 55,
+          "midsize": 55,
+          "large": 75,
+          "oversized": 95
+        },
+        "minutes": 30,
+        "standalone": false,
+        "requires_service_with": "interior",
+        "requires_addons": [],
+        "included_in": [],
+        "dependency_note": "Pet hair removal can only be added to the interior detail, full detail or The Flagship.",
+        "aliases": [
+          "pet hair removal",
+          "pet hair",
+          "dog hair",
+          "cat hair",
+          "pet-hair removal"
+        ]
+      },
+      "shampoo": {
+        "label": "Upholstery and carpet shampoo",
+        "prices": {
+          "small": 65,
+          "midsize": 75,
+          "large": 95,
+          "oversized": 125
+        },
+        "minutes": 60,
+        "standalone": false,
+        "requires_service_with": "interior",
+        "requires_addons": [],
+        "included_in": [
+          "flagship"
+        ],
+        "dependency_note": "Shampoo can only be added to the interior detail or full detail, and it's already in The Flagship.",
+        "aliases": [
+          "carpet shampoo",
+          "upholstery shampoo",
+          "seat shampoo",
+          "upholstery and carpet shampoo"
+        ]
+      },
+      "odor": {
+        "label": "Odour treatment",
+        "range": {
+          "low": 90,
+          "high": 140,
+          "note": "Odour treatment is $90 for a 1-hour ozone treatment or $140 for a 2-hour one, and the technician chooses after a smell test on arrival."
+        },
+        "minutes": 120,
+        "standalone": false,
+        "requires_service_with": "interior",
+        "requires_addons": [],
+        "included_in": [],
+        "dependency_note": "Odour treatment can only be added to the interior detail, full detail or The Flagship.",
+        "aliases": [
+          "odour",
+          "odor",
+          "odour treatment",
+          "odor treatment",
+          "ozone",
+          "smoke smell",
+          "mildew smell",
+          "musty"
+        ]
+      },
+      "clay": {
+        "label": "Clay bar",
+        "prices": {
+          "small": 60,
+          "midsize": 70,
+          "large": 85,
+          "oversized": 110
+        },
+        "minutes": 45,
+        "standalone": false,
+        "requires_service_with": "exterior",
+        "requires_addons": [],
+        "included_in": [
+          "flagship"
+        ],
+        "dependency_note": "The clay bar can only be added to the exterior wash or full detail, and it's already in The Flagship.",
+        "aliases": [
+          "clay bar",
+          "clay bar treatment"
+        ]
+      },
+      "sealant": {
+        "label": "6-month paint sealant",
+        "prices": {
+          "small": 95,
+          "midsize": 115,
+          "large": 135,
+          "oversized": 175
+        },
+        "minutes": 45,
+        "standalone": false,
+        "requires_service_with": "exterior",
+        "requires_addons": [
+          "clay"
+        ],
+        "included_in": [
+          "flagship"
+        ],
+        "dependency_note": "The paint sealant can only be bought with the clay bar add-on, on an exterior wash or full detail, and it's already in The Flagship.",
+        "aliases": [
+          "paint sealant",
+          "wax",
+          "paint protection",
+          "6-month sealant"
+        ]
+      },
+      "headlights": {
+        "label": "Headlight restoration, per pair",
+        "flat": 85,
+        "minutes": 45,
+        "standalone": true,
+        "requires_addons": [],
+        "included_in": [],
+        "dependency_note": "",
+        "aliases": [
+          "headlight restoration",
+          "headlight",
+          "foggy headlights",
+          "yellowed headlights"
+        ]
+      }
+    },
+    "conditions": {
+      "excessive-pet-hair": {
+        "kind": "surcharge",
+        "label": "Excessive pet hair",
+        "surcharge": 60,
+        "applies_to": "interior",
+        "forces_addon": "pet-hair",
+        "fact_id": "conditions.excessive-pet-hair",
+        "aliases": [
+          "excessive pet hair",
+          "excessive hair",
+          "embedded pet hair"
+        ]
+      },
+      "heavily-soiled": {
+        "kind": "surcharge",
+        "label": "Heavily soiled interior",
+        "surcharge": 75,
+        "applies_to": "interior",
+        "fact_id": "conditions.heavily-soiled",
+        "aliases": [
+          "heavily soiled",
+          "heavily soiled interior",
+          "very dirty interior"
+        ]
+      },
+      "heavy-contamination": {
+        "kind": "surcharge",
+        "label": "Heavily contaminated exterior",
+        "surcharge": 50,
+        "applies_to": "exterior",
+        "fact_id": "conditions.heavy-contamination",
+        "aliases": [
+          "heavy contamination",
+          "tree sap",
+          "road tar",
+          "bird droppings"
+        ]
+      },
+      "no-power": {
+        "kind": "generator",
+        "label": "No outlet within 75 feet",
+        "surcharge": 30,
+        "fact_id": "prerequisites.power",
+        "aliases": [
+          "no outlet",
+          "no power",
+          "generator"
+        ]
+      },
+      "enclosed-no-power": {
+        "kind": "blocks_interior",
+        "label": "Enclosed or underground garage with no outlet",
+        "fact_id": "prerequisites.power",
+        "note": "Services that include the interior can't be done in an enclosed or underground garage without an outlet, because the generator can't run there.",
+        "aliases": [
+          "enclosed garage no power",
+          "underground garage no outlet",
+          "enclosed garage no outlet"
+        ]
+      },
+      "matte-or-wrapped": {
+        "kind": "blocks_paint_work",
+        "label": "Matte paint, satin paint or vinyl wrap",
+        "fact_id": "eligibility.matte-wrap",
+        "blocked_services": [
+          "flagship"
+        ],
+        "blocked_addons": [
+          "clay",
+          "sealant"
+        ],
+        "note": "Matte paint, satin paint and vinyl wraps can't have The Flagship, the clay bar or the paint sealant.",
+        "aliases": [
+          "matte",
+          "satin",
+          "vinyl wrap",
+          "wrapped"
+        ]
+      }
+    },
+    "matte_terms": [
+      "matte",
+      "satin",
+      "vinyl wrap",
+      "wrapped"
+    ],
+    "travel": {
+      "zones": {
+        "zone-1": {
+          "label": "San Francisco, no fee",
+          "fee": 0,
+          "zips": [
+            "94102",
+            "94103",
+            "94104",
+            "94105",
+            "94107",
+            "94108",
+            "94109",
+            "94110",
+            "94111",
+            "94112",
+            "94114",
+            "94115",
+            "94116",
+            "94117",
+            "94118",
+            "94121",
+            "94122",
+            "94123",
+            "94124",
+            "94127",
+            "94129",
+            "94131",
+            "94132",
+            "94133",
+            "94134",
+            "94158"
+          ],
+          "fact_id": "service_area.zone-1"
+        },
+        "zone-2": {
+          "label": "Peninsula or Treasure Island",
+          "fee": 35,
+          "zips": [
+            "94005",
+            "94010",
+            "94014",
+            "94015",
+            "94030",
+            "94044",
+            "94066",
+            "94080",
+            "94130"
+          ],
+          "fact_id": "service_area.zone-2"
+        },
+        "zone-3": {
+          "label": "Marin or East Bay, toll included",
+          "fee": 65,
+          "zips": [
+            "94607",
+            "94608",
+            "94609",
+            "94610",
+            "94611",
+            "94612",
+            "94618",
+            "94704",
+            "94705",
+            "94920",
+            "94941",
+            "94965"
+          ],
+          "fact_id": "service_area.zone-3"
+        }
+      },
+      "per": "visit"
+    },
+    "timing_fees": {
+      "saturday": 25,
+      "evening": 30,
+      "same_day": 40
+    },
+    "tax": {
+      "rate": 0.08625,
+      "taxable": [
+        "service",
+        "addons",
+        "surcharges",
+        "generator fee",
+        "timing fees"
+      ],
+      "not_taxable": [
+        "travel fee",
+        "gift card purchases"
+      ],
+      "rounding": "half up to the cent"
+    },
+    "deposit": {
+      "standard": 50,
+      "by_service": {
+        "flagship": 150
+      },
+      "standalone_addons": 0,
+      "counts_toward_total": true
+    },
+    "recurring": {
+      "services": [
+        "exterior",
+        "interior",
+        "full"
+      ],
+      "min_visits": 3,
+      "first_visit_discounted": false,
+      "frequencies": {
+        "every-2-weeks": {
+          "pct": 15,
+          "aliases": [
+            "every 2 weeks",
+            "every two weeks",
+            "biweekly",
+            "fortnightly"
+          ]
+        },
+        "every-4-weeks": {
+          "pct": 10,
+          "aliases": [
+            "every 4 weeks",
+            "every four weeks",
+            "monthly"
+          ]
+        }
+      }
+    },
+    "fleet": {
+      "min_vehicles": 3,
+      "max_priced_vehicles": 10,
+      "services": [
+        "exterior",
+        "interior",
+        "full"
+      ],
+      "tiers": [
+        {
+          "min": 3,
+          "max": 4,
+          "pct": 10
+        },
+        {
+          "min": 5,
+          "max": 10,
+          "pct": 15
+        }
+      ],
+      "weekdays": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "combines": false
+    },
+    "vehicles": {
+      "by_size": {
+        "small": [
+          "coupe",
+          "hatchback",
+          "compact car",
+          "subcompact",
+          "honda civic",
+          "civic",
+          "toyota corolla",
+          "corolla",
+          "mini cooper",
+          "mazda3",
+          "mazda 3",
+          "volkswagen golf",
+          "vw golf",
+          "chevrolet bolt",
+          "chevy bolt",
+          "nissan leaf",
+          "miata",
+          "ford mustang",
+          "mustang"
+        ],
+        "midsize": [
+          "sedan",
+          "crossover",
+          "two-row suv",
+          "2-row suv",
+          "small suv",
+          "compact suv",
+          "toyota camry",
+          "camry",
+          "honda accord",
+          "accord",
+          "tesla model 3",
+          "model 3",
+          "tesla model y",
+          "model y",
+          "prius",
+          "honda cr-v",
+          "cr-v",
+          "crv",
+          "toyota rav4",
+          "rav4",
+          "subaru outback",
+          "outback",
+          "subaru forester",
+          "forester",
+          "mazda cx-5",
+          "cx-5",
+          "hyundai tucson",
+          "tucson",
+          "jeep wrangler",
+          "wrangler",
+          "jeep grand cherokee",
+          "grand cherokee"
+        ],
+        "large": [
+          "minivan",
+          "mini van",
+          "three-row suv",
+          "3-row suv",
+          "compact van",
+          "small van",
+          "half-ton pickup",
+          "toyota highlander",
+          "highlander",
+          "honda pilot",
+          "pilot",
+          "ford explorer",
+          "explorer",
+          "kia telluride",
+          "telluride",
+          "chevrolet tahoe",
+          "chevy tahoe",
+          "tahoe",
+          "gmc yukon",
+          "yukon",
+          "ford expedition",
+          "expedition",
+          "toyota 4runner",
+          "4runner",
+          "tesla model x",
+          "model x",
+          "rivian r1s",
+          "r1s",
+          "rivian r1t",
+          "r1t",
+          "honda odyssey",
+          "odyssey",
+          "toyota sienna",
+          "sienna",
+          "chrysler pacifica",
+          "pacifica",
+          "kia carnival",
+          "carnival",
+          "ford transit connect",
+          "transit connect",
+          "ram promaster city",
+          "promaster city",
+          "mercedes metris",
+          "metris",
+          "toyota tacoma",
+          "tacoma",
+          "ford ranger",
+          "ranger",
+          "chevrolet colorado",
+          "colorado",
+          "nissan frontier",
+          "frontier",
+          "ford f-150",
+          "f-150",
+          "f150",
+          "chevrolet silverado 1500",
+          "silverado 1500",
+          "gmc sierra 1500",
+          "sierra 1500",
+          "ram 1500",
+          "toyota tundra",
+          "tundra"
+        ],
+        "oversized": [
+          "van",
+          "cargo van",
+          "passenger van",
+          "full-size van",
+          "full size van",
+          "high-roof van",
+          "high roof van",
+          "extended-length suv",
+          "heavy-duty pickup",
+          "heavy duty pickup",
+          "ford transit",
+          "transit",
+          "mercedes sprinter",
+          "sprinter",
+          "ram promaster",
+          "promaster",
+          "chevrolet express",
+          "chevy express",
+          "gmc savana",
+          "savana",
+          "ford econoline",
+          "econoline",
+          "nissan nv",
+          "chevrolet suburban",
+          "chevy suburban",
+          "suburban",
+          "yukon xl",
+          "expedition max",
+          "escalade esv",
+          "ford f-250",
+          "f-250",
+          "f250",
+          "ford f-350",
+          "f-350",
+          "f350",
+          "chevrolet silverado 2500",
+          "silverado 2500",
+          "chevrolet silverado 3500",
+          "silverado 3500",
+          "gmc sierra 2500",
+          "sierra 2500",
+          "ram 2500",
+          "ram 3500"
+        ]
+      },
+      "not_offered": {
+        "boat": "not_offered.boats-motorcycles",
+        "yacht": "not_offered.boats-motorcycles",
+        "sailboat": "not_offered.boats-motorcycles",
+        "jet ski": "not_offered.boats-motorcycles",
+        "jetski": "not_offered.boats-motorcycles",
+        "motorcycle": "not_offered.boats-motorcycles",
+        "motorbike": "not_offered.boats-motorcycles",
+        "rv": "not_offered.rvs-large-trucks",
+        "motorhome": "not_offered.rvs-large-trucks",
+        "motor home": "not_offered.rvs-large-trucks",
+        "trailer": "not_offered.rvs-large-trucks",
+        "travel trailer": "not_offered.rvs-large-trucks",
+        "bus": "not_offered.rvs-large-trucks",
+        "school bus": "not_offered.rvs-large-trucks",
+        "box truck": "not_offered.rvs-large-trucks",
+        "semi": "not_offered.rvs-large-trucks",
+        "semi truck": "not_offered.rvs-large-trucks",
+        "tractor trailer": "not_offered.rvs-large-trucks"
+      },
+      "undecided": {
+        "cybertruck": {
+          "fact_id": "eligibility.cybertruck",
+          "note": "The owner hasn't decided which size class a Tesla Cybertruck belongs in, or whether its stainless steel panels can be polished.",
+          "still_needed": "the owner's decision on the Tesla Cybertruck's size class"
+        }
+      },
+      "camper": {
+        "terms": [
+          "camper van",
+          "campervan",
+          "camper conversion",
+          "van conversion",
+          "sprinter camper",
+          "van life"
+        ],
+        "size": "oversized",
+        "fact_id": "eligibility.camper-interior",
+        "note": "A camper van conversion gets an exterior wash at the oversized price, but the owner hasn't decided whether to clean the living quarters.",
+        "still_needed": "the owner's decision on camper van living quarters"
+      },
+      "ambiguous": {
+        "suv": {
+          "fact_ids": [
+            "size_classes.midsize",
+            "size_classes.large",
+            "size_classes.oversized"
+          ],
+          "note": "An SUV's class depends on the model: two-row is midsize, three-row is large, and extended-length is oversized."
+        },
+        "truck": {
+          "fact_ids": [
+            "size_classes.large",
+            "size_classes.oversized"
+          ],
+          "note": "A pickup's class depends on the model: standard pickups are large, and heavy-duty pickups are oversized."
+        },
+        "pickup": {
+          "fact_ids": [
+            "size_classes.large",
+            "size_classes.oversized"
+          ],
+          "note": "A pickup's class depends on the model: standard pickups are large, and heavy-duty pickups are oversized."
+        },
+        "pickup truck": {
+          "fact_ids": [
+            "size_classes.large",
+            "size_classes.oversized"
+          ],
+          "note": "A pickup's class depends on the model: standard pickups are large, and heavy-duty pickups are oversized."
+        }
+      }
+    },
+    "not_offered_terms": {
+      "ceramic": {
+        "fact_id": "not_offered.ceramic-coating",
+        "note": "Ceramic coating isn't offered. The longest-lasting paint protection is the 6-month paint sealant."
+      },
+      "ceramic coating": {
+        "fact_id": "not_offered.ceramic-coating",
+        "note": "Ceramic coating isn't offered. The longest-lasting paint protection is the 6-month paint sealant."
+      },
+      "ceramic coat": {
+        "fact_id": "not_offered.ceramic-coating",
+        "note": "Ceramic coating isn't offered. The longest-lasting paint protection is the 6-month paint sealant."
+      },
+      "paint correction": {
+        "fact_id": "not_offered.paint-correction",
+        "note": "Multi-stage paint correction isn't offered. The only machine polish is the one-step polish in The Flagship."
+      },
+      "multi-stage": {
+        "fact_id": "not_offered.paint-correction",
+        "note": "Multi-stage paint correction isn't offered. The only machine polish is the one-step polish in The Flagship."
+      },
+      "two-stage": {
+        "fact_id": "not_offered.paint-correction",
+        "note": "Multi-stage paint correction isn't offered. The only machine polish is the one-step polish in The Flagship."
+      },
+      "compound": {
+        "fact_id": "not_offered.paint-correction",
+        "note": "Multi-stage paint correction isn't offered. The only machine polish is the one-step polish in The Flagship."
+      },
+      "engine bay": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "engine": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "paint protection film": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "ppf": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "clear bra": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "tint": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "tinting": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "window tint": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "dent": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "dents": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "dent repair": {
+        "fact_id": "not_offered.other-work",
+        "note": "Engine bay cleaning, paint protection film, window tinting and dent repair aren't offered."
+      },
+      "biohazard": {
+        "fact_id": "not_offered.biohazard",
+        "note": "Biohazards, meaning visible mould, blood, vomit, or human or animal waste, aren't cleaned."
+      },
+      "mould": {
+        "fact_id": "not_offered.biohazard",
+        "note": "Biohazards, meaning visible mould, blood, vomit, or human or animal waste, aren't cleaned."
+      },
+      "mold": {
+        "fact_id": "not_offered.biohazard",
+        "note": "Biohazards, meaning visible mould, blood, vomit, or human or animal waste, aren't cleaned."
+      },
+      "blood": {
+        "fact_id": "not_offered.biohazard",
+        "note": "Biohazards, meaning visible mould, blood, vomit, or human or animal waste, aren't cleaned."
+      },
+      "vomit": {
+        "fact_id": "not_offered.biohazard",
+        "note": "Biohazards, meaning visible mould, blood, vomit, or human or animal waste, aren't cleaned."
+      },
+      "boat": {
+        "fact_id": "not_offered.boats-motorcycles",
+        "note": "Boats, jet skis and motorcycles aren't detailed."
+      },
+      "boat detailing": {
+        "fact_id": "not_offered.boats-motorcycles",
+        "note": "Boats, jet skis and motorcycles aren't detailed."
+      },
+      "jet ski": {
+        "fact_id": "not_offered.boats-motorcycles",
+        "note": "Boats, jet skis and motorcycles aren't detailed."
+      },
+      "motorcycle": {
+        "fact_id": "not_offered.boats-motorcycles",
+        "note": "Boats, jet skis and motorcycles aren't detailed."
+      },
+      "rv": {
+        "fact_id": "not_offered.rvs-large-trucks",
+        "note": "RVs, motorhomes, trailers, buses, box trucks and semi trucks aren't detailed."
+      },
+      "motorhome": {
+        "fact_id": "not_offered.rvs-large-trucks",
+        "note": "RVs, motorhomes, trailers, buses, box trucks and semi trucks aren't detailed."
+      },
+      "box truck": {
+        "fact_id": "not_offered.rvs-large-trucks",
+        "note": "RVs, motorhomes, trailers, buses, box trucks and semi trucks aren't detailed."
+      }
+    },
+    "prices_undecided_from": {
+      "date": "2027-01-01",
+      "fact_id": "pricing.2027-prices",
+      "note": "The owner hasn't decided whether prices change for jobs from 1 January 2027, so this uses the current prices."
+    }
+  },
+  "availability_rules": {
+    "timezone": "America/Los_Angeles",
+    "closed_weekdays": [
+      "Sunday",
+      "Monday"
+    ],
+    "windows": {
+      "morning": {
+        "start": "08:00",
+        "end": "09:30"
+      },
+      "afternoon": {
+        "start": "13:00",
+        "end": "14:30"
+      },
+      "evening": {
+        "start": "17:00",
+        "end": "18:00"
+      }
+    },
+    "weekday_windows": {
+      "Tuesday": [
+        "morning",
+        "afternoon",
+        "evening"
+      ],
+      "Wednesday": [
+        "morning",
+        "afternoon"
+      ],
+      "Thursday": [
+        "morning",
+        "afternoon",
+        "evening"
+      ],
+      "Friday": [
+        "morning",
+        "afternoon"
+      ],
+      "Saturday": [
+        "morning"
+      ]
+    },
+    "lead_time_hours": 24,
+    "same_day": {
+      "phone_only": true,
+      "cutoff": "10:00",
+      "services": [
+        "exterior",
+        "interior"
+      ],
+      "window": "afternoon",
+      "fee": 40,
+      "guaranteed": false
+    },
+    "morning_only_min_minutes": 300,
+    "flagship": {
+      "weekdays": [
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "window": "morning"
+    },
+    "evening": {
+      "services": [
+        "exterior"
+      ],
+      "addons_allowed": false,
+      "zones": [
+        "zone-1"
+      ]
+    },
+    "blackout_ranges": [
+      {
+        "start": "2026-11-11",
+        "end": "2026-11-11",
+        "reason": "Veterans Day"
+      },
+      {
+        "start": "2026-11-26",
+        "end": "2026-11-27",
+        "reason": "Thanksgiving"
+      },
+      {
+        "start": "2026-12-24",
+        "end": "2027-01-01",
+        "reason": "winter closure"
+      },
+      {
+        "start": "2027-02-16",
+        "end": "2027-02-18",
+        "reason": "van servicing and staff training"
+      }
+    ],
+    "booked_model": {
+      "salt": "cormorant-v1",
+      "base_share": {
+        "morning": 0.3,
+        "afternoon": 0.25,
+        "evening": 0.2
+      },
+      "near_term_bumps": [
+        {
+          "within_days": 3,
+          "add": 0.35
+        },
+        {
+          "within_days": 7,
+          "add": 0.15
+        }
+      ]
+    }
+  }
+}
