@@ -18,8 +18,8 @@ render(request, template_name, status_code=200, **context) returns a response.
 """
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import date
-from typing import Callable
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse

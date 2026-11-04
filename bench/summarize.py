@@ -54,6 +54,10 @@ def rates(rows: list[dict]) -> dict:
     }
 
 
+def table_row(cells: list) -> str:
+    return "| " + " | ".join(str(cell) for cell in cells) + " |"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--name", default="first-demo")
@@ -81,23 +85,46 @@ def main() -> None:
         cells = " | ".join(fmt.format(stats[v][key]) for v in ("control", "before", "after"))
         print(f"| {label} | {cells} |")
 
-    print("\n| Query | Type | Before | After | Before s | After s | Before $ | After $ | Before browser | After quotes | Reached resource |")
-    print("|---|---|---|---|---|---|---|---|---|---|---|")
+    columns = ["Query", "Type", "Before", "After", "Before s", "After s", "Before $", "After $", "Before browser", "After quotes", "Reached resource"]
+    print("\n" + table_row(columns) + "\n" + table_row(["---"] * len(columns)))
     for q in paired:
         b, a = before[q], after[q]
         print(
-            f"| {q} | {queries[q]['type']} | {GRADES[b['result']]} | {GRADES[a['result']]} | {float(b['seconds']):.0f} | {float(a['seconds']):.0f} "
-            f"| {float(b['cost']):.3f} | {float(a['cost']):.3f} | {b['browser_calls']} | {quote_calls(a)} | {'Yes' if a['used_resource'] else 'No'} |"
+            table_row(
+                [
+                    q,
+                    queries[q]["type"],
+                    GRADES[b["result"]],
+                    GRADES[a["result"]],
+                    f"{float(b['seconds']):.0f}",
+                    f"{float(a['seconds']):.0f}",
+                    f"{float(b['cost']):.3f}",
+                    f"{float(a['cost']):.3f}",
+                    b["browser_calls"],
+                    quote_calls(a),
+                    "Yes" if a["used_resource"] else "No",
+                ]
+            )
         )
 
     unpaired = [q for q in queries if q not in paired]
     if unpaired:
-        print("\n| Query | Type | Control | After | After s | After $ | Reached resource |\n|---|---|---|---|---|---|---|")
+        columns = ["Query", "Type", "Control", "After", "After s", "After $", "Reached resource"]
+        print("\n" + table_row(columns) + "\n" + table_row(["---"] * len(columns)))
         for q in unpaired:
             a = after[q]
             print(
-                f"| {q} | {queries[q]['type']} | {GRADES[control[q]['result']]} | {GRADES[a['result']]} | {float(a['seconds']):.0f} "
-                f"| {float(a['cost']):.3f} | {'Yes' if a['used_resource'] else 'No'} |"
+                table_row(
+                    [
+                        q,
+                        queries[q]["type"],
+                        GRADES[control[q]["result"]],
+                        GRADES[a["result"]],
+                        f"{float(a['seconds']):.0f}",
+                        f"{float(a['cost']):.3f}",
+                        "Yes" if a["used_resource"] else "No",
+                    ]
+                )
             )
 
 

@@ -165,7 +165,10 @@ def main() -> None:
     out_dir = ROOT / "runs" / args.name
     saved = out_dir / "site-logs"
     # A re-grade uses only what the benchmark saved, so it can't pick up later test traffic.
-    events = [e for stream in STREAMS[args.variant] for e in read_events(stream, saved)] if args.regrade else saved_events(args.variant, saved)
+    if args.regrade:
+        events = [event for stream in STREAMS[args.variant] for event in read_events(stream, saved)]
+    else:
+        events = saved_events(args.variant, saved)
     results = []
     for item in outputs:
         graded = grade(item["query"], item["run"], args.variant, events)

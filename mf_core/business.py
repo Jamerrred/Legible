@@ -9,6 +9,7 @@ say the price is a range. Subtotal, tax and total are None unless status is "ok"
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import re
@@ -385,10 +386,9 @@ def quote(
             notes.append(f"'{text}' isn't a defined condition, so nothing was charged for it.")
     for condition_id in wanted_conditions:
         condition = model["conditions"][condition_id]
-        if condition.get("forces_addon") and has_interior:
-            if condition["forces_addon"] not in addon_ids:
-                addon_ids.append(condition["forces_addon"])
-                notes.append(f"{condition['label']} also needs the {condition['forces_addon']} add-on, so it was added.")
+        if condition.get("forces_addon") and has_interior and condition["forces_addon"] not in addon_ids:
+            addon_ids.append(condition["forces_addon"])
+            notes.append(f"{condition['label']} also needs the {condition['forces_addon']} add-on, so it was added.")
 
     # Recurring plan and fleet counts.
     count = int(vehicle_count or 1)
@@ -620,10 +620,8 @@ def quote(
             cite("timing.saturday-fee", "timing.evening")
     else:
         parsed = None
-        try:
+        with contextlib.suppress(TypeError, ValueError, AttributeError, KeyError):
             parsed = _parse_when(when, current, rules)
-        except (TypeError, ValueError, AttributeError, KeyError):
-            pass
         if not parsed or parsed[0] is None:
             still_needed.append("when, as a date and optionally a window")
         else:

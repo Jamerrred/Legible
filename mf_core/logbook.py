@@ -27,8 +27,9 @@ def log_event(stream: str, event: str, **fields) -> dict:
     return record
 
 
-def read_events(stream: str, log_dir: Path = LOG_DIR) -> list[dict]:
-    path = log_dir / f"{stream}.jsonl"
+def read_events(stream: str, log_dir: Path | None = None) -> list[dict]:
+    """Read one stream from logs/, or from a benchmark's saved copy if given."""
+    path = (log_dir or LOG_DIR) / f"{stream}.jsonl"
     if not path.exists():
         return []
     return [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
