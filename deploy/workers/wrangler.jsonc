@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cormorant-detailing",
+  "main": "src/main.py",
+  "compatibility_date": "2026-10-25",
+  "compatibility_flags": ["python_workers"],
+  "observability": { "enabled": true },
+  "assets": { "directory": "./public" },
+  "rules": [{ "type": "Data", "globs": ["**/*.html", "**/*.json"], "fallthrough": true }],
+  "env": {
+    "before": { "name": "cormorant-detailing" },
+    "after": { "name": "cormorant-mobile-detailing" },
+    "resource": { "name": "cormorant-agents" }
+  }
+}

@@ -1,0 +1,15 @@
+# Installed tools
+.venv/
+node_modules/
+python_modules/
+.venv-workers/
+.wrangler/
+.dev.vars
+
+# Copied in by build.py
+public/
+src/businesses/
+src/demo_resource/
+src/demo_site/
+src/mf_core/
+src/version.py
