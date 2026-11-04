@@ -5,6 +5,7 @@ Usage: uv run python -m bench.summarize --name first-demo
 Only queries with a valid run on both versions count towards the comparison. This
 reads existing results and makes no model calls, so it costs nothing.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -85,7 +86,19 @@ def main() -> None:
         cells = " | ".join(fmt.format(stats[v][key]) for v in ("control", "before", "after"))
         print(f"| {label} | {cells} |")
 
-    columns = ["Query", "Type", "Before", "After", "Before s", "After s", "Before $", "After $", "Before browser", "After quotes", "Reached resource"]
+    columns = [
+        "Query",
+        "Type",
+        "Before",
+        "After",
+        "Before s",
+        "After s",
+        "Before $",
+        "After $",
+        "Before browser",
+        "After quotes",
+        "Reached resource",
+    ]
     print("\n" + table_row(columns) + "\n" + table_row(["---"] * len(columns)))
     for q in paired:
         b, a = before[q], after[q]

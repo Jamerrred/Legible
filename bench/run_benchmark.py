@@ -16,6 +16,7 @@ Each run gets a fresh process, a fresh browser profile and its own fake contact 
 The email is how a form submission in the site's log is joined back to a run, so nothing
 run-specific goes into a URL or a header.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -173,9 +174,15 @@ def main() -> None:
     for item in outputs:
         graded = grade(item["query"], item["run"], args.variant, events)
         graded.update(
-            repeat=item["run"]["repeat"], out=item["out"], cost=item["run"].get("cost"), seconds=item["run"].get("seconds"),
-            used_resource=item["run"].get("used_resource"), tool_calls=item["run"].get("tool_calls"), reused=item["run"].get("reused", False),
-            browser_calls=item["run"].get("browser_calls"), crashed=item["run"].get("crashed"),
+            repeat=item["run"]["repeat"],
+            out=item["out"],
+            cost=item["run"].get("cost"),
+            seconds=item["run"].get("seconds"),
+            used_resource=item["run"].get("used_resource"),
+            tool_calls=item["run"].get("tool_calls"),
+            reused=item["run"].get("reused", False),
+            browser_calls=item["run"].get("browser_calls"),
+            crashed=item["run"].get("crashed"),
             report=item["run"].get("report"),
         )
         results.append(graded)
@@ -186,9 +193,11 @@ def main() -> None:
 
     valid = [r for r in results if r.get("valid", True)]
     n = len(valid)
-    print(f"\n{args.variant}: valid runs {n}/{len(results)}, correct {sum(r['correct'] for r in valid)}/{n}, "
-          f"acceptable {sum(r['acceptable'] for r in valid)}/{n}, partial {sum(r['partial'] for r in valid)}, "
-          f"cost ${sum(float(r['cost'] or 0) for r in valid):.2f}")
+    print(
+        f"\n{args.variant}: valid runs {n}/{len(results)}, correct {sum(r['correct'] for r in valid)}/{n}, "
+        f"acceptable {sum(r['acceptable'] for r in valid)}/{n}, partial {sum(r['partial'] for r in valid)}, "
+        f"cost ${sum(float(r['cost'] or 0) for r in valid):.2f}"
+    )
     for r in results:
         flag = "resource" if r["used_resource"] else ""
         print(f"  {r['query_id']} r{r['repeat']}: {r['result']:20} {flag:9} {r['seconds']}s  {'; '.join(r['problems'])[:140]}")

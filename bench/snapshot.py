@@ -5,6 +5,7 @@ Crawls the site and the mock directory and competitors for that variant into
 corpus/<variant>/. The resource is left out on purpose, so in the "after" runs
 the only way to reach it is the visible link on the site.
 """
+
 from __future__ import annotations
 
 import hashlib

@@ -4,6 +4,7 @@ The back office agent's owner inbox reads these later, so every event is one
 JSON object per line with a stable shape: ts, stream, event, then the fields.
 Events in use: page_hit, quote, dead_end, request, question, lead_form.
 """
+
 from __future__ import annotations
 
 import json

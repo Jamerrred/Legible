@@ -5,6 +5,7 @@ has to build queries, filter results and tell the merchant's own pages from a
 listing. The directory's wrong claims come from the facts file, where they're
 recorded as false.
 """
+
 from __future__ import annotations
 
 from fastapi import FastAPI, Request

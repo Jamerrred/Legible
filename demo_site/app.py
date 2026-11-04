@@ -1,4 +1,5 @@
 """The Cormorant Mobile Detailing site: Home, FAQ and Book."""
+
 from __future__ import annotations
 
 import ipaddress
@@ -52,7 +53,10 @@ def create_app(variant: str = "before") -> FastAPI:
     @app.middleware("http")
     async def log_page_hit(request: Request, call_next):
         log_event(
-            stream, "page_hit", path=request.url.path, method=request.method,
+            stream,
+            "page_hit",
+            path=request.url.path,
+            method=request.method,
             user_agent=request.headers.get("user-agent"),
             ip_range=ip_range(request.client.host if request.client else None),
             referer=request.headers.get("referer"),
@@ -82,11 +86,7 @@ def create_app(variant: str = "before") -> FastAPI:
     async def sitemap(request: Request):
         base = str(request.base_url).rstrip("/")
         urls = "".join(f"  <url><loc>{base}{path}</loc></url>\n" for path in PAGES)
-        xml = (
-            '<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            f"{urls}</urlset>\n"
-        )
+        xml = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n'
         return Response(xml, media_type="application/xml")
 
     register_booking(app, stream, render, packages, addons)

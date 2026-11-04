@@ -38,7 +38,14 @@ def check(client: httpx.Client) -> str | None:
         return "step 2 didn't carry the lead fields"
     done = client.post(
         "/book/request",
-        data={**LEAD, "package": packages[0], "vehicle": "2019 Honda Civic", "addons": addons[:1], "notes": "booking check", "slot": slots[0]},
+        data={
+            **LEAD,
+            "package": packages[0],
+            "vehicle": "2019 Honda Civic",
+            "addons": addons[:1],
+            "notes": "booking check",
+            "slot": slots[0],
+        },
     )
     if done.status_code != 200:
         return f"POST /book/request returned {done.status_code}"
