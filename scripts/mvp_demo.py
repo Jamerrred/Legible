@@ -126,6 +126,8 @@ def main() -> None:
     if site["stage"] == "failed":
         raise SystemExit(site["stage_note"])
     print(f"  {site['name']}: {site['facts']}", flush=True)
+    for page in site["pages"]:
+        print(f"  read via {page.get('via')}: {page['url']} ({page.get('chars')} characters, {page.get('images')} images)", flush=True)
 
     print("2. Owner answers the inbox", flush=True)
     answer_inbox(website_id, facts)

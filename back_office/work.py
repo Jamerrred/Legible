@@ -94,7 +94,7 @@ async def onboard(website_id: str, run_check: bool = True, sim_queries: int = 5,
         if not pages:
             _stage(website_id, "failed", "The website couldn't be read")
             return
-        store.update("website", "id", website_id, pages=[{"url": p["url"], "title": p["title"]} for p in pages])
+        store.update("website", "id", website_id, pages=[{"url": p["url"], "title": p["title"], "via": p.get("via"), "chars": len(p["text"]), "images": len(p["images"])} for p in pages])
 
         _stage(website_id, "extracting", f"Building your fact sheet from {len(pages)} pages")
         images = await fetch_images(pages)

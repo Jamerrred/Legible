@@ -40,7 +40,7 @@ async def crawl_direct(url: str, max_pages: int = 12) -> list[dict]:
             if response.status_code >= 400 or "html" not in response.headers.get("content-type", "html"):
                 continue
             page = parse_html(response.text, str(response.url))
-            pages.append({"url": str(response.url), "title": page["title"], "text": page["text"][:MAX_TEXT], "images": page["images"]})
+            pages.append({"url": str(response.url), "title": page["title"], "text": page["text"][:MAX_TEXT], "images": page["images"], "via": "direct"})
             for link in page["links"]:
                 target = urldefrag(link["url"])[0]
                 if urlparse(target).netloc == host and target.rstrip("/") not in seen and not SKIP_LINK.search(target):
@@ -67,23 +67,40 @@ async def crawl_exa(url: str, max_pages: int = 12) -> list[dict]:
         for item in [result, *(result.get("subpages") or [])]:
             if item.get("text"):
                 images = [{"alt": "", "src": src} for src in (item.get("extras") or {}).get("imageLinks") or []]
-                pages.append({"url": item.get("url") or url, "title": item.get("title") or "", "text": item["text"][:MAX_TEXT], "images": images})
+                pages.append({"url": item.get("url") or url, "title": item.get("title") or "", "text": item["text"][:MAX_TEXT], "images": images, "via": "exa"})
     return pages[:max_pages]
 
 
+def _clean(pages: list[dict]) -> list[dict]:
+    """Drop non-web entries such as mailto links, and the same page listed twice."""
+    seen, out = set(), []
+    for page in pages:
+        key = page["url"].rstrip("/")
+        if page["url"].startswith("http") and key not in seen:
+            seen.add(key)
+            out.append(page)
+    return out
+
+
 async def crawl(url: str, max_pages: int = 12) -> list[dict]:
+    """Exa reads the text of public sites, and a plain crawl fills in pages and images Exa misses."""
     if is_local(url):
         return await crawl_direct(url, max_pages)
     try:
-        pages = await crawl_exa(url, max_pages)
+        exa_pages = _clean(await crawl_exa(url, max_pages))
     except Exception:
-        pages = []
-    # Exa can return few subpages or thin text, so a plain crawl tops it up.
-    if len(pages) >= 3 and sum(len(p["text"]) for p in pages) >= 3000:
-        return pages
-    seen = {p["url"].rstrip("/") for p in pages}
-    extra = [p for p in await crawl_direct(url, max_pages) if p["url"].rstrip("/") not in seen]
-    return (pages + extra)[:max_pages]
+        exa_pages = []
+    try:
+        direct = {p["url"].rstrip("/"): p for p in _clean(await crawl_direct(url, max_pages))}
+    except Exception:
+        direct = {}
+    merged = []
+    for page in exa_pages:
+        twin = direct.pop(page["url"].rstrip("/"), None)
+        if twin and not page["images"]:
+            page["images"] = twin["images"]
+        merged.append(page)
+    return (merged + list(direct.values()))[:max_pages]
 
 
 async def fetch_images(pages: list[dict], limit: int = 4) -> list[dict]:
