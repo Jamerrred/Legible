@@ -114,7 +114,7 @@ async def onboard(website_id: str, run_check: bool = True, sim_queries: int = 5,
         if run_check:
             _stage(website_id, "checking", f"Running {sim_queries} customer agents on your website")
             await run_simulation(website_id, target="storefront", n=sim_queries, label="First check, your website")
-        _stage(website_id, "ready", "Answer the questions in your inbox")
+        _stage(website_id, "ready", "Ready for you to confirm and answer")
     except Exception as error:
         traceback.print_exc()
         _stage(website_id, "failed", f"{type(error).__name__}: {str(error)[:300]}")
@@ -225,8 +225,20 @@ async def run_simulation(website_id: str, target: str = "storefront", n: int = 5
 # ---------------------------------------------------------------- activity and the periodic review
 
 
+_sync_lock = asyncio.Lock()
+
+
 async def sync_activity(website_id: str) -> int:
-    """Pull new events. Requests and questions reach the inbox at once, with no model involved."""
+    """Pull new events. Requests and questions reach the owner at once, with no model involved.
+
+    The app loads several things at once, so this takes a lock and skips events it already has.
+    Otherwise one booking could arrive twice.
+    """
+    async with _sync_lock:
+        return await _sync_activity(website_id)
+
+
+async def _sync_activity(website_id: str) -> int:
     site = store.website(website_id)
     if not site["published_version"]:
         return 0
@@ -235,6 +247,8 @@ async def sync_activity(website_id: str) -> int:
         return 0
     items = None
     for event in events:
+        if store.one("SELECT remote_id FROM event WHERE website_id = ? AND remote_id = ?", website_id, event["id"]):
+            continue
         store.insert(
             "event",
             website_id=website_id,
