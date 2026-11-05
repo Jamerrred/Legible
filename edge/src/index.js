@@ -401,7 +401,11 @@ async function readParams(request, url) {
 
 // ------------------------------------------------------------ storage
 
+// The owner app's own reads and quote console aren't agent activity.
+const quiet = new WeakSet();
+
 function log(env, ctx, slug, event, payload) {
+  if (quiet.has(ctx)) return;
   ctx.waitUntil(env.DB.prepare("INSERT INTO event (slug, ts, event, payload) VALUES (?, ?, ?, ?)").bind(slug, now(), event, JSON.stringify(payload)).run());
 }
 
@@ -415,6 +419,7 @@ const wantsMarkdown = (request) => (request.headers.get("accept") || "").toLower
 // ------------------------------------------------------------ public routes
 
 async function publicRoute(request, env, ctx, url, slug, rest) {
+  if ((request.headers.get("user-agent") || "").startsWith("legible-")) quiet.add(ctx);
   const biz = await loadBusiness(env, slug);
   if (!biz) return new Response("No business is published at this address.", { status: 404 });
   const rec = biz.record;
@@ -507,7 +512,7 @@ async function publicRoute(request, env, ctx, url, slug, rest) {
       return wantsJson ? json({ outcome: `refused_${outcome.status}`, summary: headline(rec, outcome), notes: outcome.notes }, 422) : page(`Request not sent: ${name}`, `<h1>This request wasn't sent</h1>${outcomeHtml(rec, outcome)}${requestForm(base, job, params)}`, 422);
     }
     const id = newId("req");
-    const data = { inputs: job, name: params.get("name"), email: params.get("email") || "", phone: params.get("phone") || "", submitted_by: params.get("submitted_by") || "customer", agent_name: params.get("agent_name") || "", notes: params.get("notes") || "", quote_id: params.get("quote_id") || "", total: outcome.total, still_needed: outcome.still_needed };
+    const data = { inputs: job, name: params.get("name"), email: params.get("email") || "", phone: params.get("phone") || "", submitted_by: params.get("submitted_by") || "customer", agent_name: params.get("agent_name") || "", notes: params.get("notes") || "", quote_id: params.get("quote_id") || "", lines: outcome.lines, tax: outcome.tax, total: outcome.total, still_needed: outcome.still_needed };
     await env.DB.prepare("INSERT INTO item (id, slug, kind, created_at, data) VALUES (?, ?, 'request', ?, ?)").bind(id, slug, now(), JSON.stringify(data)).run();
     log(env, ctx, slug, "request", { id, inputs: job, outcome: "received", submitted_by: data.submitted_by, agent_name: data.agent_name, total: outcome.total });
     const status = `${abs}/r/${id}`;

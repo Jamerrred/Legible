@@ -53,7 +53,7 @@ def add_questions(website_id: str, questions: list[dict], source: str) -> int:
                 "question",
                 q["question"],
                 q.get("why", ""),
-                {"topic": q.get("topic", ""), "unknown_statement": q.get("unknown_statement", "")},
+                {"topic": q.get("topic", ""), "unknown_statement": q.get("unknown_statement", ""), "chip": q.get("topic", ""), "blocks": q.get("blocks", [])},
                 source,
             )
     return len(questions)
@@ -217,52 +217,60 @@ async def run_simulation(website_id: str, target: str = "storefront", n: int = 5
         for r in runs
         if not r["settled"] and not _agent_broke(r["result"])
     ]
-    added = add_questions(website_id, await brain.holes_to_questions(record, failures, asked_titles(website_id)), "simulation")
+    questions = await brain.holes_to_questions(record, failures, asked_titles(website_id))
+    for question in questions:
+        numbers = [n for n in question.get("blocks") or [] if isinstance(n, int) and 0 <= n < len(failures)]
+        question["blocks"] = [failures[n]["customer_request"] for n in numbers]
+    added = add_questions(website_id, questions, "simulation")
     if added and target == "resource":
         await publish(website_id)
     return simulation_id
 
 
+def _read_run(log: Path) -> dict:
+    """One test customer's run log, as what it asked and each step it took."""
+    task, path, done, outcome = "", [], False, None
+    step = lambda kind, text: path.append({"kind": kind, "text": text})  # noqa: E731
+    for line in log.read_text(errors="ignore").splitlines():
+        try:
+            event = json.loads(line)
+        except ValueError:
+            continue
+        kind = event.get("event") or event.get("type")
+        if kind == "run_start":
+            task = event.get("task", "")
+        elif kind == "turn_end" and event.get("text"):
+            step("say", event["text"][:160])
+        elif kind == "tool_call":
+            args = event.get("args") or {}
+            tool = event.get("tool")
+            if tool == "read_page":
+                url = str(args.get("url", ""))
+                where = "/" + url.split("//")[-1].partition("/")[2]
+                if "/quote?" in url:
+                    step("quote", f"Working out a quote: {where[:80]}")
+                else:
+                    step("read", f"Reading {where[:80]}")
+            elif tool == "search_web":
+                step("search", f"Searching: {(args.get('queries') or [''])[0][:80]}")
+            elif tool == "browse_task":
+                step("browse", f"Opening a browser: {str(args.get('objective', ''))[:80]}")
+            elif tool == "do_math":
+                step("math", "Doing the math")
+            elif tool == "finish":
+                step("finish", "Writing the answer")
+        elif kind == "run_end":
+            done, outcome = True, (event.get("report") or {}).get("outcome")
+    return {"query": task, "steps": [s["text"] for s in path[-5:]], "path": path, "total": len(path), "done": done, "outcome": outcome}
+
+
 def sim_trace(simulation_id: str) -> list[dict]:
     """What each test customer is doing right now, read from the agents' live run logs."""
     base = RUNS / simulation_id
-    agents = []
     if not base.exists():
-        return agents
-    for folder in sorted(base.iterdir()):
-        logs = sorted(folder.glob("run-*.jsonl")) if folder.is_dir() else []
-        if not logs:
-            continue
-        task, steps, done, outcome = "", [], False, None
-        for line in logs[-1].read_text(errors="ignore").splitlines():
-            try:
-                event = json.loads(line)
-            except ValueError:
-                continue
-            kind = event.get("event") or event.get("type")
-            if kind == "run_start":
-                task = event.get("task", "")
-            elif kind == "turn_end" and event.get("text"):
-                steps.append(event["text"][:160])
-            elif kind == "tool_call":
-                args = event.get("args") or {}
-                tool = event.get("tool")
-                if tool == "read_page":
-                    url = str(args.get("url", ""))
-                    path = "/" + url.split("//")[-1].partition("/")[2]
-                    steps.append(f"Working out a quote: {path[:80]}" if "/quote?" in url else f"Reading {path[:80]}")
-                elif tool == "search_web":
-                    steps.append(f"Searching: {(args.get('queries') or [''])[0][:80]}")
-                elif tool == "browse_task":
-                    steps.append(f"Opening a browser: {str(args.get('objective', ''))[:80]}")
-                elif tool == "do_math":
-                    steps.append("Doing the math")
-                elif tool == "finish":
-                    steps.append("Writing the answer")
-            elif kind == "run_end":
-                done, outcome = True, (event.get("report") or {}).get("outcome")
-        agents.append({"query": task, "steps": steps[-5:], "total": len(steps), "done": done, "outcome": outcome})
-    return agents
+        return []
+    logs = (sorted(folder.glob("run-*.jsonl")) if folder.is_dir() else [] for folder in sorted(base.iterdir()))
+    return [_read_run(found[-1]) for found in logs if found]
 
 
 # ---------------------------------------------------------------- activity and the periodic review
