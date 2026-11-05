@@ -2,9 +2,31 @@
 
 MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps that website accurate.
 
-**Status:** the first demo is built on one fictional business, Cormorant Mobile Detailing, and is [live on Cloudflare](deploy/workers/README.md). In local runs, on the 7 queries run on both versions, a stand-in agent went from 3 correct to 7 correct after one link to a resource was added. That's a small test, and real Muse is untested: see [the benchmark](reports/first-demo-benchmark.md).
+**Status:** the back office backend is built as a prototype, and it publishes a public resource to a Cloudflare Worker: see [its report](reports/back-office-mvp.md). It has no interface yet. The first demo, on the fictional Cormorant Mobile Detailing, is [live on Cloudflare](deploy/workers/README.md), and its local results are [here](reports/first-demo-benchmark.md). Real Muse is untested.
 
-## Quick start
+## Run the back office
+
+Start the API and leave it running, then open `http://127.0.0.1:8200/docs`:
+
+```bash
+uv run uvicorn back_office.api:app --port 8200
+```
+
+Walk one business through the whole product with a scripted owner. It spends a few cents without the optional flags:
+
+```bash
+uv run python scripts/mvp_demo.py --url http://cormorant.localhost:8101
+```
+
+Redeploy the public resource after changing `edge/`:
+
+```bash
+cd edge && npx wrangler deploy
+```
+
+[The owner app doc](docs/10-owner-app.md) maps each screen to its API calls.
+
+## Quick start for the first demo
 
 You need [uv](https://docs.astral.sh/uv/). Install the dependencies and add your keys:
 
@@ -49,20 +71,22 @@ uv run python -m bench.summarize --name first-demo
 
 ## How it fits together
 
-`businesses/cormorant/facts.json` is the single source of truth. The site, resource and grader all come from it.
+For the first demo, `businesses/cormorant/facts.json` is the single source of truth, and the site, hand-written resource and grader all come from it. The back office never reads that file: it builds its own record from the website and the owner's answers.
 
 | Folder | What's in it |
 |---|---|
+| `back_office/` | The back office agent and its API: fact sheet, crawl, interview, check, inbox, activity and review |
+| `edge/` | The Cloudflare Worker that serves every business's public resource from its published record |
 | [docs/](docs/README.md) | Decisions, plan and specs. Start with the README there |
 | [reports/](reports/first-demo-benchmark.md) | Benchmark results and the build report |
 | `businesses/` | One facts file per business |
 | `mf_core/` | Reads the facts, works out quotes and open slots, and writes the structured logs |
 | `demo_site/` | The three-page website, in "before" and "after" versions. `holes.json` lists its roadblocks |
-| `demo_resource/` | The agent-readable resource, with quote, request and question forms |
+| `demo_resource/` | The hand-written resource, with quote, request and question forms. It's the answer key |
 | `consumer_agent/` | The general stand-in agent. It knows nothing about this project or business |
 | `bench/` | Control page, mock web, queries, grader and benchmark runner |
-| [deploy/workers/](deploy/workers/README.md) | The Cloudflare deployment and its live addresses |
-| `scripts/` | The server launcher and the booking check |
+| [deploy/workers/](deploy/workers/README.md) | The Cloudflare deployment of the first demo's site and hand-written resource, and their live addresses |
+| `scripts/` | The server launcher, the booking check and the scripted owner |
 | `tests/` | Tests for the facts, site, resource and grader |
 | `corpus/` | Saved page copies for the agent's local search |
 | [runs/](runs/README.md) | Raw run logs and graded results |

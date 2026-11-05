@@ -1,6 +1,6 @@
 # Build plan
 
-*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../reports/first-demo.md). Everything from the real Muse check onward is still to do.*
+*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../reports/first-demo.md). On 5 November the founder chose to skip the rest of steps 5 and 6 and go straight to step 7, whose backend is now built as a prototype: see [its report](../reports/back-office-mvp.md).*
 
 ## The order
 
@@ -110,7 +110,7 @@ The full spec is in [09-back-office-agent.md](09-back-office-agent.md). Suggeste
 | Part | Build | Test |
 |---|---|---|
 | a | Business record and resource generator | Generated resource carries the same facts as the hand-written one |
-| b | Ingestion through Context.dev, plus files | Proposes the right facts from each mock site |
+| b | Ingestion through Exa, plus files | Proposes the right facts from each mock site |
 | c | Owner chat and inbox | The owner can confirm, correct and answer |
 | d | Plain-language revision | Instruction test set: the right change, a question if unclear, nothing unconfirmed |
 | e | Simulator, reusing the consumer agent | Finds gaps we removed on purpose |
@@ -171,7 +171,7 @@ Add `/mcp` and `/.well-known/poppy.json`, generated from the record. Check Poppy
 | Now | More OpenRouter credit. The first demo used almost all of the $10, and a "before" run costs about $0.26 |
 | Before the real Muse check | A host that can run a small server, and a domain or two for the mock businesses |
 | Step 5 | Time to run the real Muse on the mock site |
-| Step 7 | API keys for Context.dev and Composio, and a demo Google account |
+| Step 7 | A Composio API key, and optionally a demo Google account holding a fake calendar and price sheet |
 
 ## Open questions
 
