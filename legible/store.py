@@ -16,7 +16,7 @@ SCHEMA = """
 CREATE TABLE IF NOT EXISTS website (
   id TEXT PRIMARY KEY, slug TEXT UNIQUE, name TEXT, url TEXT, stage TEXT, stage_note TEXT,
   published_version INTEGER DEFAULT 0, event_cursor INTEGER DEFAULT 0, revised_through INTEGER DEFAULT 0,
-  pages TEXT DEFAULT '[]', created_at TEXT);
+  pages TEXT DEFAULT '[]', created_at TEXT, link_placed INTEGER DEFAULT 0);
 CREATE TABLE IF NOT EXISTS record_version (
   website_id TEXT, version INTEGER, record TEXT, reason TEXT, created_at TEXT, PRIMARY KEY (website_id, version));
 CREATE TABLE IF NOT EXISTS inbox_item (
@@ -49,6 +49,8 @@ def connect():
     conn.row_factory = sqlite3.Row
     try:
         conn.executescript(SCHEMA)
+        if "link_placed" not in {row["name"] for row in conn.execute("PRAGMA table_info(website)")}:
+            conn.execute("ALTER TABLE website ADD COLUMN link_placed INTEGER DEFAULT 0")
         yield conn
         conn.commit()
     finally:

@@ -81,7 +81,7 @@ def test_the_next_step_follows_the_owners_path(app_state):
     client.post(f"/inbox/{app_state['question']}/answer", json={"text": "9 to 5"})
     assert step()["screen"] == "resource"
     client.post(f"/inbox/{app_state['review']}/confirm")
-    assert step() is None
+    assert step()["label"] == "Put your link on your website"
 
     store.insert(
         "simulation",
@@ -104,6 +104,8 @@ def test_the_next_step_follows_the_owners_path(app_state):
         summary={"answered": 4, "queries": 4},
         created_at=store.now(),
     )
+    assert step()["label"] == "Put your link on your website"
+    store.update("website", "id", website_id, link_placed=1)
     assert step() is None
 
     checks = client.get(f"/websites/{website_id}").json()["checks"]

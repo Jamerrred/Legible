@@ -227,7 +227,8 @@ Object.assign(actions, {
   },
   checkLink: async () => {
     const result = await post(`/websites/${state.site.id}/check-link`);
-    toast(result.found ? "Found it on your website" : "It's not on your website's home page yet");
+    toast(result.found ? "Found it on your website. Agents can reach your page now" : "It's not on your website's home page yet");
+    if (result.found) app.render();
   },
 });
 

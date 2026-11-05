@@ -39,6 +39,7 @@ def test_changing_one_size_keeps_the_others_and_moves_the_from_price(record):
         "change the class a price of the skip from 69 to 70",
         "The Skiff class A is going to $70",
         "Skiff from $69 to $70",
+        "Class A of the Skiff is now $70",
     ],
 )
 def test_demo_reads_a_plain_price_change(record, text):
@@ -67,3 +68,13 @@ def test_demo_changes_a_fee(record):
 def test_demo_still_adds_a_plain_statement(record):
     plan = demo.plan_instruction(record, "We now take Apple Pay", TODAY)
     assert "Apple Pay" in plan["ops"][0]["item"]["statement"]
+
+
+def test_new_database_tracks_whether_the_link_is_on_the_site(tmp_path, monkeypatch):
+    from legible import store
+
+    monkeypatch.setattr(store, "DB_PATH", tmp_path / "fresh.db")
+    store.insert("website", id="web_1", slug="s", url="https://example.com", pages=[], created_at=store.now())
+    assert store.website("web_1")["link_placed"] == 0
+    store.update("website", "id", "web_1", link_placed=1)
+    assert store.website("web_1")["link_placed"] == 1

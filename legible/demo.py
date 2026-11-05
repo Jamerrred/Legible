@@ -128,7 +128,7 @@ CUSTOMERS = [
         "query": "Need a number for our muddy F-250 in Sausalito, 94965. Inside only, with a real shampoo. The outlet is 150 feet away. What's the whole cost, tax and all?",
         "needs": ["fees", "tax"],
         "first": [("say", "I'll add up the whole job for your truck."), ("read", "/"), ("browse", "Find the price for a heavy-duty pickup"), ("read", "/faq"), ("say", "“May cost extra” is never defined, and neither is the travel fee."), ("finish", "")],
-        "first_answer": "$444 so far, for the interior detail and shampoo. I can't give a total: the heavily soiled charge, the travel fee and tax aren't stated.",
+        "first_answer": "$444 so far, for the interior detail, the shampoo and the generator. I can't give a total: the heavily soiled charge, the travel fee and tax aren't stated.",
         "again": [("read", "/b/sunrise"), ("quote", "/b/sunrise/quote?service=the-cutter&variant=class-d&addon=shampoo&condition=heavily-soiled&condition=generator-fee&zip=94965"), ("finish", "")],
         "again_answer": "$628.76, tax and travel included: $289 interior detail, $125 shampoo, $75 heavily soiled, $30 generator, $44.76 tax and $65 travel.",
     },
@@ -247,7 +247,7 @@ async def onboard(website_id: str, run_check: bool = True) -> None:
 
 
 async def seed_activity(website_id: str) -> None:
-    """Sample visits to the real public page, so the Inbox and Bookings have something real to show."""
+    """Sample visits to the real public page, once the owner has put the link on their website."""
     link = edge.link_for(SLUG)
     await asyncio.sleep(1.5)
     next_saturday = date.today() + timedelta(days=((5 - date.today().weekday()) % 7) or 7)
@@ -271,7 +271,7 @@ async def seed_activity(website_id: str) -> None:
                 await client.post(link + path, data=data, headers=headers)
             else:
                 await client.get(link + path, params=data, headers=headers)
-            await asyncio.sleep(0.15)
+            await asyncio.sleep(0.9)  # Slow enough to watch the counts climb.
     store.add_inbox(website_id, "insight", "3 agents asked for ceramic coating", "It isn't something you offer.", {}, "agent_activity")
     store.add_inbox(website_id, "insight", "1 agent asked about Sunday visits", "You're closed on Sundays.", {}, "agent_activity")
 
@@ -297,7 +297,7 @@ def _names_item(item: dict, lower: str, words: list[str]) -> bool:
 def _price_change(record: dict, text: str) -> dict | None:
     """A plain price edit, such as "Class A of the Skiff from 69 to 70". The real app asks the model instead."""
     lower = text.lower()
-    target = re.search(r"\bto\s+\$?(\d+(?:\.\d+)?)", lower)
+    target = re.search(r"\b(?:to|now)\s+\$?(\d+(?:\.\d+)?)", lower)
     if not target:
         return None
     new = float(target.group(1))
