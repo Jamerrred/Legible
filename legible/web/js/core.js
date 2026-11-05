@@ -32,7 +32,10 @@ export function morph(el, html) {
 }
 export function withTransition(update) {
   if (!document.startViewTransition || calm()) return update();
-  document.startViewTransition(update);
+  // A newer route change or a hidden tab skips the animation. The update still runs, so that's not an error.
+  const transition = document.startViewTransition(update);
+  transition.ready.catch(() => {});
+  transition.finished.catch(() => {});
 }
 
 // Display helpers
