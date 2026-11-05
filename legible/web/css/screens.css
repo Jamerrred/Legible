@@ -1,11 +1,5 @@
 /* ------------------------------------------------------------ Start: add a website */
 .start { position: relative; flex: 1; display: grid; place-items: center; padding: 32px; overflow: hidden; }
-.lens-ground { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 4px 30px; padding: 14px 24px; font: 500 clamp(26px, 2.9vw, 42px)/1.26 var(--font-display); letter-spacing: -.03em; user-select: none; pointer-events: none; }
-.lens-ground span { white-space: nowrap; }
-.lens-ground--blur { color: var(--line); filter: blur(7px); }
-.lens-ground--sharp { color: var(--ink); -webkit-mask-image: radial-gradient(circle 165px at var(--lx, 22%) var(--ly, 26%), #000 62%, transparent 100%); mask-image: radial-gradient(circle 165px at var(--lx, 22%) var(--ly, 26%), #000 62%, transparent 100%); }
-.lens-ground--sharp em { font-style: normal; color: var(--pen); }
-.lens-veil { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 620px 300px at 50% 50%, var(--canvas) 62%, transparent 100%); }
 .start-form { position: relative; width: min(680px, 100%); display: flex; flex-direction: column; gap: 18px; }
 .start-form h1 { text-align: center; }
 .start-form > p { text-align: center; color: var(--ink-2); font-size: 16.5px; max-width: 54ch; margin: 0 auto 8px; }
@@ -304,8 +298,6 @@ table.prices td .strong { display: block; }
 }
 @media (max-width: 860px) {
   .start { padding: 18px 16px; }
-  .lens-ground { font-size: 22px; }
-  .lens-veil { background: radial-gradient(ellipse 110% 320px at 50% 50%, var(--canvas) 72%, transparent 100%); }
   .theatre { padding: 22px 16px 28px; }
   .stages { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .customers, .customers--live, .sims .customers--live { grid-template-columns: minmax(0, 1fr); }

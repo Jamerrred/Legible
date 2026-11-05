@@ -53,8 +53,9 @@ function railHtml() {
   const nextCard = !site ? "" : next
     ? `<a class="next-card" href="#/${next.screen}"><span class="eyebrow">Next</span><b>${esc(next.label)}${next.busy ? "" : icon("arrow-right")}</b><small>${esc(next.note)}</small></a>`
     : `<div class="next-card next-card--quiet"><span class="eyebrow">Next</span><b>You're all caught up</b><small>New questions land here when agents get stuck.</small></div>`;
-  return `<a class="brand" href="#/websites" aria-label="Legible home"><img class="brand-mark" src="favicon.svg" alt=""><span class="brand-word">${BRAND}</span></a>
+  return `<a class="brand" href="#/websites/new" aria-label="Legible home"><img class="brand-mark" src="favicon.svg" alt=""><span class="brand-word">${BRAND}</span></a>
     ${site ? `<a class="site-chip" href="#/websites"><span class="dot ${site.live ? "dot--live" : ""}"></span><span class="grow"><b class="ellipsis">${esc(site.name || site.slug)}</b><small class="ellipsis">${esc(domain(site.url))}</small></span></a>` : ""}
+    ${site ? `<a class="rail-add" href="#/websites/new">${icon("plus")} Add a website</a>` : ""}
     <div class="thread" id="thread" style="--fill:${reached * 54}px"><span class="thread-fill"></span><span class="thread-ind" id="thread-ind"></span>${NAV.map(([id, ic, label], i) => {
       const [line, needs, count] = steps[id];
       return `<a class="step ${now === id ? "on" : ""} ${i < reached ? "done" : ""} ${needs ? "needs" : ""}" href="#/${id}" id="nav-${id}" ${now === id ? 'aria-current="page"' : ""}><span class="step-node">${icon(ic)}</span><span class="step-text"><b>${label}</b>${line ? `<small>${esc(line)}</small>` : ""}</span>${count ? `<span class="count">${count}</span>` : ""}</a>`;
