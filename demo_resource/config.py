@@ -5,11 +5,11 @@ from __future__ import annotations
 import os
 from zoneinfo import ZoneInfo
 
-from mf_core.business import load_facts
+from legible_core.business import load_facts
 
 SLUG = "cormorant"
 STREAM = "resource"
-BASE_URL = os.environ.get("MF_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
+BASE_URL = os.environ.get("LEGIBLE_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
 SLOT_DAYS = 21
 QUOTE_VALID_DAYS = 7  # This site's own limit. The facts don't set a quote validity period.
 

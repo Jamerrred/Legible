@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from mf_core.business import load_facts, slots
+from legible_core.business import load_facts, slots
 
 MERCHANT_HOST = re.compile(r"^https?://(agents\.)?cormorant\.localhost", re.IGNORECASE)
 UNSETTLED = {"unknown", "needs_person", "blocked"}

@@ -28,7 +28,7 @@ This is Muse's own account, so it may not be accurate.
 
 Its tools fall into five groups: search and fetch for reading, a live browser agent for interaction, command-line connectors for structured services, a filesystem and shell, and persistent memory.
 
-## Which routes MuseFront can reach
+## Which routes Legible can reach
 
 | Route | Reachable today? | What it needs |
 |---|---|---|
@@ -88,7 +88,7 @@ It also separated traffic into tiers. A public catalog would be fetched by Muse 
 - **One claim conflicts with outside reporting.** Muse says it can't present a signed identity, but [DataDome reported](https://ppc.land/metas-muse-agent-gains-a-signed-id-in-a-quiet-test-datadome-finds/) that Meta began signing a small share of Muse's requests around 12 October 2026. Log signatures if they appear, but don't depend on them.
 - **`/.well-known/agent.json` looks like Muse's own suggestion.** It isn't one of the standards we found, and Muse didn't mention Poppy.
 - **Some of it is speculation.** The questions invited agreement, and claims like first movers getting "all" the agent demand have no evidence behind them. Its "yes, I'd leave a trace" is hypothetical, because it says it lacks the tooling.
-- **MuseFront wouldn't have created a $150 van clean.** Where the real price is $414, it would give a faster, verified answer and show the owner the demand lost on price.
+- **Legible wouldn't have created a $150 van clean.** Where the real price is $414, it would give a faster, verified answer and show the owner the demand lost on price.
 
 ## Testing on Muse directly
 

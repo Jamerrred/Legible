@@ -1,6 +1,6 @@
 """CLI and function entry point.
 
-uv run python -m consumer_agent.run --task "..." --person person.json \
+uv run python -m errand.run --task "..." --person person.json \
     --search local --corpus DIR --tier spark --out runs/x/
 """
 

@@ -20,7 +20,7 @@ from demo_resource.config import (
     ZONES,
 )
 from demo_resource.formatting import esc, local_now, long_date, money, usd, words
-from mf_core.business import quote, slots
+from legible_core.business import quote, slots
 
 # ---------------------------------------------------------------- reading input
 

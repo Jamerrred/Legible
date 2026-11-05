@@ -1,7 +1,7 @@
 """The agent-readable resource for one business, served at agents.cormorant.localhost:8103.
 
 Every fact comes from businesses/cormorant/facts.json and every total from
-mf_core.business.quote. The main page and offering pages are built as a small list of
+legible_core.business.quote. The main page and offering pages are built as a small list of
 blocks, then rendered to HTML or markdown, so the two versions can't drift apart.
 
 Run from the repo root: uv run python -m demo_resource.app
@@ -60,7 +60,7 @@ from demo_resource.quoting import (
     parse_job,
     read_params,
 )
-from mf_core.logbook import log_event
+from legible_core.logbook import log_event
 
 app = FastAPI(title=NAME, docs_url=None, redoc_url=None, openapi_url=None)
 

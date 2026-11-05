@@ -1,5 +1,5 @@
 // The public resource for every business. Each page is built from the published record
-// when it's requested, so the link needs no model and no back office, and dated facts
+// when it's requested, so the link needs no model and no Legible app, and dated facts
 // such as "closed for 2 days" start and end by themselves.
 
 const CATEGORY_TITLES = {
@@ -549,7 +549,7 @@ async function publicRoute(request, env, ctx, url, slug, rest) {
   return page("Not found", "<h1>Nothing here</h1>", 404);
 }
 
-// ------------------------------------------------------------ admin routes, for the back office
+// ------------------------------------------------------------ admin routes, for the Legible app
 
 async function adminRoute(request, env, url, path) {
   const auth = request.headers.get("authorization") || "";
@@ -598,6 +598,6 @@ export default {
       const rest = (match[2] || "").replace(/\/$/, "");
       return publicRoute(request, env, ctx, url, match[1], rest);
     }
-    return new Response("MuseFront", { headers: { "content-type": "text/plain", "x-robots-tag": "noindex" } });
+    return new Response("Legible", { headers: { "content-type": "text/plain", "x-robots-tag": "noindex" } });
   },
 };

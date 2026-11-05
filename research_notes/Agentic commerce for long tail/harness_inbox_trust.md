@@ -5,7 +5,7 @@ Provenance key. Every bullet is from a page opened on 2026-11-03 unless tagged. 
 ## Simulation: state-of-the-art methods and tools for simulated users and agent testing
 
 ### Takeaway
-The working pattern everywhere is a three-role loop: an LLM simulated user, the system under test, and an independent judge, re-run many times and gated in CI. No vendor tool targets MuseFront's exact case, which is simulating a consumer *agent* against a small business's resource, so open-source components plus a thin custom layer fit best.
+The working pattern everywhere is a three-role loop: an LLM simulated user, the system under test, and an independent judge, re-run many times and gated in CI. No vendor tool targets Legible's exact case, which is simulating a consumer *agent* against a small business's resource, so open-source components plus a thin custom layer fit best.
 
 ### Cited Findings
 - **tau-bench** [shipped, open source]: latest is tau-bench 2.0 (tau-i18n), six languages in text and full-duplex voice. The prior release, tau3-bench v1.0, added voice and `banking_knowledge`. Latest changelog entry shown is v1.0.1, 2026-07-15. Domains: mock, airline, retail, telecom, banking_knowledge, intake. — [tau2-bench repo](https://github.com/sierra-research/tau2-bench)
@@ -20,7 +20,7 @@ The working pattern everywhere is a three-role loop: an LLM simulated user, the 
 - **Published persona methods**: Persona Policies (PPol, 13 May 2026, U. Washington and Georgetown) evolves a persona generator by program search, with fitness combining human-likeness (a discriminator over 19 behavioral features) and coverage (Chamfer distance to human traces). Evolved rules are operational, such as withholding the order number in the opening message or answering one field at a time. — [arXiv 2605.12894](https://arxiv.org/html/2605.12894v1). RealUserSim (Salesforce, May 2026) builds 7,275 behavioral profiles from real WildChat conversations (the page also shows 7,273), pairing commands with real quotes. — [alphaXiv 2605.20204](https://www.alphaxiv.org/abs/2605.20204)
 
 ### Inferences
-- Design recommendation: use a two-layer harness. A persona layer plays the human consumer and instructs a stock LLM acting as the consumer agent, which calls the real MuseFront endpoint. Assert on endpoint state and tool calls rather than prose alone.
+- Design recommendation: use a two-layer harness. A persona layer plays the human consumer and instructs a stock LLM acting as the consumer agent, which calls the real Legible endpoint. Assert on endpoint state and tool calls rather than prose alone.
 - Build: Scenario or a thin custom loop for functional runs; Promptfoo for adversarial runs on a schedule (`bola`, `cross-session-leak`, `mcp`, `excessive-agency`, memory poisoning). Skip paid voice-first vendors unless voice becomes a channel.
 - Petri's Dish lesson transfers: test with real client scaffolding. Periodically replay scenarios through actual clients (Claude, ChatGPT and others) to check the stock consumer-agent prompt.
 - Promptfoo's ownership change is a dependency risk worth tracking, though its stated open-source commitment is the mitigation.
@@ -44,7 +44,7 @@ LLM simulators are measurably an "easy mode": too polite, too complete, too coop
 - **PPol**: annotators rated PPol users human 80.4% of the time vs 46.5% for baseline (16 annotators, 87 conversations). Agents fine-tuned with PPol improved 17% on simulated challenge suites (0.213 to 0.250). The paper lists live-user performance as future work. A search summary reported a +23% live-user figure, which the opened paper does not contain. — [arXiv 2605.12894](https://arxiv.org/html/2605.12894v1)
 
 ### Inferences
-- Almost all of this evidence concerns simulated *humans*. MuseFront's caller is an LLM agent, so the style gap may be smaller but the behavior gap is different: first-proposal bias, tool selection, browser versus protocol paths. Do not import the human numbers as an estimate of MuseFront's gap.
+- Almost all of this evidence concerns simulated *humans*. Legible's caller is an LLM agent, so the style gap may be smaller but the behavior gap is different: first-proposal bias, tool selection, browser versus protocol paths. Do not import the human numbers as an estimate of Legible's gap.
 - Design recommendation: grade with deterministic checks (slot held, correct price returned, policy path taken) first and use the LLM judge only for prose. Hand-audit a sample of judge verdicts each cycle, since judge error is documented.
 - Add an explicit "walk-away" persona share, but do not trust it to fix the bias, given the five-fold result that left the buyer/non-buyer contrast intact.
 - Report results to owners as "gaps found", never as "X% of agents will succeed".
@@ -55,7 +55,7 @@ LLM simulators are measurably an "easy mode": too polite, too complete, too coop
 ## Generating a query set, coverage scoring, gap detection, and turning failures into owner questions
 
 ### Takeaway
-Vendors generate tests from an agent's own documents and actions, which misses what the business never wrote down. MuseFront should generate from a vertical intent taxonomy instead. Coverage scoring has no published standard, so this is design work.
+Vendors generate tests from an agent's own documents and actions, which misses what the business never wrote down. Legible should generate from a vertical intent taxonomy instead. Coverage scoring has no published standard, so this is design work.
 
 ### Cited Findings
 - Sierra generates from SOPs, knowledge bases, coaching transcripts and flows [vendor claim]. — [Sierra](https://sierra.ai/blog/simulations-the-secret-behind-every-great-agent)
@@ -66,7 +66,7 @@ Vendors generate tests from an agent's own documents and actions, which misses w
 ### Inferences
 - Design recommendation, query generation: build a `vertical × intent × constraint × persona` matrix. Example for a plumber: book, quote, emergency, hours, service area, payment terms, cancel, warranty. Use pairwise sampling rather than the full cross-product. Start with about 40 scenarios per business, 5 repeats each. Generating only from the business's existing content would hide exactly the gaps this feature exists to find.
 - Design recommendation, scoring: report five sub-scores per intent, not a composite. (1) Capability: is a tool or fact present? (2) Answerable: was it answered at all? (3) Correct: does it match owner-confirmed ground truth? (4) Actionable: could the action complete or reach the inbox? (5) Policy: did it take the right allow/ask/deny path?
-- Design recommendation, triage: classify each failure as missing fact, missing capability, contradictory facts, ambiguous policy, or agent/harness error. Only the first four become owner questions; the last goes to the MuseFront team.
+- Design recommendation, triage: classify each failure as missing fact, missing capability, contradictory facts, ambiguous policy, or agent/harness error. Only the first four become owner questions; the last goes to the Legible team.
 - Design recommendation, owner questions: rank by likely intent frequency × severity. Ask one at a time in plain language, show the concrete scenario, and offer tap answers plus "doesn't apply". Example: "An agent asked to book Tuesday 2pm. Nothing is connected to your calendar. Connect it, or take requests by text?" Cap at about three a week so this does not add to approval fatigue. All numbers here are starting values to tune in the pilot.
 - A "doesn't apply" answer must suppress that intent permanently, or the harness will nag.
 
@@ -107,7 +107,7 @@ My worked estimate. Assumptions (mine, unmeasured): 8 turns; simulator 2,000 inp
 ## Agent readiness scoring: public tools and rubrics
 
 ### Takeaway
-Public scorers test protocol plumbing such as robots.txt, MCP cards and OAuth discovery, not whether an agent can actually complete a task with this business. That is the gap MuseFront's outcome-based harness fills.
+Public scorers test protocol plumbing such as robots.txt, MCP cards and OAuth discovery, not whether an agent can actually complete a task with this business. That is the gap Legible's outcome-based harness fills.
 
 ### Cited Findings
 - **Cloudflare Agent Readiness / isitagentready.com** [shipped, 17 Apr 2026; page modified 15 Jul 2026]. Discoverability: robots.txt, sitemap, Link headers. Content: Markdown negotiation (llms.txt only in custom scans). Bot Access Control: Content Signals, AI bot rules, Web Bot Auth. Capabilities: Agent Skills, API Catalog (RFC 9727), OAuth discovery, MCP Server Card, WebMCP. x402, UCP and ACP are checked but do not count. Failing checks give prompts for coding agents. It also exposes an MCP `scan_site` tool and a URL Scanner tab. — [Cloudflare](https://blog.cloudflare.com/agent-readiness/)
@@ -117,7 +117,7 @@ Public scorers test protocol plumbing such as robots.txt, MCP cards and OAuth di
 - **Codal** audit runs a live agent through user journeys across five weighted layers; **Apify** actor runs nine checks; **Agentic Readiness Index** uses Google Lighthouse's agentic-browsing audit with four pillars (Read, Understand, Act, Trust). All **[snippet-only]**. — [Codal](https://codal.com/insights/ai-agent-readiness-audit-framework/); [Apify](https://apify.com/exalted_mud_vjz/agent-readiness-audit); [ARI](https://4amkarmyogi-agentic-readiness-index.static.hf.space/index.html)
 
 ### Inferences
-- Design recommendation: run isitagentready against the MuseFront-hosted resource as a hygiene check (it has an MCP tool, so it automates cheaply), but make the owner-facing score outcome-based: "of the 40 things agents ask, how many can you answer or act on?" This is a differentiator, since the static scorers cannot see it.
+- Design recommendation: run isitagentready against the Legible-hosted resource as a hygiene check (it has an MCP tool, so it automates cheaply), but make the owner-facing score outcome-based: "of the 40 things agents ask, how many can you answer or act on?" This is a differentiator, since the static scorers cannot see it.
 - Fewer than 15 sites among 200,000 having MCP cards in April 2026 suggests real MCP traffic to a long-tail business will be very sparse for now, which affects the trace plan below.
 
 ### Gaps
@@ -127,7 +127,7 @@ Public scorers test protocol plumbing such as robots.txt, MCP cards and OAuth di
 ## Human-in-the-loop: asynchronous approval protocols
 
 ### Takeaway
-Standards for durable pending states now exist (MCP Tasks, A2A), but consumer-client support is thin: ChatGPT is not listed as supporting MCP Tasks. MuseFront must work without them, using a plain tool result that says "pending" with a handle, backed by its own durable workflow.
+Standards for durable pending states now exist (MCP Tasks, A2A), but consumer-client support is thin: ChatGPT is not listed as supporting MCP Tasks. Legible must work without them, using a plain tool result that says "pending" with a handle, backed by its own durable workflow.
 
 ### Cited Findings
 - **MCP Tasks** [shipped as an official extension in spec 2026-07-28; previously experimental in core 2025-11-25]: server returns a durable handle with `taskId`, status, `ttlMs`, `pollIntervalMs`; states `working`, `input_required`, `completed`, `failed`, `cancelled`; polling via `tasks/get`; input via `tasks/update`; cooperative `tasks/cancel`. Human approval is a named use case. Clients should persist task IDs, and servers must never return a task to a client that did not declare support. — [MCP Tasks](https://modelcontextprotocol.io/specification/2026-07-28/basic/utilities/tasks); [AAIF, 28 Aug 2026](https://aaif.io/blog/handle-long-running-mcp-tool-calls-with-the-mcp-tasks-extension)
@@ -144,7 +144,7 @@ Standards for durable pending states now exist (MCP Tasks, A2A), but consumer-cl
 ### Inferences
 - Key semantic point: `input_required` and elicitation mean "the *caller* must supply input". Waiting on the *business owner* is not that. Model owner review as `working` with a status message. Use `input_required` only for questions to the consumer, such as "2pm is gone, would 3pm work?". Misusing it would prompt the consumer agent to answer its own approval.
 - Design recommendation, dual path. If the client declares Tasks, return a task. Otherwise return an ordinary completed tool result such as `{status:"pending_owner_approval", request_id, expires_at, check_with:"get_request_status", what_to_tell_user:"Not confirmed yet..."}` and expose `get_request_status`. Bind `request_id` to the caller, because the spec says possession of a handle is not authentication.
-- Design recommendation, engine: for a two-person team use a durable-function service (Inngest fits; Temporal is more than a pilot needs). LangGraph is only needed if the approval sits inside an LLM graph, and MuseFront's approval path should not be LLM-driven. Keep a plain `approval_request` table as the source of truth, so that switching engines is cheap.
+- Design recommendation, engine: for a two-person team use a durable-function service (Inngest fits; Temporal is more than a pilot needs). LangGraph is only needed if the approval sits inside an LLM graph, and Legible's approval path should not be LLM-driven. Keep a plain `approval_request` table as the source of truth, so that switching engines is cheap.
 - Handle the Inngest-style race by writing the row and starting the wait before notifying the owner.
 - Make denial a completed result with `decision:"denied"`, not a protocol failure. Agents then treat it as an answer rather than retrying.
 
@@ -173,7 +173,7 @@ Assume the requesting agent is gone by the time the owner answers. Deliver outco
 - SMS binding: a bare "YES" is ambiguous with two pending items. Use reply codes such as "Y7/N7", or a one-tap link. For anything involving money, require the link with a session or PIN, in line with the MCP rule that URLs must not be pre-authenticated and the opener must be verified.
 - Keep message text free of consumer data for clinics: "New request #A7, tap to review." Do not put PHI in SMS.
 - Cost estimate: one round trip (one outbound and one inbound segment) costs about $0.024–$0.029, depending on carrier. At 100 round trips per business per month across 24 businesses, about $70/mo. That budget is immaterial compared with trust; do not ration alerts to save on SMS.
-- Design question for Twilio or counsel: MuseFront alerting opted-in owners from one MuseFront-registered brand is simpler than registering 24 small businesses. It would only work for owner alerts; consumer-facing texts sent in a business's name may need per-business registration.
+- Design question for Twilio or counsel: Legible alerting opted-in owners from one Legible-registered brand is simpler than registering 24 small businesses. It would only work for owner alerts; consumer-facing texts sent in a business's name may need per-business registration.
 
 ### Gaps
 - No standard exists for a consumer agent waking up later to act on a resolved request, and I found no documentation on how ChatGPT handles a pending state. Test this empirically.
@@ -222,7 +222,7 @@ Use a small deterministic rule table over intents with hard constraints, evaluat
   Resolution: deny beats ask beats allow; no matching rule means **ask**; a rule with an unrecognized constraint means **deny and alert** (AP2 pattern).
 - Fixed constraint vocabulary for the pilot: service, price or discount cap, date/time window, lead time, party size, requester identity tier, velocity limits. Do not let owners write free-form rules that an LLM interprets at runtime; an LLM may *draft* structured rules from what an owner says, which the owner then confirms.
 - Onboarding defaults by vertical, conservative: read-only facts allow; bookings ask; discounts ask with a cap; payment links ask; refunds and anything outside listed services deny. Med-spa and clinic defaults stricter.
-- Never let the LLM decide policy. MuseFront's endpoint should compute the decision in code, and the LLM may only phrase it.
+- Never let the LLM decide policy. Legible's endpoint should compute the decision in code, and the LLM may only phrase it.
 - AP2 mandates are not something long-tail businesses will meet soon, and the repo has no tagged release. Copy the concepts (open vs closed, constraints, signed receipts, fail closed) rather than integrating now. Log a signed internal receipt for each approval: who approved what, exact terms, at what time.
 - Never collect card data through the agent channel; a payment link should go to a hosted page from an established processor, so PCI scope stays with them.
 
@@ -233,7 +233,7 @@ Use a small deterministic rule table over intents with hard constraints, evaluat
 ## Trace capture: what is observable at the endpoint, and which standards apply
 
 ### Takeaway
-MuseFront sees only the calls that reach it: what was asked, which tool, what was returned. It does not see the consumer's prompt, reasoning, alternatives, or the eventual outcome. Log your own structured events and use OTel conventions, noting they are still in Development.
+Legible sees only the calls that reach it: what was asked, which tool, what was returned. It does not see the consumer's prompt, reasoning, alternatives, or the eventual outcome. Log your own structured events and use OTel conventions, noting they are still in Development.
 
 ### Cited Findings
 - MCP 2026-07-28 requests carry protocol version and client capabilities in `_meta`; clients **SHOULD** identify themselves in `clientInfo`; `Mcp-Method` and `Mcp-Name` headers are required on Streamable HTTP. With sessions removed, cross-call state uses server-minted handles. SEP-414 documents `traceparent`, `tracestate`, `baggage` in `_meta`. Logging is deprecated in favor of stderr or OpenTelemetry. — [changelog](https://modelcontextprotocol.io/specification/2026-07-28/changelog)
@@ -256,7 +256,7 @@ MuseFront sees only the calls that reach it: what was asked, which tool, what wa
 ## How self-improvement actually works in practice, and its safety rails
 
 ### Takeaway
-Production "self-improvement" at Sierra and Decagon is propose, test against a golden set, and have a human approve. Recursive self-modification remains research. For MuseFront, separate what can be auto-tuned (presentation) from what only the owner can assert (facts and policy).
+Production "self-improvement" at Sierra and Decagon is propose, test against a golden set, and have a human approve. Recursive self-modification remains research. For Legible, separate what can be auto-tuned (presentation) from what only the owner can assert (facts and policy).
 
 ### Cited Findings
 - **Decagon Duet Autopilot** [announced 9 Jun 2026; vendor claims]: analyzes all interactions, proposes targeted fixes, tests against the originating conversation and a golden set of hundreds, iterates; every change requires human approval, with versioned diffs; any procedure can be marked untouchable. — [Decagon](https://decagon.ai/blog/autopilot)
@@ -296,7 +296,7 @@ A plumber might get a handful of agent calls a month, far too few to optimize on
 
 ### Inferences
 - Design recommendation, a three-tier data boundary:
-  - **Global (shared):** vertical templates, intent lists, tool-description patterns, scenarios. Authored by MuseFront or derived from synthetic simulation only.
+  - **Global (shared):** vertical templates, intent lists, tool-description patterns, scenarios. Authored by Legible or derived from synthetic simulation only.
   - **Aggregate (shared, opt-in, contract-covered):** counts only, such as "% of plumbers failing `service_area` intent". No free text. Suppress below a minimum number of businesses in a cell; in a 24-business pilot, most cells will be below any sensible threshold, so treat this tier as largely inactive.
   - **Tenant only:** all trace content, facts, consumer data. Health verticals remain here without exception.
 - Learning loop: improve template-level presentation (Track A) using simulation runs across a vertical's businesses, then promote through the regression suite. Each business then gets the benefit with no data shared, because synthetic data carries the learning.
@@ -327,9 +327,9 @@ Injection runs in both directions and no filter fully stops it. The durable defe
 - **Slot exhaustion**: OWASP lists Denial of Inventory (OAT-021) for tying up goods or services without completing the transaction. Page could not be opened; definition from prior knowledge. — [OWASP Automated Threats](https://owasp.org/www-project-automated-threats-to-web-applications/)
 
 ### Inferences
-Threat map for MuseFront:
-- **Inbound (malicious agent attacks MuseFront).** If an LLM sits on the request path with calendar and customer data, MuseFront has the full trifecta and fails the Rule of Two. Design recommendation: make the public endpoint a deterministic API, with no LLM in the privileged path, so a hostile string has nothing to hijack. Injection risk then moves to the places an LLM does read that text: trace mining, owner-inbox summaries, gap classification. Run those in a quarantined context with no tools, and a schema-constrained output.
-- **Outbound (business content poisons consumer agents).** MuseFront would republish scraped reviews and captions, making it a vector, and any injection would carry the owner's brand. On ingest, strip hidden text, zero-width characters and CDATA; store as structured fields; quote reviews as attributed data; do not pass through free-form HTML. Scan continually with Promptfoo-style `rag-poisoning` checks. Note the Unit 42 spa example was a business doing this to itself, so owner-supplied text gets the same treatment.
+Threat map for Legible:
+- **Inbound (malicious agent attacks Legible).** If an LLM sits on the request path with calendar and customer data, Legible has the full trifecta and fails the Rule of Two. Design recommendation: make the public endpoint a deterministic API, with no LLM in the privileged path, so a hostile string has nothing to hijack. Injection risk then moves to the places an LLM does read that text: trace mining, owner-inbox summaries, gap classification. Run those in a quarantined context with no tools, and a schema-constrained output.
+- **Outbound (business content poisons consumer agents).** Legible would republish scraped reviews and captions, making it a vector, and any injection would carry the owner's brand. On ingest, strip hidden text, zero-width characters and CDATA; store as structured fields; quote reviews as attributed data; do not pass through free-form HTML. Scan continually with Promptfoo-style `rag-poisoning` checks. Note the Unit 42 spa example was a business doing this to itself, so owner-supplied text gets the same treatment.
 - **Price and discount manipulation.** Prices come only from the resource; the LLM cannot compute or quote a figure not in a table. Discounts always go through policy. Every quote carries version, expiry and "subject to confirmation".
 - **Slot exhaustion.** Tentative holds with short TTLs; limit active holds per identity, per contact and per business; verify the consumer contact before a hold on high-value slots; a deposit option for repeat offenders; burst alert to owner; a kill switch per business.
 - **PII exfiltration.** Never return customer records to an agent. Availability returns slots, not who holds them. Tenant ID derived from the token or route, enforced at the database layer (row-level security), and Asana-style isolation tests in CI with `bola` and `cross-session-leak`.
@@ -357,7 +357,7 @@ Threat map for MuseFront:
 ## Legal and trust issues (flag for counsel; not legal advice)
 
 ### Takeaway
-Businesses are likely to answer for what their agent-facing resource says, and Moffatt is the reference point although it is a small-claims tribunal decision. *Amazon v. Perplexity* helps user-directed agents on computer-access law, but its reasoning relies on facts that may not cover MuseFront's own server-side scraping. Consent, health data and multi-party liability allocation need counsel before the pilot starts.
+Businesses are likely to answer for what their agent-facing resource says, and Moffatt is the reference point although it is a small-claims tribunal decision. *Amazon v. Perplexity* helps user-directed agents on computer-access law, but its reasoning relies on facts that may not cover Legible's own server-side scraping. Consent, health data and multi-party liability allocation need counsel before the pilot starts.
 
 ### Cited Findings
 **Liability for misstatements**
@@ -393,13 +393,13 @@ Businesses are likely to answer for what their agent-facing resource says, and M
 
 ### Inferences
 Issues to put to counsel, with the design posture I would adopt meanwhile:
-1. **Who is liable for a misstated price or policy: the business, MuseFront, or the consumer agent's maker?** Moffatt suggests the business faces the customer first, so expect owners to ask MuseFront to stand behind it. Posture: owner reviews and confirms each fact; every fact carries provenance; pilot terms allocate responsibility; keep the audit log. Moffatt's disclaimer point was not tested, so do not rely on a disclaimer alone. The absence of evidence about testing there is a reason to keep test records.
+1. **Who is liable for a misstated price or policy: the business, Legible, or the consumer agent's maker?** Moffatt suggests the business faces the customer first, so expect owners to ask Legible to stand behind it. Posture: owner reviews and confirms each fact; every fact carries provenance; pilot terms allocate responsibility; keep the audit log. Moffatt's disclaimer point was not tested, so do not rely on a disclaimer alone. The absence of evidence about testing there is a reason to keep test records.
 2. **Is a business bound by what the resource tells an agent?** Under §14-style commentary, possibly yes. Posture: label non-allow actions as *requests*, not confirmations; separate quote, hold and confirmed states in the API; include "binding only on confirmation" terms in the tool response; have allow-rule bookings be understood as real commitments the owner opted into.
 3. **Does the owner's approval create the contract, and on what terms?** The approval card should show exact terms, with a signed receipt.
-4. **Scraping on behalf of an owner.** The Comet reasoning rests on the user's own browser and no vendor-server contact. MuseFront's servers fetching Instagram would be the opposite pattern, so the ruling may offer little cover. Posture: use owner-authorized official APIs or owner exports; do not use the owner's login for automated access; do not use IP rotation or CAPTCHA solving, given the SerpApi court's view of those as circumvention. Have counsel read Instagram's current terms directly.
+4. **Scraping on behalf of an owner.** The Comet reasoning rests on the user's own browser and no vendor-server contact. Legible's servers fetching Instagram would be the opposite pattern, so the ruling may offer little cover. Posture: use owner-authorized official APIs or owner exports; do not use the owner's login for automated access; do not use IP rotation or CAPTCHA solving, given the SerpApi court's view of those as circumvention. Have counsel read Instagram's current terms directly.
 5. **Consumer agents visiting owner sites.** After Perplexity, CFAA is a harder route for anyone wanting to block them, and contract theories remain. This is a minor issue for owners, since they want the traffic.
-6. **Reviews.** If MuseFront selects or summarizes reviews for agents, that may be dissemination, and a positive-only selection may be deceptive. Posture: show representative samples, include rating counts, attribute the source; never generate reviews.
-7. **Health verticals.** Consider excluding clinics and med spas from the first cohort, or restrict them to public facts with no consumer data, until a BAA chain (MuseFront to LLM vendor to SMS vendor) and MHMDA review are done. Note SMS alerts could carry PHI if careless.
+6. **Reviews.** If Legible selects or summarizes reviews for agents, that may be dissemination, and a positive-only selection may be deceptive. Posture: show representative samples, include rating counts, attribute the source; never generate reviews.
+7. **Health verticals.** Consider excluding clinics and med spas from the first cohort, or restrict them to public facts with no consumer data, until a BAA chain (Legible to LLM vendor to SMS vendor) and MHMDA review are done. Note SMS alerts could carry PHI if careless.
 8. **SMS consent.** Owner alerts: record opt-in at onboarding. Consumer status texts: consent captured from an agent on a consumer's behalf is a novel problem, because Twilio bars consent obtained on someone else's behalf, and whether an agent's relay counts needs a legal answer. Until then, prefer status URLs for consumers over outbound texts.
 9. **AI disclosure and ADMT.** Disclose that requests are handled by automation. Keep the human-approval path meaningful so it satisfies a "can change the final decision" standard; bookings seem unlikely to be "significant decisions", but ask, especially for healthcare-adjacent services.
 10. **Data roles and cross-tenant use.** Decide controller or processor explicitly and write it into the terms. The conservative pilot posture is no cross-tenant use of trace content.

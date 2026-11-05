@@ -7,10 +7,10 @@ import os
 import re
 from typing import Any
 
-from consumer_agent.llm import LLM, LLMError, load_env
+from errand.llm import LLM, LLMError, load_env
 
 load_env()
-TIER = os.environ.get("MF_MODEL", "spark")
+TIER = os.environ.get("LEGIBLE_MODEL", "spark")
 _model_id: str | None = None
 spend = {"calls": 0, "cost": 0.0}
 

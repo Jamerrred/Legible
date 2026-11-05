@@ -1,4 +1,4 @@
-# MuseFront
+# Legible
 
 - All work on this project happens in this folder and its GitHub repo, `Jamerrred/Musefront`.
 - Start with `docs/README.md`, which has the current position and the reading order.
@@ -16,7 +16,7 @@
 
 ## Protect the results
 
-- `consumer_agent/` is frozen at the tag `first-demo-agent-freeze`. Don't change it unless the work is meant to change the agent. If it is, rerun the benchmark and move the tag.
+- `errand/`, our consumer agent, is frozen at the tag `first-demo-agent-freeze`, where it was named `consumer_agent/`. Don't change it unless the work is meant to change the agent. If it is, rerun the benchmark and move the tag.
 - "Before" and "after" may differ only by the link line.
 - Whoever writes benchmark queries sees only the facts, without placements. Whoever writes the resource never sees the queries.
 - Benchmark runs spend real OpenRouter credit, so ask first. `--regrade` and `bench.summarize` are free.

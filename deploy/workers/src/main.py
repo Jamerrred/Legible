@@ -4,9 +4,9 @@ import os
 
 from version import APP, RESOURCE_URL
 
-os.environ["MF_RESOURCE_BASE_URL"] = RESOURCE_URL
-os.environ["MF_LOG_DIR"] = "/tmp/musefront-logs"
-os.environ["MF_LOG_STDOUT"] = "1"
+os.environ["LEGIBLE_RESOURCE_BASE_URL"] = RESOURCE_URL
+os.environ["LEGIBLE_LOG_DIR"] = "/tmp/legible-logs"
+os.environ["LEGIBLE_LOG_STDOUT"] = "1"
 
 if APP == "resource":
     from demo_resource.app import app

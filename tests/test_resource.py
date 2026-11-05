@@ -9,7 +9,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from demo_resource.app import app
-from mf_core.business import load_facts, quote
+from legible_core.business import load_facts, quote
 
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = load_facts()["facts"]
@@ -54,7 +54,7 @@ def test_ask_only_logs_the_question_and_returns_a_status_link(client, isolated_l
     assert "Do you clean roof racks?" in log
 
 
-def test_consumer_agent_knows_nothing_about_this_project():
-    code = "\n".join(path.read_text() for path in (ROOT / "consumer_agent").glob("*.py"))
-    for word in ("cormorant", "musefront", "agents.", "detailing"):
+def test_errand_knows_nothing_about_this_project():
+    code = "\n".join(path.read_text() for path in (ROOT / "errand").glob("*.py"))
+    for word in ("cormorant", "legible", "agents.", "detailing"):
         assert word not in code.lower(), word

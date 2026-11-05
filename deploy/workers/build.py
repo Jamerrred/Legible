@@ -10,7 +10,7 @@ SKIP = shutil.ignore_patterns("__pycache__", "static", "holes.json", "DESIGN_NOT
 
 
 def build(app: str, resource_url: str) -> None:
-    for folder in ("mf_core", "demo_site", "demo_resource", "businesses"):
+    for folder in ("legible_core", "demo_site", "demo_resource", "businesses"):
         shutil.rmtree(HERE / "src" / folder, ignore_errors=True)
         shutil.copytree(ROOT / folder, HERE / "src" / folder, ignore=SKIP)
     shutil.rmtree(HERE / "public", ignore_errors=True)

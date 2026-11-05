@@ -10,7 +10,7 @@ from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 
-DB_PATH = Path(os.environ.get("MF_DB_PATH", Path(__file__).resolve().parent / "musefront.db"))
+DB_PATH = Path(os.environ.get("LEGIBLE_DB_PATH", Path(__file__).resolve().parent / "legible.db"))
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS website (

@@ -1,6 +1,6 @@
 # Build plan
 
-*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../reports/first-demo.md). On 5 November the founder chose to skip the rest of steps 5 and 6 and go straight to step 7, whose backend is now built as a prototype: see [its report](../reports/back-office-mvp.md).*
+*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../reports/first-demo.md). On 5 November the founder chose to skip the rest of steps 5 and 6 and go straight to step 7, whose backend is now built as a prototype: see [its report](../reports/legible-mvp.md).*
 
 ## The order
 
@@ -11,17 +11,17 @@ The sequence is the founder's, with a control test, a separate query bank and th
 | 1 | First mock business site | Gives the agent something real to hit |
 | 2 | Consumer agent | Our stand-in for Muse, Instinct, Grok and search-API agents |
 | 3 | Query bank and "before" runs | Proves the roadblocks are real |
-| 4 | Hand-written resource | The target output for the back office agent |
+| 4 | Hand-written resource | The target output for the Legible agent |
 | 5 | "After" runs and the real Muse check | The go or no-go test |
 | 6 | The other three sites | Proves it's horizontal |
-| 7 | Back office agent, end to end | The product |
+| 7 | Legible agent, end to end | The product |
 | 8 | Demo assembly | Turns real runs into a story |
 | 9 | MCP and Poppy (optional) | Only if there's a reason by then |
 
 Two pieces get reused:
 
-- **The hand-written resource** becomes the answer key for the back office agent.
-- **The consumer agent** becomes the simulator inside the back office agent.
+- **The hand-written resource** becomes the answer key for the Legible agent.
+- **The consumer agent** becomes the simulator inside the Legible agent.
 
 ## How the first demo changed this
 
@@ -78,7 +78,7 @@ Two pieces get reused:
 
 ## Step 4: Hand-written resource
 
-**Build:** a resource written by Claude from the facts file, following the [resource spec](04-resource-spec.md), plus a small form handler and the link from the site. The back office agent isn't involved yet.
+**Build:** a resource written by Claude from the facts file, following the [resource spec](04-resource-spec.md), plus a small form handler and the link from the site. The Legible agent isn't involved yet.
 
 **Done when:** every fact in the resource matches the facts file, and the resource's author hasn't seen the query bank.
 
@@ -103,9 +103,9 @@ Two pieces get reused:
 
 **Done when:** all four have before-and-after results.
 
-## Step 7: Back office agent
+## Step 7: Legible agent
 
-The full spec is in [09-back-office-agent.md](09-back-office-agent.md). Suggested order within this step:
+The full spec is in [09-legible-agent.md](09-legible-agent.md). Suggested order within this step:
 
 | Part | Build | Test |
 |---|---|---|
@@ -118,7 +118,7 @@ The full spec is in [09-back-office-agent.md](09-back-office-agent.md). Suggeste
 | g | Composio connectors | Reads a demo calendar and price sheet. Check coverage first |
 | h | Request handling and approvals | A request reaches the inbox, and the owner's reply reaches the status page |
 
-**Done when:** a mock business goes from a raw site to a working resource through the back office agent alone, and the consumer agent passes the same queries as it did on the hand-written version.
+**Done when:** a mock business goes from a raw site to a working resource through the Legible agent alone, and the consumer agent passes the same queries as it did on the hand-written version.
 
 ## Step 8: Demo assembly
 
@@ -128,7 +128,7 @@ The full spec is in [09-back-office-agent.md](09-back-office-agent.md). Suggeste
 
 ## Step 9: MCP and Poppy (optional)
 
-Add `/mcp` and `/.well-known/poppy.json`, generated from the record. Check Poppy's field names against its validator. Do this only if the back office agent is finished and there's a reason to.
+Add `/mcp` and `/.well-known/poppy.json`, generated from the record. Check Poppy's field names against its validator. Do this only if the Legible agent is finished and there's a reason to.
 
 ## Test rules
 

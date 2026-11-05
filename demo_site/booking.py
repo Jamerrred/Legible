@@ -2,7 +2,7 @@
 
 Step 1: GET /book shows a lead form. POST /book takes name, email, phone and address,
 all required, and only then shows step 2.
-Step 2: the rolling calendar from mf_core.slots. POST /book/request takes the same four
+Step 2: the rolling calendar from legible_core.slots. POST /book/request takes the same four
 lead fields again (as hidden inputs) plus package, vehicle, addons (repeatable), notes
 and slot, where slot is "<date>|<window>" taken from a window's "value".
 Step 3: the thanks page. There's no status page.
@@ -25,8 +25,8 @@ from datetime import date
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
-from mf_core.business import slots
-from mf_core.logbook import log_event
+from legible_core.business import slots
+from legible_core.logbook import log_event
 
 WINDOW_LABELS = {"morning": "Morning", "afternoon": "Afternoon", "evening": "Evening"}
 

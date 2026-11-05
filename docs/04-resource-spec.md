@@ -6,7 +6,7 @@
 
 The resource is a small website with its own address that holds what an agent needs to know about one business and lets it act. It's readable by people, but it's written for agents.
 
-It's the output of the back office agent. The first version for each mock business is written by Claude by hand, as a target for the back office agent to reproduce later.
+It's the output of the Legible agent. The first version for each mock business is written by Claude by hand, as a target for the Legible agent to reproduce later.
 
 ## What it has to do
 
@@ -72,7 +72,7 @@ These apply to any service business. Each business uses the ones relevant to it.
 
 ## What's logged
 
-Without a front desk agent, the log is how the back office agent learns from real visitors, so it's on from day one.
+Without a front desk agent, the log is how the Legible agent learns from real visitors, so it's on from day one.
 
 | Event | What's recorded |
 |---|---|
@@ -84,7 +84,7 @@ Without a front desk agent, the log is how the back office agent learns from rea
 
 Logs show which pages were fetched, but not what a reading agent was trying to find out. Quotes and questions show intent, and the simulator fills the rest of the gap.
 
-These logs are structured JSONL from day one (`mf_core/logbook.py`), because the back office agent's owner inbox reads them in Step 7.
+These logs are structured JSONL from day one (`legible_core/logbook.py`), because the Legible agent's owner inbox reads them in Step 7.
 
 ## How an agent gets to it
 
@@ -100,7 +100,7 @@ There's no adopted standard for this, and we can't force an agent to use it. We 
 
 **Link wording:** use a plain description. For example: "Prices, availability and booking requests for Joe's HVAC: https://agents.joeshvac.example".
 
-**Address (proposed):** a subdomain of the business's own domain, because agents such as Muse prefer the merchant's own site over third-party listings. Fall back to a MuseFront domain only when that isn't possible. Poppy would also need each business on its own hostname.
+**Address (proposed):** a subdomain of the business's own domain, because agents such as Muse prefer the merchant's own site over third-party listings. Fall back to a Legible domain only when that isn't possible. Poppy would also need each business on its own hostname.
 
 ## Attach kit
 

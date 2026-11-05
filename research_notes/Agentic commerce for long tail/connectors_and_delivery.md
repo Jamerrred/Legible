@@ -1,4 +1,4 @@
-# Connectors and delivery feasibility for MuseFront (as of 3 Nov 2026)
+# Connectors and delivery feasibility for Legible (as of 3 Nov 2026)
 
 Evidence key. Untagged = primary or vendor page I opened (through a fetch tool that returns a model-extracted summary, so re-check exact wording before quoting it externally). **[S]** = seen only in a search-result summary, page not opened. **[3P]** = third-party source, not the vendor. Search budget ran out partway through, so several gaps below could not be searched further; they are listed in each Gaps block. Dollar figures are USD list prices on the date above.
 
@@ -51,10 +51,10 @@ Pilot tier: **A** = connect in the pilot. **B** = connect with a workaround. **C
 - Manual export exists: Accounts Center > Export your information, HTML or JSON. That article covers personal profiles and does not cover Pages ([Facebook help](https://www.facebook.com/help/212802592074644)).
 
 ### Inferences
-- A brand-new MuseFront without an aged Google profile cannot pass the GBP gate itself. Apply using a founder's or friendly pilot business's profile that is 60+ days old. Until approved, fill GBP data by interview. Nothing indicates the 60-day rule can be waived.
+- A brand-new Legible without an aged Google profile cannot pass the GBP gate itself. Apply using a founder's or friendly pilot business's profile that is 60+ days old. Until approved, fill GBP data by interview. Nothing indicates the 60-day rule can be waived.
 - For Google Calendar in a 24-owner pilot, publishing the OAuth consent screen as "in production, unverified" looks better than Testing status: it accepts a warning screen and burns up to 24 of the 100 lifetime slots, but avoids seven-day re-consent, since the docs tie seven-day expiry to Testing only. Confirm this behaviour in a test project. Use `calendar.freebusy` plus a separate `calendar.events` grant only when booking is on.
 - For Meta, running Development mode with each owner as an Instagram Tester is workable technically for 24 businesses, but it adds a role-invite step per owner and is intended for development and testing, so using it with real client accounts is a policy risk rather than a cleared path. Submit App Review in parallel so a rejection or delay is visible early.
-- The MCP servers now offered by Calendly, Square, Stripe, Shopify and Wix change the build: MuseFront can sometimes broker to them rather than re-implement each API. Note these mostly assume a user-authorized client, so they help read and act for the owner, not expose a public consumer endpoint, with Wix and Shopify storefront endpoints as exceptions.
+- The MCP servers now offered by Calendly, Square, Stripe, Shopify and Wix change the build: Legible can sometimes broker to them rather than re-implement each API. Note these mostly assume a user-authorized client, so they help read and act for the owner, not expose a public consumer endpoint, with Wix and Shopify storefront endpoints as exceptions.
 - Recommended pilot order: website crawl and document upload first, then Google Calendar, Square, Calendly, Shopify Storefront, Wix, WooCommerce, Stripe. Add Instagram and GBP as soon as approvals allow. Leave Toast, Mindbody, Vagaro, Fresha, Etsy, Yelp, TikTok, WhatsApp and Gmail to manual intake.
 
 ### Gaps
@@ -91,7 +91,7 @@ Crawling is effectively a solved and very cheap problem at pilot scale (cents pe
   - Cloudflare: at an assumed 5 s per page, 2.5 min or under $0.01 at overage. 24 sites refreshed weekly is about 4 browser hours, inside the 10 included on the $5/month Workers plan, excluding Workers AI.
   - Jina: at about 2,500 tokens per 10 kB page ([Anthropic's estimate](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool)), 75,000 tokens per site, so 10M free tokens covers about five passes of 24 sites.
 - Cost per menu page, assuming about 1,860 input tokens and 1,500 output tokens: Haiku 5.5 about $0.001, Gemini 2.5 Flash-Lite about $0.001, Sonnet 5.5 about $0.019. That is below the third-party $0.01 to $0.10 range for cheap models. All 24 businesses at 4 menu pages each costs under $2 even on Sonnet 5.5.
-- Suggested pipeline: Firecrawl or Cloudflare to crawl, keep raw HTML, run `extruct` before any markdown conversion, LLM-normalize visible text into the MuseFront schema, vision LLM for PDFs and image menus, then owner review. Cost is immaterial; extraction errors in prices and hours are the actual risk.
+- Suggested pipeline: Firecrawl or Cloudflare to crawl, keep raw HTML, run `extruct` before any markdown conversion, LLM-normalize visible text into the Legible schema, vision LLM for PDFs and image menus, then owner review. Cost is immaterial; extraction errors in prices and hours are the actual risk.
 
 ### Gaps
 - No 2026 benchmark found of menu-specific structured extraction across Gemini, Claude and GPT. Run a small test on a few dozen real menus scored against hand labels.
@@ -116,8 +116,8 @@ Buy OAuth and token plumbing from a low-cost tool (Nango or Composio) and build 
 
 ### Inferences
 - Cost at pilot scale, assuming 3 connections for each of 24 businesses (72 total): Nango about $21 inside the $50 included credit; Merge about $1,560/month for 24 accounts; Pipedream $99 to $150; Composio $0 to $29; Unified.to $750+ after the trial.
-- Build vs buy. Buy token storage, refresh and hosted connect UI, since that saves weeks per provider. Build the per-source mapping into MuseFront's schema, because a unified "calendar" or "commerce" model will not capture services, menus or booking rules well. Direct keys or tokenless access are simple enough to build yourself for WooCommerce, Shopify Storefront, Wix site MCP and Acuity.
-- Composio-managed OAuth is the only option here that might let owners connect Google or Meta without MuseFront's own review, since Composio owns the app. That is untested; a shared app's scopes and quota may not fit.
+- Build vs buy. Buy token storage, refresh and hosted connect UI, since that saves weeks per provider. Build the per-source mapping into Legible's schema, because a unified "calendar" or "commerce" model will not capture services, menus or booking rules well. Direct keys or tokenless access are simple enough to build yourself for WooCommerce, Shopify Storefront, Wix site MCP and Acuity.
+- Composio-managed OAuth is the only option here that might let owners connect Google or Meta without Legible's own review, since Composio owns the app. That is untested; a shared app's scopes and quota may not fit.
 - Long-tail vertical tools with gated access (Toast, Mindbody, Vagaro) stay gated regardless: the platform stores tokens but does not grant partner status or activation codes.
 
 ### Gaps
@@ -149,7 +149,7 @@ Manual intake should be the default path rather than an edge case, since Tier C 
 ## Delivering the resource: which plug-in option works for which owner and platform?
 
 ### Takeaway
-Host everything on a MuseFront-controlled URL and ask the owner to do one small thing: add a visible link and, where the platform allows it, a `<head>` tag or an llms.txt line. `/.well-known` on the owner's domain is mostly unavailable on Wix, Squarespace and Shopify, and DNS, JS-only and QR options are poor primary channels.
+Host everything on a Legible-controlled URL and ask the owner to do one small thing: add a visible link and, where the platform allows it, a `<head>` tag or an llms.txt line. `/.well-known` on the owner's domain is mostly unavailable on Wix, Squarespace and Shopify, and DNS, JS-only and QR options are poor primary channels.
 
 ### Cited Findings
 
@@ -173,9 +173,9 @@ Framer is the contrast case: Pro and higher host up to 30 well-known files per p
 | **Agent page** (server-rendered HTML + JSON-LD) | None to create | Independent of platform | Any fetcher, if linked or found by search. Claude's fetch does not run JavaScript ([Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool)), so it must be server-rendered | **Primary deliverable** |
 | **`/.well-known` file** on owner's domain | High or impossible on builders | See matrix | Direct path fetch if the agent knows the convention. Server Cards and API Catalogs were on fewer than 15 of ~200,000 top domains (Apr 2026) ([Cloudflare](https://blog.cloudflare.com/agent-readiness/)) | Skip for owner domains |
 | **llms.txt** | Low: paste a line on Squarespace; API or app on Wix; template on Shopify | The one root file all three builders now expose | Weak. Reports of zero or few autonomous fetches **[S][3P]** ([vendor test](https://www.ovclawyermarketing.com/images/LLM_TXT_Research_Paper_Final.pdf), [Promptwatch](https://promptwatch.com/blog/llms-txt-has-no-impact-on-ai-search-and-geo)) | Cheap add-on, low expected impact |
-| **A2A agent card** | None if MuseFront hosts on a domain it controls | `/.well-known/agent-card.json` is domain-scoped; also curated registries and direct config ([A2A](https://a2a-protocol.org/latest/topics/agent-discovery/)) | Well-known path on the agent's domain, or a registry | Later, only with a real A2A server |
+| **A2A agent card** | None if Legible hosts on a domain it controls | `/.well-known/agent-card.json` is domain-scoped; also curated registries and direct config ([A2A](https://a2a-protocol.org/latest/topics/agent-discovery/)) | Well-known path on the agent's domain, or a registry | Later, only with a real A2A server |
 | **Subdomain `agents.business.com`** | Medium: add a CNAME, may need help | Needs DNS access. Cloudflare for SaaS: 100 hostnames included, then $0.10 ([Cloudflare](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/plans/)). Vercel Pro: unlimited custom domains, soft limit 100,000, 100 additions/hour ([Vercel](https://vercel.com/docs/platforms/multi-tenant-platforms/limits)) | Link from main site. Gains a real `/.well-known` on the business's registrable domain | Opt-in upgrade for capable owners |
-| **Path `musefront.ai/b/slug`** | None | Universal | Link from site or bio. Domain-level `.well-known` cannot be per-tenant, but a card may sit at any URI with `/server-card` recommended ([SEP-2127](https://modelcontextprotocol.io/seps/2127-mcp-server-cards)) | **Default URL** |
+| **Path `legible.ai/b/slug`** | None | Universal | Link from site or bio. Domain-level `.well-known` cannot be per-tenant, but a card may sit at any URI with `/server-card` recommended ([SEP-2127](https://modelcontextprotocol.io/seps/2127-mcp-server-cards)) | **Default URL** |
 | **DNS TXT record** | Medium to high | Needs DNS access | MCP's Server Card group considered and rejected it as too limited for path-based servers ([SEP-2127](https://modelcontextprotocol.io/seps/2127-mcp-server-cards)) | Not for discovery |
 | **`<link rel>` tag in `<head>`** | Low to medium, paste once | Wix, Squarespace, Shopify as above | No agent documented as following it. Whether fetch pipelines surface head links is undocumented | Add where possible, secondary |
 | **JS snippet** | Low | Same as head tag | Invisible to non-rendering fetchers such as Claude's web fetch ([Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool)) | Avoid as sole mechanism |
@@ -186,13 +186,13 @@ Framer is the contrast case: Pro and higher host up to 30 well-known files per p
 
 Two things already on owners' sites affect this choice:
 - Wix says agents get public site content from the default site MCP ([Wix](https://support.wix.com/en/article/ai-tools-connecting-wix-sites-to-ai-platforms)), and Shopify auto-generates `/.well-known/ucp` **[S]** ([forum](https://community.shopify.dev/t/how-to-get-well-known-ucp-on-shopify-plus-with-a-custom-headless-storefront/28470)).
-- SEP-2127's own example is Restaurant A listing cards hosted by a reservations SaaS in `restaurant-a.com/.well-known/ai-catalog.json`, with the SaaS exposing one card per restaurant ([SEP-2127](https://modelcontextprotocol.io/seps/2127-mcp-server-cards)). That is structurally MuseFront.
+- SEP-2127's own example is Restaurant A listing cards hosted by a reservations SaaS in `restaurant-a.com/.well-known/ai-catalog.json`, with the SaaS exposing one card per restaurant ([SEP-2127](https://modelcontextprotocol.io/seps/2127-mcp-server-cards)). That is structurally Legible.
 
 ### Inferences
-- Recommended default: `musefront.ai/b/slug` serves one server-rendered page holding visible facts, JSON-LD, a Markdown alternate, and links to `/b/slug/mcp`, its server card and an llms.txt. Consider `slug.musefront.ai` instead, because wildcard subdomains give each tenant its own `/.well-known` with no owner effort. Cost is a wildcard certificate and routing setup.
+- Recommended default: `legible.ai/b/slug` serves one server-rendered page holding visible facts, JSON-LD, a Markdown alternate, and links to `/b/slug/mcp`, its server card and an llms.txt. Consider `slug.legible.ai` instead, because wildcard subdomains give each tenant its own `/.well-known` with no owner effort. Cost is a wildcard certificate and routing setup.
 - Owner step is a generated, per-platform copy-paste with a verification button that fetches their homepage and confirms the link is live. Footer link first, head tag second, llms.txt line third.
-- Native Wix and Shopify endpoints reduce MuseFront's value on those platforms for catalog facts. MuseFront's edge there is merging data the platform does not hold, such as calendars, Instagram or owner policies. Non-platform service businesses are the stronger fit.
-- A MuseFront URL proves nothing about ownership. A link back from the owner's own domain, plus `sameAs` from the page to the owner's domain and social profiles, is the cheapest claim of authenticity. A DNS TXT record may still help MuseFront verify ownership, separately from discovery.
+- Native Wix and Shopify endpoints reduce Legible's value on those platforms for catalog facts. Legible's edge there is merging data the platform does not hold, such as calendars, Instagram or owner policies. Non-platform service businesses are the stronger fit.
+- A Legible URL proves nothing about ownership. A link back from the owner's own domain, plus `sameAs` from the page to the owner's domain and social profiles, is the cheapest claim of authenticity. A DNS TXT record may still help Legible verify ownership, separately from discovery.
 
 ### Gaps
 - Whether Wix Custom Code head snippets appear in the initial server HTML seen by non-rendering fetchers is untested. Same for Squarespace and Shopify. A one-hour test on each would settle this.
@@ -228,7 +228,7 @@ There is no adopted standard. No `rel="mcp"` exists; MCP's own Server Card exten
 - llms.txt autonomous fetching: a vendor's nine-site test reported none **[S][3P]** ([vendor test](https://www.ovclawyermarketing.com/images/LLM_TXT_Research_Paper_Final.pdf)); other logs show occasional generic requests with no ranking or citation lift **[S][3P]** ([Promptwatch](https://promptwatch.com/blog/llms-txt-has-no-impact-on-ai-search-and-geo)). No independent or peer-reviewed study was found.
 
 ### Inferences
-- Publish several weak signals rather than betting on one. On each agent page: visible text and a visible link; `<link rel="alternate" type="text/markdown">`; `<link rel="describedby">` to a per-business llms.txt; `<link rel="api-catalog">` or a catalog URL; a server card at `/b/slug/mcp/server-card`; JSON-LD with facts repeated in visible text. On MuseFront's apex: `/.well-known/ai-catalog.json` listing tenants' cards, matching SEP-2127's SaaS example.
+- Publish several weak signals rather than betting on one. On each agent page: visible text and a visible link; `<link rel="alternate" type="text/markdown">`; `<link rel="describedby">` to a per-business llms.txt; `<link rel="api-catalog">` or a catalog URL; a server card at `/b/slug/mcp/server-card`; JSON-LD with facts repeated in visible text. On Legible's apex: `/.well-known/ai-catalog.json` listing tenants' cards, matching SEP-2127's SaaS example.
 - Avoid inventing `rel="mcp"`: nothing would consume it, though it costs little if a future convention adopts that name.
 - WebMCP is relevant only for a site running script in a user's browser with a consuming browser agent. It cannot serve the "agent pings a link" model, and it requires script on the owner's site.
 - Treat "agent follows a link from a page" as a hypothesis, and instrument it: log user agents and referrers on every agent page and MCP endpoint in the pilot. That data would be unusual and useful.
@@ -259,10 +259,10 @@ Yes, and it became much easier with MCP 2026-07-28, which removed sessions and t
 | **Railway** | Generic container | Custom domains: Free 0, Hobby 2, Pro 20 ([pricing](https://railway.com/pricing)) | Hobby $5/month, Pro $20/month, usage about $10/GB-month and $20/vCPU-month ([pricing](https://railway.com/pricing)) |
 
 ### Inferences
-- Recommended: one Cloudflare Worker or Vercel function routing `/b/{slug}/mcp` or `{slug}.musefront.ai/mcp`, loading a tenant's JSON from KV, D1 or Postgres. Expect about $5/month for 24 businesses. Railway's 20-domain cap and lack of a free custom-domain tier make it a weaker pick if offering `agents.business.com`.
+- Recommended: one Cloudflare Worker or Vercel function routing `/b/{slug}/mcp` or `{slug}.legible.ai/mcp`, loading a tenant's JSON from KV, D1 or Postgres. Expect about $5/month for 24 businesses. Railway's 20-domain cap and lack of a free custom-domain tier make it a weaker pick if offering `agents.business.com`.
 - Set `cacheScope: "public"` with a sensible `ttlMs` for tenant read results, since these are public facts. Note that a shared endpoint serving many tenants must key caches by tenant path.
-- Split the surface. Public read tools need no auth. For booking and other actions, the awkward question is whose identity is being authenticated: a consumer agent has no account with MuseFront. Pragmatic pilot option: no OAuth for consumers; unauthenticated `request_booking` that holds nothing until the owner or their booking system confirms, or simply return the business's own booking link. Rate-limit by IP and tool name, which the new `Mcp-Name` header makes easy at the edge.
-- If OAuth is needed later, per-tenant path URIs let tokens be audience-bound to one business under RFC 8707. MuseFront then needs its own authorization server or a provider; `mcp-handler` does not include one, and Cloudflare's library does.
+- Split the surface. Public read tools need no auth. For booking and other actions, the awkward question is whose identity is being authenticated: a consumer agent has no account with Legible. Pragmatic pilot option: no OAuth for consumers; unauthenticated `request_booking` that holds nothing until the owner or their booking system confirms, or simply return the business's own booking link. Rate-limit by IP and tool name, which the new `Mcp-Name` header makes easy at the edge.
+- If OAuth is needed later, per-tenant path URIs let tokens be audience-bound to one business under RFC 8707. Legible then needs its own authorization server or a provider; `mcp-handler` does not include one, and Cloudflare's library does.
 - Support both current and handshake-based protocol versions for now, given docs on client side still reference older specs.
 
 ### Gaps
@@ -273,7 +273,7 @@ Yes, and it became much easier with MCP 2026-07-28, which removed sessions and t
 ## Instagram and Facebook bio links: can they carry a machine-readable hint, and do agents follow them?
 
 ### Takeaway
-No machine-readable hint is possible beyond the URL string itself, and Instagram's robots rules disallow crawling by default, so a compliant agent will not read a bio to find the link. Bio links are for humans; an agent gets to MuseFront through the website, search, Google Business Profile, or a user pasting the link.
+No machine-readable hint is possible beyond the URL string itself, and Instagram's robots rules disallow crawling by default, so a compliant agent will not read a bio to find the link. Bio links are for humans; an agent gets to Legible through the website, search, Google Business Profile, or a user pasting the link.
 
 ### Cited Findings
 - Instagram's `robots.txt` has `User-agent: *` with `Disallow: /`, and names GPTBot, ClaudeBot, Google-Extended, PerplexityBot, Applebot-Extended and Amazonbot with full disallow. `ChatGPT-User` is unlisted, so the wildcard covers it ([robots](https://www.instagram.com/robots.txt), fetched 3 Nov 2026).
@@ -282,7 +282,7 @@ No machine-readable hint is possible beyond the URL string itself, and Instagram
 - GBP's `websiteUri` is writable by the Business Information API and may be "preferably one specific to this location" ([Location](https://developers.google.com/my-business/reference/businessinformation/rest/v1/accounts.locations)). GBP also has a Place Actions API at 300 QPM ([limits](https://developers.google.com/my-business/content/limits)); its reference was not opened.
 
 ### Inferences
-- Instagram controls the markup, so `rel` attributes and head tags are impossible. The only hint is a readable URL such as `musefront.ai/b/slug` or a bio line like "Book or ask via AI: musefront.ai/b/slug".
+- Instagram controls the markup, so `rel` attributes and head tags are impossible. The only hint is a readable URL such as `legible.ai/b/slug` or a bio line like "Book or ask via AI: legible.ai/b/slug".
 - Better social and listing surfaces, in order: (1) the business's own website link and footer; (2) Google Business Profile website or action links, since Google's data is more accessible to agents than Instagram's; (3) Facebook Page website field; (4) link-in-bio set to the agent page itself so that human and agent see the same URL, avoiding a separate Linktree layer; (5) `sameAs` from the agent page to the social profiles so identity resolves in the other direction.
 - Browser-driving agents operating a logged-in user's session could read a bio link, unlike server-side fetchers. Whether they do so is unverified.
 

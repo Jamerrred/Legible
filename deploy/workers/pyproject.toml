@@ -1,7 +1,7 @@
 [project]
-name = "musefront-workers"
+name = "legible-workers"
 version = "0.1.0"
-description = "Runs the MuseFront site and resource on Cloudflare Python Workers"
+description = "Runs the Legible site and resource on Cloudflare Python Workers"
 requires-python = ">=3.13"
 dependencies = [
     "fastapi",

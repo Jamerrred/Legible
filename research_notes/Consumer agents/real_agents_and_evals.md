@@ -1,6 +1,6 @@
 # Real consumer/search agents and how web agents are evaluated (4 Nov 2026)
 
-Time-boxed (about 5 min). Reading key: "STATED" = I read it on the vendor's page. "SECONDARY" = blog, directory or search summary; I did not read a primary source. "INFERENCE" = mine. Muse and Instinct are covered in the existing notes (consumer_agents.md) and not repeated here, except where a profile needs them.
+Time-boxed (about 5 min). Reading key: "STATED" = I read it on the vendor's page. "SECONDARY" = blog, directory or search summary; I did not read a primary source. "INFERENCE" = mine. Muse and Instinct are covered in the existing notes (errands.md) and not repeated here, except where a profile needs them.
 
 ## Real agents
 

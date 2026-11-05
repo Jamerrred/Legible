@@ -41,7 +41,7 @@ from demo_resource.formatting import (
     words,
 )
 from demo_resource.quoting import open_slots
-from mf_core.business import quote
+from legible_core.business import quote
 
 # ---------------------------------------------------------------- blocks and rendering
 

@@ -12,8 +12,8 @@ from collections import defaultdict
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from mf_core.business import load_facts, slots
-from mf_core.logbook import log_event
+from legible_core.business import load_facts, slots
+from legible_core.logbook import log_event
 
 STREAM = "control"
 

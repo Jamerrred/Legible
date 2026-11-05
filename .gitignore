@@ -27,9 +27,9 @@ logs/
 runs/**/browser/
 .browser-profiles/
 
-# Back office MVP
+# Legible app MVP
 edge/.wrangler/
 edge/node_modules/
-back_office/*.db*
-runs/back-office/
+legible/*.db*
+runs/legible/
 edge/.dev.vars

@@ -44,7 +44,7 @@ Muse is a real, shipped consumer agent: a Meta-hosted cloud VM with its own brow
 
 ### Inferences
 - Muse is two separate products for a small business: an unannounced browser visitor to its site, and a possible future counterpart to its Business Agent. Today only the first is real at scale.
-- The Business Agent "Websites" knowledge source is the most concrete shipped hook for MuseFront: a resource published as a crawlable URL could feed a business's agent now, whatever happens with Muse-to-business-agent routing.
+- The Business Agent "Websites" knowledge source is the most concrete shipped hook for Legible: a resource published as a crawlable URL could feed a business's agent now, whatever happens with Muse-to-business-agent routing.
 - Wang's small-business goal plus 1,500 connector applications suggests a connector-aggregator role may be possible, but nothing I found confirms Meta would accept one that speaks for many small businesses.
 
 ### Gaps
@@ -127,7 +127,7 @@ The field consolidated in 2026 around cloud or browser agents plus closed partne
 ### Inferences
 - For a long-tail business, the agents most likely to appear in 2026 are browser-driven (Muse, ChatGPT agent, Comet, Claude in Chrome, auto browse) or phone-driven (Google, Muse, Instinct).
 - HUMAN's Comet and Claude collapses in September look mostly like a share shift from Muse's arrival and detection coverage, though Comet's absolute decline of 28.3% shows it is not only that. Treat rankings as volatile.
-- The EEA, UK and China are materially behind for most agents, so a US-first MuseFront pilot matches where the agents are.
+- The EEA, UK and China are materially behind for most agents, so a US-first Legible pilot matches where the agents are.
 
 ### Gaps
 - OpenAI's ChatGPT agent help page on identification returned HTTP 403, so its current tier, region and signing behaviour are unverified here.
@@ -193,8 +193,8 @@ Rendered-browser automation dominates observed agent traffic and is the only cha
 - A machine-facing resource reached only by a dedicated path has no demonstrated traffic source. The most defensible design has the resource reachable from a normal link in the rendered homepage DOM, with its key facts as server-rendered visible text, because that is what the dominant agent mode actually sees.
 - Hidden JSON-LD should be a supplement, not the delivery vehicle. Visible text and real form controls are what browser agents act on.
 - `/.well-known/poppy.json` is a cheap hedge worth publishing, since Muse and Instinct are named participants. It is not yet a traffic source, and its OAuth requirements suggest a hosted provider is needed for very small businesses.
-- MuseFront cannot reliably measure this from user agents alone. Muse looks like Chrome from Cloudflare or Fastly addresses, so instrumented canary links are more trustworthy than log classification.
-- MuseFront should run its own tests: put a resource link on a test site, send each live agent at it with real tasks, and record whether it is followed.
+- Legible cannot reliably measure this from user agents alone. Muse looks like Chrome from Cloudflare or Fastly addresses, so instrumented canary links are more trustworthy than log classification.
+- Legible should run its own tests: put a resource link on a test site, send each live agent at it with real tasks, and record whether it is followed.
 
 ### Gaps
 - No evidence found on any agent following a custom link in an Instagram, Facebook or TikTok bio as a discovery step. This is absence of evidence from limited searching, not proof it never happens.
@@ -242,9 +242,9 @@ No rigorous multi-vertical study exists. The closest long-tail evidence is a 200
 
 ### Inferences
 - For long-tail sites the likely failure order differs from big retail: less deliberate bot defence, more third-party widget, cookie-wall and form problems. The Zyte industry split and restaurant study point this way, but neither directly measures it.
-- This favours MuseFront's premise: a clean, static, plainly labelled resource page sidesteps most failure classes that Merj and the restaurant study list, provided the agent actually gets there and the final booking step has a usable path.
+- This favours Legible's premise: a clean, static, plainly labelled resource page sidesteps most failure classes that Merj and the restaurant study list, provided the agent actually gets there and the final booking step has a usable path.
 - The final step remains the hard part. The resource can answer questions, but the restaurant test suggests booking widgets are where flows stop, so a resource should include a direct deep link and a phone or email fallback.
-- If MuseFront onboards customers on Cloudflare or a host with bot defaults, checking agent access should be part of onboarding, since this setting could defeat the resource.
+- If Legible onboards customers on Cloudflare or a host with bot defaults, checking agent access should be part of onboarding, since this setting could defeat the resource.
 
 ### Gaps
 - No empirical study found on PDF or image menus specifically. The nearest proxies are Merj's image-related tests and a Business Agent limit that it cannot read documents in chat ([Meta docs](https://developers.facebook.com/documentation/meta-business-agent/capabilities)).
@@ -277,8 +277,8 @@ Instagram and Facebook are not established as agent-readable business front door
 - Sierra says agents built on Sierra began calling other Sierra-built agents in healthcare in 2025, and shipped a speech-based detector, fleming-1, for AI callers (8 Oct 2026; no volumes given) — [Sierra](https://sierra.ai/blog/caller-id-in-the-age-of-agents)
 
 ### Inferences
-- A social profile is best treated as a human-facing pointer, plus a possible input to MuseFront's ingestion. The evidence does not support an agent traversing bio to resource as a designed path.
-- The phone is the proven small-business channel, and the failure there is informational: half of answered calls produced no price. The MuseFront resource could double as the script or knowledge source for answering these calls, which is a clearer near-term value than any endpoint.
+- A social profile is best treated as a human-facing pointer, plus a possible input to Legible's ingestion. The evidence does not support an agent traversing bio to resource as a designed path.
+- The phone is the proven small-business channel, and the failure there is informational: half of answered calls produced no price. The Legible resource could double as the script or knowledge source for answering these calls, which is a clearer near-term value than any endpoint.
 - Google's opt-out and AI disclosure give a business some visibility on that channel. Muse's disclosure practice is still unsettled.
 
 ### Gaps
@@ -331,7 +331,7 @@ Measured AI referrals to small sites are low: a median of about 14 visits a mont
 | Headlines to reject | Claims that agents now out-traffic humans, which mix all bots with agents ([example](https://theaicareerlab.com/blog/ai-agents-majority-web-traffic-2026)) | Radar's user-action share of verified AI crawler requests is only 3.66% ([TechnologyChecker](https://technologychecker.io/blog/ai-crawler-statistics)) |
 
 ### Inferences
-- Illustrative only, multiplying across studies that do not share samples: 14 AI visits a month at 1.3% to 2.1% conversion gives about 0.2 to 0.3 conversions a month, or 2 to 4 a year, for a median small site. That does not count agent sessions, which are unmeasured, or phone calls. A MuseFront ROI pitch based on today's site traffic alone would be weak.
+- Illustrative only, multiplying across studies that do not share samples: 14 AI visits a month at 1.3% to 2.1% conversion gives about 0.2 to 0.3 conversions a month, or 2 to 4 a year, for a median small site. That does not count agent sessions, which are unmeasured, or phone calls. A Legible ROI pitch based on today's site traffic alone would be weak.
 - The 12.4B to 51,000 ratio on DataDome's network is about 243,000 crawler requests per referral. These are different activities and the network scope for referrals is an assumption, but it shows how little reading has so far returned to sites as visits.
 - Radar's 3.66% almost certainly undercounts agents like Muse, since the denominator is verified, declared AI crawlers and Muse's Chromium traffic looks like ordinary Chrome. Comparing Radar to HUMAN or DataDome is not valid.
 - The growth rate is the honest bull case: Muse added a large free browser agent in eight weeks, and September's jump suggests long-tail exposure could change quickly. Current long-tail exposure remains small and unmeasured.
@@ -364,10 +364,10 @@ Sierra is the co-author with Meta of the Personal Agent Protocol ("Poppy"), anno
 - Jefferies names Sierra and Decagon among private beneficiaries of agent access friction (Oct 2026) — [Proactive Investors](https://www.proactiveinvestors.com/companies/news/1099848/meta-s-muse-ai-agent-blocked-by-one-third-of-websites-tested-jefferies-says-1099848.html)
 
 ### Inferences
-- Poppy is the closest thing to MuseFront's thesis in standards form, and its website-plus-guest-session design suits a small business better than a full API. But the designers are enterprise-facing, and nothing in the materials addresses a business with no OAuth, API or agent.
+- Poppy is the closest thing to Legible's thesis in standards form, and its website-plus-guest-session design suits a small business better than a full API. But the designers are enterprise-facing, and nothing in the materials addresses a business with no OAuth, API or agent.
 - That leaves a plausible gap for a hosted intermediary to publish `poppy.json`, run the guest-mode resource and handle sign-in on behalf of many small businesses. Whether the spec allows delegated hosting for the organization and domain fields should be checked against the draft and the Company kit.
 - Competitive exposure: Sierra, Decagon, Shopify or a booking vendor could offer this same layer for their own customers. Long-tail businesses without those vendors are the uncovered segment.
-- Because the spec is moving quickly (versions up to 0.3 are referenced within weeks of the 9 Oct draft) and its pages disagree, any MuseFront implementation should validate against the current draft rather than a fixed copy.
+- Because the spec is moving quickly (versions up to 0.3 are referenced within weeks of the 9 Oct draft) and its pages disagree, any Legible implementation should validate against the current draft rather than a fixed copy.
 
 ### Gaps
 - No evidence yet of any shipped agent, Muse included, fetching `poppy.json` in production, or of any live production site publishing one.

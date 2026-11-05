@@ -1,10 +1,10 @@
-"""A scripted private copy of the app, for recording demos. It only runs with MF_DEMO=1.
+"""A scripted private copy of the app, for recording demos. It only runs with LEGIBLE_DEMO=1.
 
 Crawling, questions and test customers are played back quickly from fixed data, with no model
 calls. The fact sheet is a real crawl of the demo site, and the answers come from its facts file.
 Publishing is real, so the public page, /quote, /request and /ask all work.
 
-Run: MF_DEMO=1 MF_DB_PATH=back_office/demo.db uv run uvicorn back_office.api:app --port 8300
+Run: LEGIBLE_DEMO=1 LEGIBLE_DB_PATH=legible/demo.db uv run uvicorn legible.api:app --port 8300
 Start over by opening /demo/reset.
 """
 
@@ -19,10 +19,10 @@ from pathlib import Path
 
 import httpx
 
-from back_office import edge, store, work
-from back_office.record import slugify, stamp_all, today_for
+from legible import edge, store, work
+from legible.record import slugify, stamp_all, today_for
 
-ENABLED = os.environ.get("MF_DEMO") == "1"
+ENABLED = os.environ.get("LEGIBLE_DEMO") == "1"
 SLUG = "cormorant"
 SITE_URL = "https://cormorant-detailing.jamerrred-audiobooks.workers.dev"
 HERE = Path(__file__).resolve().parent

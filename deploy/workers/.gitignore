@@ -11,5 +11,5 @@ public/
 src/businesses/
 src/demo_resource/
 src/demo_site/
-src/mf_core/
+src/legible_core/
 src/version.py

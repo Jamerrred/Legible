@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from mf_core.business import load_facts, quote, slots
+from legible_core.business import load_facts, quote, slots
 
 FACTS = load_facts()
 

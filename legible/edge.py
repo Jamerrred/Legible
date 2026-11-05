@@ -6,17 +6,17 @@ import os
 
 import httpx
 
-from consumer_agent.llm import load_env
+from errand.llm import load_env
 
 load_env()
-EDGE_URL = os.environ.get("MF_EDGE_URL", "http://127.0.0.1:8787").rstrip("/")
+EDGE_URL = os.environ.get("LEGIBLE_EDGE_URL", "http://127.0.0.1:8787").rstrip("/")
 
 
 def _headers() -> dict:
-    token = os.environ.get("MF_ADMIN_TOKEN")
+    token = os.environ.get("LEGIBLE_ADMIN_TOKEN")
     if not token:
-        raise RuntimeError("MF_ADMIN_TOKEN is not set")
-    return {"authorization": f"Bearer {token}", "user-agent": "musefront-back-office"}
+        raise RuntimeError("LEGIBLE_ADMIN_TOKEN is not set")
+    return {"authorization": f"Bearer {token}", "user-agent": "legible-app"}
 
 
 def link_for(slug: str) -> str:

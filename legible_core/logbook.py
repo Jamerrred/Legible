@@ -1,6 +1,6 @@
 """Structured JSONL logs shared by the site, the resource and the control page.
 
-The back office agent's owner inbox reads these later, so every event is one
+the Legible agent's owner inbox reads these later, so every event is one
 JSON object per line with a stable shape: ts, stream, event, then the fields.
 Events in use: page_hit, quote, dead_end, request, question, lead_form.
 """
@@ -13,7 +13,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 # Python Workers can only write to /tmp, and only until the Worker restarts.
-LOG_DIR = Path(os.environ.get("MF_LOG_DIR") or Path(__file__).resolve().parent.parent / "logs")
+LOG_DIR = Path(os.environ.get("LEGIBLE_LOG_DIR") or Path(__file__).resolve().parent.parent / "logs")
 
 
 def log_event(stream: str, event: str, **fields) -> dict:
@@ -21,7 +21,7 @@ def log_event(stream: str, event: str, **fields) -> dict:
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     record = {"ts": datetime.now(UTC).isoformat(), "stream": stream, "event": event, **fields}
     line = json.dumps(record, default=str) + "\n"
-    if os.environ.get("MF_LOG_STDOUT"):
+    if os.environ.get("LEGIBLE_LOG_STDOUT"):
         print(line, end="", flush=True)
     fd = os.open(LOG_DIR / f"{stream}.jsonl", os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
     try:

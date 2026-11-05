@@ -1,6 +1,6 @@
 # Consumer agent design
 
-*Last updated 5 November 2026. Built at `consumer_agent/`. The design below is the original proposal, based on [the research](07-consumer-agent-research.md). [As built](#as-built-first-demo) lists where the build differs.*
+*Last updated 5 November 2026. Built at `errand/`. The design below is the original proposal, based on [the research](07-consumer-agent-research.md). [As built](#as-built-first-demo) lists where the build differs.*
 
 ## What it is
 
@@ -9,9 +9,9 @@ Our own agent that acts for a person with a business: it reads, works out the an
 It has two jobs:
 
 1. **Test agent:** the "before" and "after" runs in the demo.
-2. **Simulator:** later, inside the back office agent, to find gaps in a resource.
+2. **Simulator:** later, inside the Legible agent, to find gaps in a resource.
 
-**It's general.** It holds nothing specific to any business, query or mock site, and it knows nothing about MuseFront. That's what lets it take on the [long tail of queries](05-roadblocks-and-queries.md#the-long-tail-of-queries).
+**It's general.** It holds nothing specific to any business, query or mock site, and it knows nothing about Legible. That's what lets it take on the [long tail of queries](05-roadblocks-and-queries.md#the-long-tail-of-queries).
 
 ## Summary of choices
 
@@ -23,7 +23,7 @@ It has two jobs:
 | Model | Claude to start, with the provider kept swappable | Others | Different models act as a cheap way to see more varied agent behaviour |
 | Logs | JSONL event log per run | n/a | Makes runs comparable. Event shape borrowed from Pi |
 
-**Not used:** multi-agent research trees, Deep Agents, the Claude Agent SDK and Pi for this agent. They bring more than this agent needs, or a language mismatch. The back office agent may choose differently.
+**Not used:** multi-agent research trees, Deep Agents, the Claude Agent SDK and Pi for this agent. They bring more than this agent needs, or a language mismatch. The Legible agent may choose differently.
 
 ## How it fits together
 

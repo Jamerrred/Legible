@@ -1,4 +1,4 @@
-"""The jobs the back office agent runs: onboarding, the initial check, publishing and the periodic review."""
+"""The jobs the Legible agent runs: onboarding, the initial check, publishing and the periodic review."""
 
 from __future__ import annotations
 
@@ -8,12 +8,12 @@ import sys
 import traceback
 from pathlib import Path
 
-from back_office import brain, edge, store
-from back_office.crawl import crawl, fetch_images, is_local
-from back_office.record import apply_ops, counts, public_view, stamp_all, today_for
+from legible import brain, edge, store
+from legible.crawl import crawl, fetch_images, is_local
+from legible.record import apply_ops, counts, public_view, stamp_all, today_for
 
 ROOT = Path(__file__).resolve().parent.parent
-RUNS = ROOT / "runs" / "back-office"
+RUNS = ROOT / "runs" / "legible"
 PERSON = {
     "profile": {
         "name": "Dana Whitlock",
@@ -144,7 +144,7 @@ async def _run_query(simulation_id: str, query: dict, task: str, site_url: str, 
     person_path.write_text(json.dumps(PERSON))
     corpus = ROOT / "corpus" / "before"
     local_corpus = is_local(site_url) and "cormorant" in site_url and corpus.exists()
-    cmd = [sys.executable, "-m", "consumer_agent.run", "--task", task, "--person", str(person_path), "--profile", profile, "--out", str(out)]
+    cmd = [sys.executable, "-m", "errand.run", "--task", task, "--person", str(person_path), "--profile", profile, "--out", str(out)]
     cmd += ["--search", "local", "--corpus", str(corpus)] if local_corpus else ["--search", "exa"]
     result: dict = {}
     async with gate:

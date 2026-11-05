@@ -8,7 +8,7 @@ from demo_resource.config import ADDONS, BIZ, CONDITIONS, MODEL, SERVICES, STREA
 from demo_resource.content import facts_used_html
 from demo_resource.formatting import esc, money, service_name, stamp
 from demo_resource.quoting import evaluate, first, headline, needed_word
-from mf_core.logbook import read_events
+from legible_core.logbook import read_events
 
 
 def option(value: str, label: str, current: str) -> str:

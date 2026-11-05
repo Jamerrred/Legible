@@ -10,7 +10,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from demo_site.app import create_app
-from mf_core.business import load_facts
+from legible_core.business import load_facts
 from scripts.check_booking import LEAD, check
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,7 +40,7 @@ def test_after_differs_from_before_only_by_the_link_line(before, after, path):
 
 
 def test_link_line_uses_the_configured_address(monkeypatch):
-    monkeypatch.setenv("MF_RESOURCE_BASE_URL", "https://example.test")
+    monkeypatch.setenv("LEGIBLE_RESOURCE_BASE_URL", "https://example.test")
     page = TestClient(create_app("after")).get("/").text
     assert '<a href="https://example.test">https://example.test</a>' in page
     assert "localhost" not in page
@@ -54,7 +54,7 @@ def test_booking_steps_differ_only_by_the_link_line(before, after):
 @pytest.mark.parametrize("path", ["/", "/faq", "/book"])
 def test_before_has_no_trace_of_the_resource_or_the_test(before, path):
     page = before.get(path).text.lower()
-    for word in ("agents.cormorant", "musefront", "data-hole", "benchmark"):
+    for word in ("agents.cormorant", "legible", "data-hole", "benchmark"):
         assert word not in page
 
 

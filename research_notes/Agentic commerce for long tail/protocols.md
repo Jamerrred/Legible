@@ -64,7 +64,7 @@ Verified. "Poppy" is the official short name of the **Personal Agent Protocol** 
 ## 2. What must a resource do to be Poppy-compatible? Conformance, SDKs, adopters
 
 ### Takeaway
-A signed-out Poppy presence is cheap: one JSON file plus an existing stateless MCP or OpenAPI endpoint, with no OAuth. The hard constraint for MuseFront is identity. Each business must be its own hostname, and path-based tenants on a shared host cannot be expressed today. There is an official validator but no certification and no official reference server yet, and adoption is demos plus design-partner work.
+A signed-out Poppy presence is cheap: one JSON file plus an existing stateless MCP or OpenAPI endpoint, with no OAuth. The hard constraint for Legible is identity. Each business must be its own hostname, and path-based tenants on a shared host cannot be expressed today. There is an official validator but no certification and no official reference server yet, and adoption is demos plus design-partner work.
 
 ### Cited Findings
 
@@ -78,11 +78,11 @@ A signed-out Poppy presence is cheap: one JSON file plus an existing stateless M
 - *Useful for honest small businesses:* `excluded_tasks` tells agents what not to look for, written "the way a customer would ask for it" with an alternative where one exists — [guides](https://personalagentprotocol.org/docs/0.3/guides)
 - Agents are told "Don't phone a company that publishes a `poppy.json`", though DIRECTV (design partner, 2026-10-27) points out this is only guide-level advice — [guides](https://personalagentprotocol.org/docs/0.3/guides); [#48](https://github.com/personal-agent-protocol/personal-agent-protocol/issues/48)
 
-**The multi-tenant constraint (critical for MuseFront)**
+**The multi-tenant constraint (critical for Legible)**
 - "A provider, such as a commerce platform, can run the protocol for several independent companies", but: "Serve each storefront's `poppy.json` on the storefront's own domain", and "A document redirected to the platform's domain speaks for the platform, not the storefront" — [guides](https://personalagentprotocol.org/docs/0.3/guides)
 - `organization.domain` must be the host serving the document after redirects; since 0.2 a leading `www.` is not ignored — [spec](https://personalagentprotocol.org/docs/0.3/spec); [changelog](https://personalagentprotocol.org/docs/changelog)
 - Open issue #57 (2026-10-28, from a "large scheduling product"): tenants at a path on a shared host "can't be identified", which is "common for scheduling and booking tools, link-in-bio and creator pages, and marketplaces", and "often the business has no domain of its own". Same issue confirms the current model "covers platforms where each tenant has its own hostname". Proposal not accepted as of 2026-11-03 — [#57](https://github.com/personal-agent-protocol/personal-agent-protocol/issues/57)
-- Endpoints listed in the document "can be on any host" (spec §10.3), so a business-domain `poppy.json` can point at MuseFront-hosted APIs — [spec](https://personalagentprotocol.org/docs/0.3/spec)
+- Endpoints listed in the document "can be on any host" (spec §10.3), so a business-domain `poppy.json` can point at Legible-hosted APIs — [spec](https://personalagentprotocol.org/docs/0.3/spec)
 - A company can use another provider for its agent endpoint, though "Publishing metadata alone doesn't configure the issuer or establish trust between the providers" — [guides](https://personalagentprotocol.org/docs/0.3/guides)
 - Open issue #58 (2026-10-28) comes from a vendor running assistants for 300+ merchants and raises token audience and operator-disclosure gaps for that setup — [#58](https://github.com/personal-agent-protocol/personal-agent-protocol/issues/58)
 
@@ -101,7 +101,7 @@ A signed-out Poppy presence is cheap: one JSON file plus an existing stateless M
 - Shopify stores are structurally close: 5 of 6 stores I probed as likely Shopify serve `/.well-known/ucp`, `oauth-authorization-server` and `oauth-protected-resource` (bombas.com rate-limited; allbirds, gymshark and beardbrand confirmed as Shopify by their `myshopify.com` endpoints, tentree and rothys by status code only). None of this is Poppy yet — e.g. [beardbrand probe](https://www.beardbrand.com/.well-known/oauth-protected-resource)
 
 ### Inferences
-- Valid hosting shapes for MuseFront, in order of identity strength: (1) file on the business's own apex or `www`; (2) business subdomain (`agents.example-salon.com`) via CNAME, with an optional redirect from the apex well-known; (3) per-tenant MuseFront hostname, which is valid but makes the MuseFront host the identity the agent shows the user. The third is the only option for businesses with no domain.
+- Valid hosting shapes for Legible, in order of identity strength: (1) file on the business's own apex or `www`; (2) business subdomain (`agents.example-salon.com`) via CNAME, with an optional redirect from the apex well-known; (3) per-tenant Legible hostname, which is valid but makes the Legible host the identity the agent shows the user. The third is the only option for businesses with no domain.
 - A signed-out profile needs no per-tenant OAuth issuer, which removes the most expensive multi-tenant requirement. Adding OAuth later can change the company identifier ("Users get new IDs and Sessions", [guides](https://personalagentprotocol.org/docs/0.3/guides)), so pick the hostname model carefully at the start.
 - Generate `poppy.json` from a template and run the validator in CI, because 0.x breaks are the norm.
 
@@ -146,7 +146,7 @@ MCP is the only general protocol with real consumer hosts, and it is the shared 
 **NLWeb [DORMANT-leaning]**
 - Repo moved to `nlweb-ai/NLWeb`, MIT, 6.3k stars, no releases, last push 2026-08-11. Each instance is an MCP server with an `ask` method; A2A "coming soon" — [repo](https://github.com/nlweb-ai/NLWeb); [GitHub API](https://api.github.com/repos/nlweb-ai/NLWeb)
 - No primary evidence of consumer-agent use found. UCP `ask` covers the same need (see question 4).
-- *Small-business exposure:* index schema.org content and run the service. MuseFront could offer the same via an `ask` tool on its MCP server without adopting NLWeb.
+- *Small-business exposure:* index schema.org content and run the service. Legible could offer the same via an `ask` tool on its MCP server without adopting NLWeb.
 
 **llms.txt [widely published, rarely read]**
 - 137,210 domains, May 2026: 28% publish it (upper bound, SEO-skewed sample) and 97% of those files got zero requests. AI assistants were 2.5% of requests, retrieval bots 1.1%; Claude-Code led assistant bots — [Ahrefs, 2026-06-15](https://ahrefs.com/blog/llmstxt-study/)
@@ -224,15 +224,15 @@ UCP is the live one, and on Shopify it is already served for the merchant. ACP r
 - Local services "Get Quote": required tool `request_service`, widget `ui://widget/request-service.html`, partner feed `GET /v1/businesses`, `action_type: request_a_quote`. Apply through the ChatGPT merchants form — [spec](https://developers.openai.com/plugins/guides/local-services-request-quote-conversion-spec.md)
 - Restaurant "Reserve": required tool `restaurant_reservation`; recommended later `refresh_availability`, `make_reservation`, `reservation_confirmation` — [spec](https://developers.openai.com/plugins/guides/restaurant-reservation-conversion-spec.md)
 - Guidelines: verified organization; explicit annotations on every tool; "Plugins may conduct commerce only for physical goods"; external checkout on your own domain; "Separate tenants on a shared hosting service count as different domains" for iframes — [guidelines](https://developers.openai.com/plugins/plugin-guidelines.md)
-- *Small-business exposure:* not directly. It is a provider-level integration, so MuseFront would be the applicant.
+- *Small-business exposure:* not directly. It is a provider-level integration, so Legible would be the applicant.
 
 **Others (interface level only)**
 - Microsoft Copilot Checkout (2026-01-08, with PayPal, Shopify, Stripe) and Perplexity Instant Buy with PayPal (2025-11-25, no 2026 update found) — [Wiegold](https://thomas-wiegold.com/blog/agentic-commerce-ucp/). Wire protocols are not clearly documented in what I read; a [commercetools post, 2026-02-24](https://commercetools.com/blog/understanding-mcp-acp-ucp-in-agentic-commerce) associates Copilot with ACP but is marketing.
 
 ### Inferences
-- OpenAI's `GET /v1/businesses` + `request_service` shape is the closest published schema for what a MuseFront resource does. It is worth mirroring in tool design even without partner approval.
+- OpenAI's `GET /v1/businesses` + `request_service` shape is the closest published schema for what a Legible resource does. It is worth mirroring in tool design even without partner approval.
 - Implementing UCP `ask` and `location` for service businesses is spec-legal in structure, but I found no surface calling them on a non-merchant. Treat it as a later option.
-- The Toast and Block seats on the Food TC suggest restaurant tenants may get coverage through their POS vendor rather than MuseFront.
+- The Toast and Block seats on the Food TC suggest restaurant tenants may get coverage through their POS vendor rather than Legible.
 
 ### Gaps
 - No evidence on whether Square, Toast, Mindbody, Vagaro, Calendly or similar expose agent endpoints. Searching was cut off by the session's web-search limit, and this is the largest remaining gap for a services-heavy pilot.
@@ -241,7 +241,7 @@ UCP is the live one, and on Shopify it is already served for the merchant. ACP r
 ## 5. Agent identity: how can a server tell which agent is calling?
 
 ### Takeaway
-There is no universal answer today. ChatGPT's cloud browser signs with Web Bot Auth and Google-Agent signs a subset, while Muse, the agent MuseFront most cares about, reportedly looks like ordinary Chrome. A pilot should use signatures for recognition and analytics, never as a gate.
+There is no universal answer today. ChatGPT's cloud browser signs with Web Bot Auth and Google-Agent signs a subset, while Muse, the agent Legible most cares about, reportedly looks like ordinary Chrome. A pilot should use signatures for recognition and analytics, never as a gate.
 
 ### Cited Findings
 
@@ -258,7 +258,7 @@ There is no universal answer today. ChatGPT's cloud browser signs with Web Bot A
 **Cloudflare signed agents [LIVE]**
 - Launched 2025-08-28 with ChatGPT agent, Goose, Browserbase, Anchor Browser — [Cloudflare blog](https://blog.cloudflare.com/signed-agents/)
 - Since 2026-07-01 the distinction is a BotBase field, Direct vs Intermediary. Customers can use AI Crawler and Agent access policies; a `Forwarded` header experiment could expose the end user behind an intermediary — [Cloudflare docs](https://developers.cloudflare.com/bots/concepts/bot/signed-agents/)
-- *Small-business exposure:* a site behind Cloudflare gets verification at the edge. Plan availability is not stated on the [docs page](https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/). A MuseFront-hosted resource can verify itself and need no action from the business.
+- *Small-business exposure:* a site behind Cloudflare gets verification at the edge. Plan availability is not stated on the [docs page](https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/). A Legible-hosted resource can verify itself and need no action from the business.
 
 **Visa Trusted Agent Protocol [ANNOUNCED/limited evidence]**
 - Launched 2025-10-14 with Cloudflare on Web Bot Auth; "minimal changes"; interoperability work with x402; engagement with Google, OpenAI, Stripe. No live volumes reported — [Digital Transactions](https://www.digitaltransactions.net/visa-launches-trusted-agent-an-agentic-commerce-protocol/)
@@ -311,12 +311,12 @@ Consumer agents today mostly consume rendered websites, user-connected or direct
 
 ### Inferences
 - For an agent that "arrives at a business" with no prior connector, the realistic path in November 2026 is the web page. MCP mostly requires a prior install or directory step, and that is the gap Poppy's `poppy.json` is designed to close by making `apis[]` discoverable from a domain.
-- MuseFront's practical near-term value is therefore (a) a page Muse can use, and (b) a ready MCP endpoint and `poppy.json` for when agents start reading them. The second is a bet on Meta and OpenAI following through, not a current traffic source.
+- Legible's practical near-term value is therefore (a) a page Muse can use, and (b) a ready MCP endpoint and `poppy.json` for when agents start reading them. The second is a bet on Meta and OpenAI following through, not a current traffic source.
 
 ### Gaps
 - No independent, cross-agent measurement of which protocols consumer agents call. Most data comes from vendors with a commercial interest.
 - I could not confirm what protocol Muse "connectors" use.
-- Whether Muse, ChatGPT or Gemini fetch `/.well-known/` files on arrival is unknown. MuseFront's own logs during a pilot could answer this.
+- Whether Muse, ChatGPT or Gemini fetch `/.well-known/` files on arrival is unknown. Legible's own logs during a pilot could answer this.
 
 ## 7. Smallest protocol set for a pilot of about two dozen small businesses
 
@@ -335,13 +335,13 @@ Each choice rests on evidence above; key anchors:
 **Build now (recommendation, my judgment)**
 1. **Web page per business.** Server-rendered HTML with real prices, hours, services, a working contact or booking flow, no CAPTCHA on read paths, and JSON-LD `LocalBusiness`/`Service`. JSON-LD's benefit is unproven, but its cost is near zero.
 2. **One remote MCP server** (Streamable HTTP, supporting 2025-06-18 through 2026-07-28 clients). Read tools plus one or two request tools such as `request_quote` and `request_booking`, modelled on OpenAI's `request_service` and on UCP's `ask` and `location` semantics, including "indicative" answers and "unknown, not closed" hours. Explicit annotations on every tool. No sign-in. Actions that commit the business go through as requests that a human confirms.
-3. **Signed-out `poppy.json`** on each business's own host where possible, else a per-tenant MuseFront hostname. Include `apis` to the MCP server, `web`, `excluded_tasks`, and `feedback`. Run the official validator in CI, pin `protocol_version`, and accept regeneration on each draft. Cost is low, and payoff depends on Meta, OpenAI or Instinct shipping clients.
+3. **Signed-out `poppy.json`** on each business's own host where possible, else a per-tenant Legible hostname. Include `apis` to the MCP server, `web`, `excluded_tasks`, and `feedback`. Run the official validator in CI, pin `protocol_version`, and accept regeneration on each draft. Cost is low, and payoff depends on Meta, OpenAI or Instinct shipping clients.
 4. **Passive identity logging.** Verify Web Bot Auth signatures and, if present, Poppy Session JWTs. Record agent, tool and outcome. Never gate on it. These logs also fill the biggest evidence gap in this research.
 
 **Conditional**
 - Shopify tenants: verify `/.well-known/ucp` and reference it. Do not rebuild it. Note the Poppy `ucp` extension requires the profile on the same host as `poppy.json`, so these tenants need their `poppy.json` on the storefront host or should skip Poppy for now.
 - Restaurant tenants: check Toast and Block/Square status before building ordering.
-- MuseFront as a provider: apply to OpenAI's merchant form for "Get Quote" as a parallel business-development action, not an engineering dependency.
+- Legible as a provider: apply to OpenAI's merchant form for "Get Quote" as a parallel business-development action, not an engineering dependency.
 
 **Defer, with what would change the call**
 | Item | Why defer | Revisit when |

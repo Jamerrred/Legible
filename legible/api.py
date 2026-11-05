@@ -1,6 +1,6 @@
 """The owner app's API, shaped around its four screens: inbox, resource, simulations and websites.
 
-Run from the repo root: uv run uvicorn back_office.api:app --port 8200
+Run from the repo root: uv run uvicorn legible.api:app --port 8200
 The app is at /, and interactive API docs are at /docs. There's no login yet, so keep it on localhost.
 """
 
@@ -20,8 +20,8 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from back_office import brain, connectors, demo, edge, model, store, work
-from back_office.record import confirm_drafts, counts, slugify, today_for
+from legible import brain, connectors, demo, edge, model, store, work
+from legible.record import confirm_drafts, counts, slugify, today_for
 
 _tasks: set[asyncio.Task] = set()
 
@@ -34,13 +34,13 @@ def _background(coro) -> None:
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    hours = float(os.environ.get("MF_CRON_HOURS", "6"))
+    hours = float(os.environ.get("LEGIBLE_CRON_HOURS", "6"))
     cron = asyncio.create_task(work.cron_loop(hours))
     yield
     cron.cancel()
 
 
-app = FastAPI(title="MuseFront back office", lifespan=lifespan)
+app = FastAPI(title="Legible Legible app", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
@@ -345,7 +345,7 @@ async def activity(website_id: str, limit: int = 50):
     await work.sync_activity(website_id)
     rows = store.query("SELECT * FROM event WHERE website_id = ? ORDER BY remote_id DESC", website_id)
     events = [{"id": r["remote_id"], "ts": r["ts"], "event": r["event"], **r["payload"]} for r in rows]
-    events = [e for e in events if not (e.get("user_agent") or "").startswith("musefront")]  # The app's own preview reads.
+    events = [e for e in events if not (e.get("user_agent") or "").startswith("legible")]  # The app's own preview reads.
     kinds = Counter(e["event"] for e in events)
     feed = []
     for event in events[:limit]:
@@ -442,7 +442,7 @@ def changes(website_id: str):
 async def agent_view(website_id: str):
     """The page exactly as agents read it, as markdown from the live Worker."""
     site = _site(website_id)
-    async with httpx.AsyncClient(timeout=20, headers={"user-agent": "musefront-back-office"}) as client:
+    async with httpx.AsyncClient(timeout=20, headers={"user-agent": "legible-app"}) as client:
         response = await client.get(f"{edge.link_for(site['slug'])}/index.md")
     return {"live": response.status_code == 200, "text": response.text if response.status_code == 200 else ""}
 
