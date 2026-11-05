@@ -32,3 +32,4 @@ edge/.wrangler/
 edge/node_modules/
 back_office/*.db*
 runs/back-office/
+edge/.dev.vars

@@ -12,6 +12,10 @@ TOOLKITS = {
 }
 
 
+def configured() -> bool:
+    return bool(os.environ.get("COMPOSIO_API_KEY"))
+
+
 class NotConfigured(RuntimeError):
     pass
 

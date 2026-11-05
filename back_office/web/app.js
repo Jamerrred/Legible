@@ -104,8 +104,8 @@ async function renderWebsites() {
   if (adding) return paint(side + addForm());
   if (isBusy(site)) { poll = setTimeout(render, 3000); return paint(side + `<div class="center-pane"><div style="width:min(600px,100%)">${stepsPanel(site)}</div></div>`); }
   if (site.stage === "failed") return paint(side + `<div class="center-pane"><div class="stack" style="width:min(600px,100%)"><h1 class="headline">This website couldn't be read</h1><p class="soft">${esc(site.stage_note)}</p><div><a class="btn" href="#/websites/new">Try another address</a></div></div></div>`);
-  const connected = Object.fromEntries((site.connections || []).map((c) => [c.toolkit, c.status]));
-  const accounts = ACCOUNTS.map(([id, ic, name, help]) => `<div class="line-row">${icon(ic, "soft")}<div class="grow"><div style="font-weight:500;font-size:14.5px">${name}</div><div class="small muted">${help}</div></div>${connected[id] === "connected" ? `<button class="btn" data-do="syncAccount" data-id="${id}">Read now</button>` : `<button class="btn" data-do="connect" data-id="${id}">${connected[id] === "pending" ? "Finish connecting" : "Connect"}</button>`}</div>`).join("");
+  const linked = (site.connections || []).filter((c) => c.status === "connected");
+  const accounts = linked.length ? linked.map((c) => { const a = ACCOUNTS.find(([id]) => id === c.toolkit) || [c.toolkit, "plug", c.toolkit]; return `<div class="line-row">${icon(a[1], "soft")}<div class="grow" style="font-weight:500;font-size:14.5px">${esc(a[2])}</div><span class="row-flex small ok" style="gap:6px;font-weight:500">${icon("check")} Connected</span></div>`; }).join("") : "";
   const n = site.needs;
   const next = n.review ? ["resource", `Confirm ${site.facts.draft} facts read from your website`] : n.missing ? ["simulations", `Answer ${n.missing} question${n.missing > 1 ? "s" : ""} about what's missing`] : null;
   paint(side + `<section class="pane-main"><div class="column">
@@ -116,8 +116,24 @@ async function renderWebsites() {
       <div class="small soft">Paste this line on your pricing or booking page, where any agent reading it will see it:</div>
       <div class="paste-line"><span>${esc(site.link_line)}</span><button class="btn ghost icon-btn" data-do="copy" data-text="${esc(site.link_line)}" data-label="Line" aria-label="Copy line">${icon("copy")}</button></div>` : `<div class="empty" style="border:0;padding:0"><b>Your link appears once you've confirmed your facts</b>Nothing is public until then.</div>`}
     </div>
-    <div class="section-gap"><h2 class="section">Connected accounts</h2><p class="small soft" style="margin:4px 0 14px">MuseFront reads these and asks you before anything changes.</p>${accounts}</div>
+    <div class="section-gap"><div class="between"><div><h2 class="section">Connected accounts</h2><p class="small soft" style="margin:4px 0 14px">Optional. MuseFront reads these and asks you before anything changes.</p></div><button class="btn" data-do="openConnect">${icon("plug")} Connect a resource</button></div>${accounts}</div>
   </div></section>`);
+}
+
+// ------------------------------------------------------------ Connect popup
+
+const connectState = { configured: false, rows: {} };
+function renderConnect() {
+  const notice = connectState.configured ? "" : `<div class="modal-note">Connecting accounts is optional, and MuseFront works without it. To turn it on, add <code>COMPOSIO_API_KEY</code> to your <code>.env</code> file and restart MuseFront.</div>`;
+  const rows = ACCOUNTS.map(([id, ic, name, help]) => {
+    const r = connectState.rows[id] || {};
+    const isConnected = r.step === "done" || (state.site.connections || []).some((c) => c.toolkit === id && c.status === "connected");
+    const right = isConnected ? `<span class="done-check">${icon("check")}</span>` : r.step === "waiting" ? icon("loader", "spin accent") : `<button class="btn" data-do="startConnect" data-id="${id}" ${connectState.configured ? "" : "disabled"}>Connect</button>`;
+    const waiting = r.step === "waiting" ? `<div class="small soft">Finish signing in in the new window, then come back here.</div>${id === "googlesheets" ? `<input class="sheet" id="sheet-id" placeholder="Paste your spreadsheet's ID">` : ""}<div><button class="btn primary" data-do="finishConnect" data-id="${id}">I've connected it</button></div>` : "";
+    return `<div class="modal-row"><div class="top">${icon(ic, "soft")}<div class="grow" style="flex:1;min-width:0"><div style="font-weight:500;font-size:14.5px">${name}</div><div class="small muted">${help}</div></div>${right}</div>${waiting}${r.error ? `<div class="err-text">${esc(r.error)}</div>` : ""}</div>`;
+  }).join("");
+  $("#modal").innerHTML = `<div class="modal-back" data-do="closeConnect" data-self="1"><div class="modal" role="dialog" aria-modal="true" aria-label="Connect a resource"><div class="between"><h2 class="section">Connect a resource</h2><button class="btn ghost icon-btn" data-do="closeConnect" aria-label="Close">${icon("x")}</button></div><p class="small soft" style="margin:6px 0 0">MuseFront reads what you connect and proposes changes for you to confirm. Connections run through Composio.</p>${notice}<div style="margin-top:14px">${rows}</div></div></div>`;
+  if (window.lucide) lucide.createIcons();
 }
 
 // ------------------------------------------------------------ Simulations
@@ -289,6 +305,27 @@ async function renderBookings() {
 
 const actions = {
   reload: () => render(),
+  openConnect: async () => { const a = await api("/connections/available"); connectState.configured = a.configured; connectState.rows = {}; renderConnect(); },
+  closeConnect: () => { $("#modal").innerHTML = ""; render(); },
+  startConnect: async (el) => {
+    const id = el.dataset.id;
+    connectState.rows[id] = { step: "waiting" };
+    renderConnect();
+    try {
+      const r = await post(`/websites/${state.site.id}/connections`, { toolkit: id });
+      window.open(r.connect_link, "_blank", "noopener,width=520,height=680");
+    } catch (error) { connectState.rows[id] = { error: error.message }; renderConnect(); }
+  },
+  finishConnect: async (el) => {
+    const id = el.dataset.id;
+    const sheet = $("#sheet-id")?.value.trim();
+    try {
+      const r = await post(`/websites/${state.site.id}/connections/${id}/sync`, sheet ? { spreadsheet_id: sheet } : {});
+      connectState.rows[id] = { step: "done" };
+      renderConnect();
+      toast(r.proposal ? "Connected. Proposed changes are waiting on your Resource page" : "Connected. Nothing new to change");
+    } catch (error) { connectState.rows[id] = { step: "waiting", error: error.message }; renderConnect(); }
+  },
   copy: (el) => copy(el.dataset.text, el.dataset.label),
   pickSite: (el) => { selectSite(el.dataset.id); location.hash = "#/websites"; render(); },
   pickSim: (el) => { state.selectedSim = el.dataset.id; render(); },
@@ -296,8 +333,6 @@ const actions = {
   viewOwner: () => { state.agentView = false; render(); },
   viewAgent: () => { state.agentView = true; render(); },
   checkLink: async () => { const r = await post(`/websites/${state.site.id}/check-link`); toast(r.found ? "Found on your website" : "Not on your website's home page yet"); },
-  connect: async (el) => { const r = await post(`/websites/${state.site.id}/connections`, { toolkit: el.dataset.id, callback_url: location.href }); window.open(r.connect_link, "_blank", "noopener"); render(); },
-  syncAccount: async (el) => { const r = await post(`/websites/${state.site.id}/connections/${el.dataset.id}/sync`); toast(r.proposal ? "Changes are waiting on your Resource page" : r.summary); render(); },
   dismiss: async (el) => { await post(`/inbox/${el.dataset.id}/dismiss`); render(); },
   runCheck: async () => { await post(`/websites/${state.site.id}/simulations`, { target: state.site.live ? "resource" : "storefront" }); toast("Check started"); setTimeout(render, 600); },
   review: async () => { const r = await post(`/websites/${state.site.id}/revise`); toast(r.signals ? `Reviewed ${r.signals} signals: ${r.questions} new questions, ${r.insights} insights` : "Nothing new to review"); render(); },
@@ -363,6 +398,7 @@ const forms = {
 document.addEventListener("click", async (event) => {
   const el = event.target.closest("[data-do]");
   if (!el || el.disabled) return;
+  if (el.dataset.self && event.target !== el) return; // Clicks inside the popup don't close it.
   try { await actions[el.dataset.do](el); } catch (error) { fail(error); }
 });
 document.addEventListener("submit", async (event) => {

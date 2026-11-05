@@ -35,6 +35,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 # Model prompts are long lines of plain text.
 "back_office/*" = ["E501"]
 "scripts/mvp_demo.py" = ["E501"]
+"scripts/start.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
