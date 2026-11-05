@@ -1,6 +1,6 @@
 # Legible
 
-**Legible is an agentic harness, powered by Muse Spark, that lets AI agents like Muse do business with small businesses.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page, which the owner embeds as a link on their website, social media or storefront. When a consumer agent like Muse arrives, it can use that page to answer the customer's questions, work out an all-in price and send a booking request.
+**Legible is an agentic harness, powered by Muse Spark, that lets AI agents like Muse do business with small businesses.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page, which the owner links to from their website, social media or storefront. When a consumer agent like Muse arrives, it can use that page to answer the customer's questions, work out an all-in price, send a booking request and more.
 
 <a href="https://www.youtube.com/watch?v=BCvsijSwoW0"><img src="https://img.youtube.com/vi/BCvsijSwoW0/maxresdefault.jpg" alt="Watch the 3-minute Legible film on YouTube" width="640"></a>
 
@@ -14,7 +14,7 @@ AI agents like Muse and Instinct already shop for people, but they often can't f
 
 When a site leaves gaps like these, agents either give up or confidently make something up.
 
-**See it:** [a page Legible generated](https://legible.jamerrred-audiobooks.workers.dev/b/sunrise-auto-detailers) for a fictional business, from [its website](https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev).
+**See it:** [a page Legible generated](https://legible.jamerrred-audiobooks.workers.dev/b/sunrise-auto-detailers) for a fictional business, from [its website](https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev), which we built to look like a typical small US mobile detailer's site.
 
 ## What Legible does
 
@@ -28,7 +28,7 @@ A business owner gives Legible a website and other resources connected to their 
 
 4. **Publish.** A filter strips anything unconfirmed, so a draft never leaves the harness. A Cloudflare Worker backed by D1 serves the rest as HTML and markdown, with no model in the request path. Agents get a deterministic `/quote` engine, also available as JSON, that handles size variants, add-ons, fees, zones, tax and closures without asking for personal details, plus `/request` and `/ask` endpoints. Facts the owner hasn't stated are published as explicit unknowns, so agents don't fill the silence with a guess. Rechecks run the same requests against a private preview of the page, so the before and after scores can be compared.
 
-5. **Embed.** The owner adds one link line to their website, social media or storefront. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
+5. **Embed the link.** The owner adds one link line to their website, social media or storefront. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
 
 6. **Run the agent inbox.** Questions and booking requests from outside agents reach the owner immediately. The owner's reply appears on a public status page that the agent can check.
 
@@ -38,7 +38,7 @@ A business owner gives Legible a website and other resources connected to their 
 
 ## Benchmark: can an agent finish the job?
 
-We ran a controlled before-and-after test to see whether an agent-ready page, which the business owner embeds in their website or storefront as one link, changes what an agent like Muse can do. We simulated that agent with [Errand](#errand-the-consumer-agent), a Muse-like agent we built.
+We ran a controlled before-and-after test to see whether an agent-ready page, which the business owner links to from their website or storefront, changes what an agent like Muse can do. We simulated that agent with [Errand](#errand-the-consumer-agent), a Muse-like agent we built.
 
 - **The business:** Sunrise Auto Detailers, a fictional mobile detailer defined by 75 facts. Its three-page website leaves out 37 of them, hides 34 in places such as image price boards, FAQ answers and a lead form, and states 4 plainly.
 - **Three versions:** the website alone, the same website plus one link line (checked by diffing every page), and a control page with the same facts in plain text, which shows the best the agent can do.
