@@ -109,7 +109,7 @@ async def onboard(website_id: str, run_check: bool = True, sim_queries: int = 5,
         store.add_inbox(website_id, "review", f"Confirm {total} facts read from your website", "Nothing is public until you confirm it.", {"count": total})
 
         _stage(website_id, "interviewing", "Working out what's missing")
-        add_questions(website_id, await brain.interview_questions(record, limit=8), "interview")
+        add_questions(website_id, await brain.interview_questions(record), "interview")
 
         if run_check:
             _stage(website_id, "checking", f"Running {sim_queries} customer agents on your website")
@@ -123,7 +123,14 @@ async def onboard(website_id: str, run_check: bool = True, sim_queries: int = 5,
 # ---------------------------------------------------------------- simulation
 
 
+def _agent_broke(result: dict) -> bool:
+    """A run that ended on a model or provider error says nothing about the business."""
+    return bool(result.get("error")) or (result.get("answer") or "").startswith("The model stopped responding")
+
+
 def _settled(result: dict) -> bool:
+    if _agent_broke(result):
+        return False
     if result.get("error") or result.get("outcome") in ("unknown", "blocked", None):
         return False
     return not any(c.get("evidence") == "unknown" for c in result.get("claims") or [])
@@ -196,9 +203,11 @@ async def run_simulation(website_id: str, target: str = "storefront", n: int = 5
 
     runs = store.query("SELECT * FROM simulation_run WHERE simulation_id = ?", simulation_id)
     settled = sum(r["settled"] for r in runs)
+    broken = [r for r in runs if _agent_broke(r["result"])]
     summary = {
         "queries": len(runs),
         "answered": settled,
+        "agent_errors": len(broken),
         "cost": round(sum(r["result"].get("cost") or 0 for r in runs), 3),
         "average_seconds": round(sum(r["result"].get("wall_s") or 0 for r in runs) / max(len(runs), 1), 1),
     }
@@ -207,7 +216,7 @@ async def run_simulation(website_id: str, target: str = "storefront", n: int = 5
         failures = [
             {"customer_request": r["query"], "agent_answer": (r["result"].get("answer") or "")[:1500], "outcome": r["result"].get("outcome")}
             for r in runs
-            if not r["settled"]
+            if not r["settled"] and not _agent_broke(r["result"])
         ]
         add_questions(website_id, await brain.holes_to_questions(record, failures, asked_titles(website_id)), "simulation")
     return simulation_id

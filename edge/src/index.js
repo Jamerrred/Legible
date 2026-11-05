@@ -67,7 +67,7 @@ function confirmed(item) {
 function offeringLine(rec, o, base) {
   const name = rec.business?.name || "this business";
   const parts = [`[${o.name}](${base}/services/${o.id}) at ${name} costs ${priceText(rec, o)}.`];
-  if (o.duration) parts.push(`It takes ${o.duration}.`);
+  if (o.duration) parts.push(`Time on site: ${String(o.duration).replace(/\.+$/, "")}.`);
   if (o.description) parts.push(o.description);
   if (list(o.aliases).length) parts.push(`Customers also call it ${list(o.aliases).join(", ")}.`);
   if (o.notes) parts.push(o.notes);
@@ -84,7 +84,8 @@ function addonLine(rec, a, base) {
 
 function feeLine(rec, f) {
   const amount = f.percent ? `${f.percent}%` : money(rec, f.amount);
-  return `${f.label}: ${amount}${f.applies_when ? `, when ${f.applies_when}` : ""}.` + confirmed(f);
+  const when = String(f.applies_when || "").replace(/\.+$/, "");
+  return `${f.label}: ${amount}.${when ? ` Applies: ${when}.` : ""}` + confirmed(f);
 }
 
 function sections(rec, base, day) {
@@ -200,7 +201,8 @@ function evaluate(rec, job, day) {
   const stop = (status, note) => {
     r.status = status;
     r.dead_end = status;
-    r.notes.push(note);
+    r.reason = note;
+    r.notes.unshift(note);
     return r;
   };
 
@@ -284,14 +286,22 @@ function evaluate(rec, job, day) {
     else r.notes.push(`"${text}" isn't a defined condition, so nothing was charged for it.`);
   }
   if (when) for (const fee of fees) if (list(fee.weekdays).map(norm).includes(norm(weekdayOf(when)))) applyFee(fee);
-  for (const fee of fees) if (!applied.has(fee.id)) r.notes.push(`May also apply: ${fee.label}${fee.applies_when ? `, when ${fee.applies_when}` : ""}.`);
+  for (const fee of fees) {
+    if (!applied.has(fee.id)) r.notes.push(`May also apply: ${fee.label}${fee.applies_when ? ` (${String(fee.applies_when).replace(/\.+$/, "")})` : ""}. Pass condition=${fee.id} to include it.`);
+  }
 
   if (zones.length) {
     const code = String(job.zip || "").replace(/\D/g, "").slice(0, 5);
     if (!code) r.still_needed.push("zip");
     else {
-      const zone = zones.find((z) => list(z.zips).map(String).includes(code));
-      if (!zone) return stop("out_of_area", `ZIP ${code} isn't in the service area.`);
+      let zone = zones.find((z) => list(z.zips).map(String).includes(code));
+      if (!zone) {
+        // A zone with no ZIP list can't rule a ZIP out, so say what's being assumed instead of refusing.
+        const unlisted = zones.filter((z) => !list(z.zips).length);
+        if (!unlisted.length) return stop("out_of_area", `ZIP ${code} isn't in the service area.`);
+        zone = unlisted[0];
+        r.notes.push(`ZIP ${code} isn't on a list, so this assumes it's in ${unlisted.map((z) => z.label).join(" or ")}. The owner can confirm.`);
+      }
       if (zone.fee) push(`Travel fee (${zone.label})`, { low: Number(zone.fee), high: Number(zone.fee) }, false);
     }
   }
@@ -323,7 +333,7 @@ function headline(rec, o) {
   }
   if (o.status === "needs_info") return `A total needs more details: ${o.still_needed.join("; ")}.`;
   if (o.status === "quote_only") return "This is priced after the details are given.";
-  return o.notes[0] || "This can't be priced as entered.";
+  return o.reason || o.notes[0] || "This can't be priced as entered.";
 }
 
 function outcomeHtml(rec, o) {

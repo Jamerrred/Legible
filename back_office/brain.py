@@ -54,6 +54,7 @@ async def extract_record(pages: list[dict], image_text: str, website: str) -> di
         "You build a structured fact sheet for a service business from its website. Use only what the pages and images state. Never guess or invent, "
         "and leave out anything not stated. Capture every price, fee, rule and exclusion you find, with source_url set to the page it came from. "
         "Vague lines such as 'may cost extra' go in facts with the vagueness kept. "
+        "A fee is a charge that adds to the total. A deposit counts toward the total, so it's a fact in the policies category, not a fee. "
         f"Fact categories: {', '.join(CATEGORIES)}. Return exactly this shape:\n{RECORD_SHAPE}",
         f"Website: {website}\n\nIMAGES\n{image_text or '(none)'}\n\nPAGES\n{corpus}",
         max_tokens=16000,
@@ -61,11 +62,15 @@ async def extract_record(pages: list[dict], image_text: str, website: str) -> di
     return normalise(result)
 
 
-async def interview_questions(record: dict, limit: int = 10, already: list[str] | None = None) -> list[dict]:
+async def interview_questions(record: dict, limit: int = 12, already: list[str] | None = None) -> list[dict]:
     result = await ask_json(
         "You interview a small business owner to fill gaps in their fact sheet, so that any AI agent can answer customers correctly. "
-        f"Check the fact sheet against these needs: {NEEDS}. Ask only about what's missing or vague. Each question is short, plain and concrete, in the owner's language, "
-        "and answerable in a sentence. Rank by how likely it is to stop a customer's agent. Skip anything already asked. "
+        f"Check the fact sheet against these needs: {NEEDS}. Ask only about what's missing or vague. Each question is short, plain and concrete, in the owner's language. "
+        "Owners know far more than their website says, so also ask these three broad questions, unless the sheet clearly covers them already: "
+        "(1) every surcharge, discount and fee tied to the day, time, quantity or repeat visits, with amounts; "
+        "(2) everything the business refuses or doesn't offer that customers might ask for; "
+        "(3) any rule that can rule a job out, and exactly where the service does and doesn't go. "
+        "Rank by how likely it is to stop a customer's agent. Skip anything already asked. "
         'Reply as {"questions": [{"topic": "", "question": "", "why": "one short line on what an agent can\'t do without this", '
         '"unknown_statement": "one sentence for the public page, naming the business, saying the owner hasn\'t stated this"}]}.',
         f"Ask at most {limit}.\nAlready asked: {json.dumps(already or [])}\n\nFACT SHEET\n{_compact(record)}",

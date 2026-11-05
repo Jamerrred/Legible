@@ -47,10 +47,10 @@ def owner_facts(slug: str) -> str:
 
 async def owner_answer(question: str, facts: str) -> str:
     result = await ask_json(
-        "You play a small business owner answering a question from your assistant. Answer in one or two plain sentences using only the facts below. "
+        "You play a small business owner answering a question from your assistant. Answer fully in plain sentences, including every relevant detail and amount, using only the facts below. "
         'If they don\'t cover it, say you haven\'t decided that. Reply as {"answer": ""}.',
         f"QUESTION\n{question}\n\nFACTS YOU KNOW\n{facts}",
-        max_tokens=1500,
+        max_tokens=3000,
     )
     return result.get("answer") or "I haven't decided that."
 

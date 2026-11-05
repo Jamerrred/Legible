@@ -56,7 +56,9 @@ async def crawl_exa(url: str, max_pages: int = 12) -> list[dict]:
             "urls": [url],
             "text": {"maxCharacters": MAX_TEXT},
             "subpages": max(max_pages - 1, 0),
+            "subpageTarget": ["pricing", "prices", "services", "book", "faq", "about", "contact", "policies", "areas"],
             "extras": {"imageLinks": 15},
+            "maxAgeHours": 0,
             "livecrawlTimeout": 30000,
         },
     )
@@ -76,7 +78,12 @@ async def crawl(url: str, max_pages: int = 12) -> list[dict]:
         pages = await crawl_exa(url, max_pages)
     except Exception:
         pages = []
-    return pages if len(pages) >= 2 else (await crawl_direct(url, max_pages)) or pages
+    # Exa can return few subpages or thin text, so a plain crawl tops it up.
+    if len(pages) >= 3 and sum(len(p["text"]) for p in pages) >= 3000:
+        return pages
+    seen = {p["url"].rstrip("/") for p in pages}
+    extra = [p for p in await crawl_direct(url, max_pages) if p["url"].rstrip("/") not in seen]
+    return (pages + extra)[:max_pages]
 
 
 async def fetch_images(pages: list[dict], limit: int = 4) -> list[dict]:
