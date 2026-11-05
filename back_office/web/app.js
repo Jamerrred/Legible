@@ -45,7 +45,7 @@ function selectSite(id) { localStorage.setItem("mf.site", id); state.site = stat
 
 function renderRail() {
   const n = state.site?.needs || {};
-  const dots = { simulations: n.missing, resource: (n.review || 0) + (n.proposals || 0), inbox: n.agent_questions, bookings: n.bookings };
+  const dots = { simulations: n.missing, resource: (n.review || 0) + (n.proposals || 0), inbox: (n.agent_questions || 0) + (n.missing || 0), bookings: n.bookings };
   $("#rail").innerHTML = `<div class="logo">M</div>` + NAV.map(([id, ic, label]) => `<a class="nav ${route() === id ? "on" : ""}" href="#/${id}">${icon(ic)}<span>${label}</span>${dots[id] ? '<span class="dot"></span>' : ""}</a>`).join("") + (state.site ? `<a class="switcher" href="#/websites" title="${esc(state.site.name)}">${esc((state.site.name || "?")[0])}</a>` : "");
 }
 const paint = (html) => { view.innerHTML = html; if (window.lucide) lucide.createIcons(); };
@@ -73,6 +73,50 @@ async function render() {
 // ------------------------------------------------------------ Websites
 
 const isBusy = (s) => s && !["ready", "failed"].includes(s.stage);
+const seen = {};
+
+function agentsHtml(sim) {
+  if (!sim) return "";
+  if (!sim.agents.length) return `<div class="row-flex" style="margin-top:18px"><span class="ring"></span><span class="shimmer">Writing questions for the test customers</span></div>`;
+  return `<div class="agents">${sim.agents.map((a, n) => {
+    const asked = a.query.replace(/\s*\(?https?:\/\/\S+\)?/g, "");
+    const from = a.total - a.steps.length;
+    const lines = a.steps.map((text, i) => {
+      const fresh = from + i >= (seen[`${sim.id}${n}`] || 0);
+      const live = !a.done && i === a.steps.length - 1;
+      return `<div class="trace-line ${fresh ? "fresh" : ""}">${live ? `<span class="shimmer">› ${esc(text)}</span>` : `› ${esc(text)}`}</div>`;
+    }).join("");
+    seen[`${sim.id}${n}`] = a.total;
+    const mark = !a.done ? '<span class="ring"></span>' : ["unknown", "blocked"].includes(a.outcome) ? icon("x", "accent") : icon("check", "ok");
+    return `<div class="agent"><div class="agent-head">${mark}<span>“${esc(asked)}”</span></div><div class="trace-lines">${lines || '<div class="trace-line"><span class="shimmer">› Starting</span></div>'}</div></div>`;
+  }).join("")}</div>`;
+}
+
+function onboardHtml(t) {
+  const at = STEPS.findIndex(([id]) => id === t.stage);
+  const rows = STEPS.map(([id, label], i) => {
+    const done = t.stage === "ready" || (at >= 0 && i < at);
+    const now = i === at || (t.stage === "queued" && i === 0);
+    const mark = done ? icon("check", "ok") : now ? '<span class="ring"></span>' : '<span class="status-dot" style="margin:0 5px;opacity:.4"></span>';
+    const pages = id === "crawling" && (t.pages || []).length ? t.pages.map((p) => `<div class="page-line">Read ${esc(p.url.replace(/^https?:\/\/[^/]+/, "") || "/")}</div>`).join("") : "";
+    const sim = id === "checking" && now ? agentsHtml(t.simulation) : "";
+    return `<div class="line-row"><span style="width:16px;display:grid;place-items:center">${mark}</span><span class="grow ${now ? "shimmer" : done ? "" : "muted"}" style="font-weight:${now ? 500 : 400}">${label}</span></div>${pages}${sim}`;
+  }).join("");
+  return `<div class="stack"><div class="row-flex" style="gap:16px"><span class="ring big"></span><h1 class="headline">Getting to know ${esc(t.name)}</h1></div><p class="soft" style="margin:0;font-size:15.5px">${esc(t.stage_note || "Starting")}</p><div class="step-list">${rows}</div></div>`;
+}
+
+async function pollTrace() {
+  try {
+    const t = await api(`/websites/${state.site.id}/trace`);
+    const el = $("#trace");
+    if (!el) return;
+    const onboarding = route() === "websites";
+    if (onboarding ? ["ready", "failed"].includes(t.stage) : !t.simulation && !["crawling", "extracting", "interviewing", "queued"].includes(t.stage)) return render();
+    el.innerHTML = onboarding ? onboardHtml(t) : agentsHtml(t.simulation) || `<div class="row-flex" style="margin-top:18px"><span class="ring"></span><span class="shimmer">${esc(t.stage_note || "Working")}</span></div>`;
+    if (window.lucide) lucide.createIcons();
+  } catch { /* The next poll tries again. */ }
+  poll = setTimeout(pollTrace, 1200);
+}
 
 function addForm() {
   return `<div class="center-pane"><form class="stack" data-form="addSite" style="width:min(600px,100%)">
@@ -102,7 +146,12 @@ async function renderWebsites() {
     <div class="row-flex tiny" style="gap:6px;margin-top:3px"><span class="status-dot ${s.live ? "live" : ""}"></span><span class="${s.live ? "ok" : "muted"}" style="font-weight:500">${s.live ? "Live" : isBusy(s) ? "Setting up" : s.stage === "failed" ? "Failed" : "Not public yet"}</span></div></button>`).join("");
   const side = `<aside class="pane-list"><div class="list-head"><h1 class="page-title">Websites</h1><a class="btn icon-btn" href="#/websites/new" aria-label="Add a website">${icon("plus")}</a></div><div class="list">${list}</div></aside>`;
   if (adding) return paint(side + addForm());
-  if (isBusy(site)) { poll = setTimeout(render, 3000); return paint(side + `<div class="center-pane"><div style="width:min(600px,100%)">${stepsPanel(site)}</div></div>`); }
+  if (isBusy(site)) {
+    const t = await api(`/websites/${site.id}/trace`);
+    paint(side + `<section class="pane-main"><div class="column" id="trace">${onboardHtml(t)}</div></section>`);
+    poll = setTimeout(pollTrace, 1200);
+    return;
+  }
   if (site.stage === "failed") return paint(side + `<div class="center-pane"><div class="stack" style="width:min(600px,100%)"><h1 class="headline">This website couldn't be read</h1><p class="soft">${esc(site.stage_note)}</p><div><a class="btn" href="#/websites/new">Try another address</a></div></div></div>`);
   const linked = (site.connections || []).filter((c) => c.status === "connected");
   const accounts = linked.length ? linked.map((c) => { const a = ACCOUNTS.find(([id]) => id === c.toolkit) || [c.toolkit, "plug", c.toolkit]; return `<div class="line-row">${icon(a[1], "soft")}<div class="grow" style="font-weight:500;font-size:14.5px">${esc(a[2])}</div><span class="row-flex small ok" style="gap:6px;font-weight:500">${icon("check")} Connected</span></div>`; }).join("") : "";
@@ -114,7 +163,9 @@ async function renderWebsites() {
     <div class="stack section-gap"><div class="between"><h2 class="section">Your link</h2><button class="btn ghost small" data-do="checkLink">${icon("search-check")} Check it's on your site</button></div>
       ${site.live ? `<div class="link-box"><span class="mono">${esc(site.link)}</span><button class="btn primary" data-do="copy" data-text="${esc(site.link)}" data-label="Link">${icon("copy")} Copy</button></div>
       <div class="small soft">Paste this line on your pricing or booking page, where any agent reading it will see it:</div>
-      <div class="paste-line"><span>${esc(site.link_line)}</span><button class="btn ghost icon-btn" data-do="copy" data-text="${esc(site.link_line)}" data-label="Line" aria-label="Copy line">${icon("copy")}</button></div>` : `<div class="empty" style="border:0;padding:0"><b>Your link appears once you've confirmed your facts</b>Nothing is public until then.</div>`}
+      <div class="paste-line"><span>${esc(site.link_line)}</span><button class="btn ghost icon-btn" data-do="copy" data-text="${esc(site.link_line)}" data-label="Line" aria-label="Copy line">${icon("copy")}</button></div>
+      <div class="small soft">Or embed it as HTML:</div>
+      <div class="paste-line"><span class="mono" style="font-size:12px">${esc(site.link_line_html)}</span><button class="btn ghost icon-btn" data-do="copy" data-text="${esc(site.link_line_html)}" data-label="HTML" aria-label="Copy HTML">${icon("copy")}</button></div>` : `<div class="empty" style="border:0;padding:0"><b>Your link appears once you've confirmed your facts</b>Nothing is public until then.</div>`}
     </div>
     <div class="section-gap"><div class="between"><div><h2 class="section">Connected accounts</h2><p class="small soft" style="margin:4px 0 14px">Optional. MuseFront reads these and asks you before anything changes.</p></div><button class="btn" data-do="openConnect">${icon("plug")} Connect a resource</button></div>${accounts}</div>
   </div></section>`);
@@ -150,7 +201,6 @@ async function renderSimulations() {
   if (!sims.some((s) => s.id === state.selectedSim)) state.selectedSim = sims[0]?.id || null;
   const current = state.selectedSim ? await api(`/simulations/${state.selectedSim}`) : null;
   const running = sims.some((s) => s.status === "running") || isBusy(state.site);
-  if (running) poll = setTimeout(render, 5000);
   const score = (s) => (s.status === "running" ? "…" : `${s.summary.answered} of ${s.summary.queries}`);
   const list = sims.map((s) => `<button class="list-item ${s.id === state.selectedSim ? "on" : ""}" data-do="pickSim" data-id="${s.id}"><div class="between"><div style="min-width:0"><div class="name">${esc(s.label)}</div><div class="tiny muted">${esc(when(s.created_at))}</div></div><span style="font:400 18px var(--voice);flex:none">${score(s)}</span></div></button>`).join("");
   let detail = `<div class="empty"><b>No check has run yet</b>A check sends test customers at your website to find what they can't answer.</div>`;
@@ -165,7 +215,7 @@ async function renderSimulations() {
       return `<details class="run"><summary>${mark}<span class="request">“${esc(asked)}”</span><span class="small ${label === "Stuck" ? "accent" : "muted"}" style="flex:none">${label}</span></summary><div class="run-body">${esc(broke(r) ? "The test agent crashed before it finished. This doesn't count against you." : r.result?.answer || "No answer.")}</div></details>`;
     }).join("");
     detail = current.status === "running"
-      ? `<div class="row-flex soft" style="padding:16px 0">${icon("loader", "spin")} Test customers are working through this now. It takes about 5 minutes.</div>`
+      ? `<h2 class="section">Test customers are working</h2><div id="trace"></div>`
       : `<div class="stack"><div class="small muted" style="font-weight:500">${esc(current.label)}</div><h2 class="headline" style="font-size:30px">${current.summary.answered} of ${current.summary.queries} test customers got an answer</h2><div class="meter">${segs}</div></div><div style="margin-top:22px">${rows}</div>`;
   }
   const open = missing.open;
@@ -179,6 +229,7 @@ async function renderSimulations() {
       <div class="section-gap">${detail}</div>
       ${answered ? `<div class="section-gap"><h2 class="section" style="margin-bottom:12px">Already answered</h2>${answered}</div>` : ""}
     </div></section>`);
+  if (running) { if (!$("#trace")) $(".pane-main .column .section-gap").insertAdjacentHTML("afterbegin", '<div id="trace"></div>'); pollTrace(); }
 }
 
 // ------------------------------------------------------------ Resource
@@ -261,7 +312,7 @@ function feedLine(e) {
 
 async function renderInbox() {
   const id = state.site.id;
-  const [activity, items] = await Promise.all([api(`/websites/${id}/activity`), api(`/websites/${id}/inbox?kinds=agent_question`)]);
+  const [activity, items, missing] = await Promise.all([api(`/websites/${id}/activity`), api(`/websites/${id}/inbox?kinds=agent_question`), api(`/websites/${id}/missing`)]);
   const c = activity.counts;
   const stats = [[c.page_reads, "Pages read"], [c.quotes, "Quotes worked out"], [c.dead_ends, "Dead ends"], [c.questions, "Questions"]].map(([n, l]) => `<div class="stat"><b class="${l === "Dead ends" && n ? "accent" : ""}">${n}</b><span class="small muted">${l}</span></div>`).join("");
   const asked = items.map((q) => `<article class="question"><h3>${esc(q.title)}</h3><div class="soft small">An agent asked this for a customer. Your answer shows on its status page.</div>
@@ -272,6 +323,7 @@ async function renderInbox() {
   paint(`<section class="pane-main"><div class="wide-column"><div class="between"><h1 class="page-title">Inbox</h1><button class="btn ghost small" data-do="review">${icon("refresh-cw")} Review activity now</button></div>
     <div class="stats">${stats}</div>
     ${asked ? `<div style="margin-bottom:40px"><h2 class="section" style="margin-bottom:6px">Agents are asking</h2>${asked}</div>` : ""}
+    ${missing.open.length ? `<div style="margin-bottom:40px"><h2 class="section" style="margin-bottom:6px">Questions for you<span class="count-pill">${missing.open.length}</span></h2>${missing.open.map(questionBlock).join("")}</div>` : ""}
     <div class="zones"><div><h2 class="section" style="margin-bottom:12px">What agents did</h2>${feed || `<div class="empty"><b>No agents yet</b>Put your link on your website, and what agents do will show up here.</div>`}</div>
     <aside><h2 class="section" style="margin-bottom:12px;font-size:19px">Wanted, but not offered</h2>${wanted || `<div class="empty small">Nothing yet.</div>`}<p class="small muted" style="margin-top:16px">You can only see agents that reach your MuseFront page. An agent that stops at your own website stays invisible.</p></aside></div>
   </div></section>`);

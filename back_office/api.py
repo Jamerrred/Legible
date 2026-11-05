@@ -140,6 +140,20 @@ def get_website(website_id: str):
     return {**_site_view(_site(website_id)), "pages": _site(website_id)["pages"]}
 
 
+@app.get("/websites/{website_id}/trace")
+def trace(website_id: str):
+    """Live progress for the app: the onboarding stage, pages read, and each test customer's steps."""
+    site = _site(website_id)
+    sim = store.one("SELECT id, label FROM simulation WHERE website_id = ? AND status = 'running' ORDER BY created_at DESC LIMIT 1", website_id)
+    return {
+        "stage": site["stage"],
+        "stage_note": site["stage_note"],
+        "name": site["name"] or site["slug"],
+        "pages": site["pages"],
+        "simulation": {"id": sim["id"], "label": sim["label"], "agents": work.sim_trace(sim["id"])} if sim else None,
+    }
+
+
 @app.post("/websites/{website_id}/publish")
 async def publish_website(website_id: str):
     _site(website_id)
