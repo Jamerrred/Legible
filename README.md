@@ -2,11 +2,11 @@
 
 MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps that website accurate.
 
-**Status:** the back office backend is built as a prototype, and it publishes a public resource to a Cloudflare Worker: see [its report](reports/back-office-mvp.md). It has no interface yet. The first demo, on the fictional Cormorant Mobile Detailing, is [live on Cloudflare](deploy/workers/README.md), and its local results are [here](reports/first-demo-benchmark.md). Real Muse is untested.
+**Status:** the back office backend is built as a prototype, and it publishes a public resource to a Cloudflare Worker: see [its report](reports/back-office-mvp.md). The owner app runs locally. The first demo, on the fictional Cormorant Mobile Detailing, is [live on Cloudflare](deploy/workers/README.md), and its local results are [here](reports/first-demo-benchmark.md). Real Muse is untested.
 
 ## Run the back office
 
-Start the API and leave it running, then open `http://127.0.0.1:8200/docs`:
+Start it and leave it running, then open the app at `http://127.0.0.1:8200`. API docs are at `/docs`:
 
 ```bash
 uv run uvicorn back_office.api:app --port 8200

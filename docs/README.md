@@ -8,7 +8,7 @@ MuseFront gives a service business a small website that any AI agent can read an
 
 **Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the back office backend with a public resource on Cloudflare ([report](../reports/back-office-mvp.md)).
 
-**Next steps:** the founder's interface design, which the API then gets fitted to ([owner app](10-owner-app.md)), connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
+**Next steps:** the [owner app](10-owner-app.md) is built and runs locally, so next come connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
 
 **Skipped on the founder's direction, 5 November:** the 5 missing "before" runs and the other three mock businesses, which wait until the founder asks for them. Whether real agents follow the link is still untested.
 
@@ -25,7 +25,7 @@ MuseFront gives a service business a small website that any AI agent can read an
 | [07 Consumer agent research](07-consumer-agent-research.md) | How research agents, browser agents and harnesses are built, with sources |
 | [08 Consumer agent design](08-consumer-agent-design.md) | What we'd build as our stand-in agent, including draft instructions |
 | [09 Back office agent](09-back-office-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
-| [10 Owner app](10-owner-app.md) | The four screens, how they map to the API, and who can change what |
+| [10 Owner app](10-owner-app.md) | The five screens, how they map to the API, and who can change what |
 
 Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names real businesses, so don't publish it as is.
 
