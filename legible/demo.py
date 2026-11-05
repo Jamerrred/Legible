@@ -25,17 +25,17 @@ from legible import edge, store, work
 from legible.record import slugify, stamp_all, today_for
 
 ENABLED = os.environ.get("LEGIBLE_DEMO") == "1"
-SLUG = "cormorant"
-SITE_URL = "https://cormorant-detailing.jamerrred-audiobooks.workers.dev"
+SLUG = "sunrise"
+SITE_URL = "https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev"
 HERE = Path(__file__).resolve().parent
-NAME = "Cormorant Mobile Detailing"
+NAME = "Sunrise Auto Detailers"
 AGENT_SUGGESTIONS = {"golf": "We don't detail golf carts."}
 AGENT_UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140.0 Safari/537.36 PersonalAssistant/1.0"
 UNNAMED_UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140.0 Safari/537.36"
 
 
 def _facts() -> dict:
-    return json.loads((HERE.parent / "businesses" / "cormorant" / "facts.json").read_text())
+    return json.loads((HERE.parent / "businesses" / "sunrise" / "facts.json").read_text())
 
 
 def _questions() -> dict[str, dict]:
@@ -111,25 +111,25 @@ CUSTOMERS = [
     {
         "query": "Inside and out on my 2021 Subaru Outback in Berkeley, 94704, with dog hair on the back seat. I can't go over $400 all in. Does a Saturday work?",
         "needs": ["fees", "tax"],
-        "first": [("say", "I'll check Cormorant's prices for your Outback."), ("read", "/"), ("browse", "Read the prices on the package image"), ("read", "/book"), ("say", "No Saturday fee, tax or East Bay travel fee is stated anywhere."), ("finish", "")],
+        "first": [("say", "I'll check Sunrise's prices for your Outback."), ("read", "/"), ("browse", "Read the prices on the package image"), ("read", "/book"), ("say", "No Saturday fee, tax or East Bay travel fee is stated anywhere."), ("finish", "")],
         "first_answer": "The Schooner for a midsize car is $249, plus $55 for pet hair, so $304 before anything else. I can't confirm an all-in total, because the site doesn't state tax, the East Bay travel fee or any Saturday fee.",
-        "again": [("say", "I'll work out both days for your budget."), ("read", "/b/cormorant"), ("quote", "/b/cormorant/quote?service=the-schooner&variant=class-b&addon=pet-hair-removal&zip=94704&when=saturday"), ("quote", "/b/cormorant/quote?service=the-schooner&variant=class-b&addon=pet-hair-removal&zip=94704&when=tuesday"), ("finish", "")],
+        "again": [("say", "I'll work out both days for your budget."), ("read", "/b/sunrise"), ("quote", "/b/sunrise/quote?service=the-schooner&variant=class-b&addon=pet-hair-removal&zip=94704&when=saturday"), ("quote", "/b/sunrise/quote?service=the-schooner&variant=class-b&addon=pet-hair-removal&zip=94704&when=tuesday"), ("finish", "")],
         "again_answer": "Saturday comes to $422.38, which is $22.38 over your $400. Tuesday to Friday comes to $395.22, which fits.",
     },
     {
-        "query": "My kid got carsick in the back of our CR-V and it reeks. Can Cormorant come clean that up in 94122? How much?",
+        "query": "My kid got carsick in the back of our CR-V and it reeks. Can Sunrise come clean that up in 94122? How much?",
         "needs": ["refuse"],
-        "first": [("say", "I'll see if Cormorant can take this job."), ("read", "/"), ("read", "/faq"), ("search", "Cormorant Mobile Detailing vomit cleanup"), ("say", "The site never says what it refuses, so I can't rule this in or out."), ("finish", "")],
+        "first": [("say", "I'll see if Sunrise can take this job."), ("read", "/"), ("read", "/faq"), ("search", "Sunrise Auto Detailers vomit cleanup"), ("say", "The site never says what it refuses, so I can't rule this in or out."), ("finish", "")],
         "first_answer": "I can't tell. They offer interior cleaning and odour treatment, but the site doesn't say whether they take biohazard jobs like this one. You'd need to call and ask.",
-        "again": [("read", "/b/cormorant"), ("say", "Found it under what they don't offer."), ("finish", "")],
-        "again_answer": "No. Cormorant doesn't clean biohazards, which includes vomit, even though you're in its service area.",
+        "again": [("read", "/b/sunrise"), ("say", "Found it under what they don't offer."), ("finish", "")],
+        "again_answer": "No. Sunrise doesn't clean biohazards, which includes vomit, even though you're in its service area.",
     },
     {
         "query": "Need a number for our muddy F-250 in Sausalito, 94965. Inside only, with a real shampoo. The outlet is 150 feet away. What's the whole cost, tax and all?",
         "needs": ["fees", "tax"],
         "first": [("say", "I'll add up the whole job for your truck."), ("read", "/"), ("browse", "Find the price for a heavy-duty pickup"), ("read", "/faq"), ("say", "“May cost extra” is never defined, and neither is the travel fee."), ("finish", "")],
         "first_answer": "$444 so far, for the interior detail and shampoo. I can't give a total: the heavily soiled charge, the travel fee and tax aren't stated.",
-        "again": [("read", "/b/cormorant"), ("quote", "/b/cormorant/quote?service=the-cutter&variant=class-d&addon=shampoo&condition=heavily-soiled&condition=generator-fee&zip=94965"), ("finish", "")],
+        "again": [("read", "/b/sunrise"), ("quote", "/b/sunrise/quote?service=the-cutter&variant=class-d&addon=shampoo&condition=heavily-soiled&condition=generator-fee&zip=94965"), ("finish", "")],
         "again_answer": "$628.76, tax and travel included: $289 interior detail, $125 shampoo, $75 heavily soiled, $30 generator, $44.76 tax and $65 travel.",
     },
     {
@@ -137,7 +137,7 @@ CUSTOMERS = [
         "needs": [],
         "first": [("read", "/"), ("read", "/faq"), ("say", "The FAQ covers this."), ("finish", "")],
         "first_answer": "You get half your deposit back when you cancel between 24 and 48 hours before the arrival window.",
-        "again": [("read", "/b/cormorant"), ("finish", "")],
+        "again": [("read", "/b/sunrise"), ("finish", "")],
         "again_answer": "You get half your deposit back when you cancel between 24 and 48 hours before the arrival window.",
     },
 ]

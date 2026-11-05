@@ -1,4 +1,4 @@
-"""Walk the site's whole booking flow. Usage: uv run python scripts/check_booking.py http://cormorant.localhost:8101"""
+"""Walk the site's whole booking flow. Usage: uv run python scripts/check_booking.py http://sunrise.localhost:8101"""
 
 from __future__ import annotations
 

@@ -1,9 +1,9 @@
 """Start the local servers. Usage: uv run python scripts/serve.py [site,resource,control,world]
 
-  8101    "before" site    http://cormorant.localhost:8101
-  8102    "after" site     http://cormorant.localhost:8102
-  8103    resource         http://agents.cormorant.localhost:8103
-  8104    control page     http://cormorant.localhost:8104
+  8101    "before" site    http://sunrise.localhost:8101
+  8102    "after" site     http://sunrise.localhost:8102
+  8103    resource         http://agents.sunrise.localhost:8103
+  8104    control page     http://sunrise.localhost:8104
   8105-7  mock directory and competitors, linking to the before, after and control site
 
 Each server binds both 127.0.0.1 and ::1, because *.localhost resolves to ::1 from Python
@@ -26,7 +26,7 @@ from bench.world import create_world_app  # noqa: E402
 from demo_resource.app import app as resource_app  # noqa: E402
 from demo_site.app import create_app  # noqa: E402
 
-SITE = "http://cormorant.localhost"
+SITE = "http://sunrise.localhost"
 GROUPS = {
     "site": lambda: [(8101, create_app("before")), (8102, create_app("after"))],
     "resource": lambda: [(8103, resource_app)],

@@ -116,10 +116,10 @@ uv run python scripts/serve.py
 
 | Address | What it is |
 |---|---|
-| `http://cormorant.localhost:8101` | "Before": the website alone |
-| `http://cormorant.localhost:8102` | "After": the same website plus one link line |
-| `http://agents.cormorant.localhost:8103` | The hand-written page for agents |
-| `http://cormorant.localhost:8104` | Control: a plain page holding the same facts, to show what Errand can do with nothing in its way |
+| `http://sunrise.localhost:8101` | "Before": the website alone |
+| `http://sunrise.localhost:8102` | "After": the same website plus one link line |
+| `http://agents.sunrise.localhost:8103` | The hand-written page for agents |
+| `http://sunrise.localhost:8104` | Control: a plain page holding the same facts, to show what Errand can do with nothing in its way |
 
 **2. Run each version** in another terminal. Using a new `--name` keeps the published results as they are. The runner stops starting new runs when your balance falls below $0.30.
 
@@ -152,7 +152,7 @@ Results are in `runs/my-run/results_*.json`, with each run's log beside them.
 To ask Errand one question yourself:
 
 ```bash
-uv run python -m errand.run --task "What does a full detail cost at Cormorant Mobile Detailing?" --search local --corpus corpus/after --out runs/adhoc
+uv run python -m errand.run --task "What does a full detail cost at Sunrise Auto Detailers?" --search local --corpus corpus/after --out runs/adhoc
 ```
 
 ### How it was kept fair
@@ -180,7 +180,7 @@ The sidebar follows the order an owner works in, so go through it from top to bo
 **1. Websites: connect a website.** Paste an address and press the arrow. You can use your own, or this fictional demo business, which has prices hidden in images and missing rules on purpose:
 
 ```text
-https://cormorant-detailing.jamerrred-audiobooks.workers.dev
+https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev
 ```
 
 Leave "Also test it with 5 customer agents" ticked to see the full flow. That takes about 5 minutes and costs about $1.50. Untick it for a quick try, which takes about a minute and costs a few cents.
@@ -204,7 +204,7 @@ Legible works out the exact dates and asks you to confirm, and the closure ends 
 To watch the whole product run by itself, with a script playing the owner, start Legible and run this in another terminal. It costs a few cents and only makes sense with the demo business above:
 
 ```bash
-uv run python scripts/mvp_demo.py --url https://cormorant-detailing.jamerrred-audiobooks.workers.dev
+uv run python scripts/mvp_demo.py --url https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev
 ```
 
 ### Connect accounts (optional)

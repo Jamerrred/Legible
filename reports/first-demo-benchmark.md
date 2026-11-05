@@ -4,7 +4,7 @@ This is the source file for infographics and the demo. Every number comes from r
 
 | | |
 |---|---|
-| **Business** | Cormorant Mobile Detailing, San Francisco. It's fictional |
+| **Business** | Sunrise Auto Detailers, San Francisco. It's fictional |
 | **Agent** | Our stand-in consumer agent, on Muse Spark 1.3 through OpenRouter, using the hybrid profile |
 | **Run** | 4 November 2026, Pacific time, entirely on localhost |
 | **Agent frozen** | At commit `2c319fc`, before any benchmark run, and unchanged since |
@@ -53,19 +53,19 @@ The control page is a plain page holding the same facts. It shows what the agent
 
 This is the strongest demo moment, because the wrong answer would send someone a bill for a job the business refuses.
 
-**Customer:** "My kid got carsick in the back of our CR-V over the weekend and threw up all over the back seat and floor. I cleaned what I could but some of it's still dried on and it reeks. Can Cormorant come clean that up and get the smell out? How much? We're in 94122."
+**Customer:** "My kid got carsick in the back of our CR-V over the weekend and threw up all over the back seat and floor. I cleaned what I could but some of it's still dried on and it reeks. Can Sunrise come clean that up and get the smell out? How much? We're in 94122."
 
-**Correct answer:** no. Cormorant doesn't clean biohazards, which include vomit.
+**Correct answer:** no. Sunrise doesn't clean biohazards, which include vomit.
 
 **Before: wrong, 147 s, $0.275**
 
-> Yes — Cormorant can come to you in 94122 for this.
+> Yes — Sunrise can come to you in 94122 for this.
 
 > Cutter $179 + shampoo $75 + odour $90 = $344, or $394 with 2-hour odour
 
 **After: correct, 27 s, $0.045**
 
-> No — Cormorant Mobile Detailing says it will not clean this job up, even though you are in its service area.
+> No — Sunrise Auto Detailers says it will not clean this job up, even though you are in its service area.
 
 **Why it changed:** the site never says what it doesn't do (hole F6). The agent's own overconfidence played a part too, since it treated silence as a yes. The resource states the exclusion.
 
@@ -73,7 +73,7 @@ This is the strongest demo moment, because the wrong answer would send someone a
 
 **Customer:** "We're a small plumbing shop in SoMa, 94103, with three Ford Transit vans in our lot. Looking for somebody in San Francisco who'll come to us and wash the outsides, nothing inside. A Saturday would be best since that's when they're all parked. Who can do that and what's the all-in price?"
 
-**Correct answer:** Cormorant can, at $407.67 with the 10% fleet discount and tax, but fleet jobs run Tuesday to Friday only, and three vehicles need a working spigot within 100 feet.
+**Correct answer:** Sunrise can, at $407.67 with the 10% fleet discount and tax, but fleet jobs run Tuesday to Friday only, and three vehicles need a working spigot within 100 feet.
 
 **Before: wrong, 229 s, $0.331**
 
@@ -87,11 +87,11 @@ This is the strongest demo moment, because the wrong answer would send someone a
 
 > 1) All 3 together on a weekday - Tuesday-Friday - $407.67 all-in
 
-**Why it changed:** the site leaves out the fleet discount, the fleet's day rule and tax (holes E10, E5, C3). The resource states them, and `/quote` works out the total. This query also names no business, so the agent found Cormorant through search on both versions.
+**Why it changed:** the site leaves out the fleet discount, the fleet's day rule and tax (holes E10, E5, C3). The resource states them, and `/quote` works out the total. This query also names no business, so the agent found Sunrise through search on both versions.
 
 ### q01: no answer becomes an exact budget decision
 
-**Customer:** "Can you work out if Cormorant Mobile Detailing fits my budget? I've got a 2021 Subaru Outback in my driveway in Berkeley, 94704, with an outlet right by it. I want it done inside and out, and my dog sheds on the one spot he sits in on the back seat, so that hair needs dealing with too. I'd much rather do a Saturday but I can't go over $400 all in, tax and everything. Does Saturday work or does it have to be a weekday?"
+**Customer:** "Can you work out if Sunrise Auto Detailers fits my budget? I've got a 2021 Subaru Outback in my driveway in Berkeley, 94704, with an outlet right by it. I want it done inside and out, and my dog sheds on the one spot he sits in on the back seat, so that hair needs dealing with too. I'd much rather do a Saturday but I can't go over $400 all in, tax and everything. Does Saturday work or does it have to be a weekday?"
 
 **Correct answer:** Saturday is over budget at $422.38, and a weekday fits at $395.22.
 
@@ -109,7 +109,7 @@ This is the strongest demo moment, because the wrong answer would send someone a
 
 This is the fairest example, because the agent did its job on both versions and the site was the only limit.
 
-**Customer:** "Need a number from Cormorant Mobile Detailing. Our F-250 has been on job sites all year and the inside is wrecked: mud wall to wall on the floor, and the seats and carpet are grubby enough that they need a real shampoo, not just a vacuum. Don't care about the outside, it's a work truck. It sits in our driveway in Sausalito, 94965, and the nearest outlet is a good 150 feet away. Any weekday works. What's the whole thing going to cost me, tax and all?"
+**Customer:** "Need a number from Sunrise Auto Detailers. Our F-250 has been on job sites all year and the inside is wrecked: mud wall to wall on the floor, and the seats and carpet are grubby enough that they need a real shampoo, not just a vacuum. Don't care about the outside, it's a work truck. It sits in our driveway in Sausalito, 94965, and the nearest outlet is a good 150 feet away. Any weekday works. What's the whole thing going to cost me, tax and all?"
 
 **Correct answer:** $628.76, made up of $289 interior detail, $125 shampoo, $75 heavily soiled surcharge, $30 generator fee, $44.76 tax and $65 travel.
 
@@ -131,11 +131,11 @@ This is the fairest example, because the agent did its job on both versions and 
 - **q04:** both versions correctly said no, but on different evidence.
   - **Before, inferred from silence:**
 
-    > No — Cormorant Mobile Detailing does not list a multi-year ceramic coating for your Model Y.
+    > No — Sunrise Auto Detailers does not list a multi-year ceramic coating for your Model Y.
 
   - **After, stated by the business:**
 
-    > No — Cormorant Mobile Detailing does NOT do ceramic coating, so they can't do a multi-year ceramic coating on your Model Y.
+    > No — Sunrise Auto Detailers does NOT do ceramic coating, so they can't do a multi-year ceramic coating on your Model Y.
 
 ## What the resource fixed
 
@@ -209,7 +209,7 @@ This means **two holes have no "before" evidence yet:** the calendar behind the 
 | Graded results | `runs/first-demo/results_before.json`, `results_after.json`, `results_control.json` |
 | Each run's full log | `runs/first-demo/<version>/<query>_r1/` |
 | Queries and correct answers | `bench/queries.json` |
-| Facts and their placement on the site | `businesses/cormorant/facts.json` |
+| Facts and their placement on the site | `businesses/sunrise/facts.json` |
 | Holes on the site | `demo_site/holes.json` |
 | Build notes, skipped work and commands | [first-demo.md](first-demo.md) |
 

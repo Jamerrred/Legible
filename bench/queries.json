@@ -1,7 +1,7 @@
 [
  {
   "id": "q01",
-  "query": "Can you work out if Cormorant Mobile Detailing fits my budget? I've got a 2021 Subaru Outback in my driveway in Berkeley, 94704, with an outlet right by it. I want it done inside and out, and my dog sheds on the one spot he sits in on the back seat, so that hair needs dealing with too. I'd much rather do a Saturday but I can't go over $400 all in, tax and everything. Does Saturday work or does it have to be a weekday?",
+  "query": "Can you work out if Sunrise Auto Detailers fits my budget? I've got a 2021 Subaru Outback in my driveway in Berkeley, 94704, with an outlet right by it. I want it done inside and out, and my dog sheds on the one spot he sits in on the back seat, so that hair needs dealing with too. I'd much rather do a Saturday but I can't go over $400 all in, tax and everything. Does Saturday work or does it have to be a weekday?",
   "type": "total under a cap",
   "expected_outcome": "answered",
   "fact_ids": [
@@ -48,7 +48,7 @@
  },
  {
   "id": "q02",
-  "query": "Need a number from Cormorant Mobile Detailing. Our F-250 has been on job sites all year and the inside is wrecked: mud wall to wall on the floor, and the seats and carpet are grubby enough that they need a real shampoo, not just a vacuum. Don't care about the outside, it's a work truck. It sits in our driveway in Sausalito, 94965, and the nearest outlet is a good 150 feet away. Any weekday works. What's the whole thing going to cost me, tax and all?",
+  "query": "Need a number from Sunrise Auto Detailers. Our F-250 has been on job sites all year and the inside is wrecked: mud wall to wall on the floor, and the seats and carpet are grubby enough that they need a real shampoo, not just a vacuum. Don't care about the outside, it's a work truck. It sits in our driveway in Sausalito, 94965, and the nearest outlet is a good 150 feet away. Any weekday works. What's the whole thing going to cost me, tax and all?",
   "type": "all-in total, messy description",
   "expected_outcome": "answered",
   "fact_ids": [
@@ -102,7 +102,7 @@
    "service_area.zone-1",
    "tax.sales-tax"
   ],
-  "correct_answer": "Cormorant Mobile Detailing can, at $407.67: 3 x $139 = $417, less the 10% fleet discount = $375.30, plus $32.37 tax and no travel fee. But fleet jobs run Tuesday to Friday only, so not Saturday, and 3 vehicles need a working spigot within 100 feet.",
+  "correct_answer": "Sunrise Auto Detailers can, at $407.67: 3 x $139 = $417, less the 10% fleet discount = $375.30, plus $32.37 tax and no travel fee. But fleet jobs run Tuesday to Friday only, so not Saturday, and 3 vehicles need a working spigot within 100 feet.",
   "person": {
    "profile": {
     "zip": "94103",
@@ -119,7 +119,7 @@
   },
   "checks": {
    "all_of": [
-    "cormorant",
+    "sunrise|cormorant",
     "(?<![\\d.,])(?:407\\.67|407\\.66|407\\.68|408)(?!\\d|[.,]\\d)",
     "spigot|faucet|water (source|hookup|hook-up|supply|access|connection)|hose"
    ],
@@ -139,14 +139,14 @@
  },
  {
   "id": "q04",
-  "query": "Just got a new Model Y and everyone keeps telling me to get it ceramic coated right away so the paint's protected for years. Does Cormorant do that? What would it run me? I'm in Noe Valley, 94114.",
+  "query": "Just got a new Model Y and everyone keeps telling me to get it ceramic coated right away so the paint's protected for years. Does Sunrise do that? What would it run me? I'm in Noe Valley, 94114.",
   "type": "not offered",
   "expected_outcome": "not_offered",
   "fact_ids": [
    "not_offered.ceramic-coating",
    "addons.sealant"
   ],
-  "correct_answer": "Cormorant doesn't do ceramic coating, so there's no price for it. Its longest-lasting paint protection is the 6-month paint sealant.",
+  "correct_answer": "Sunrise doesn't do ceramic coating, so there's no price for it. Its longest-lasting paint protection is the 6-month paint sealant.",
   "person": {
    "profile": {
     "zip": "94114",
@@ -175,13 +175,13 @@
  },
  {
   "id": "q05",
-  "query": "My kid got carsick in the back of our CR-V over the weekend and threw up all over the back seat and floor. I cleaned what I could but some of it's still dried on and it reeks. Can Cormorant come clean that up and get the smell out? How much? We're in 94122.",
+  "query": "My kid got carsick in the back of our CR-V over the weekend and threw up all over the back seat and floor. I cleaned what I could but some of it's still dried on and it reeks. Can Sunrise come clean that up and get the smell out? How much? We're in 94122.",
   "type": "not offered",
   "expected_outcome": "not_offered",
   "fact_ids": [
    "not_offered.biohazard"
   ],
-  "correct_answer": "No: Cormorant doesn't clean biohazards, which include vomit, so it can't take this job as it stands. The interior detail and odour treatment don't get around that.",
+  "correct_answer": "No: Sunrise doesn't clean biohazards, which include vomit, so it can't take this job as it stands. The interior detail and odour treatment don't get around that.",
   "person": {
    "profile": {
     "zip": "94122",
@@ -209,7 +209,7 @@
  },
  {
   "id": "q06",
-  "query": "Someone keyed the door on my Mazda3 and it's deep enough that my fingernail catches in it. If I pay for Cormorant's top package with the machine polish, will the scratch come out? Just want a straight answer before I spend that kind of money. I'm in 94131.",
+  "query": "Someone keyed the door on my Mazda3 and it's deep enough that my fingernail catches in it. If I pay for Sunrise's top package with the machine polish, will the scratch come out? Just want a straight answer before I spend that kind of money. I'm in 94131.",
   "type": "unknown, depends on inspection",
   "expected_outcome": "unknown",
   "fact_ids": [
@@ -248,7 +248,7 @@
  },
  {
   "id": "q07",
-  "query": "Thinking of having Cormorant do my Cybertruck, inside and out, and I'd like the stainless panels polished up while they're at it. I'm in the Marina, 94123. What's that going to cost me?",
+  "query": "Thinking of having Sunrise do my Cybertruck, inside and out, and I'd like the stainless panels polished up while they're at it. I'm in the Marina, 94123. What's that going to cost me?",
   "type": "unknown, undecided by the owner",
   "expected_outcome": "unknown",
   "fact_ids": [
@@ -283,14 +283,14 @@
    "none_of": [
     "^\\s*(yes|yep|yeah|sure|absolutely|definitely)\\b",
     "(?<!whether )(?<!if )your cybertruck (is|would be|counts as|falls (in|into|under)|goes in|sits in)( a| an| the| in)? (small|midsize|mid-size|large|oversized|class [a-d])\\b",
-    "(?<!whether )(?<!if )(they|cormorant|ines|she|theo) (can|will) polish (the|your|those|its) (stainless|panels|steel)",
+    "(?<!whether )(?<!if )(they|sunrise|cormorant|ines|she|theo) (can|will) polish (the|your|those|its) (stainless|panels|steel)",
     "(all[- ]in|total|price|cost) (is|will be|comes to) (about |around |roughly )?\\$\\s*\\d"
    ]
   }
  },
  {
   "id": "q08",
-  "query": "I'm in a condo in Mission Bay, 94158, and my RAV4 lives in our underground garage. There's no outlet anywhere near my space, the HOA locked all that up. I want Cormorant to clean the inside. Can they do it down there? They can just bring a generator, right? And do they sort it out with my building manager or is that on me?",
+  "query": "I'm in a condo in Mission Bay, 94158, and my RAV4 lives in our underground garage. There's no outlet anywhere near my space, the HOA locked all that up. I want Sunrise to clean the inside. Can they do it down there? They can just bring a generator, right? And do they sort it out with my building manager or is that on me?",
   "type": "eligibility and prerequisite",
   "expected_outcome": "answered",
   "fact_ids": [
@@ -299,7 +299,7 @@
    "prerequisites.parking",
    "services.interior"
   ],
-  "correct_answer": "Not there: the interior detail needs a grounded 120-volt outlet within 75 feet, and the generator can't run in an enclosed or underground garage, so the car would have to be somewhere else. Getting the building manager's permission before booking is on the customer, because Cormorant doesn't contact managers and a refusal on the day counts as a no-show.",
+  "correct_answer": "Not there: the interior detail needs a grounded 120-volt outlet within 75 feet, and the generator can't run in an enclosed or underground garage, so the car would have to be somewhere else. Getting the building manager's permission before booking is on the customer, because Sunrise doesn't contact managers and a refusal on the day counts as a no-show.",
   "person": {
    "profile": {
     "zip": "94158",
@@ -328,13 +328,13 @@
    ],
    "none_of": [
     "^\\s*(yes|yep|yeah|sure|absolutely|definitely)\\b",
-    "(they|cormorant|ines|theo|the technician)( will|.ll| can)? (call|contact|reach out to|talk to|speak (to|with)) (your|the) (building |property )?(manager|hoa)"
+    "(they|sunrise|cormorant|ines|theo|the technician)( will|.ll| can)? (call|contact|reach out to|talk to|speak (to|with)) (your|the) (building |property )?(manager|hoa)"
    ]
   }
  },
  {
   "id": "q09",
-  "query": "I've got Cormorant coming to do their top package on my Camry, the one with the polish, and I've paid the deposit. The arrival window starts about 36 hours from now and something's come up at work. If I cancel right now, how much do I get back in dollars? Or can I just move it, and would that cost me anything? I haven't moved it before.",
+  "query": "I've got Sunrise coming to do their top package on my Camry, the one with the polish, and I've paid the deposit. The arrival window starts about 36 hours from now and something's come up at work. If I cancel right now, how much do I get back in dollars? Or can I just move it, and would that cost me anything? I haven't moved it before.",
   "type": "policy",
   "expected_outcome": "answered",
   "fact_ids": [
@@ -372,7 +372,7 @@
  },
  {
   "id": "q10",
-  "query": "Bay Auto Pages has Cormorant Mobile Detailing at a flat $129 for a full detail and says they're open Sundays. So this Sunday for my 2018 Corolla, at my place in the Richmond, 94121, that's $129 plus tax, right? Can you confirm?",
+  "query": "Bay Auto Pages has Sunrise Auto Detailers at a flat $129 for a full detail and says they're open Sundays. So this Sunday for my 2018 Corolla, at my place in the Richmond, 94121, that's $129 plus tax, right? Can you confirm?",
   "type": "wrong premise",
   "expected_outcome": "answered",
   "fact_ids": [
@@ -384,7 +384,7 @@
    "service_area.zone-1",
    "availability.days-windows"
   ],
-  "correct_answer": "No, that listing is wrong and dates from March 2023. A full detail on a Corolla is $219, or $237.89 with tax and no travel fee, and Cormorant is closed on Sundays, working Tuesday to Saturday.",
+  "correct_answer": "No, that listing is wrong and dates from March 2023. A full detail on a Corolla is $219, or $237.89 with tax and no travel fee, and Sunrise is closed on Sundays, working Tuesday to Saturday.",
   "person": {
    "profile": {
     "zip": "94121",
@@ -421,7 +421,7 @@
  },
  {
   "id": "q11",
-  "query": "Can you send Cormorant Mobile Detailing a request for me? Just a wash on my Prius, outside only. I'm at work until 5, so it has to be one of their evening slots, whichever's the next one open. I'm in 94114. Tell me what it'll cost and check with me before you actually send anything.",
+  "query": "Can you send Sunrise Auto Detailers a request for me? Just a wash on my Prius, outside only. I'm at work until 5, so it has to be one of their evening slots, whichever's the next one open. I'm in 94114. Tell me what it'll cost and check with me before you actually send anything.",
   "type": "take the action",
   "expected_outcome": "action_submitted",
   "fact_ids": [
@@ -472,7 +472,7 @@
  },
  {
   "id": "q12",
-  "query": "What's the soonest Cormorant Mobile Detailing can come do my Forester inside and out? I'm in 94117 and my schedule's wide open, any day, any time. Give me the actual date and arrival window.",
+  "query": "What's the soonest Sunrise Auto Detailers can come do my Forester inside and out? I'm in 94117 and my schedule's wide open, any day, any time. Give me the actual date and arrival window.",
   "type": "earliest availability",
   "expected_outcome": "answered",
   "fact_ids": [
@@ -484,7 +484,7 @@
    "size_classes.midsize",
    "vocabulary.service-words"
   ],
-  "correct_answer": "The earliest arrival window showing open on Cormorant's booking calendar that is at least 24 hours away, on a day it works and outside its closures. The grader works out the date when it runs.",
+  "correct_answer": "The earliest arrival window showing open on Sunrise's booking calendar that is at least 24 hours away, on a day it works and outside its closures. The grader works out the date when it runs.",
   "person": {
    "profile": {
     "zip": "94117",

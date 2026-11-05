@@ -1,6 +1,6 @@
-"""The agent-readable resource for one business, served at agents.cormorant.localhost:8103.
+"""The agent-readable resource for one business, served at agents.sunrise.localhost:8103.
 
-Every fact comes from businesses/cormorant/facts.json and every total from
+Every fact comes from businesses/sunrise/facts.json and every total from
 legible_core.business.quote. The main page and offering pages are built as a small list of
 blocks, then rendered to HTML or markdown, so the two versions can't drift apart.
 

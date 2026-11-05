@@ -8,7 +8,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 cd "$(dirname "$0")"
-resource_url="https://cormorant-agents.$1.workers.dev"
+resource_url="https://sunrise-agents.$1.workers.dev"
 
 uv sync --quiet
 export PATH="$PWD/.venv/bin:$PATH"

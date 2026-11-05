@@ -56,5 +56,5 @@ def test_ask_only_logs_the_question_and_returns_a_status_link(client, isolated_l
 
 def test_errand_knows_nothing_about_this_project():
     code = "\n".join(path.read_text() for path in (ROOT / "errand").glob("*.py"))
-    for word in ("cormorant", "legible", "agents.", "detailing"):
+    for word in ("sunrise", "legible", "agents.", "detailing"):
         assert word not in code.lower(), word

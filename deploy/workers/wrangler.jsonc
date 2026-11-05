@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "cormorant-detailing",
+  "name": "sunrise-auto-detailers",
   "main": "src/main.py",
   "compatibility_date": "2026-10-25",
   "compatibility_flags": ["python_workers"],
@@ -8,8 +8,8 @@
   "assets": { "directory": "./public" },
   "rules": [{ "type": "Data", "globs": ["**/*.html", "**/*.json"], "fallthrough": true }],
   "env": {
-    "before": { "name": "cormorant-detailing" },
-    "after": { "name": "cormorant-mobile-detailing" },
-    "resource": { "name": "cormorant-agents" }
+    "before": { "name": "sunrise-auto-detailers" },
+    "after": { "name": "sunrise-detailers" },
+    "resource": { "name": "sunrise-agents" }
   }
 }

@@ -12,9 +12,9 @@ You need `uv`, Node and a Wrangler login, which `npx wrangler login` sets up. Th
 
 | Worker | What it is | Live at |
 |---|---|---|
-| `cormorant-detailing` | The site, "before" | https://cormorant-detailing.jamerrred-audiobooks.workers.dev |
-| `cormorant-mobile-detailing` | The site, "after", which adds one link line | https://cormorant-mobile-detailing.jamerrred-audiobooks.workers.dev |
-| `cormorant-agents` | The resource | https://cormorant-agents.jamerrred-audiobooks.workers.dev |
+| `sunrise-auto-detailers` | The site, "before" | https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev |
+| `sunrise-detailers` | The site, "after", which adds one link line | https://sunrise-detailers.jamerrred-audiobooks.workers.dev |
+| `sunrise-agents` | The resource | https://sunrise-agents.jamerrred-audiobooks.workers.dev |
 
 The names don't reveal which version is which, so a test doesn't give it away.
 
@@ -25,5 +25,5 @@ The names don't reveal which version is which, so a test doesn't give it away.
 ## Limits
 
 - **Forms and status pages don't last:** a Worker can only write to `/tmp`, which clears when it restarts, so a status link can stop working.
-- **Cloudflare's logs are the lasting record:** each event is printed there and kept for a few days, including form contents such as contact details. Watch them live with `npx wrangler tail cormorant-agents`.
+- **Cloudflare's logs are the lasting record:** each event is printed there and kept for a few days, including form contents such as contact details. Watch them live with `npx wrangler tail sunrise-agents`.
 - **Hidden from search:** every app page sends `X-Robots-Tag: noindex`, because these are mock businesses. Search tools, including Exa, may not find them, so give agents the address directly.

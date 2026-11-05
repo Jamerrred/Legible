@@ -1,6 +1,6 @@
 # The resource (the "slug" website)
 
-*Last updated 5 November 2026. The first version is built for the mock detailing business, at `demo_resource/`, running locally at `http://agents.cormorant.localhost:8103`.*
+*Last updated 5 November 2026. The first version is built for the mock detailing business, at `demo_resource/`, running locally at `http://agents.sunrise.localhost:8103`.*
 
 ## What it is
 

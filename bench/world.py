@@ -73,7 +73,7 @@ def create_world_app(site_url: str) -> FastAPI:
         if host in COMPETITORS:
             title, text = COMPETITORS[host]
             return _shell(title, f"<h1>{title}</h1><p>{text}</p>")
-        if path.strip("/") == "cormorant-mobile-detailing":
+        if path.strip("/") == "sunrise-auto-detailers":
             return _shell(
                 f"{name} | Bay Auto Pages",
                 f"<h1>{name}</h1><p>Mobile detailing, San Francisco, CA. Unclaimed listing, last updated {price['last_updated']}.</p>"
@@ -81,7 +81,7 @@ def create_world_app(site_url: str) -> FastAPI:
                 f"<p>Services: {', '.join(services['claimed'])}, interior and exterior detailing.</p>"
                 f"<p>Website: <a href='{site_url}/'>{site_url}</a></p>",
             )
-        listing = f"<li><a href='/cormorant-mobile-detailing'>{name}</a>, mobile, San Francisco. Full detail ${price['claimed_price']}</li>"
+        listing = f"<li><a href='/sunrise-auto-detailers'>{name}</a>, mobile, San Francisco. Full detail ${price['claimed_price']}</li>"
         return _directory_home(listing, port)
 
     return app

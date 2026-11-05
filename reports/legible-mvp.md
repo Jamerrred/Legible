@@ -1,12 +1,12 @@
 # Legible app prototype: build report
 
-*Run on 5 November 2026 on the fictional Cormorant Mobile Detailing, using the deployed site without the link. The consumer agent is unchanged since its freeze.*
+*Run on 5 November 2026 on the fictional Sunrise Auto Detailers, using the deployed site without the link. The consumer agent is unchanged since its freeze.*
 
 ## The result
 
 **The whole flow works end to end on a deployed site, and the generated resource got 3 of 4 test queries right.** That's one run per query with a scripted owner, so it shows the product works, not how accurate it is.
 
-Live resource: https://musefront.jamerrred-audiobooks.workers.dev/b/cormorant-detailing
+Live resource: https://musefront.jamerrred-audiobooks.workers.dev/b/sunrise-auto-detailers
 
 ## What happened in the run
 
@@ -71,7 +71,7 @@ This session used $5.77 of OpenRouter credit, across three full walkthroughs and
 
 ## Added afterwards: the owner app
 
-The app is in `legible/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Cormorant record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect were tested later: see the next section.
+The app is in `legible/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Sunrise record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect were tested later: see the next section.
 
 **Bugs that testing caught, all fixed:**
 

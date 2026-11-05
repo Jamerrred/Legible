@@ -17,7 +17,8 @@ from zoneinfo import ZoneInfo
 
 from legible_core.business import load_facts, slots
 
-MERCHANT_HOST = re.compile(r"^https?://(agents\.)?cormorant\.localhost", re.IGNORECASE)
+# The saved runs happened when the business had its earlier name, so both hosts count.
+MERCHANT_HOST = re.compile(r"^https?://(agents\.)?(sunrise|cormorant)\.localhost", re.IGNORECASE)
 UNSETTLED = {"unknown", "needs_person", "blocked"}
 
 
@@ -194,5 +195,5 @@ def read_run(out_dir: Path) -> dict:
                 info["report"] = event.get("report")
                 info["cost"] = event.get("cost")
                 info["seconds"] = event.get("wall_s")
-    info["used_resource"] = any("agents.cormorant.localhost" in url for url in info["urls"])
+    info["used_resource"] = any("agents.sunrise.localhost" in url or "agents.cormorant.localhost" in url for url in info["urls"])
     return info

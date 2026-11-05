@@ -27,7 +27,7 @@ Two pieces get reused:
 
 | Topic | Decision |
 |---|---|
-| First business | Mobile detailing, as the fictional Cormorant Mobile Detailing in San Francisco |
+| First business | Mobile detailing, as the fictional Sunrise Auto Detailers in San Francisco |
 | Order | Facts file first, then the site, resource and agent. The agent is frozen before any benchmark run |
 | Where it runs | Everything is local for now. Exa stays available behind the same search tool for public use |
 | The "before" site | Three pages (Home, FAQ, Book), tidy but not highly polished, with facts left out where a real small site would leave them out |
