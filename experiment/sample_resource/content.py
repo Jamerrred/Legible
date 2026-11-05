@@ -4,10 +4,11 @@ from __future__ import annotations
 
 import re
 
+from business_core.business import quote
 from fastapi import Request
 from fastapi.responses import HTMLResponse, Response
 
-from demo_resource.config import (
+from sample_resource.config import (
     ADDONS,
     BASE_URL,
     BIZ,
@@ -27,7 +28,7 @@ from demo_resource.config import (
     TAX_RATE,
     ZONES,
 )
-from demo_resource.formatting import (
+from sample_resource.formatting import (
     addon_price_cells,
     clock,
     esc,
@@ -40,8 +41,7 @@ from demo_resource.formatting import (
     whole,
     words,
 )
-from demo_resource.quoting import open_slots
-from legible_core.business import quote
+from sample_resource.quoting import open_slots
 
 # ---------------------------------------------------------------- blocks and rendering
 

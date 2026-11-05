@@ -1,10 +1,10 @@
 """The agent-readable resource for one business, served at agents.sunrise.localhost:8103.
 
 Every fact comes from businesses/sunrise/facts.json and every total from
-legible_core.business.quote. The main page and offering pages are built as a small list of
+business_core.business.quote. The main page and offering pages are built as a small list of
 blocks, then rendered to HTML or markdown, so the two versions can't drift apart.
 
-Run from the repo root: uv run python -m demo_resource.app
+Run from the repo root: uv run python -m sample_resource.app
 """
 
 from __future__ import annotations
@@ -13,10 +13,11 @@ import ipaddress
 import secrets
 from datetime import timedelta
 
+from business_core.logbook import log_event
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 
-from demo_resource.config import (
+from sample_resource.config import (
     ADDONS,
     BASE_URL,
     BIZ,
@@ -27,7 +28,7 @@ from demo_resource.config import (
     SERVICES,
     STREAM,
 )
-from demo_resource.content import (
+from sample_resource.content import (
     addon_sections,
     facts_used_html,
     main_html,
@@ -41,8 +42,8 @@ from demo_resource.content import (
     service_sections,
     wants_markdown,
 )
-from demo_resource.formatting import esc, link, local_now, stamp
-from demo_resource.forms import (
+from sample_resource.formatting import esc, link, local_now, stamp
+from sample_resource.forms import (
     ask_form,
     find_record,
     normalise_who,
@@ -51,7 +52,7 @@ from demo_resource.forms import (
     request_form,
     request_status_html,
 )
-from demo_resource.quoting import (
+from sample_resource.quoting import (
     evaluate,
     first,
     headline,
@@ -60,7 +61,6 @@ from demo_resource.quoting import (
     parse_job,
     read_params,
 )
-from legible_core.logbook import log_event
 
 app = FastAPI(title=NAME, docs_url=None, redoc_url=None, openapi_url=None)
 

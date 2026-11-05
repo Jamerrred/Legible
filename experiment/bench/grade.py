@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from legible_core.business import load_facts, slots
+from business_core.business import load_facts, slots
 
 # The saved runs happened when the business had its earlier name, so both hosts count.
 MERCHANT_HOST = re.compile(r"^https?://(agents\.)?(sunrise|cormorant)\.localhost", re.IGNORECASE)

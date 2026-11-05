@@ -6,15 +6,15 @@ import ipaddress
 import os
 from pathlib import Path
 
+from business_core.business import load_facts
+from business_core.logbook import log_event
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException
 
-from demo_site.booking import register_booking
-from legible_core.business import load_facts
-from legible_core.logbook import log_event
+from sample_site.booking import register_booking
 
 HERE = Path(__file__).resolve().parent
 PAGES = ["/", "/faq", "/book"]

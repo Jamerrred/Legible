@@ -9,9 +9,9 @@ os.environ["LEGIBLE_LOG_DIR"] = "/tmp/legible-logs"
 os.environ["LEGIBLE_LOG_STDOUT"] = "1"
 
 if APP == "resource":
-    from demo_resource.app import app
+    from sample_resource.app import app
 else:
-    from demo_site.app import create_app
+    from sample_site.app import create_app
 
     app = create_app(APP)
 

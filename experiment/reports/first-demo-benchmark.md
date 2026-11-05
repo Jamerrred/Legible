@@ -212,7 +212,7 @@ This means **two holes have no "before" evidence yet:** the calendar behind the 
 | Each run's full log | `runs/first-demo/<version>/<query>_r1/` |
 | Queries and correct answers | `bench/queries.json` |
 | Facts and their placement on the site | `businesses/sunrise/facts.json` |
-| Holes on the site | `demo_site/holes.json` |
+| Holes on the site | `sample_site/holes.json` |
 | Build notes, skipped work and commands | [first-demo.md](first-demo.md) |
 
 Regenerate the tables, at no cost:

@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import subprocess
 import sys
 import time
@@ -23,9 +24,10 @@ from pathlib import Path
 import httpx
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
+sys.path[:0] = [str(ROOT), str(ROOT.parent)]
 
 from bench.grade import content_checks, report_text  # noqa: E402
+
 from legible.model import ask_json  # noqa: E402
 
 API = "http://127.0.0.1:8200"
@@ -94,7 +96,7 @@ def proof(link: str) -> None:
         person.write_text(json.dumps(queries[qid].get("person") or {}))
         task = f"{queries[qid]['query']} (The business's information page is {link})"
         cmd = [sys.executable, "-m", "errand.run", "--task", task, "--person", str(person), "--search", "exa", "--out", str(out)]
-        procs.append((qid, out, subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)))
+        procs.append((qid, out, subprocess.Popen(cmd, cwd=ROOT, env={**os.environ, "PYTHONPATH": str(ROOT.parent)}, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)))
     total_cost = 0.0
     for qid, out, process in procs:
         process.wait(timeout=480)

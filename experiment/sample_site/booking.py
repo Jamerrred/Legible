@@ -1,8 +1,8 @@
-"""The booking flow, kept from the first build. Everything else in demo_site is new.
+"""The booking flow, kept from the first build. Everything else in sample_site is new.
 
 Step 1: GET /book shows a lead form. POST /book takes name, email, phone and address,
 all required, and only then shows step 2.
-Step 2: the rolling calendar from legible_core.slots. POST /book/request takes the same four
+Step 2: the rolling calendar from business_core.slots. POST /book/request takes the same four
 lead fields again (as hidden inputs) plus package, vehicle, addons (repeatable), notes
 and slot, where slot is "<date>|<window>" taken from a window's "value".
 Step 3: the thanks page. There's no status page.
@@ -22,11 +22,10 @@ from __future__ import annotations
 from collections.abc import Callable
 from datetime import date
 
+from business_core.business import slots
+from business_core.logbook import log_event
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
-
-from legible_core.business import slots
-from legible_core.logbook import log_event
 
 WINDOW_LABELS = {"morning": "Morning", "afternoon": "Afternoon", "evening": "Evening"}
 

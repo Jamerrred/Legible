@@ -10,12 +10,12 @@ SKIP = shutil.ignore_patterns("__pycache__", "static", "holes.json", "DESIGN_NOT
 
 
 def build(app: str, resource_url: str) -> None:
-    for folder in ("legible_core", "demo_site", "demo_resource", "businesses"):
+    for folder in ("business_core", "sample_site", "sample_resource", "businesses"):
         shutil.rmtree(HERE / "src" / folder, ignore_errors=True)
         shutil.copytree(ROOT / folder, HERE / "src" / folder, ignore=SKIP)
     shutil.rmtree(HERE / "public", ignore_errors=True)
     # Workers serves these directly, because Starlette's file responses need threads.
-    shutil.copytree(ROOT / "demo_site" / "static", HERE / "public" / "static")
+    shutil.copytree(ROOT / "sample_site" / "static", HERE / "public" / "static")
     (HERE / "src" / "version.py").write_text(f"APP = {app!r}\nRESOURCE_URL = {resource_url!r}\n")
 
 

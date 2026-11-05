@@ -140,7 +140,7 @@ Real Muse can't reach localhost, so this test needs:
 4. **Fresh chats,** with a clean account or cleared memory if possible, and several repeats of each query.
 5. **You, running it by hand at first,** since Muse is logged in on Brave. The site's logs then show what Muse fetched.
 
-Public mock sites also need a decision on whether to say they're mock, which is still an [open question](../docs/03-build-plan.md#open-questions).
+Public mock sites also need a decision on whether to say they're mock, which is still an [open question](../../docs/planning/03-build-plan.md#open-questions).
 
 ## What it would cost to finish
 

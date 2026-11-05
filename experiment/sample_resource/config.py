@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from zoneinfo import ZoneInfo
 
-from legible_core.business import load_facts
+from business_core.business import load_facts
 
 SLUG = "sunrise"
 STREAM = "resource"

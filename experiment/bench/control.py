@@ -9,11 +9,10 @@ from __future__ import annotations
 import html
 from collections import defaultdict
 
+from business_core.business import load_facts, slots
+from business_core.logbook import log_event
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse
-
-from legible_core.business import load_facts, slots
-from legible_core.logbook import log_event
 
 STREAM = "control"
 

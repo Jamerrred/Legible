@@ -23,8 +23,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from bench.control import create_control_app  # noqa: E402
 from bench.world import create_world_app  # noqa: E402
-from demo_resource.app import app as resource_app  # noqa: E402
-from demo_site.app import create_app  # noqa: E402
+from sample_resource.app import app as resource_app  # noqa: E402
+from sample_site.app import create_app  # noqa: E402
 
 SITE = "http://sunrise.localhost"
 GROUPS = {

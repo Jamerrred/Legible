@@ -5,9 +5,10 @@ from __future__ import annotations
 import re
 from datetime import date, timedelta
 
+from business_core.business import quote, slots
 from fastapi import Request
 
-from demo_resource.config import (
+from sample_resource.config import (
     CONDITIONS,
     DEAD_STATUSES,
     MODEL,
@@ -19,8 +20,7 @@ from demo_resource.config import (
     SLUG,
     ZONES,
 )
-from demo_resource.formatting import esc, local_now, long_date, money, usd, words
-from legible_core.business import quote, slots
+from sample_resource.formatting import esc, local_now, long_date, money, usd, words
 
 # ---------------------------------------------------------------- reading input
 

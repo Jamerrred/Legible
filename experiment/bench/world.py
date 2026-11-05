@@ -8,10 +8,9 @@ recorded as false.
 
 from __future__ import annotations
 
+from business_core.business import load_facts
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse
-
-from legible_core.business import load_facts
 
 WORLD_HOSTS = ["bayautopages.localhost", "sunsetshine.localhost", "ferrybuildingautocare.localhost", "peninsulasuds.localhost"]
 

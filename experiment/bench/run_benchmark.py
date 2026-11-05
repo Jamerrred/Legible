@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -30,10 +31,10 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import httpx
+from business_core.logbook import read_events
 from dotenv import dotenv_values
 
 from bench.grade import grade, read_run
-from legible_core.logbook import read_events
 
 ROOT = Path(__file__).resolve().parent.parent
 STREAMS = {"before": ["site-before"], "after": ["site-after", "resource"], "control": ["control"]}
@@ -59,7 +60,7 @@ def person_for(query: dict, run_tag: str) -> dict:
 
 
 def credit_left() -> float | None:
-    key = dotenv_values(ROOT / ".env").get("OPENROUTER_API_KEY")
+    key = dotenv_values(ROOT.parent / ".env").get("OPENROUTER_API_KEY")
     try:
         data = httpx.get("https://openrouter.ai/api/v1/credits", headers={"Authorization": f"Bearer {key}"}, timeout=20).json()["data"]
         return float(data["total_credits"]) - float(data["total_usage"])
@@ -98,7 +99,8 @@ def one_run(query: dict, variant: str, repeat: int, args: argparse.Namespace, re
     ]  # fmt: skip
     started = time.time()
     try:
-        proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=480, check=False)
+        env = {**os.environ, "PYTHONPATH": str(ROOT.parent)}
+        proc = subprocess.run(cmd, cwd=ROOT, env=env, capture_output=True, text=True, timeout=480, check=False)
         (out / "stdout.txt").write_text(proc.stdout[-4000:])
         (out / "stderr.txt").write_text(proc.stderr[-4000:])
         crashed = proc.returncode != 0

@@ -5,7 +5,7 @@
 .env
 .env.*
 !.env.example
-.claude/settings.local.json
+.claude/
 
 # Python
 __pycache__/
@@ -24,12 +24,18 @@ logs/
 *.log
 
 # Browser histories and screenshots from runs
-runs/**/browser/
+experiment/runs/**/browser/
+experiment/runs/back-office/
 .browser-profiles/
 
 # Legible app MVP
 edge/.wrangler/
 edge/node_modules/
 legible/*.db*
-runs/legible/
+/runs/
 edge/.dev.vars
+
+# Kept outside this repository: old local databases, and the design and film working files
+/back_office/
+/design/
+/video/

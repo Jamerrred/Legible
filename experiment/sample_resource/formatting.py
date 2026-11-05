@@ -6,7 +6,7 @@ import html
 from datetime import date, datetime
 from urllib.parse import urlencode
 
-from demo_resource.config import SERVICES, SIZES, TZ
+from sample_resource.config import SERVICES, SIZES, TZ
 
 
 def esc(value) -> str:

@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from demo_resource.config import ADDONS, BIZ, CONDITIONS, MODEL, SERVICES, STREAM, TZ
-from demo_resource.content import facts_used_html
-from demo_resource.formatting import esc, money, service_name, stamp
-from demo_resource.quoting import evaluate, first, headline, needed_word
-from legible_core.logbook import read_events
+from business_core.logbook import read_events
+
+from sample_resource.config import ADDONS, BIZ, CONDITIONS, MODEL, SERVICES, STREAM, TZ
+from sample_resource.content import facts_used_html
+from sample_resource.formatting import esc, money, service_name, stamp
+from sample_resource.quoting import evaluate, first, headline, needed_word
 
 
 def option(value: str, label: str, current: str) -> str:

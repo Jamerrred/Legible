@@ -1,12 +1,11 @@
-"""Draw the price board and the service-area map. Run: uv run python -m demo_site.make_assets"""
+"""Draw the price board and the service-area map. Run: uv run python -m sample_site.make_assets"""
 
 from __future__ import annotations
 
 from pathlib import Path
 
+from business_core.business import load_facts
 from PIL import Image, ImageDraw, ImageFont
-
-from legible_core.business import load_facts
 
 OUT = Path(__file__).resolve().parent / "static" / "img"
 FONT_DIR = "/System/Library/Fonts/Supplemental/"
