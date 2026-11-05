@@ -1,45 +1,47 @@
 /* Legible's design system.
-   Palette and type were dealt by tasteskill 2.5 (cool-grey-cobalt, Host Grotesk + JetBrains Mono, soft radius).
-   The colours each do one job:
-     cobalt     anything an agent sees or does
+   Colours follow Interfere (interfere.com): near-black neutrals, soft white text and one gradient
+   from orange through pink and purple to blue. Type is the system font, so it reads as ordinary
+   software on any computer. The colours each do one job:
+     gradient   anything an agent sees or does
      pen        where something got stuck, or what needs the owner
      green      answered, live
-     yellow     what just changed, briefly
-   Motion numbers follow tasteskill's motion reference: quick hover steps, soft landings, no bounce. */
-
-@font-face { font-family: "Host Grotesk"; src: url("../fonts/host-grotesk-latin-wght-normal.woff2") format("woff2"); font-weight: 300 800; font-display: swap; }
-@font-face { font-family: "JetBrains Mono"; src: url("../fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+     highlight  what just changed, briefly
+   Motion numbers: quick hover steps, soft landings, no bounce. */
 
 :root {
-  --p-bg: #eef0f3; --p-surface: #e2e5ea; --p-ink: #0b0c0e; --p-muted: #5d6470;
-  --p-accent: #1f2de6; --p-accent-ink: #ffffff;
-  --font-display: "Host Grotesk", system-ui, sans-serif;
-  --font-text: "Host Grotesk", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --display-weight: 500;
-  --display-tracking: -0.035em;
-  --display-tracking-xl: -0.04em;
+  color-scheme: dark;
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 550;
+  --display-tracking: -0.022em;
+  --display-tracking-xl: -0.028em;
 
-  --bg: var(--p-bg);
-  --surface: var(--p-surface);
-  --paper: #ffffff;
-  --ink: var(--p-ink);
-  --ink-2: #363b44;
-  --muted: var(--p-muted);
-  --line: rgb(11 12 14 / .09);
-  --line-2: rgb(11 12 14 / .17);
+  --bg: #0b0b0b;
+  --surface: #1c1c1c;
+  --paper: #141414;
+  --ink: #ededed;
+  --ink-2: #b0b0b0;
+  --muted: #8c8c8c;
+  --on-ink: #0b0b0b;
+  --ink-fill: #272727;
+  --line: rgb(255 255 255 / .09);
+  --line-2: rgb(255 255 255 / .17);
 
-  --agent: var(--p-accent);
-  --agent-deep: #1520b4;
+  --spectrum: rgb(255 59 0), rgb(246 0 157) 38%, rgb(151 62 198) 71%, rgb(0 142 255);
+  --agent: #5ba1ff;
+  --agent-deep: #0b0b0b;
+  --agent-fill: linear-gradient(90deg, rgb(255 59 0 / .62), rgb(246 0 157 / .62) 38%, rgb(151 62 198 / .62) 71%, rgb(0 142 255 / .62)), #141414;
+  --agent-wash: linear-gradient(90deg, rgb(255 59 0 / .2), rgb(246 0 157 / .2) 38%, rgb(151 62 198 / .2) 71%, rgb(0 142 255 / .2)), #141414;
   --agent-ink: #ffffff;
-  --agent-soft: rgb(255 255 255 / .74);
-  --agent-line: rgb(255 255 255 / .2);
+  --agent-soft: rgb(255 255 255 / .78);
+  --agent-line: rgb(255 255 255 / .22);
 
-  --pen: #cf3a11;
-  --pen-soft: #fdeee9;
-  --ok: #0f7d45;
-  --ok-soft: #e4f3ea;
-  --hl: #ffe45c;
+  --pen: #ff9574;
+  --pen-soft: rgb(255 149 116 / .14);
+  --ok: #6fd392;
+  --ok-soft: rgb(111 211 146 / .14);
+  --hl: rgb(246 0 157 / .34);
 
   --r-s: 7px; --r-m: 12px; --r-l: 18px; --r-xl: 24px;
 
@@ -92,8 +94,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* Buttons. Hover lifts 1px and shifts the fill; press sinks 1px. */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 38px; padding: 0 15px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--paper); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), color var(--m-out) var(--m-ease), border-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
 .btn:active { transform: translateY(1px) scale(.985); }
-.btn--primary { background: var(--ink); border-color: var(--ink); color: #fff; }
-.btn--agent { background: var(--agent); border-color: var(--agent); color: #fff; }
+.btn--primary { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.btn--agent { background: var(--agent-fill); border-color: transparent; color: #fff; }
 .btn--on-agent { background: #fff; border-color: #fff; color: var(--agent-deep); }
 .btn--ghost-agent { background: transparent; border-color: var(--agent-line); color: #fff; }
 .btn--ghost { background: transparent; border-color: transparent; color: var(--ink-2); }
@@ -103,11 +105,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .btn[disabled] { opacity: .45; cursor: default; }
 @media (hover: hover) and (pointer: fine) {
   .btn:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--paper) 92%, var(--ink)); border-color: color-mix(in oklab, var(--ink) 30%, transparent); transition-duration: var(--m-in), var(--m-in), var(--m-in), var(--m-press), var(--m-in); }
-  .btn--primary:hover { background: color-mix(in oklab, var(--ink) 84%, #fff); border-color: transparent; }
-  .btn--agent:hover { background: color-mix(in oklab, var(--agent) 86%, #fff); border-color: transparent; }
+  .btn--primary:hover { background: #fff; border-color: #fff; }
+  .btn--agent:hover { filter: brightness(1.15); border-color: transparent; }
   .btn--on-agent:hover { background: color-mix(in oklab, #fff 88%, var(--agent)); border-color: transparent; }
   .btn--ghost-agent:hover { background: rgb(255 255 255 / .12); border-color: rgb(255 255 255 / .4); }
-  .btn--ghost:hover { background: rgb(11 12 14 / .05); border-color: transparent; }
+  .btn--ghost:hover { background: rgb(255 255 255 / .07); border-color: transparent; }
   .btn:active, .btn:hover:active { transform: translateY(1px) scale(.985); }
   .btn[disabled]:hover { transform: none; }
 }
@@ -123,25 +125,25 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* Fields */
 .field { display: flex; align-items: center; gap: 10px; padding: 7px 7px 7px 15px; background: var(--paper); border: 1px solid var(--line-2); border-radius: 13px; transition: border-color var(--m-out) var(--m-ease), box-shadow var(--m-out) var(--m-ease); }
-.field:focus-within { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(31 45 230 / .13); transition-duration: var(--m-in); }
+.field:focus-within { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(91 161 255 / .13); transition-duration: var(--m-in); }
 .field input, .field textarea { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 15px; }
 .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
-.send { width: 34px; height: 34px; flex: none; border: 0; border-radius: 10px; background: var(--ink); color: #fff; display: grid; place-items: center; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
+.send { width: 34px; height: 34px; flex: none; border: 0; border-radius: 10px; background: var(--ink); color: var(--on-ink); display: grid; place-items: center; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
 .send:active { transform: translateY(1px) scale(.96); }
 .send[disabled] { opacity: .4; cursor: default; }
-@media (hover: hover) and (pointer: fine) { .send:hover { background: var(--agent); } }
+@media (hover: hover) and (pointer: fine) { .send:hover { background: #fff; } }
 .field--xl { padding: 11px 11px 11px 22px; border-radius: 18px; box-shadow: 0 1px 0 rgb(11 12 14 / .03), 0 18px 50px -24px rgb(11 12 14 / .22); }
 .field--xl input { font-size: 19px; letter-spacing: -.012em; }
 .field--xl .send { width: 44px; height: 44px; border-radius: 12px; }
 
 textarea.note { width: 100%; min-height: 72px; padding: 11px 14px; border: 1px solid var(--line-2); border-radius: var(--r-m); background: var(--paper); outline: 0; resize: vertical; transition: border-color var(--m-out), box-shadow var(--m-out); }
-textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(31 45 230 / .13); }
+textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(91 161 255 / .13); }
 
 .switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--ink-2); user-select: none; }
 .switch input { position: absolute; opacity: 0; width: 0; height: 0; }
 .switch .track { width: 34px; height: 20px; border-radius: 10px; background: var(--line-2); position: relative; transition: background-color var(--m-out) var(--m-ease); flex: none; }
-.switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 8px; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .25); transition: transform 180ms var(--m-ease), width 90ms var(--m-ease); }
-.switch input:checked + .track { background: var(--agent); }
+.switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 8px; background: #f2f2f2; box-shadow: 0 1px 2px rgb(0 0 0 / .25); transition: transform 180ms var(--m-ease), width 90ms var(--m-ease); }
+.switch input:checked + .track { background: var(--agent-fill); }
 .switch input:checked + .track::after { transform: translateX(14px); }
 .switch:active .track::after { width: 20px; }
 .switch input:focus-visible + .track { outline: 2px solid var(--agent); outline-offset: 2px; }
@@ -156,7 +158,7 @@ textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(31 4
 .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-2); flex: none; }
 .dot--live { background: var(--ok); box-shadow: 0 0 0 3px rgb(15 125 69 / .14); }
 .dot--pen { background: var(--pen); }
-.dot--agent { background: var(--agent); }
+.dot--agent { background: var(--agent-fill); }
 .count { display: inline-grid; place-items: center; min-width: 21px; height: 21px; padding: 0 6px; border-radius: 7px; background: var(--pen-soft); color: var(--pen); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
 
 /* Digits that roll to their value. The transition is on the column, so any re-render animates it. */
