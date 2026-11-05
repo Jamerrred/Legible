@@ -8,15 +8,8 @@ const ACCOUNTS = [
 ];
 const STAGES = [["crawling", "Read your website"], ["extracting", "Build your fact sheet"], ["interviewing", "Work out what's missing"], ["checking", "Test it with customer agents"]];
 
-// The words that stop an agent. They sit out of focus until the lens passes over them.
-const VAGUE = ["Prices on request", "See our <em>packages image</em>", "Starting at $69<em>*</em>", "May <em>cost extra</em>", "Call us for availability", "Ask about <em>Saturdays</em>", "Travel fee <em>may apply</em>", "Bookings by phone", "Some restrictions apply", "Contact us for a quote", "Pricing <em>varies</em>", "Deposit required", "Open most days", "Terms apply", "Service area <em>varies</em>", "Rates on our <em>flyer</em>", "Message us", "Large vehicles <em>extra</em>", "Hours may change", "Ask for details", "Prices on request", "See our <em>packages image</em>", "May <em>cost extra</em>", "Travel fee <em>may apply</em>", "Call us for availability", "Ask about <em>Saturdays</em>"];
-
 function startView() {
-  const line = VAGUE.map((v) => `<span>${v}</span>`).join("");
   return `<section class="start" id="start">
-    <div class="lens-ground lens-ground--blur" aria-hidden="true">${line}</div>
-    <div class="lens-ground lens-ground--sharp" aria-hidden="true">${line}</div>
-    <div class="lens-veil" aria-hidden="true"></div>
     <form class="start-form" data-form="addSite">
       <h1 class="t-hero focus-in">Which website should agents read?</h1>
       <p>Legible reads your site, tests it with customer agents and asks you what's missing. Nothing goes public until you confirm it.</p>
@@ -24,29 +17,6 @@ function startView() {
       <label class="switch"><input type="checkbox" name="check" checked><span class="track"></span>Also test it with customer agents${state.config?.demo ? "" : ", about 5 minutes"}</label>
     </form>
   </section>`;
-}
-
-// The lens glides after the pointer, so vague copy sharpens wherever you look.
-function bindLens() {
-  const box = $("#start");
-  if (!box) return;
-  const sharp = $(".lens-ground--sharp", box);
-  const rect = () => box.getBoundingClientRect();
-  let x = rect().width * 0.2, y = rect().height * 0.26, tx = x, ty = y, frame = 0;
-  const step = () => {
-    x += (tx - x) * 0.14;
-    y += (ty - y) * 0.14;
-    sharp.style.setProperty("--lx", `${x}px`);
-    sharp.style.setProperty("--ly", `${y}px`);
-    frame = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? requestAnimationFrame(step) : 0;
-  };
-  box.addEventListener("pointermove", (event) => {
-    const r = rect();
-    tx = event.clientX - r.left;
-    ty = event.clientY - r.top;
-    if (!frame) frame = requestAnimationFrame(step);
-  });
-  step();
 }
 
 // ---- Legible at work
@@ -161,8 +131,7 @@ screens.websites = {
     if (site.stage === "failed") return `<div class="blank"><div class="blank-inner"><h1 class="t-1">This website couldn't be read</h1><p class="soft">${esc(site.stage_note)}</p><a class="btn btn--primary" href="#/websites/new">Try another address</a></div></div>`;
     return deskView(site);
   },
-  after({ adding, trace }) {
-    if (adding) bindLens();
+  after({ trace }) {
     if (trace) startPoll(pollTheatre, pollMs());
   },
 };

@@ -132,7 +132,9 @@ Change the Class A price of the Skiff to $70
 
 Legible works out the exact change and asks you to confirm. A closure ends by itself when its dates pass, and **Undo last change** takes back the last edit. **What agents see** shows your page exactly as agents read it.
 
-A full run through all seven steps should cost about $2, at the rates we saw. Your total depends on the website and on current model prices.
+A full run through all seven steps should cost about $2, at the rates we saw, and a larger website costs more. The app has no spending limit of its own, so set a credit limit on your OpenRouter key if you want a hard stop.
+
+To add another website at any time, press the Legible logo or **Add a website** in the sidebar.
 
 To watch the whole product run by itself, with a script playing the owner, start Legible and run this in another terminal. It costs a few cents and only makes sense with the demo business above:
 
@@ -184,7 +186,7 @@ The logs use the business's earlier name, Cormorant Mobile Detailing. They're ke
 
 ### Run it again (spends OpenRouter credit)
 
-All 12 questions on all three versions should cost about $5, at the rates we saw. You only need `OPENROUTER_API_KEY`.
+All 12 questions on all three versions should cost about $6, at the rates we saw. You only need `OPENROUTER_API_KEY`.
 
 **1. Start the local sites** in one terminal, and leave it running:
 
@@ -267,7 +269,7 @@ uv run ruff check .
 | A stage fails with an error from the model | Check your OpenRouter key and balance, then add the website again |
 | A test customer says "Agent crashed" | The AI provider returned an error. It doesn't count against the business, so run the check again |
 | The demo business's address doesn't load | Run `uv run python scripts/serve.py` and use `http://sunrise.localhost:8101` instead |
-| You want to start over | Stop Legible and delete `legible/legible.db` |
+| You want to start over | Stop Legible and delete `legible/legible.db`. The demo copy has **Start over** in its sidebar |
 
 ## Limits
 
