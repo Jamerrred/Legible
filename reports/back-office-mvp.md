@@ -71,7 +71,7 @@ This session used $5.77 of OpenRouter credit, across three full walkthroughs and
 
 ## Added afterwards: the owner app
 
-The app is in `back_office/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Cormorant record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect weren't clicked, since a check spends credit and Composio has no key.
+The app is in `back_office/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Cormorant record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect were tested later: see the next section.
 
 **Bugs that testing caught, all fixed:**
 
@@ -79,6 +79,12 @@ The app is in `back_office/web/`, and the inbox was split into five tabs: see [t
 - Loading several screens at once could add a booking or question twice.
 
 **Starting questions:** now at most 5, on prices, fees, area and what rules a job out. On a fresh run they all were. This may lower accuracy until agents fill the gaps, and the 4-query test hasn't been rerun since.
+
+## Added afterwards: running it from a fresh download
+
+`scripts/start.py` now runs everything locally, with no Cloudflare account. It was tested from a fresh clone with only the OpenRouter and Exa keys: it started in 38 seconds, read the demo site, published locally, and handled a question, a booking and a reply.
+
+Run check also worked there: 3 of 5, $0.42, about 3.5 minutes. The connect popup works, and a fake Composio key reached Composio and got a clear error. A real sign-in is still untested.
 
 ## How to run it
 

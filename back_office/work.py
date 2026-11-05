@@ -212,13 +212,14 @@ async def run_simulation(website_id: str, target: str = "storefront", n: int = 5
         "average_seconds": round(sum(r["result"].get("wall_s") or 0 for r in runs) / max(len(runs), 1), 1),
     }
     store.update("simulation", "id", simulation_id, status="done", summary=summary, finished_at=store.now())
-    if target == "storefront":
-        failures = [
-            {"customer_request": r["query"], "agent_answer": (r["result"].get("answer") or "")[:1500], "outcome": r["result"].get("outcome")}
-            for r in runs
-            if not r["settled"] and not _agent_broke(r["result"])
-        ]
-        add_questions(website_id, await brain.holes_to_questions(record, failures, asked_titles(website_id)), "simulation")
+    failures = [
+        {"customer_request": r["query"], "agent_answer": (r["result"].get("answer") or "")[:1500], "outcome": r["result"].get("outcome")}
+        for r in runs
+        if not r["settled"] and not _agent_broke(r["result"])
+    ]
+    added = add_questions(website_id, await brain.holes_to_questions(record, failures, asked_titles(website_id)), "simulation")
+    if added and target == "resource":
+        await publish(website_id)
     return simulation_id
 
 
