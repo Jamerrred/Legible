@@ -1,7 +1,7 @@
 """The owner app's API, shaped around its four screens: inbox, resource, simulations and websites.
 
 Run from the repo root: uv run uvicorn back_office.api:app --port 8200
-Interactive docs are at /docs. There's no login yet, so keep it on localhost.
+The app is at /, and interactive API docs are at /docs. There's no login yet, so keep it on localhost.
 """
 
 from __future__ import annotations
@@ -10,11 +10,13 @@ import asyncio
 import os
 from collections import Counter
 from contextlib import asynccontextmanager
+from pathlib import Path
 from urllib.parse import urlparse
 
 import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from back_office import brain, connectors, edge, model, store, work
@@ -57,6 +59,20 @@ def _item(item_id: str) -> dict:
     return item
 
 
+def _needs(website_id: str) -> dict:
+    """What's waiting on the owner, by the screen it belongs to."""
+    rows = store.query("SELECT kind, COUNT(*) AS n FROM inbox_item WHERE website_id = ? AND status = 'open' GROUP BY kind", website_id)
+    by_kind = {r["kind"]: r["n"] for r in rows}
+    return {
+        "missing": by_kind.get("question", 0),
+        "review": by_kind.get("review", 0),
+        "proposals": by_kind.get("proposal", 0),
+        "agent_questions": by_kind.get("agent_question", 0),
+        "insights": by_kind.get("insight", 0),
+        "bookings": by_kind.get("request", 0),
+    }
+
+
 def _site_view(site: dict) -> dict:
     link = edge.link_for(site["slug"])
     record = work.current_record(site["id"])
@@ -75,6 +91,7 @@ def _site_view(site: dict) -> dict:
         "link_line_html": f'<p>Prices, availability and booking requests for {name}: <a href="{link}">{link}</a></p>',
         "facts": counts(record) if record else {"confirmed": 0, "draft": 0},
         "open_inbox": store.one("SELECT COUNT(*) AS n FROM inbox_item WHERE website_id = ? AND status = 'open'", site["id"])["n"],
+        "needs": _needs(site["id"]),
         "connections": store.query("SELECT toolkit, status FROM connection WHERE website_id = ?", site["id"]),
         "created_at": site["created_at"],
     }
@@ -146,11 +163,43 @@ async def check_link(website_id: str):
 
 
 @app.get("/websites/{website_id}/inbox")
-async def inbox(website_id: str, status: str = "open"):
+async def inbox(website_id: str, status: str = "open", kinds: str | None = None):
+    """Every open item by default. `kinds` narrows it, such as agent_question,insight."""
     _site(website_id)
     await work.sync_activity(website_id)
     order = "CASE kind WHEN 'review' THEN 0 WHEN 'request' THEN 1 WHEN 'proposal' THEN 2 WHEN 'agent_question' THEN 3 WHEN 'question' THEN 4 ELSE 5 END"
-    return store.query(f"SELECT * FROM inbox_item WHERE website_id = ? AND status = ? ORDER BY {order}, created_at", website_id, status)
+    rows = store.query(f"SELECT * FROM inbox_item WHERE website_id = ? AND status = ? ORDER BY {order}, created_at", website_id, status)
+    if kinds:
+        wanted = set(kinds.split(","))
+        rows = [r for r in rows if r["kind"] in wanted]
+    return rows
+
+
+@app.get("/websites/{website_id}/missing")
+async def missing(website_id: str):
+    """What the Simulations screen asks the owner: gaps found by tests and real agents first."""
+    _site(website_id)
+    await work.sync_activity(website_id)
+    order = "CASE source WHEN 'simulation' THEN 0 WHEN 'agent_activity' THEN 1 ELSE 2 END, created_at"
+    return {
+        "open": store.query(f"SELECT * FROM inbox_item WHERE website_id = ? AND kind = 'question' AND status = 'open' ORDER BY {order}", website_id),
+        "answered": store.query(
+            "SELECT * FROM inbox_item WHERE website_id = ? AND kind = 'question' AND status != 'open' ORDER BY resolved_at DESC LIMIT 20", website_id
+        ),
+    }
+
+
+@app.get("/websites/{website_id}/bookings")
+async def bookings(website_id: str):
+    """Booking requests agents have sent, with open ones first."""
+    site = _site(website_id)
+    await work.sync_activity(website_id)
+    link = edge.link_for(site["slug"])
+    rows = store.query(
+        "SELECT * FROM inbox_item WHERE website_id = ? AND kind = 'request' AND status != 'dismissed' ORDER BY CASE status WHEN 'open' THEN 0 ELSE 1 END, created_at DESC",
+        website_id,
+    )
+    return [{**r, "status_url": f"{link}/r/{r['payload'].get('remote_id')}"} for r in rows]
 
 
 class Instruction(BaseModel):
@@ -234,6 +283,7 @@ class Reply(BaseModel):
     message: str = ""
 
 
+@app.post("/bookings/{item_id}/reply")
 @app.post("/inbox/{item_id}/reply")
 async def reply(item_id: str, body: Reply):
     """Answer a booking request. The reply shows on the request's public status page."""
@@ -274,6 +324,7 @@ async def activity(website_id: str, limit: int = 50):
     await work.sync_activity(website_id)
     rows = store.query("SELECT * FROM event WHERE website_id = ? ORDER BY remote_id DESC", website_id)
     events = [{"id": r["remote_id"], "ts": r["ts"], "event": r["event"], **r["payload"]} for r in rows]
+    events = [e for e in events if not (e.get("user_agent") or "").startswith("musefront")]  # The app's own preview reads.
     kinds = Counter(e["event"] for e in events)
     feed = []
     for event in events[:limit]:
@@ -351,6 +402,25 @@ async def undo(website_id: str):
     store.save_record(website_id, versions[1]["record"], f"Undid: {versions[0]['reason']}")
     await work.publish(website_id)
     return {"version": store.latest_record(website_id)["version"], "restored": versions[1]["version"]}
+
+
+@app.get("/websites/{website_id}/resource/changes")
+def changes(website_id: str):
+    """What the owner asked for in the Resource text box, with anything awaiting confirmation first."""
+    _site(website_id)
+    return store.query(
+        "SELECT * FROM inbox_item WHERE website_id = ? AND kind = 'proposal' ORDER BY CASE status WHEN 'open' THEN 0 ELSE 1 END, created_at DESC LIMIT 20",
+        website_id,
+    )
+
+
+@app.get("/websites/{website_id}/resource/agent-view")
+async def agent_view(website_id: str):
+    """The page exactly as agents read it, as markdown from the live Worker."""
+    site = _site(website_id)
+    async with httpx.AsyncClient(timeout=20, headers={"user-agent": "musefront-back-office"}) as client:
+        response = await client.get(f"{edge.link_for(site['slug'])}/index.md")
+    return {"live": response.status_code == 200, "text": response.text if response.status_code == 200 else ""}
 
 
 @app.get("/websites/{website_id}/resource/versions")
@@ -434,3 +504,7 @@ async def sync_account(website_id: str, toolkit: str, body: SyncAccount | None =
 @app.get("/health")
 def health():
     return {"ok": True, "edge": edge.EDGE_URL, "model_calls": model.spend["calls"], "model_cost": round(model.spend["cost"], 4), "composio": bool(os.environ.get("COMPOSIO_API_KEY"))}
+
+
+# The owner app itself. This stays last, so the API's routes win.
+app.mount("/", StaticFiles(directory=Path(__file__).resolve().parent / "web", html=True), name="web")

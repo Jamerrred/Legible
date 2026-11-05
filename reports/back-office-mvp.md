@@ -69,6 +69,17 @@ The OpenRouter client, the Exa client, the page parser and the whole agent as th
 
 This session used $5.77 of OpenRouter credit, across three full walkthroughs and a stopped one. $9.44 is left.
 
+## Added afterwards: the owner app
+
+The app is in `back_office/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Cormorant record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect weren't clicked, since a check spends credit and Composio has no key.
+
+**Bugs that testing caught, all fixed:**
+
+- A closed-days fact with no dates made `/quote` refuse every dated job, including bookings.
+- Loading several screens at once could add a booking or question twice.
+
+**Starting questions:** now at most 5, on prices, fees, area and what rules a job out. On a fresh run they all were. This may lower accuracy until agents fill the gaps, and the 4-query test hasn't been rerun since.
+
 ## How to run it
 
 See [the README](../README.md#run-the-back-office). [The owner app doc](../docs/10-owner-app.md) maps each screen to its API calls.

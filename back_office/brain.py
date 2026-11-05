@@ -21,7 +21,8 @@ OPS_FORMAT = f"""An op is one of:
 Item fields follow this record shape: {RECORD_SHAPE}
 Fact categories: {", ".join(CATEGORIES)}. Prices belong in structured fields, not in fact statements.
 A statement is one self-contained sentence naming the business, with absolute dates and no words like "next week".
-A temporary fact has valid_from and valid_to as YYYY-MM-DD. A closure is a fact with category "closure"."""
+A temporary fact has valid_from and valid_to as YYYY-MM-DD. A closure is a fact with category "closure" and always has those dates.
+Regular closed days are not closures: they go in business.closed_weekdays."""
 
 
 def _compact(record: dict) -> str:
@@ -54,6 +55,7 @@ async def extract_record(pages: list[dict], image_text: str, website: str) -> di
         "You build a structured fact sheet for a service business from its website. Use only what the pages and images state. Never guess or invent, "
         "and leave out anything not stated. Capture every price, fee, rule and exclusion you find, with source_url set to the page it came from. "
         "Vague lines such as 'may cost extra' go in facts with the vagueness kept. "
+        "Regular closed days go in business.closed_weekdays and availability facts. The closure category is only for closures with specific dates. "
         "A fee is a charge that adds to the total. A deposit counts toward the total, so it's a fact in the policies category, not a fee. "
         f"Fact categories: {', '.join(CATEGORIES)}. Return exactly this shape:\n{RECORD_SHAPE}",
         f"Website: {website}\n\nIMAGES\n{image_text or '(none)'}\n\nPAGES\n{corpus}",
@@ -62,15 +64,16 @@ async def extract_record(pages: list[dict], image_text: str, website: str) -> di
     return normalise(result)
 
 
-async def interview_questions(record: dict, limit: int = 12, already: list[str] | None = None) -> list[dict]:
+async def interview_questions(record: dict, limit: int = 5, already: list[str] | None = None) -> list[dict]:
+    """Only the few blockers. Everything else comes from what test customers and real agents get stuck on."""
     result = await ask_json(
-        "You interview a small business owner to fill gaps in their fact sheet, so that any AI agent can answer customers correctly. "
-        f"Check the fact sheet against these needs: {NEEDS}. Ask only about what's missing or vague. Each question is short, plain and concrete, in the owner's language. "
-        "Owners know far more than their website says, so also ask these three broad questions, unless the sheet clearly covers them already: "
-        "(1) every surcharge, discount and fee tied to the day, time, quantity or repeat visits, with amounts; "
-        "(2) everything the business refuses or doesn't offer that customers might ask for; "
-        "(3) any rule that can rule a job out, and exactly where the service does and doesn't go. "
-        "Rank by how likely it is to stop a customer's agent. Skip anything already asked. "
+        "You ask a small business owner the few questions that would most often stop an AI agent from answering a customer. "
+        f"These are the things an agent may need: {NEEDS}. "
+        "Ask only about what's truly missing and would stop an agent giving a price or a yes or no: prices that aren't stated, what fees and discounts apply and how much, "
+        "whether tax is added, exactly where the service goes, and what the business refuses to do. "
+        "Don't ask about trivia or nice-to-haves, such as time zones, payment methods, the words customers use, tipping, credentials or how fast the owner replies. "
+        "If the fact sheet covers something well enough, don't ask about it. Fewer is better, and none is fine. "
+        "Each question is short, plain and concrete, in the owner's language. Skip anything already asked. "
         'Reply as {"questions": [{"topic": "", "question": "", "why": "one short line on what an agent can\'t do without this", '
         '"unknown_statement": "one sentence for the public page, naming the business, saying the owner hasn\'t stated this"}]}.',
         f"Ask at most {limit}.\nAlready asked: {json.dumps(already or [])}\n\nFACT SHEET\n{_compact(record)}",

@@ -1,6 +1,6 @@
 # The owner app
 
-*Last updated 5 November 2026. The backend is built, and this is the map a frontend builds on. The visual design comes later from the founder. Nothing here is final design.*
+*Last updated 5 November 2026. The app is built and running locally. `design/` holds the earlier design, which still shows the old four-tab layout.*
 
 ## The feel
 
@@ -9,64 +9,37 @@ Very minimal, smooth and polished. Take Cursor's restraint and its always-availa
 - Almost no colour: one accent, used only for what needs the owner.
 - Hairline borders rather than shadows, with plenty of space.
 - Plain words. "Your resource is live", not "Deployment succeeded".
-- The inbox has to work at phone width, since owners often work with their hands.
+- It works at phone width, since owners often work with their hands.
 
-## The four screens
+## The five screens
 
-A thin icon sidebar on the left holds these, and the inbox opens first.
+A thin icon sidebar on the left holds these, in the order an owner works through them. It's built in `back_office/web/` as plain HTML, CSS and JS, and the API serves it at `http://127.0.0.1:8200`.
 
 | Screen | What it holds | Main action |
 |---|---|---|
-| Inbox | What needs the owner: fact confirmations, interview questions, proposed changes and booking requests. A second view shows minimal activity | One text bar to tell MuseFront anything |
-| Resource | The fact sheet, reading like a clean document. Each line shows where it came from | Click a line to edit it, and copy the link |
-| Simulations | Each check with its score, and what agents couldn't answer | Run a check |
-| Websites | Each linked website, whether the link is on the site, and its connected accounts | Add a website, connect an account |
+| Websites | Each linked website, the copy-paste link, whether the link is on the site, and connected accounts | Add a website, connect an account |
+| Simulations | "What's missing", then each check with its score and answers | Answer a question, run a check |
+| Resource | The fact sheet, reading like a clean document, with where each line came from | A text box at the bottom to tell MuseFront what to change, or click a line to edit it |
+| Inbox | Only what agents did and asked: counts, questions, a feed and unmet demand | Answer an agent's question |
+| Bookings | Booking requests from agents, and the replies | Accept, suggest another time or decline |
 
-The owner's accounts live under Websites, because a connection belongs to one website.
+The inbox used to hold everything, so tasks now live where they belong: questions under Simulations, proposed changes and fact confirmation under Resource, and bookings in their own tab.
+
+**Where questions come from:** at most 5 starting questions, only for what blocks a price or a yes or no. The rest come from test customers getting stuck and from real agents, so the record fills up as agents use it.
 
 ## Screens to API
 
-Run the API with `uv run uvicorn back_office.api:app --port 8200`. Interactive docs are at `/docs`. There's no login yet.
+Interactive docs are at `/docs`. There's no login yet.
 
-**Websites**
-
-| Call | What it does |
+| Screen | Calls |
 |---|---|
-| `POST /websites` | Starts onboarding from a URL, in the background |
-| `GET /websites`, `GET /websites/{id}` | List or read, with `stage`, `stage_note`, `link`, `link_line`, `live` and `open_inbox`. Poll `stage` during onboarding |
-| `POST /websites/{id}/check-link` | Checks whether the owner's home page carries the link |
-| `POST /websites/{id}/connections` | Returns a connect link for `googlecalendar` or `googlesheets` |
-| `POST /websites/{id}/connections/{toolkit}/sync` | Reads the account and puts any changes in the inbox |
+| Websites | `POST /websites`, `GET /websites`, `GET /websites/{id}`, `POST /websites/{id}/check-link`, `POST /websites/{id}/connections`, `POST /websites/{id}/connections/{toolkit}/sync` |
+| Simulations | `GET /websites/{id}/missing`, `POST /inbox/{item}/answer`, `POST /inbox/{item}/dismiss`, `GET /websites/{id}/simulations`, `POST /websites/{id}/simulations`, `GET /simulations/{id}` |
+| Resource | `GET /websites/{id}/resource`, `PATCH /websites/{id}/resource`, `POST /websites/{id}/instructions`, `GET /websites/{id}/resource/changes`, `POST /inbox/{item}/confirm`, `POST /websites/{id}/resource/undo`, `GET /websites/{id}/resource/agent-view` |
+| Inbox | `GET /websites/{id}/activity`, `GET /websites/{id}/inbox?kinds=agent_question`, `POST /inbox/{item}/answer`, `POST /websites/{id}/revise` |
+| Bookings | `GET /websites/{id}/bookings`, `POST /bookings/{item}/reply` |
 
-**Inbox**
-
-| Call | What it does |
-|---|---|
-| `GET /websites/{id}/inbox` | Open items. Each `kind` is `review`, `question`, `proposal`, `request`, `agent_question` or `insight` |
-| `POST /websites/{id}/instructions` | Plain language in, a proposal out, or a clarifying question |
-| `POST /inbox/{item}/answer` | Answers a question. `scope` is `everyone`, which adds it to the record, or `once`, which only replies |
-| `POST /inbox/{item}/confirm` | Applies a proposal, or confirms crawled facts. `exclude_ids` leaves some out |
-| `POST /inbox/{item}/dismiss` | Dismisses an item |
-| `POST /inbox/{item}/reply` | Answers a booking request. The reply shows on its public status page |
-| `GET /websites/{id}/activity` | Counts, agents, dead ends, unmet demand and a feed |
-| `POST /websites/{id}/revise` | Runs the periodic review now |
-
-**Resource**
-
-| Call | What it does |
-|---|---|
-| `GET /websites/{id}/resource` | The record, with link, version, counts and what's not stated yet |
-| `PATCH /websites/{id}/resource` | Direct or programmatic edits, as ops. These apply and publish at once |
-| `POST /websites/{id}/resource/undo` | Restores the previous version and republishes |
-| `GET /websites/{id}/resource/versions` | Version history |
-
-**Simulations**
-
-| Call | What it does |
-|---|---|
-| `POST /websites/{id}/simulations` | Runs a check on `resource` or `storefront`, reusing the first check's queries so scores compare |
-| `GET /websites/{id}/simulations` | Each check and its summary |
-| `GET /simulations/{id}` | Every query, answer and outcome in one check |
+Each website also returns `needs`, the counts behind the sidebar's dots.
 
 ## Who can change what
 
