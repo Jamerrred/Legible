@@ -34,6 +34,10 @@ async def put_business(slug: str, record: dict, noindex: bool = True) -> dict:
     return await _call("PUT", f"/admin/businesses/{slug}", json={"record": record, "noindex": noindex})
 
 
+async def delete_business(slug: str) -> dict:
+    return await _call("DELETE", f"/admin/businesses/{slug}")
+
+
 async def get_events(slug: str, after: int = 0) -> list[dict]:
     return (await _call("GET", f"/admin/businesses/{slug}/events", params={"after": after}))["events"]
 

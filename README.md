@@ -211,6 +211,16 @@ uv run python scripts/mvp_demo.py --url https://cormorant-detailing.jamerrred-au
 
 To let owners connect accounts such as Google Calendar and Google Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. Then go to **Websites**, press **Connect a resource**, and follow the popup. Legible reads what you connect and proposes changes for you to confirm.
 
+## Record a demo
+
+A private demo copy plays the whole flow back in about a minute, with no AI credit. Crawling, questions and test customers are scripted from a real crawl and the demo business's facts. Publishing is real, so the public page and its quote, request and ask forms work. It runs separately from your real data:
+
+```bash
+LEGIBLE_DEMO=1 LEGIBLE_DB_PATH=legible/demo.db uv run uvicorn legible.api:app --port 8300
+```
+
+Open `http://127.0.0.1:8300`. To start a new take, open `http://127.0.0.1:8300/demo/reset`. If you show this to others, say it's sped up with sample data.
+
 ## Test it
 
 These need no keys and cost nothing:

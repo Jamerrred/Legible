@@ -37,6 +37,7 @@ const shortDate = (iso) => { const d = new Date(`${iso}T12:00:00`); return Numbe
 const route = () => (location.hash.replace(/^#\/?/, "") || "websites").split("/")[0];
 
 async function loadSites() {
+  if (state.demo === undefined) { const c = await api("/config"); state.demo = c.demo; state.demoUrl = c.demo_url; }
   state.sites = await api("/websites");
   const wanted = localStorage.getItem("mf.site");
   state.site = state.sites.find((s) => s.id === wanted) || state.sites[0] || null;
@@ -114,16 +115,17 @@ async function pollTrace() {
     if (onboarding ? ["ready", "failed"].includes(t.stage) : !t.simulation && !["crawling", "extracting", "interviewing", "queued"].includes(t.stage)) return render();
     el.innerHTML = onboarding ? onboardHtml(t) : agentsHtml(t.simulation) || `<div class="row-flex" style="margin-top:18px"><span class="ring"></span><span class="shimmer">${esc(t.stage_note || "Working")}</span></div>`;
     if (window.lucide) lucide.createIcons();
+    if (t.simulation) { const scroller = el.closest(".pane-main"); if (scroller) scroller.scrollTo({ top: scroller.scrollHeight, behavior: "smooth" }); }
   } catch { /* The next poll tries again. */ }
-  poll = setTimeout(pollTrace, 1200);
+  poll = setTimeout(pollTrace, state.demo ? 500 : 1200);
 }
 
 function addForm() {
   return `<div class="center-pane"><form class="stack" data-form="addSite" style="width:min(600px,100%)">
     <h1 class="headline">Which website should agents be able to read?</h1>
     <p class="soft" style="margin:0;font-size:15.5px">Legible reads it, works out what's missing, and nothing goes public until you've confirmed it.</p>
-    <div class="field"><input name="url" type="url" required placeholder="https://yourbusiness.com" autofocus><button class="send" aria-label="Add website">${icon("arrow-up")}</button></div>
-    <label class="row-flex small soft"><input type="checkbox" name="check" checked> Also test it with 5 customer agents, about 5 minutes</label>
+    <div class="field"><input name="url" type="url" required placeholder="https://yourbusiness.com" value="${esc(state.demoUrl || "")}" autofocus><button class="send" aria-label="Add website">${icon("arrow-up")}</button></div>
+    <label class="row-flex small soft"><input type="checkbox" name="check" checked> Also test it with customer agents${state.demo ? "" : ", about 5 minutes"}</label>
   </form></div>`;
 }
 
@@ -149,7 +151,7 @@ async function renderWebsites() {
   if (isBusy(site)) {
     const t = await api(`/websites/${site.id}/trace`);
     paint(side + `<section class="pane-main"><div class="column" id="trace">${onboardHtml(t)}</div></section>`);
-    poll = setTimeout(pollTrace, 1200);
+    poll = setTimeout(pollTrace, state.demo ? 500 : 1200);
     return;
   }
   if (site.stage === "failed") return paint(side + `<div class="center-pane"><div class="stack" style="width:min(600px,100%)"><h1 class="headline">This website couldn't be read</h1><p class="soft">${esc(site.stage_note)}</p><div><a class="btn" href="#/websites/new">Try another address</a></div></div></div>`);
@@ -191,6 +193,7 @@ function renderConnect() {
 
 function questionBlock(q) {
   return `<article class="question"><div class="source-tag">${esc(SOURCE[q.source] || "Missing")}</div><h3>${esc(q.title)}</h3>${q.body ? `<div class="soft small">${esc(q.body)}</div>` : ""}
+    ${q.payload?.suggested ? `<button class="chip" type="button" data-do="useSuggested" data-text="${esc(q.payload.suggested)}">${esc(q.payload.suggested)}</button>` : ""}
     <form data-form="answer" data-id="${q.id}" style="margin-top:6px"><div class="field"><input name="text" required placeholder="Type your answer" autocomplete="off"><button class="send" aria-label="Send answer">${icon("arrow-up")}</button></div></form>
     <div><button class="btn ghost small" data-do="dismiss" data-id="${q.id}" style="padding:4px 8px;margin-left:-8px">Doesn't apply</button></div></article>`;
 }
@@ -221,7 +224,7 @@ async function renderSimulations() {
   const open = missing.open;
   const answered = missing.answered.filter((q) => q.status === "done").slice(0, 8).map((q) => `<details class="run"><summary>${icon("check", "ok")}<span class="request" style="font-size:15.5px">${esc(q.title)}</span></summary><div class="run-body">${esc(q.resolution)}</div></details>`).join("");
   paint(`<aside class="pane-list"><div class="list-head"><h1 class="page-title">Simulations</h1></div><div class="list">${list}</div><div class="spacer"></div>
-    <div class="stack" style="padding:16px 20px 22px 24px;gap:10px"><div class="small muted">Sends the same test customers again, so you can see the score change. About 5 minutes.</div><button class="btn primary wide" data-do="runCheck" ${running ? "disabled" : ""}>${icon("play")} ${running ? "Running" : "Run check"}</button></div></aside>
+    <div class="stack" style="padding:16px 20px 22px 24px;gap:10px"><div class="small muted">Sends the same test customers again, so you can see the score change.${state.demo ? "" : " About 5 minutes."}</div><button class="btn primary wide" data-do="runCheck" ${running ? "disabled" : ""}>${icon("play")} ${running ? "Running" : "Run check"}</button></div></aside>
     <section class="pane-main"><div class="column">
       <h1 class="headline" style="font-size:30px">What's missing${open.length ? `<span class="count-pill">${open.length}</span>` : ""}</h1>
       <p class="soft" style="margin:8px 0 18px">Your answers go live on your page. New questions appear here as test customers and real agents get stuck.</p>
@@ -316,6 +319,7 @@ async function renderInbox() {
   const c = activity.counts;
   const stats = [[c.page_reads, "Pages read"], [c.quotes, "Quotes worked out"], [c.dead_ends, "Dead ends"], [c.questions, "Questions"]].map(([n, l]) => `<div class="stat"><b class="${l === "Dead ends" && n ? "accent" : ""}">${n}</b><span class="small muted">${l}</span></div>`).join("");
   const asked = items.map((q) => `<article class="question"><h3>${esc(q.title)}</h3><div class="soft small">An agent asked this for a customer. Your answer shows on its status page.</div>
+    ${state.demo && /golf/i.test(q.title) ? `<button class="chip" type="button" data-do="useSuggested" data-text="We don't detail golf carts.">We don't detail golf carts.</button>` : ""}
     <form data-form="answer" data-id="${q.id}"><div class="field"><input name="text" required placeholder="Type your answer" autocomplete="off"><button class="send" aria-label="Send answer">${icon("arrow-up")}</button></div>
     <label class="row-flex small soft" style="margin-top:8px"><input type="checkbox" name="once"> Just this once, don't add it to my page</label></form></article>`).join("");
   const feed = activity.feed.slice(0, 30).map((e) => { const [ic, text, detail, dead] = feedLine(e); return `<div class="line-row">${icon(ic, dead ? "accent" : "muted")}<span class="grow" style="overflow-wrap:anywhere">${esc(text)}</span><span class="small muted" style="flex:none">${esc(detail)}</span><span class="tiny muted" style="flex:none;width:96px;text-align:right">${esc(when(e.ts))}</span></div>`; }).join("");
@@ -382,6 +386,7 @@ const actions = {
   pickSite: (el) => { selectSite(el.dataset.id); location.hash = "#/websites"; render(); },
   pickSim: (el) => { state.selectedSim = el.dataset.id; render(); },
   pickBooking: (el) => { state.selectedBooking = el.dataset.id; render(); },
+  useSuggested: (el) => { const input = el.closest(".question").querySelector("input[name=text]"); input.value = el.dataset.text; input.focus(); },
   viewOwner: () => { state.agentView = false; render(); },
   viewAgent: () => { state.agentView = true; render(); },
   checkLink: async () => { const r = await post(`/websites/${state.site.id}/check-link`); toast(r.found ? "Found on your website" : "Not on your website's home page yet"); },
