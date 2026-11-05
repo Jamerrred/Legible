@@ -5,13 +5,14 @@ from __future__ import annotations
 import pytest
 from fastapi.testclient import TestClient
 
-from legible import api
+from legible import api, store
 
 WRITE = "/websites/none/check-link"  # 404 means the request got through to the app, and spends nothing.
 
 
 @pytest.fixture
-def client() -> TestClient:
+def client(tmp_path, monkeypatch) -> TestClient:
+    monkeypatch.setattr(store, "DB_PATH", tmp_path / "test.db")
     return TestClient(api.app, base_url="http://127.0.0.1:8200")
 
 
