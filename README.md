@@ -1,6 +1,6 @@
 # Legible
 
-**Legible is an agentic commerce platform, powered by Muse Spark, that gets small businesses ready for AI agents.** It turns a website built for people into a verified page that agents can read, price and act on.
+**Legible is an agent harness, powered by Muse Spark, that makes a small business usable by other AI agents.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page where an agent like Muse can answer a customer, work out an all-in price and send a booking request.
 
 AI agents like Muse and Instinct already shop for people, but they often can't finish the job on a small business's website. Reading the page is only the start. The agent has to turn a messy request into a correct, all-in answer, using rules that the site scatters across pages or never states:
 
@@ -14,25 +14,27 @@ When a site leaves gaps like these, agents either give up or confidently make so
 
 ## What Legible does
 
-A business owner gives Legible their website. Legible builds a structured record of the business, tests it with simulated customer agents, asks the owner to fill whatever stopped them, and publishes the result as a page any agent can use.
+A business owner gives Legible a website and other resources connected to their business. Legible builds a structured record of the business, tests it with simulated customer agents, asks the owner to fill whatever stopped them, and publishes the result as a page any agent can use. It then keeps that page accurate: an agent inbox collects what outside agents ask and request, the traces they leave feed back into new questions, and the owner can update the page at any time in plain language.
 
 1. **Ingest.** Exa and our own breadth-first crawler read the site, and their results are merged so that one catches what the other misses. A vision pass transcribes facts trapped in images, such as price boards. Muse Spark then extracts a typed fact sheet of offerings, size variants, add-ons, fees, service zones, tax, policies and exclusions, each with its source URL and marked as a draft. Owners can also connect accounts such as Google Calendar and Sheets through Composio, though that path hasn't run with a real account yet.
 
-2. **Simulate.** Legible writes realistic customer requests and runs each one through Errand, our consumer agent, in its own process. Errand is modelled on how Muse described its own process: search first, then read pages, and open a live browser only if it has to. It runs on a budget of 15 tool calls and two browser workers. Two code gates keep it honest: one sends back any claim marked as verified if its numbers never appeared in a tool result, and the other blocks any tool call carrying the customer's personal details until they approve.
+2. **Simulate.** Legible writes realistic customer requests and runs each one through [Errand](#errand-the-consumer-agent), our consumer agent, in its own process. Errand is modelled on how Muse described its own process: search first, then read pages, and open a live browser only if it has to.
 
 3. **Find the gaps.** Runs that couldn't settle an answer are traced back to the facts that were missing. Each gap becomes one plain question for the owner, linked to the customer requests it would have unblocked. The owner answers in their own words, and Muse Spark turns the answer into typed operations on the fact sheet.
 
-4. **Publish.** A filter strips anything unconfirmed, so a draft never leaves the owner's machine. A Cloudflare Worker backed by D1 serves the rest as HTML and markdown, with no model in the request path. Agents get a deterministic `/quote` engine, also available as JSON, that handles size variants, add-ons, fees, zones, tax and closures without asking for personal details, plus `/request` and `/ask` endpoints. Facts the owner hasn't stated are published as explicit unknowns, so agents don't fill the silence with a guess.
+4. **Publish.** A filter strips anything unconfirmed, so a draft never leaves the control plane. A Cloudflare Worker backed by D1 serves the rest as HTML and markdown, with no model in the request path. Agents get a deterministic `/quote` engine, also available as JSON, that handles size variants, add-ons, fees, zones, tax and closures without asking for personal details, plus `/request` and `/ask` endpoints. Facts the owner hasn't stated are published as explicit unknowns, so agents don't fill the silence with a guess.
 
-5. **Embed.** The owner adds one link line to their website. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an unmodified agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
+5. **Embed.** The owner adds one link line to their website or storefront. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
 
-6. **Keep it true.** Every read, quote, question, booking and dead end is logged as an event and pulled into the owner's agent inbox. A periodic review turns failed quotes and dead ends into new questions, and reports unmet demand, such as "3 agents asked for ceramic coating". The owner can change anything in plain language: "We're closed for the next 2 days" becomes a proposed change with absolute dates, goes live once confirmed, and expires by itself. Every change creates a new version of the record, with one-step undo.
+6. **Run the agent inbox.** Questions and booking requests from outside agents reach the owner immediately. The owner's reply appears on a public status page that the agent can check.
 
-The Legible agent edits the fact sheet and never the page, so it can't break the page. Text from outside agents is treated as data: it can prompt a question to the owner, but it can't change a fact.
+7. **Learn from agent traces.** Every page read, quote, question, booking and dead end leaves a trace, which feeds an analytics view of which agents came, where they got stuck and what they wanted. A review every 6 hours turns failed quotes and dead ends into new questions for the owner, and reports unmet demand, such as "3 agents asked for ceramic coating".
+
+8. **Update in plain language.** "We're closed for the next 2 days" becomes a proposed change with absolute dates, goes live once the owner confirms it, and expires by itself. Every change creates a new version of the record, with one-step undo.
 
 ## Benchmark: can an agent finish the job?
 
-We ran a controlled before-and-after test to see whether one link to an agent-ready page changes what an unmodified agent can do.
+We ran a controlled before-and-after test to see whether an agent-ready page, which the business owner embeds in their website or storefront as one link, changes what an agent like Muse can do. We simulated that agent with [Errand](#errand-the-consumer-agent), a Muse-like agent we built.
 
 - **The business:** Sunrise Auto Detailers, a fictional mobile detailer defined by 75 facts. Its three-page website leaves out 37 of them, hides 34 in places such as image price boards, FAQ answers and a lead form, and states 4 plainly.
 - **Three versions:** the website alone, the same website plus one link line (checked by diffing every page), and a control page with the same facts in plain text, which shows the best the agent can do.
@@ -42,15 +44,18 @@ We ran a controlled before-and-after test to see whether one link to an agent-re
 
 ### Results
 
-| On the 7 questions run on all three versions | Website alone | With the link | Control page |
-|---|---|---|---|
-| Correct answers | 3 of 7 | **7 of 7** | 7 of 7 |
-| Runs that needed a browser | 5 of 7 | **0 of 7** | 0 of 7 |
-| Browser worker calls | 8 | **0** | 0 |
-| Average time per run | 165 s | **32 s** | 29 s |
-| Average cost per run | $0.263 | **$0.071** | $0.041 |
+We graded 31 runs. The website-alone version stopped at 7 questions when our API credit ran out, so the fair comparison is on those 7.
 
-Errand found and used the page in 6 of those 7 runs without being told it exists. Across all 12 questions, it got 12 of 12 right with the link. The other 5 never ran on the website alone, because our credit ran out.
+| | Website alone | With the link | Control page |
+|---|---|---|---|
+| Correct, on every question run | 3 of 7 | **12 of 12** | 11 of 12 |
+| Correct, on the same 7 questions | 3 of 7 | **7 of 7** | 7 of 7 |
+| Runs that needed a browser, same 7 | 5 of 7 | **0 of 7** | 0 of 7 |
+| Browser worker calls, same 7 | 8 | **0** | 0 |
+| Average time per run, same 7 | 165 s | **32 s** | 29 s |
+| Average cost per run, same 7 | $0.263 | **$0.071** | $0.041 |
+
+Errand found and used the page in 6 of those 7 runs, and 11 of all 12, without being told it exists.
 
 ### What we asked
 
@@ -83,7 +88,7 @@ These test far more than whether an agent can read a price.
 
 - **Agents read silence as yes.** Saying what a business doesn't do matters as much as listing prices.
 - **Missing facts were the main limit, more than parsing.** The browser worker could read the image price board, so that cost time and money without changing the answers. With the link, Errand came close to the control page's best case.
-- **An unmodified agent will follow one link.** It reached the page in 11 of 12 runs across all the questions, and the twelfth didn't need it.
+- **An agent that's never heard of Legible will follow one link.** It reached the page in 11 of 12 runs, and the twelfth didn't need it.
 
 ### How far to trust this
 
@@ -96,194 +101,312 @@ This is an early signal, not a measured rate.
 
 [The experiment](experiment/README.md) has every answer, the method and the full [report](experiment/reports/first-demo-benchmark.md), and you can [re-check the results for free](experiment/README.md#check-the-saved-results-free-no-keys).
 
-## How it works
+## Architecture
+
+Legible separates a private **control plane**, where the agents run and the owner works, from a public **edge tier** that serves outside agents without calling a model. Outside agents can only reach the edge. The two tiers talk over one authenticated admin API.
+
+### System overview
+
+```mermaid
+flowchart TB
+  owner(["Business owner"])
+  agent(["Customer's AI agent<br/>Muse, Instinct, ChatGPT"])
+  site["Business website"]
+
+  subgraph control["Control plane (self-hosted)"]
+    console["Owner console<br/>ES modules, no framework"]
+    api["API and job runner<br/>FastAPI, asyncio"]
+    harness["Legible agent<br/>crawl, extract, interview, review"]
+    sims["Simulation workers<br/>Errand, one process per run"]
+    sqlite[("SQLite<br/>versioned fact sheets, inbox,<br/>simulations, events")]
+  end
+
+  subgraph edge["Edge tier (Cloudflare)"]
+    worker["Public resource Worker<br/>pages, markdown, /quote, /request, /ask"]
+    d1[("D1<br/>published records, events, requests")]
+  end
+
+  subgraph services["External services"]
+    openrouter["OpenRouter<br/>Muse Spark"]
+    exa["Exa<br/>crawl and search"]
+    composio["Composio<br/>account connectors"]
+  end
+
+  owner --> console --> api
+  api <--> sqlite
+  api --> harness
+  api --> sims
+  harness --> openrouter
+  harness --> exa
+  harness --> composio
+  harness -->|crawl| site
+  sims --> openrouter
+  sims -->|test before| site
+  sims -->|test after| worker
+  api -->|"publish facts, pull events<br/>(bearer token)"| worker
+  worker <--> d1
+  site -.->|one link line| worker
+  agent -->|reads| site
+  agent -->|"reads, quotes, asks, requests"| worker
+```
+
+| Component | Code | What it does |
+|---|---|---|
+| Owner console | [`legible/web/`](legible/web/) | Single-page app for reviewing facts, answering questions, running checks and handling bookings |
+| API and job runner | [`legible/api.py`](legible/api.py), [`work.py`](legible/work.py) | REST API, with onboarding, simulations and reviews as background jobs. Each website moves through `queued`, `crawling`, `extracting`, `interviewing`, `checking` and `ready` |
+| Legible agent | [`brain.py`](legible/brain.py), [`crawl.py`](legible/crawl.py) | Each judgement is one structured Muse Spark call in JSON mode, retried once if the reply doesn't parse |
+| Fact record | [`record.py`](legible/record.py), [`store.py`](legible/store.py) | Typed record with an immutable version per change. Each item tracks its status, source and validity dates |
+| Errand | [`errand/`](errand/) | The consumer agent that plays each test customer |
+| Public resource | [`edge/`](edge/) | A Worker and D1 that serve pages, compute quotes and log every interaction |
+
+### From website to published page
+
+```mermaid
+sequenceDiagram
+  actor Owner
+  participant L as Legible agent
+  participant C as Exa + BFS crawler
+  participant M as Muse Spark
+  participant E as Errand workers
+  participant W as Edge Worker
+
+  Owner->>L: POST /websites
+  L->>C: Crawl site
+  C-->>L: Pages and images
+  L->>M: Transcribe images (vision)
+  L->>M: Extract typed fact sheet
+  Note over L: Save version 1, every item a draft
+  L->>M: Find blockers (at most 5 questions)
+  L->>M: Write customer requests
+  L->>E: Run agents on the website, 5 at a time
+  E-->>L: Answer, outcome, claims with evidence
+  L->>M: Map failed runs to missing facts
+  L-->>Owner: Questions, each linked to the runs it blocks
+  Owner->>L: Answer in plain language, confirm facts
+  L->>M: Answer to typed operations
+  L->>W: PUT /admin/businesses/{slug}, confirmed items only
+  Owner->>L: Run the check again
+  L->>W: Publish a private preview
+  L->>E: Same requests, now pointed at the preview
+  E-->>L: Compare the two scores
+```
+
+Rechecks reuse the first check's requests so that scores are comparable. They run against a separate preview page, which keeps test traffic out of the owner's analytics.
+
+### Errand: the consumer agent
+
+Errand is a general-purpose agent that acts for a person who wants something from a business. It holds nothing specific to any business and knows nothing about Legible, which is what makes it a fair test. It has been frozen since the tag `first-demo-agent-freeze`, apart from its rename.
 
 ```mermaid
 flowchart LR
-  site["The business's website"]
-  subgraph mac["Your computer"]
-    app["Owner app and Legible agent<br/>legible/"]
-    errand["Test customers<br/>errand/"]
-  end
-  subgraph services["Online services"]
-    model["OpenRouter<br/>the AI model"]
-    exa["Exa<br/>reads public websites"]
-  end
-  page["Public page<br/>edge/"]
-  agents["Customers' AI agents"]
+  request["Customer request<br/>+ customer profile"] --> loop
 
-  site -->|read| app
-  app --> model
-  app --> exa
-  errand -->|test| site
-  errand -->|test| page
-  app -->|confirmed facts only| page
-  agents -->|read, quote, ask, request| page
-  page -->|questions and bookings| app
+  subgraph errand["Errand"]
+    loop["Orchestrator tool loop<br/>Muse Spark, 15 tool calls, 6 minutes"]
+    privacy{{"Personal-details gate"}}
+    search["search_web<br/>Exa or saved corpus"]
+    read["read_page<br/>plain fetch, no JavaScript"]
+    browse["browse_task<br/>browser-use and Chromium, 2 workers"]
+    math["do_math<br/>totals and dates"]
+    ask["ask_person<br/>approvals"]
+    finish["finish<br/>answer and labelled claims"]
+    evidence{{"Evidence gate"}}
+  end
+
+  loop --> privacy
+  privacy --> search
+  privacy --> read
+  privacy --> browse
+  loop --> math
+  loop --> ask
+  loop --> finish --> evidence
+  evidence -->|"unsupported claim,<br/>up to 2 retries"| loop
+  evidence --> report["Report with sources"]
+  loop -.-> logs[("JSONL run log")]
 ```
 
-- **The owner app** runs on your computer. It reads the site, builds a fact sheet, asks you what's missing and reviews what agents did.
-- **The test customers** are AI agents that try real customer requests on your site, then on your page, so you can compare the two.
-- **The public page** is built from the fact sheet and needs no AI to serve. It runs on your computer until you [put it online](#put-your-page-online).
+- **Cheapest step first.** It searches, then reads pages, and uses a browser worker only when reading can't settle the question.
+- **Evidence gate.** Each claim is labelled `verified_at_source`, `listed_unverified` or `unknown`. Code sends back a verified claim if it has no source, or if its numbers never appeared in a tool result.
+- **Personal-details gate.** Code blocks any search, read or browser call that carries the customer's details until they've approved it through `ask_person`.
+- **Same agent, two jobs.** It's the test agent in the benchmark and the simulated customer inside Legible, so the product is tested the way the benchmark was run.
 
-The agent changes the fact sheet and never the page, so every part of the page stays consistent. Nothing an outside agent says can change the facts.
+### Serving agents and the feedback loop
 
-## Run it
+```mermaid
+sequenceDiagram
+  actor Customer
+  participant A as AI agent
+  participant S as Business website
+  participant W as Edge Worker
+  participant D as D1
+  participant L as Control plane
+  actor Owner
 
-This takes about 5 minutes to set up. These steps were tested on macOS.
+  Customer->>A: Under $400 all in, Saturday or a weekday?
+  A->>S: Read site
+  S-->>A: One link line
+  A->>W: GET /b/{slug} (Accept: text/markdown)
+  W->>D: Load record, log page_hit
+  W-->>A: Confirmed facts and stated unknowns
+  A->>W: GET /quote?service=...&zip=...&format=json
+  Note over W: Deterministic: variants, add-ons,<br/>fees, zones, tax, closures
+  W->>D: Log quote, and dead_end if it can't proceed
+  W-->>A: Total, or the named blocker
+  A->>W: POST /request or /ask
+  W->>D: Store item, log event
+  L->>W: GET /admin/businesses/{slug}/events
+  L-->>Owner: Inbox and Bookings
+  Owner->>L: Reply
+  L->>W: POST /admin/items/{id}/reply
+  A->>W: GET /b/{slug}/r/{id}
+  W-->>A: Owner's reply
+  loop Every 6 hours
+    L->>L: Review dead ends, failed quotes and questions
+    L-->>Owner: New questions and unmet demand
+  end
+```
 
-### 1. Install what you need
+### Design rules
 
-- **[uv](https://docs.astral.sh/uv/getting-started/installation/)**, which runs the Python code and installs Python 3.12 and its dependencies.
-- **[Node.js](https://nodejs.org)**, version 20 or newer, which runs the public page.
+- **One gate to public.** `public_view()` serves confirmed items only, so a draft can't reach the edge.
+- **Agents write data, not pages.** The model emits typed operations on the fact sheet. The Worker renders every page from that record, so an agent can't break the page or make its parts disagree.
+- **Outside text is data.** Every model call carries a rule that text from websites, agents and customers is never an instruction. Outside agents can prompt a question to the owner, but they can't change a fact.
+- **No model at the edge.** The public tier makes no AI calls, so serving a page or a quote costs no model credit and leaves no prompt to inject.
+- **Least privilege.** Writes to the edge require a bearer token held by the control plane. API keys for AI services never leave it.
 
-### 2. Download the code
+## Quickstart
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and [Node.js](https://nodejs.org) 20 or newer, then:
 
 ```bash
 git clone https://github.com/Jamerrred/Legible.git
-```
-
-```bash
 cd Legible
-```
-
-```bash
 uv sync
-```
-
-Test customers sometimes need a real browser, so install one:
-
-```bash
 uv run --with playwright playwright install chromium
-```
-
-### 3. Add your API keys
-
-Make your settings file, which git ignores:
-
-```bash
 cp .env.example .env
 ```
 
-Then open `.env` and fill in these two keys:
+Add two keys to `.env`. `scripts/start.py` fills in the other settings.
 
-| Key | What it's for | Where to get it |
+| Key | Used for | Get it from |
 |---|---|---|
-| `OPENROUTER_API_KEY` | The AI model behind every agent | [openrouter.ai/keys](https://openrouter.ai/keys) |
-| `EXA_API_KEY` | Reads public websites and runs the test customers' web searches | [dashboard.exa.ai](https://dashboard.exa.ai) |
+| `OPENROUTER_API_KEY` | Muse Spark, behind every agent | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| `EXA_API_KEY` | Crawling public sites and Errand's web searches | [dashboard.exa.ai](https://dashboard.exa.ai) |
 
-Leave the other settings as they are. `scripts/start.py` fills them in.
-
-### 4. Start Legible
+Then start the stack:
 
 ```bash
 uv run python scripts/start.py
 ```
 
-The first start takes about a minute. It opens the app at **http://127.0.0.1:8200**. Keep that terminal open while you use it, and press `Ctrl+C` to stop.
+This runs the control plane at `http://127.0.0.1:8200`, with API docs at `/docs`. Until you [deploy the edge tier](#deployment), it also runs the Worker locally at `http://127.0.0.1:8787`, using a local D1. No Cloudflare account is needed for this.
 
-### 5. Try it
+To try it, onboard this fictional business, which has prices in images and missing rules on purpose:
 
-The **Next** card at the bottom of the sidebar always shows what to do now, so you can simply follow it. Real AI does the work, so each step spends a little credit.
+```text
+https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev
+```
 
-1. **Websites: connect a website.** Paste an address and press the arrow. Use your own, or this fictional business, which has prices in images and missing rules on purpose:
+**Cost:** a full onboarding with 5 simulated customers takes 5 to 10 minutes and costs up to about $2.50 in OpenRouter credit. Without the simulation, it takes about a minute and costs a few cents. The app has no spending limit of its own, so set one on your OpenRouter key.
 
-   ```text
-   https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev
-   ```
+### Try it without keys
 
-   Leave "Also test it with customer agents" on to see the full flow. That usually takes 5 to 10 minutes and costs up to about $2.50. Turn it off for a quick try, which takes about a minute and costs a few cents.
+The `demo` branch holds a scripted copy of the app, which replays the same flow on sample data with no keys or credit. Our film was recorded from it.
 
-2. **Simulations: see what stopped the agents.** Each test customer shows the question it was given, its answer, and where it got stuck. Under **What's missing**, answer each question in your own words, or press **This doesn't apply**.
+```bash
+git switch demo
+uv sync
+uv run python scripts/start.py --demo
+```
 
-3. **Resource: confirm the facts.** Check what Legible read from the site. Click any line or price to fix it, then press **Confirm and publish**. Nothing is public until you do.
+It runs at `http://127.0.0.1:8300`.
 
-4. **Simulations: test it again.** Press **Run the check again**. The same kind of customers now use your page, so you can compare the two scores.
+## Deployment
 
-5. **Websites: put the link on your site.** Copy your link. It's the one line a real business adds to its website, and **Check it's on your site** looks for it. It won't find it on the fictional business, because you can't edit that site.
-
-6. **Inbox and Bookings: act like an agent.** Press **Open the page**, then use its **Ask** and **Request** pages. The question shows up in **Inbox** and the request in **Bookings**. Answer or accept them, then open the status link to see your reply.
-
-7. **Resource: change something.** Type a change into the box at the bottom, such as `We're closed for the next 2 days`. Legible works out the exact change and asks you to confirm. A closure ends by itself when its dates pass, and **Undo last change** takes back the last edit.
-
-The app has no spending limit of its own, so set a credit limit on your OpenRouter key if you want a hard stop.
-
-### Connect accounts (optional)
-
-To let owners connect accounts such as Google Calendar and Google Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. Then go to **Websites** and press **Connect** beside an account. This code hasn't been run with a real key yet, so expect rough edges.
-
-## Put your page online
-
-Until now, your page has only been reachable from your own computer. To let real agents reach it, deploy it to your own Cloudflare account. A free account is enough.
+Deploy the edge tier to your own Cloudflare account, so real agents can reach your pages. A free account is enough.
 
 ```bash
 uv run python scripts/deploy.py
 ```
 
-This signs you in, creates the database, deploys the page and points Legible at its live address. Anything you've already published moves across. Then restart Legible, and your link becomes a real public address that you can add to your website.
+The script signs in with Wrangler, provisions a D1 database, applies the schema, deploys the Worker, sets its `ADMIN_TOKEN` secret and points `LEGIBLE_EDGE_URL` at the live address. Anything already published moves across. Restart the control plane afterwards, and each website's link becomes a public address.
 
-Only the public page goes online. The owner app stays on your computer, because it has no login and anyone who reached it could spend your AI credit. The page keeps working when your computer is off. New questions and bookings wait there until you next open the app, and the periodic review of what agents did only runs while the app is open.
+The edge tier keeps serving when the control plane is offline. New questions and bookings wait in D1 until the control plane next pulls them, and the 6-hour review only runs while it's up.
 
-Pages tell search engines not to index them for now, so agents reach yours through the link on your site. To go back to a local page, set `LEGIBLE_EDGE_URL=http://127.0.0.1:8787` in `.env`.
+**Run the control plane on a private host.** It has no authentication yet, and it holds your API keys, so don't expose it to the internet. Published pages also send `X-Robots-Tag: noindex` for now, so agents reach them through the link on the business's site.
 
-## See it without keys
+## Walkthrough
 
-The `demo` branch holds a scripted copy of the app that plays the same story back in about 3 minutes, with sample data, no API keys and no credit. It's the version our film was recorded from.
+Each step in the owner console maps to the API. The console's **Next** card shows which step comes next.
 
-```bash
-git switch demo
+| Step | Screen | API | What happens |
+|---|---|---|---|
+| Onboard | Websites | `POST /websites` | Starts the crawl, extraction, interview and simulation job. `GET /websites/{id}/trace` streams its progress and each agent's steps |
+| Review failures | Simulations | `GET /simulations/{id}` | Shows each run's request, answer, outcome and where it got stuck |
+| Close gaps | Simulations | `GET /websites/{id}/missing`, `POST /inbox/{id}/answer` | The model turns each answer into typed operations, and the page republishes |
+| Publish | Resource | `POST /inbox/{id}/confirm` | Marks drafts as confirmed, saves a new version and pushes the public view to the Worker |
+| Re-test | Simulations | `POST /websites/{id}/simulations` | Reruns the same requests against a private preview of the page |
+| Embed | Websites | `POST /websites/{id}/check-link` | Fetches the business's home page and looks for the link |
+| Act as an agent | Public page | `GET /b/{slug}`, `/quote`, `POST /request`, `/ask` | Each call logs an event on the edge. Add `?format=json` to `/quote` for JSON |
+| Handle activity | Inbox, Bookings | `GET /websites/{id}/activity`, `POST /bookings/{id}/reply` | Pulls new events, and shows the reply on the request's status page |
+| Update | Resource | `POST /websites/{id}/instructions`, `POST /inbox/{id}/confirm` | Turns plain language into a proposed change, which goes live once confirmed |
+| Undo | Resource | `POST /websites/{id}/resource/undo` | Restores the previous version and republishes |
+
+### Connectors
+
+To connect accounts such as Google Calendar and Google Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. Legible reads the account and proposes changes for the owner to confirm. This path hasn't run with a real key yet.
+
+## Repository structure
+
+```text
+legible/              Control plane
+  api.py              REST API for the owner console
+  work.py             Jobs: onboarding, simulations, publishing, periodic review
+  brain.py            Every model judgement, one structured call each
+  crawl.py            Exa and breadth-first crawling, image fetching
+  record.py           Fact sheet schema, typed operations, confirmed-only public view
+  store.py            SQLite: versions, inbox, simulations, events
+  edge.py             Client for the Worker's admin API
+  model.py            Structured model calls through OpenRouter
+  connectors.py       Composio account connections
+  web/                Owner console
+edge/                 Edge tier
+  src/index.js        Worker: pages, markdown, quote engine, forms, admin API
+  schema.sql          D1 schema
+errand/               Consumer agent
+  loop.py             Orchestrator tool loop
+  tools.py            Tools, search backends and the evidence gate
+  worker.py           browser-use worker
+  person.py           Customer profile and the personal-details gate
+  llm.py              OpenRouter client
+experiment/           Benchmark: sample business, questions, grader, run logs and reports
+scripts/              start.py runs the stack, deploy.py deploys the edge tier
+tests/                Test suite
+docs/planning/        Original research and design notes
 ```
 
-```bash
-uv sync
-```
+## Reproducing the benchmark
+
+Every run's log is in this repository. Regrading the saved runs is free and needs no keys:
 
 ```bash
-uv run python scripts/start.py --demo
+cd experiment
+uv run python -m bench.run_benchmark --variant before --name first-demo --regrade
+uv run python -m bench.run_benchmark --variant after --name first-demo --regrade
+uv run python -m bench.run_benchmark --variant control --name first-demo --regrade
+uv run python -m bench.summarize --name first-demo
 ```
 
-Open `http://127.0.0.1:8300`. Run `git switch main` to come back to the real app. If you've run the real app already, stop it first, because both use the same local page.
+To rerun it from scratch for about $6 of OpenRouter credit, follow [the experiment's guide](experiment/README.md#run-it-again-spends-openrouter-credit).
 
-## What's in this repository
-
-| Folder | What it is |
-|---|---|
-| [`legible/`](legible/) | The product: the owner app and the Legible agent |
-| [`edge/`](edge/) | The public page, a Cloudflare Worker |
-| [`errand/`](errand/) | The test customers: a general-purpose consumer agent that knows nothing about Legible |
-| [`scripts/`](scripts/) | Starts the app, and deploys the public page |
-| [`tests/`](tests/) | Automated checks |
-| [`experiment/`](experiment/README.md) | The before-and-after test: its fictional business, questions, logs and reports |
-| [`docs/`](docs/) | How we work, plus the original planning notes |
-
-## Test it
+## Tests
 
 These need no keys and cost nothing:
 
 ```bash
 uv run pytest
-```
-
-```bash
 uv run ruff check .
 ```
-
-## If something goes wrong
-
-| What you see | What to do |
-|---|---|
-| `Add OPENROUTER_API_KEY...` when starting | Fill in your keys in `.env`, then start again |
-| `Another program is using port...` | Close the other program or your other copy of Legible, or use another port for the app: `LEGIBLE_PORT=8400 uv run python scripts/start.py` |
-| The website shows "couldn't be read" | Check the address opens in a browser, then check your Exa key. Sites that block automated visitors can fail |
-| A stage fails with an error from the model | Check your OpenRouter key and balance, then add the website again |
-| A test customer says "Agent crashed" | The AI provider returned an error. It doesn't count against the business, so run the check again |
-| You want to start over | Stop Legible and delete `legible/legible.db` |
-
-## Limits
-
-- **Real agents are untested.** Whether agents such as Muse follow the link is still an open question.
-- **It's a prototype.** The app has no login, so keep it on your own computer.
-- **The fictional business is fictional,** and any match with a real business's name is a coincidence.
 
 ## Learn more
 
