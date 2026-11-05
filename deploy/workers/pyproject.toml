@@ -1,0 +1,19 @@
+[project]
+name = "musefront-workers"
+version = "0.1.0"
+description = "Runs the MuseFront site and resource on Cloudflare Python Workers"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi",
+    "jinja2",
+    "python-multipart",
+    "tzdata",
+]
+
+[dependency-groups]
+dev = [
+    # pywrangler needs a newer uv than many machines have, so it's pinned here rather than globally.
+    "uv>=0.13.4",
+    "workers-py",
+    "workers-runtime-sdk",
+]

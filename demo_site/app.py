@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import ipaddress
+import os
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -41,10 +42,11 @@ def create_app(variant: str = "before") -> FastAPI:
     addons = [addon["label"] for addon in model["addons"].values()]
 
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
-    app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
+    app.mount("/static", StaticFiles(directory=HERE / "static", check_dir=False), name="static")
     templates = Jinja2Templates(directory=HERE / "templates")
     templates.env.trim_blocks = True
     templates.env.lstrip_blocks = True
+    templates.env.globals["resource_url"] = os.environ.get("MF_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
     templates.env.globals.update(variant=variant, business=facts["business"])
 
     def render(request: Request, template_name: str, status_code: int = 200, **context):

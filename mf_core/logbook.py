@@ -12,14 +12,17 @@ import os
 from datetime import UTC, datetime
 from pathlib import Path
 
-LOG_DIR = Path(__file__).resolve().parent.parent / "logs"
+# Python Workers can only write to /tmp, and only until the Worker restarts.
+LOG_DIR = Path(os.environ.get("MF_LOG_DIR") or Path(__file__).resolve().parent.parent / "logs")
 
 
 def log_event(stream: str, event: str, **fields) -> dict:
     """Append one event to logs/<stream>.jsonl and return it."""
-    LOG_DIR.mkdir(exist_ok=True)
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
     record = {"ts": datetime.now(UTC).isoformat(), "stream": stream, "event": event, **fields}
     line = json.dumps(record, default=str) + "\n"
+    if os.environ.get("MF_LOG_STDOUT"):
+        print(line, end="", flush=True)
     fd = os.open(LOG_DIR / f"{stream}.jsonl", os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
     try:
         os.write(fd, line.encode())
