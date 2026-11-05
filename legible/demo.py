@@ -15,7 +15,7 @@ import json
 import os
 import random
 import re
-from datetime import date, timedelta
+from datetime import UTC, date, datetime, timedelta
 from difflib import get_close_matches
 from pathlib import Path
 
@@ -29,7 +29,7 @@ SLUG = "sunrise"
 SITE_URL = "https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev"
 HERE = Path(__file__).resolve().parent
 NAME = "Sunrise Auto Detailers"
-AGENT_SUGGESTIONS = {"golf": "We don't detail golf carts."}
+AGENT_SUGGESTIONS = {"golf": "We don't detail golf carts.", "military": "No, we don't offer a senior or military discount."}
 AGENT_UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140.0 Safari/537.36 PersonalAssistant/1.0"
 UNNAMED_UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140.0 Safari/537.36"
 
@@ -246,33 +246,123 @@ async def onboard(website_id: str, run_check: bool = True) -> None:
     stage("ready", "Ready for you to confirm and answer")
 
 
+def _next(weekday: int, today: date) -> date:
+    """The next date on this weekday, at least 2 days out so no same-day fee applies. Monday is 0."""
+    days = (weekday - today.weekday()) % 7
+    return today + timedelta(days=days if days >= 2 else days + 7)
+
+
+def _booking(name: str, contact: str, phone: str, notes: str, **job) -> dict:
+    return {"name": name, "email": f"{contact}@example.com", "phone": phone, "submitted_by": "agent", "agent_name": "a personal agent", "notes": notes, "format": "json", **job}
+
+
+def sample_visits(today: date) -> list[tuple]:
+    """A sample week of agents using the public page: (method, path, data, user agent).
+
+    Every customer here is invented. The story behind each one comes from the business's own rules,
+    and the page itself works out every total, so the numbers on screen are real.
+    """
+    saturday, sunday, tuesday, wednesday, friday = (_next(day, today).isoformat() for day in (5, 6, 1, 2, 4))
+    quote = lambda agent=AGENT_UA, **job: ("GET", "/quote", {**job, "format": "json"}, agent)  # noqa: E731
+    read = lambda path="", agent=AGENT_UA: ("GET", path, None, agent)  # noqa: E731
+    outback = {"service": "the-schooner", "variant": "class-b", "zip": "94110", "when": saturday}
+    golden = {"service": "the-cutter", "variant": "class-b", "addon": "pet-hair-removal", "zip": "94117", "when": tuesday}
+    # The muddy F-250 from the test customers, now with a total the owner's answers made possible.
+    truck = {"service": "the-cutter", "variant": "class-d", "addon": "shampoo", "condition": ["heavily-soiled", "generator-fee"], "zip": "94965", "when": wednesday}
+    minivan = {"service": "the-schooner", "variant": "class-c", "addon": "shampoo", "zip": "94114", "when": friday}
+    return [
+        read(),
+        read("/services/the-schooner", UNNAMED_UA),
+        quote(service="the-schooner", variant="class-b", zip="94110"),
+        quote(service="ceramic coating"),
+        read("", UNNAMED_UA),
+        quote(UNNAMED_UA, service="ceramic coating for a new Model Y"),
+        read(),
+        quote(**golden),
+        ("POST", "/request", _booking("Priya Raman", "priya.raman", "415-555-0142", "Golden retriever hair on the back seat. It's in the driveway, and someone will be home to hand over the keys.", **golden), AGENT_UA),
+        read("", UNNAMED_UA),
+        quote(service="the-cutter", variant="class-c", zip="94103", when=sunday),
+        ("POST", "/ask", {"question": "Do you detail golf carts?", "format": "json"}, AGENT_UA),
+        read(),
+        quote(**truck),
+        ("POST", "/request", _booking("Marcus Ellery", "marcus.ellery", "415-555-0118", "Work truck with mud across the floor, inside only. It's in our driveway, and the nearest outlet is about 150 feet away.", **truck), AGENT_UA),
+        quote(service="ceramic coat"),
+        read("/services/the-flagship", UNNAMED_UA),
+        quote(service="RV detailing"),
+        read("", UNNAMED_UA),
+        quote(UNNAMED_UA, service="motorhome wash"),
+        ("POST", "/ask", {"question": "Do you offer a senior or military discount?", "format": "json"}, AGENT_UA),
+        read(),
+        quote(**minivan),
+        ("POST", "/request", _booking("Renee Okafor", "renee.okafor", "415-555-0163", "Spilled milk on the carpet in the back of our minivan. It's in the driveway, with an outlet in the garage.", **minivan), AGENT_UA),
+        read("", UNNAMED_UA),
+        quote(service="the-skiff", variant="class-a", zip="94107"),
+        read(),
+        read("/services/the-schooner"),
+        quote(**outback),
+        ("POST", "/request", _booking("Dana Whitlock", "dana.whitlock", "415-555-0177", "Parked in the driveway, with an outlet nearby.", **outback), AGENT_UA),
+    ]
+
+
+# Two of the sample bookings already have a reply, so the owner can see both states.
+SAMPLE_REPLIES = {
+    "Marcus Ellery": ("accepted", "Yes, we can do this. We'll bring the generator, and we'll text you your arrival window the day before."),
+    "Renee Okafor": ("suggested", "We're full that Friday. Would the following Tuesday morning work?"),
+}
+SAMPLE_DAYS = 4
+
+
+def sample_times(count: int, now: datetime) -> list[str]:
+    """When each visit shows as happening: uneven gaps across the last few days, ending now."""
+    rng = random.Random(count)
+    gaps = [rng.uniform(0.3, 1.7) for _ in range(count)]
+    span, total, passed, times = timedelta(days=SAMPLE_DAYS), sum(gaps), 0.0, []
+    for gap in gaps:
+        passed += gap
+        times.append((now - span + span * (passed / total)).isoformat(timespec="seconds"))
+    return times
+
+
+async def _date_arrivals(website_id: str, after: int, stamp: str) -> int:
+    """Pull what just arrived and date it on the sample week. Returns the last event dated."""
+    await work.sync_activity(website_id)
+    rows = store.query("SELECT remote_id, payload FROM event WHERE website_id = ? AND remote_id > ?", website_id, after)
+    for row in rows:
+        store.run("UPDATE event SET ts = ? WHERE website_id = ? AND remote_id = ?", stamp, website_id, row["remote_id"])
+        if row["payload"].get("id"):
+            store.run("UPDATE inbox_item SET created_at = ? WHERE website_id = ? AND json_extract(payload, '$.remote_id') = ?", stamp, website_id, row["payload"]["id"])
+    return max((r["remote_id"] for r in rows), default=after)
+
+
 async def seed_activity(website_id: str) -> None:
-    """Sample visits to the real public page, once the owner has put the link on their website."""
+    """Sample visits to the real public page, once the owner has put the link on their website.
+
+    They arrive in seconds so the counts climb on camera, and they're dated across the last few
+    days so the Inbox reads like a real week. The demo's sidebar says the data is a sample.
+    """
     link = edge.link_for(SLUG)
-    await asyncio.sleep(1.5)
-    next_saturday = date.today() + timedelta(days=((5 - date.today().weekday()) % 7) or 7)
-    next_sunday = next_saturday + timedelta(days=1)
+    await asyncio.sleep(1.0)
+    visits = sample_visits(date.today())
+    seen = store.website(website_id)["event_cursor"] or 0
+    times = sample_times(len(visits), datetime.now(UTC))
     async with httpx.AsyncClient(timeout=20) as client:
-        steps = [
-            ("GET", "", None, AGENT_UA),
-            ("GET", "/services/the-schooner", None, UNNAMED_UA),
-            ("GET", "/quote", {"service": "the-schooner", "variant": "class-b", "zip": "94110", "format": "json"}, AGENT_UA),
-            ("GET", "/quote", {"service": "ceramic coating", "format": "json"}, AGENT_UA),
-            ("GET", "", None, UNNAMED_UA),
-            ("GET", "/quote", {"service": "ceramic coating for a new Model Y", "format": "json"}, UNNAMED_UA),
-            ("GET", "/quote", {"service": "the-cutter", "variant": "class-c", "zip": "94103", "when": next_sunday.isoformat(), "format": "json"}, AGENT_UA),
-            ("GET", "/quote", {"service": "ceramic coat", "format": "json"}, AGENT_UA),
-            ("POST", "/ask", {"question": "Do you detail golf carts?", "format": "json"}, AGENT_UA),
-            ("POST", "/request", {"service": "the-schooner", "variant": "class-b", "zip": "94110", "when": next_saturday.isoformat(), "name": "Dana Whitlock", "email": "dana.whitlock@example.com", "phone": "415-555-0177", "submitted_by": "agent", "agent_name": "a personal agent", "notes": "Parked in the driveway, with an outlet nearby.", "format": "json"}, AGENT_UA),
-        ]
-        for method, path, data, agent in steps:
+        for (method, path, data, agent), stamp in zip(visits, times, strict=True):
             headers = {"user-agent": agent}
             if method == "POST":
                 await client.post(link + path, data=data, headers=headers)
             else:
                 await client.get(link + path, params=data, headers=headers)
-            await asyncio.sleep(0.9)  # Slow enough to watch the counts climb.
+            await asyncio.sleep(0.4)  # Slow enough to watch the counts climb.
+            seen = await _date_arrivals(website_id, seen, stamp)
+    await asyncio.sleep(0.5)  # The page logs just after it responds, so catch the last ones.
+    await _date_arrivals(website_id, seen, times[-1])
+    for item in store.query("SELECT * FROM inbox_item WHERE website_id = ? AND kind = 'request' AND status = 'open'", website_id):
+        reply = SAMPLE_REPLIES.get(item["payload"].get("details", {}).get("name"))
+        if reply:
+            await edge.reply(item["payload"]["remote_id"], *reply)
+            store.resolve_inbox(item["id"], f"{reply[0]}: {reply[1]}")
     store.add_inbox(website_id, "insight", "3 agents asked for ceramic coating", "It isn't something you offer.", {}, "agent_activity")
+    store.add_inbox(website_id, "insight", "2 agents asked about RVs and motorhomes", "It isn't something you offer.", {}, "agent_activity")
     store.add_inbox(website_id, "insight", "1 agent asked about Sunday visits", "You're closed on Sundays.", {}, "agent_activity")
 
 
