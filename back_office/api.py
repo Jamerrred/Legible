@@ -140,6 +140,20 @@ def get_website(website_id: str):
     return {**_site_view(_site(website_id)), "pages": _site(website_id)["pages"]}
 
 
+@app.get("/websites/{website_id}/trace")
+def trace(website_id: str):
+    """Live progress for the app: the onboarding stage, pages read, and each test customer's steps."""
+    site = _site(website_id)
+    sim = store.one("SELECT id, label FROM simulation WHERE website_id = ? AND status = 'running' ORDER BY created_at DESC LIMIT 1", website_id)
+    return {
+        "stage": site["stage"],
+        "stage_note": site["stage_note"],
+        "name": site["name"] or site["slug"],
+        "pages": site["pages"],
+        "simulation": {"id": sim["id"], "label": sim["label"], "agents": work.sim_trace(sim["id"])} if sim else None,
+    }
+
+
 @app.post("/websites/{website_id}/publish")
 async def publish_website(website_id: str):
     _site(website_id)
@@ -462,6 +476,12 @@ def simulation(simulation_id: str):
 # ---------------------------------------------------------------- connected accounts
 
 
+@app.get("/connections/available")
+def connections_available():
+    """Whether accounts can be connected on this install. Composio is optional."""
+    return {"configured": connectors.configured(), "toolkits": connectors.TOOLKITS}
+
+
 class NewConnection(BaseModel):
     toolkit: str
     callback_url: str | None = None
@@ -476,6 +496,8 @@ async def connect(website_id: str, body: NewConnection):
         link = await asyncio.to_thread(connectors.connect_link, website_id, body.toolkit, body.callback_url)
     except connectors.NotConfigured as error:
         raise HTTPException(409, str(error)) from error
+    except Exception as error:
+        raise HTTPException(502, f"Composio couldn't start this connection. Check your COMPOSIO_API_KEY. ({type(error).__name__})") from error
     store.insert("connection", website_id=website_id, toolkit=body.toolkit, status="pending", detail={}, created_at=store.now())
     return {"connect_link": link}
 
@@ -492,7 +514,11 @@ async def sync_account(website_id: str, toolkit: str, body: SyncAccount | None =
         data = await asyncio.to_thread(connectors.read_account, website_id, toolkit, body.spreadsheet_id if body else None)
     except connectors.NotConfigured as error:
         raise HTTPException(409, str(error)) from error
-    store.update("connection", "website_id", website_id, status="connected")
+    except ValueError as error:
+        raise HTTPException(422, str(error)) from error
+    except Exception as error:
+        raise HTTPException(502, f"That account couldn't be read yet. Finish connecting it, then try again. ({type(error).__name__})") from error
+    store.run("UPDATE connection SET status = 'connected' WHERE website_id = ? AND toolkit = ?", website_id, toolkit)
     record = work.current_record(website_id)
     plan = await brain.source_to_ops(record, toolkit, data, today_for(record))
     if not plan.get("ops"):

@@ -1,57 +1,94 @@
 # MuseFront
 
-MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps that website accurate.
+AI agents already shop for people, but they often can't finish the job on a small business's website. Prices are in images, rules are buried, and the agent gives up or guesses.
 
-**Status:** the back office backend is built as a prototype, and it publishes a public resource to a Cloudflare Worker: see [its report](reports/back-office-mvp.md). The owner app runs locally. The first demo, on the fictional Cormorant Mobile Detailing, is [live on Cloudflare](deploy/workers/README.md), and its local results are [here](reports/first-demo-benchmark.md). Real Muse is untested.
+MuseFront fixes that. Give it a website, and it builds a small page that any AI agent can read and act on, works out what's missing, and keeps the page accurate. The owner runs it all from one simple app.
 
-## Run the back office
+## Run it
 
-Start it and leave it running, then open the app at `http://127.0.0.1:8200`. API docs are at `/docs`:
+This takes about 5 minutes. Everything runs on your own computer, and you don't need a Cloudflare account.
 
-```bash
-uv run uvicorn back_office.api:app --port 8200
-```
+### 1. Install what you need
 
-Walk one business through the whole product with a scripted owner. It spends a few cents without the optional flags:
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)**, which runs the Python code and installs its dependencies.
+- **[Node.js](https://nodejs.org)**, version 20 or newer, which runs the public agent page locally.
 
-```bash
-uv run python scripts/mvp_demo.py --url http://cormorant.localhost:8101
-```
-
-Redeploy the public resource after changing `edge/`:
+### 2. Download the code and install
 
 ```bash
-cd edge && npx wrangler deploy
+git clone https://github.com/Jamerrred/Musefront.git
 ```
 
-[The owner app doc](docs/10-owner-app.md) maps each screen to its API calls.
-
-## Quick start for the first demo
-
-You need [uv](https://docs.astral.sh/uv/). Install the dependencies and add your keys:
+```bash
+cd Musefront
+```
 
 ```bash
 uv sync
 ```
 
+The test customers sometimes need a real browser, so install one:
+
+```bash
+uv run --with playwright playwright install chromium
+```
+
+### 3. Add your API keys
+
+Make your settings file:
+
 ```bash
 cp .env.example .env
 ```
 
-Start every local server and leave it running:
+Then open `.env` and fill in these two:
+
+| Key | What it's for | Where to get it |
+|---|---|---|
+| `OPENROUTER_API_KEY` | The AI model behind every agent. About $3 of credit is plenty to try everything | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| `EXA_API_KEY` | Reads websites and runs the test customers' searches | [dashboard.exa.ai](https://dashboard.exa.ai) |
+
+`COMPOSIO_API_KEY` is optional: see [Connect accounts](#optional-connect-accounts). Leave the other values alone, because the next step fills them in.
+
+### 4. Start it
 
 ```bash
-uv run python scripts/serve.py
+uv run python scripts/start.py
 ```
 
-| Address | What it is |
-|---|---|
-| `http://cormorant.localhost:8101` | The site, "before" |
-| `http://cormorant.localhost:8102` | The site, "after", which adds one link line |
-| `http://agents.cormorant.localhost:8103` | The resource |
-| `http://cormorant.localhost:8104` | The control page, a plain page with the same facts |
+The first start takes a minute. It opens the app at **http://127.0.0.1:8200**. Keep that terminal window open while you use it, and press `Ctrl+C` to stop.
 
-Check everything works, with no keys or servers needed:
+## Try it
+
+The sidebar follows the order an owner works in, so go through it from top to bottom.
+
+**1. Websites: connect a website.** Paste an address and press the arrow. You can use your own, or this fictional demo business, which has prices hidden in images and missing rules on purpose:
+
+```text
+https://cormorant-detailing.jamerrred-audiobooks.workers.dev
+```
+
+Leave "Also test it with 5 customer agents" ticked to see the full flow. That takes about 5 minutes and costs about $1.50. Untick it for a quick try, which takes about a minute and costs a few cents.
+
+**2. Resource: confirm the facts.** Check what MuseFront read from the site and press **Confirm all**. Nothing is public until you do. Your page is now live, and **What agents see** shows it exactly as agents read it.
+
+**3. Simulations: fill in what's missing.** Answer the questions. Each answer goes straight onto your page. Then press **Run check** to see how test customers do now.
+
+**4. Resource: change something.** Use the text box at the bottom, and type:
+
+```text
+We're closed for the next 2 days
+```
+
+MuseFront works out the exact dates and asks you to confirm. It ends by itself when the dates pass. You can also click any line or price to edit it, and undo with the version button at the top.
+
+**5. Websites: copy your link.** This is the link a real business would put on its website.
+
+**6. Inbox and Bookings: act like an agent.** Open your link and use its **Ask** and **Request** pages, as an agent would. The question shows up in **Inbox**, and the request shows up in **Bookings**. Answer or accept them, then open the status link to see your reply.
+
+## Test it
+
+These need no keys and cost nothing:
 
 ```bash
 uv run pytest
@@ -61,47 +98,54 @@ uv run pytest
 uv run ruff check .
 ```
 
-Print the benchmark's tables, at no cost:
+To watch the whole product run by itself, with a script playing the business owner, start MuseFront in one terminal and run this in another. It costs a few cents, and it only makes sense with the demo business above:
 
 ```bash
-uv run python -m bench.summarize --name first-demo
+uv run python scripts/mvp_demo.py --url https://cormorant-detailing.jamerrred-audiobooks.workers.dev
 ```
 
-[The build report](reports/first-demo.md) has the commands for running the agent and the benchmark. Those spend OpenRouter credit.
+## Optional: connect accounts
 
-## How it fits together
+MuseFront works without this. To let owners connect accounts such as Google Calendar and Google Sheets through [Composio](https://composio.dev):
 
-For the first demo, `businesses/cormorant/facts.json` is the single source of truth, and the site, hand-written resource and grader all come from it. The back office never reads that file: it builds its own record from the website and the owner's answers.
+1. Get an API key from [composio.dev](https://composio.dev).
+2. Add it to `.env` as `COMPOSIO_API_KEY`.
+3. Restart MuseFront.
+4. Go to **Websites**, press **Connect a resource**, and follow the popup.
 
-| Folder | What's in it |
+MuseFront reads what you connect and proposes changes for you to confirm. This part hasn't been tested with a real key yet.
+
+## If something goes wrong
+
+| What you see | What to do |
 |---|---|
-| `back_office/` | The back office agent and its API: fact sheet, crawl, interview, check, inbox, activity and review |
-| `edge/` | The Cloudflare Worker that serves every business's public resource from its published record |
-| [docs/](docs/README.md) | Decisions, plan and specs. Start with the README there |
-| [reports/](reports/first-demo-benchmark.md) | Benchmark results and the build report |
-| `businesses/` | One facts file per business |
-| `mf_core/` | Reads the facts, works out quotes and open slots, and writes the structured logs |
-| `demo_site/` | The three-page website, in "before" and "after" versions. `holes.json` lists its roadblocks |
-| `demo_resource/` | The hand-written resource, with quote, request and question forms. It's the answer key |
-| `consumer_agent/` | The general stand-in agent. It knows nothing about this project or business |
-| `bench/` | Control page, mock web, queries, grader and benchmark runner |
-| [deploy/workers/](deploy/workers/README.md) | The Cloudflare deployment of the first demo's site and hand-written resource, and their live addresses |
-| `scripts/` | The server launcher, the booking check and the scripted owner |
-| `tests/` | Tests for the facts, site, resource and grader |
-| `corpus/` | Saved page copies for the agent's local search |
-| [runs/](runs/README.md) | Raw run logs and graded results |
-| `research_notes/` | Raw research behind the docs |
+| `Add OPENROUTER_API_KEY...` when starting | Fill in your keys in `.env`, then start again |
+| `Is another program using that port?` | Close the other program, or use another port: `MF_PORT=8300 uv run python scripts/start.py` |
+| The website shows "couldn't be read" | Check your Exa key, or try another address. Sites that block automated visitors can fail |
+| A test customer says "Agent crashed" | The AI provider returned an error. It doesn't count against the business, so run the check again |
+| You want to start over | Stop MuseFront and delete `back_office/musefront.db` |
 
-## Rules that protect the results
+## How it works
 
-- **`consumer_agent/` is frozen** at the tag `first-demo-agent-freeze`, so any remaining runs use the same agent. If you change it, rerun the benchmark and move the tag.
-- **"Before" and "after" differ only by the link line.** A test enforces this.
-- **Keep the query writer and the resource author separate.** Neither sees the other's work, and the query writer doesn't see the site.
+| Part | What it does | Where |
+|---|---|---|
+| Owner app | The five screens | `back_office/web/` |
+| Back office agent | Reads the site, builds the fact sheet, asks the owner, runs checks and reviews what agents did | `back_office/` |
+| Public resource | The page, quote and booking forms that agents use. It's built from the fact sheet and needs no AI to serve | `edge/` |
+| Test customers | A general-purpose AI agent that acts like a customer's assistant | `consumer_agent/` |
 
-## How we work
+The agent changes the fact sheet and never the page, so every part of the page stays consistent. Only facts the owner has confirmed are ever public, and nothing an outside agent says can change them.
 
-Work happens in small commits on a short-lived branch, then a pull request merged into `main` with a merge commit. See [CLAUDE.md](CLAUDE.md).
+**Good to know:**
 
-## Keep this repo private
+- The app has no login, so keep it on your own computer.
+- Agent pages run on your computer too, so real outside agents can't reach them. To put them online, deploy `edge/` to Cloudflare with `npx wrangler deploy`, then set `MF_EDGE_URL` and the Worker's `ADMIN_TOKEN` secret.
+- The businesses in the demo are fictional.
 
-[The Muse transcript](docs/reference/muse-transcript.md) names real businesses and makes claims about their prices and ratings. Replace those names before making it public.
+[docs/](docs/README.md) has the full decisions and research, and [reports/](reports/back-office-mvp.md) has the build notes and test results.
+
+## For contributors
+
+- **`consumer_agent/` is frozen** at the tag `first-demo-agent-freeze`, so test results stay comparable. If you change it, rerun the benchmark and move the tag.
+- **Work** happens on short-lived branches, merged by pull request with a merge commit. See [CLAUDE.md](CLAUDE.md).
+- **`docs/reference/muse-transcript.md`** names real businesses, so replace those names before making this repo public.

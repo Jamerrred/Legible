@@ -212,14 +212,57 @@ async def run_simulation(website_id: str, target: str = "storefront", n: int = 5
         "average_seconds": round(sum(r["result"].get("wall_s") or 0 for r in runs) / max(len(runs), 1), 1),
     }
     store.update("simulation", "id", simulation_id, status="done", summary=summary, finished_at=store.now())
-    if target == "storefront":
-        failures = [
-            {"customer_request": r["query"], "agent_answer": (r["result"].get("answer") or "")[:1500], "outcome": r["result"].get("outcome")}
-            for r in runs
-            if not r["settled"] and not _agent_broke(r["result"])
-        ]
-        add_questions(website_id, await brain.holes_to_questions(record, failures, asked_titles(website_id)), "simulation")
+    failures = [
+        {"customer_request": r["query"], "agent_answer": (r["result"].get("answer") or "")[:1500], "outcome": r["result"].get("outcome")}
+        for r in runs
+        if not r["settled"] and not _agent_broke(r["result"])
+    ]
+    added = add_questions(website_id, await brain.holes_to_questions(record, failures, asked_titles(website_id)), "simulation")
+    if added and target == "resource":
+        await publish(website_id)
     return simulation_id
+
+
+def sim_trace(simulation_id: str) -> list[dict]:
+    """What each test customer is doing right now, read from the agents' live run logs."""
+    base = RUNS / simulation_id
+    agents = []
+    if not base.exists():
+        return agents
+    for folder in sorted(base.iterdir()):
+        logs = sorted(folder.glob("run-*.jsonl")) if folder.is_dir() else []
+        if not logs:
+            continue
+        task, steps, done, outcome = "", [], False, None
+        for line in logs[-1].read_text(errors="ignore").splitlines():
+            try:
+                event = json.loads(line)
+            except ValueError:
+                continue
+            kind = event.get("event") or event.get("type")
+            if kind == "run_start":
+                task = event.get("task", "")
+            elif kind == "turn_end" and event.get("text"):
+                steps.append(event["text"][:160])
+            elif kind == "tool_call":
+                args = event.get("args") or {}
+                tool = event.get("tool")
+                if tool == "read_page":
+                    url = str(args.get("url", ""))
+                    path = "/" + url.split("//")[-1].partition("/")[2]
+                    steps.append(f"Working out a quote: {path[:80]}" if "/quote?" in url else f"Reading {path[:80]}")
+                elif tool == "search_web":
+                    steps.append(f"Searching: {(args.get('queries') or [''])[0][:80]}")
+                elif tool == "browse_task":
+                    steps.append(f"Opening a browser: {str(args.get('objective', ''))[:80]}")
+                elif tool == "do_math":
+                    steps.append("Doing the math")
+                elif tool == "finish":
+                    steps.append("Writing the answer")
+            elif kind == "run_end":
+                done, outcome = True, (event.get("report") or {}).get("outcome")
+        agents.append({"query": task, "steps": steps[-5:], "total": len(steps), "done": done, "outcome": outcome})
+    return agents
 
 
 # ---------------------------------------------------------------- activity and the periodic review

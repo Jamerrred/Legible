@@ -9,7 +9,7 @@ import httpx
 from consumer_agent.llm import load_env
 
 load_env()
-EDGE_URL = os.environ.get("MF_EDGE_URL", "https://musefront.jamerrred-audiobooks.workers.dev").rstrip("/")
+EDGE_URL = os.environ.get("MF_EDGE_URL", "http://127.0.0.1:8787").rstrip("/")
 
 
 def _headers() -> dict:

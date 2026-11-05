@@ -109,6 +109,8 @@ details.run > summary:hover .request { color: var(--ink); }
 /* Resource */
 .res-wrap { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; }
 .res-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px 14px 32px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.res-bar > .row-flex:last-child { flex-wrap: wrap; }
+.seg button { white-space: nowrap; }
 .seg { display: flex; gap: 2px; padding: 3px; border-radius: 9px; background: var(--rail); }
 .seg button { border: 1px solid transparent; background: none; padding: 5px 11px; border-radius: 7px; font-size: 12.5px; color: var(--ink-2); cursor: pointer; }
 .seg button.on { background: var(--card); border-color: var(--line); color: var(--ink); font-weight: 500; }
@@ -155,6 +157,34 @@ table.prices td:first-child { text-align: left; padding-left: 0; }
 .toast { position: fixed; left: 50%; bottom: 96px; transform: translate(-50%, 10px); padding: 9px 14px; display: flex; gap: 12px; align-items: center; background: var(--ink); color: var(--bg); border-radius: 10px; font-size: 13px; opacity: 0; pointer-events: none; transition: opacity .16s, transform .16s; max-width: min(560px, 90vw); z-index: 20; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
 .toast button { border: 0; background: none; color: var(--bg); font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; }
+
+/* Live progress */
+.ring { display: inline-block; flex: none; width: 16px; height: 16px; border: 2px solid var(--line-strong); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+.ring.big { width: 30px; height: 30px; border-width: 3px; }
+.shimmer { background: linear-gradient(90deg, var(--ink-3) 30%, var(--ink) 50%, var(--ink-3) 70%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 1.7s linear infinite; }
+@keyframes shimmer { from { background-position: 120% 0; } to { background-position: -120% 0; } }
+.agents { display: flex; flex-direction: column; gap: 14px; margin-top: 22px; }
+.agent { padding: 14px 16px; border: 1px solid var(--line); border-radius: 13px; background: var(--card); }
+.agent-head { display: flex; align-items: flex-start; gap: 10px; font: 400 16px/1.3 var(--voice); }
+.agent-head .ring, .agent-head svg { margin-top: 3px; }
+.trace-lines { margin: 9px 0 0 26px; display: flex; flex-direction: column; gap: 3px; font: 400 12px/1.5 var(--mono); color: var(--ink-3); }
+.trace-line { overflow-wrap: anywhere; }
+.trace-line.fresh { animation: rise .22s ease-out; }
+.page-line { font: 400 12px/1.6 var(--mono); color: var(--ink-3); padding-left: 30px; animation: rise .2s ease-out; }
+
+/* Connect popup */
+.modal-back { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 16px; background: #1b1a1733; backdrop-filter: blur(4px); animation: fade-in .18s ease-out; }
+.modal { width: min(480px, 100%); max-height: 90vh; overflow-y: auto; padding: 26px; background: var(--card); border-radius: 18px; box-shadow: 0 24px 70px #1b1a1730; animation: pop .24s cubic-bezier(.2, .9, .3, 1.15); }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.97); } to { opacity: 1; transform: none; } }
+.modal-row { display: flex; flex-direction: column; gap: 10px; padding: 14px 0; border-top: 1px solid var(--line); animation: rise .2s ease-out backwards; }
+.modal-row:nth-child(2) { animation-delay: .05s; }
+.modal-row .top { display: flex; align-items: center; gap: 14px; }
+.modal-note { padding: 12px 14px; margin: 14px 0; border-radius: 12px; background: var(--rail); font-size: 13px; color: var(--ink-2); }
+.modal-note code { font: 400 12px var(--mono); }
+.done-check { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: #e7f3ec; color: var(--ok); animation: pop .3s cubic-bezier(.2, .9, .3, 1.4); }
+.modal input.sheet { width: 100%; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 9px; outline: 0; }
+.err-text { color: var(--accent); font-size: 12.5px; }
 
 /* Phones: the rail moves to the bottom, and lists stack above their detail. */
 @media (max-width: 760px) {
