@@ -83,7 +83,7 @@ function addonLine(rec, a, base) {
 }
 
 function feeLine(rec, f) {
-  const amount = f.percent ? `${f.percent}%` : money(rec, f.amount);
+  const amount = f.percent ? `${f.percent}%` : f.amount === null || f.amount === undefined ? "amount varies" : money(rec, f.amount);
   const when = String(f.applies_when || "").replace(/\.+$/, "");
   return `${f.label}: ${amount}.${when ? ` Applies: ${when}.` : ""}` + confirmed(f);
 }
@@ -278,7 +278,8 @@ function evaluate(rec, job, day) {
       const low = items.reduce((s, i) => s + i.low, 0) * (Number(fee.percent) / 100);
       const high = items.reduce((s, i) => s + i.high, 0) * (Number(fee.percent) / 100);
       push(fee.label, { low, high }, fee.taxable !== false);
-    } else push(fee.label, { low: Number(fee.amount), high: Number(fee.amount) }, fee.taxable !== false);
+    } else if (fee.amount === null || fee.amount === undefined) r.notes.push(`${fee.label} applies, but its amount varies.`);
+    else push(fee.label, { low: Number(fee.amount), high: Number(fee.amount) }, fee.taxable !== false);
   };
   for (const text of job.conditions) {
     const fee = matchIn(fees, text);
