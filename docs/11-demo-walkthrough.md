@@ -92,17 +92,17 @@ Pause after each action. The numbers and traces animate, and they're the most pe
 
 **On screen:** the counts climbing as agents arrive.
 
-**Say:** "Now agents are coming. The owner can see what they read and what they quoted, and where they hit a dead end. Three asked for ceramic coating, which Sunrise doesn't offer, and that's demand this owner could never see before."
+**Say:** "This is a sample week of agents using the page. The owner can see what they read and what they quoted, and where they hit a dead end. Three asked for ceramic coating, which Sunrise doesn't offer, and that's demand this owner could never see before."
 
 ### 7. Business comes in (25 seconds)
 
-**Do:** press **Reply to 1 booking request** in the Next card.
+**Do:** press **Reply to 2 booking requests** in the Next card.
 
 **On screen:** the request with its bill, $297.63.
 
 **Say:** "An agent has sent a booking for its customer, with the price the page worked out, tax and Saturday fee included. One click to accept, and the agent sees the reply."
 
-**Do:** press **Accept booking**, then **Answer 1 agent question** in the Next card.
+**Do:** press **Accept booking**. The list also shows the muddy F-250 from the test customers, already accepted at $628.76, and a request where the owner suggested another time. Then press **Answer 2 agent questions** in the Next card.
 
 **Say:** "Another agent asked something the page didn't cover. The owner answers once, and it goes on the page for every agent after that."
 
@@ -131,6 +131,7 @@ Pause after each action. The numbers and traces animate, and they're the most pe
 |---|---|
 | Reading the site, fact sheet, questions, test customers | Scripted, with no AI calls |
 | Placing the link | Scripted: the demo site never really carries it |
-| Agents arriving | Sample visits, sent as real requests to the real public page |
+| Agents arriving | Invented customers, sent as real requests to the real public page, and dated across the last 4 days. Opening Inbox or Bookings starts them if you skip the link step |
+| Booking replies already there | 2 of the 4 sample bookings arrive already answered, using the same real reply |
 | Publishing, the public page, quotes, bills, booking replies | Real, and the numbers are worked out live |
 | Plain-words changes | A simple scripted reader. The real app uses the model |
