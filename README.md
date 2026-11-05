@@ -104,6 +104,16 @@ To watch the whole product run by itself, with a script playing the business own
 uv run python scripts/mvp_demo.py --url https://cormorant-detailing.jamerrred-audiobooks.workers.dev
 ```
 
+## Record a demo
+
+A private demo copy plays the whole flow back in about a minute, with no AI credit. Crawling, questions and test customers are scripted from a real crawl and the demo business's facts. Publishing is real, so the public page and its quote, request and ask forms work. It needs a Cloudflare Worker to publish to, so set `MF_EDGE_URL` and `MF_ADMIN_TOKEN` first, or run `scripts/start.py` alongside it.
+
+```bash
+MF_DEMO=1 MF_DB_PATH=back_office/demo.db uv run uvicorn back_office.api:app --port 8300
+```
+
+Open `http://127.0.0.1:8300`. To start a new take, open `http://127.0.0.1:8300/demo/reset`. If you show this to others, say it's sped up with sample data.
+
 ## Optional: connect accounts
 
 MuseFront works without this. To let owners connect accounts such as Google Calendar and Google Sheets through [Composio](https://composio.dev):
