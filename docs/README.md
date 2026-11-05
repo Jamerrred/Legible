@@ -8,7 +8,7 @@ Legible gives a service business a small website that any AI agent can read and 
 
 **Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the Legible app backend with a public resource on Cloudflare ([report](../reports/legible-mvp.md)).
 
-**Next steps:** the [owner app](10-owner-app.md) is built and runs locally, so next come connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
+**Next steps:** the [owner app](10-owner-app.md) is built and runs locally, with a separate scripted copy for the [demo video](11-demo-walkthrough.md), so next come connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
 
 **Skipped on the founder's direction, 5 November:** the 5 missing "before" runs and the other three mock businesses, which wait until the founder asks for them. Whether real agents follow the link is still untested.
 
@@ -26,6 +26,7 @@ Legible gives a service business a small website that any AI agent can read and 
 | [08 Consumer agent design](08-consumer-agent-design.md) | What we'd build as our stand-in agent, including draft instructions |
 | [09 Legible agent](09-legible-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
 | [10 Owner app](10-owner-app.md) | The five screens, how they map to the API, and who can change what |
+| [11 Demo walkthrough](11-demo-walkthrough.md) | The step-by-step story for a demo video, with what to say and what's scripted |
 
 Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names real businesses, so don't publish it as is.
 
