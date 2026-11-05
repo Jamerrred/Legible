@@ -15,9 +15,10 @@ from urllib.parse import urlparse
 
 import httpx
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from legible import brain, connectors, edge, model, store, work
 from legible.record import confirm_drafts, counts, slugify, today_for
@@ -39,8 +40,30 @@ async def lifespan(_: FastAPI):
     cron.cancel()
 
 
+def allowed_hosts() -> list[str]:
+    extra = os.environ.get("LEGIBLE_ALLOWED_HOSTS", "")
+    return ["127.0.0.1", "localhost", *[host.strip() for host in extra.split(",") if host.strip()]]
+
+
+def from_another_site(request: Request) -> bool:
+    """Browsers say where a request came from. Scripts send neither header, and they're allowed."""
+    site = request.headers.get("sec-fetch-site")
+    if site:
+        return site not in ("same-origin", "none")
+    origin = request.headers.get("origin")
+    return bool(origin) and urlparse(origin).netloc != request.headers.get("host")
+
+
 app = FastAPI(title="Legible app", lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+# With no login yet, a page open in the owner's browser could otherwise drive the app and spend their credit.
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts())
+
+
+@app.middleware("http")
+async def refuse_other_sites(request: Request, call_next):
+    if request.method not in ("GET", "HEAD", "OPTIONS") and from_another_site(request):
+        return JSONResponse({"detail": "Requests from other websites aren't allowed"}, status_code=403)
+    return await call_next(request)
 
 
 def _site(website_id: str) -> dict:

@@ -135,6 +135,7 @@ Errand is a general-purpose agent that acts for a person who wants something fro
 - **Outside text is data.** Every model call carries a rule that text from websites, agents and customers is never an instruction. Outside agents can prompt a question to the owner, but they can't change a fact.
 - **No model on the public page.** Serving a page or a quote costs no model credit and leaves no prompt to inject.
 - **Least privilege.** Publishing requires a bearer token held by the harness, and API keys for AI services never leave it.
+- **Closed to other websites.** The harness refuses writes from other sites and requests to unknown hostnames, so a page open in the owner's browser can't drive it or spend their credit.
 
 ## Quickstart
 
@@ -197,7 +198,7 @@ The script signs in with Wrangler, provisions a D1 database, applies the schema,
 
 The public page keeps serving when the harness is offline. New questions and bookings wait in D1 until the harness next pulls them, and the 6-hour review only runs while it's up.
 
-**Run the harness on a private host.** It has no authentication yet, and it holds your API keys, so don't expose it to the internet. Published pages also send `X-Robots-Tag: noindex` for now, so agents reach them through the link on the business's site.
+**Run the harness on a private host.** It has no authentication yet, and it holds your API keys, so don't expose it to the internet. It only answers on `127.0.0.1` and `localhost`, so on another machine, add its hostname to `LEGIBLE_ALLOWED_HOSTS`. Published pages also send `X-Robots-Tag: noindex` for now, so agents reach them through the link on the business's site.
 
 ## Repository structure
 

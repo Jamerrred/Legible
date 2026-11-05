@@ -60,7 +60,8 @@ def app_state(tmp_path, monkeypatch):
     question = store.add_inbox(
         website_id, "question", "What are your hours?", "", {"unknown_statement": "Hours aren't stated."}, "simulation"
     )
-    return {"client": TestClient(api.app), "id": website_id, "review": review, "question": question, "published": published}
+    client = TestClient(api.app, base_url="http://127.0.0.1:8200")
+    return {"client": client, "id": website_id, "review": review, "question": question, "published": published}
 
 
 def test_answering_a_question_stays_private_until_the_first_confirmation(app_state):
