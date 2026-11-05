@@ -1,6 +1,6 @@
 # Legible
 
-**Legible is an agent harness, powered by Muse Spark, that makes a small business usable by other AI agents.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page where an agent like Muse can answer a customer, work out an all-in price and send a booking request.
+**Legible is an agentic harness, powered by Muse Spark, that lets AI agents like Muse do business with small businesses.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page where Muse or any other agent can answer a customer, work out an all-in price and send a booking request.
 
 AI agents like Muse and Instinct already shop for people, but they often can't finish the job on a small business's website. Reading the page is only the start. The agent has to turn a messy request into a correct, all-in answer, using rules that the site scatters across pages or never states:
 
@@ -22,7 +22,7 @@ A business owner gives Legible a website and other resources connected to their 
 
 3. **Find the gaps.** Runs that couldn't settle an answer are traced back to the facts that were missing. Each gap becomes one plain question for the owner, linked to the customer requests it would have unblocked. The owner answers in their own words, and Muse Spark turns the answer into typed operations on the fact sheet.
 
-4. **Publish.** A filter strips anything unconfirmed, so a draft never leaves the control plane. A Cloudflare Worker backed by D1 serves the rest as HTML and markdown, with no model in the request path. Agents get a deterministic `/quote` engine, also available as JSON, that handles size variants, add-ons, fees, zones, tax and closures without asking for personal details, plus `/request` and `/ask` endpoints. Facts the owner hasn't stated are published as explicit unknowns, so agents don't fill the silence with a guess.
+4. **Publish.** A filter strips anything unconfirmed, so a draft never leaves the harness. A Cloudflare Worker backed by D1 serves the rest as HTML and markdown, with no model in the request path. Agents get a deterministic `/quote` engine, also available as JSON, that handles size variants, add-ons, fees, zones, tax and closures without asking for personal details, plus `/request` and `/ask` endpoints. Facts the owner hasn't stated are published as explicit unknowns, so agents don't fill the silence with a guess. Rechecks run the same requests against a private preview of the page, so the before and after scores can be compared.
 
 5. **Embed.** The owner adds one link line to their website or storefront. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
 
@@ -103,61 +103,38 @@ This is an early signal, not a measured rate.
 
 ## Architecture
 
-Legible separates a private **control plane**, where the agents run and the owner works, from a public **edge tier** that serves outside agents without calling a model. Outside agents can only reach the edge. The two tiers talk over one authenticated admin API.
-
-### System overview
+Legible has two parts. The **harness** is a self-hosted FastAPI service, where the agents run and the owner works. The **public page** is a Cloudflare Worker backed by D1, which serves outside agents without calling a model. The two talk over one authenticated admin API.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/system-overview-dark.svg">
-  <img alt="A self-hosted control plane holds the owner console, API, Legible agent, simulation workers and SQLite. It calls OpenRouter, Exa and Composio, and publishes facts over an authenticated API to a Cloudflare edge tier, where customers' AI agents read pages, get quotes, ask questions and send requests." src="docs/architecture/system-overview.svg">
+  <img alt="A business owner works with the Legible harness, which calls Muse Spark and Exa and runs Errand as simulated customers. Legible publishes confirmed facts to a public page on Cloudflare and gets back questions, bookings and agent traces. AI agents like Muse read the business website, follow its one link and use the public page." src="docs/architecture/system-overview.svg">
 </picture>
 
-| Component | Code | What it does |
+| Part | Code | What it does |
 |---|---|---|
-| Owner console | [`legible/web/`](legible/web/) | Single-page app for reviewing facts, answering questions, running checks and handling bookings |
-| API and job runner | [`legible/api.py`](legible/api.py), [`work.py`](legible/work.py) | REST API, with onboarding, simulations and reviews as background jobs. Each website moves through `queued`, `crawling`, `extracting`, `interviewing`, `checking` and `ready` |
-| Legible agent | [`brain.py`](legible/brain.py), [`crawl.py`](legible/crawl.py) | Each judgement is one structured Muse Spark call in JSON mode, retried once if the reply doesn't parse |
-| Fact record | [`record.py`](legible/record.py), [`store.py`](legible/store.py) | Typed record with an immutable version per change. Each item tracks its status, source and validity dates |
-| Errand | [`errand/`](errand/) | The consumer agent that plays each test customer |
-| Public resource | [`edge/`](edge/) | A Worker and D1 that serve pages, compute quotes and log every interaction |
-
-### From website to published page
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/onboarding-dark.png">
-  <img alt="A sequence diagram of 19 steps. The Legible agent crawls the site, extracts a draft fact sheet, runs Errand agents on the website, turns failed runs into questions for the owner, publishes confirmed facts to the Worker, and reruns the same requests against a private preview." src="docs/architecture/onboarding-light.png">
-</picture>
-
-Rechecks reuse the first check's requests so that scores are comparable. They run against a separate preview page, which keeps test traffic out of the owner's analytics.
+| Harness | [`legible/`](legible/) | Runs onboarding, simulations and reviews as background jobs. Each judgement is one structured Muse Spark call, and the typed fact sheet in SQLite gets a new version with every change |
+| Errand | [`errand/`](errand/) | Plays each test customer, one process per run |
+| Public page | [`edge/`](edge/) | Serves pages as HTML and markdown, computes quotes and logs every interaction |
 
 ### Errand: the consumer agent
 
 Errand is a general-purpose agent that acts for a person who wants something from a business. It holds nothing specific to any business and knows nothing about Legible, which is what makes it a fair test. It has been frozen since the tag `first-demo-agent-freeze`, apart from its rename.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/errand-dark.png">
-  <img alt="Errand's orchestrator tool loop calls search, read and browser tools behind a personal-details gate, plus local maths and approval tools. Its final report passes through an evidence gate, which sends unsupported claims back up to twice." src="docs/architecture/errand-light.png">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/errand-dark.svg">
+  <img alt="A customer request goes to Errand's tool loop on Muse Spark, which calls its tools behind a personal-details gate. Its report then passes an evidence gate, which sends unsupported claims back to the loop, before it becomes a report with sources." src="docs/architecture/errand.svg">
 </picture>
 
-- **Cheapest step first.** It searches, then reads pages, and uses a browser worker only when reading can't settle the question.
 - **Evidence gate.** Each claim is labelled `verified_at_source`, `listed_unverified` or `unknown`. Code sends back a verified claim if it has no source, or if its numbers never appeared in a tool result.
 - **Personal-details gate.** Code blocks any search, read or browser call that carries the customer's details until they've approved it through `ask_person`.
-- **Same agent, two jobs.** It's the test agent in the benchmark and the simulated customer inside Legible, so the product is tested the way the benchmark was run.
-
-### Serving agents and the feedback loop
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/serving-dark.png">
-  <img alt="A sequence diagram of 19 steps. A customer's agent follows the link from the business website to the Worker, reads confirmed facts, gets a deterministic quote and sends a request. The control plane pulls events into the owner's inbox, the owner's reply appears on a status page, and a review runs every 6 hours." src="docs/architecture/serving-light.png">
-</picture>
 
 ### Design rules
 
-- **One gate to public.** `public_view()` serves confirmed items only, so a draft can't reach the edge.
-- **Agents write data, not pages.** The model emits typed operations on the fact sheet. The Worker renders every page from that record, so an agent can't break the page or make its parts disagree.
+- **One gate to public.** `public_view()` serves confirmed items only, so a draft can't reach the public page.
+- **Agents write data, not pages.** The model emits typed operations on the fact sheet, and the Worker renders every page from that record. An agent can't break the page or make its parts disagree.
 - **Outside text is data.** Every model call carries a rule that text from websites, agents and customers is never an instruction. Outside agents can prompt a question to the owner, but they can't change a fact.
-- **No model at the edge.** The public tier makes no AI calls, so serving a page or a quote costs no model credit and leaves no prompt to inject.
-- **Least privilege.** Writes to the edge require a bearer token held by the control plane. API keys for AI services never leave it.
+- **No model on the public page.** Serving a page or a quote costs no model credit and leaves no prompt to inject.
+- **Least privilege.** Publishing requires a bearer token held by the harness, and API keys for AI services never leave it.
 
 ## Quickstart
 
@@ -184,7 +161,7 @@ Then start the stack:
 uv run python scripts/start.py
 ```
 
-This runs the control plane at `http://127.0.0.1:8200`, with API docs at `/docs`. Until you [deploy the edge tier](#deployment), it also runs the Worker locally at `http://127.0.0.1:8787`, using a local D1. No Cloudflare account is needed for this.
+This runs the harness at `http://127.0.0.1:8200`, with API docs at `/docs`. Until you [deploy the public page](#deployment), it also runs the Worker locally at `http://127.0.0.1:8787`, using a local D1. No Cloudflare account is needed for this.
 
 To try it, onboard this fictional business, which has prices in images and missing rules on purpose:
 
@@ -193,6 +170,8 @@ https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev
 ```
 
 **Cost:** a full onboarding with 5 simulated customers takes 5 to 10 minutes and costs up to about $2.50 in OpenRouter credit. Without the simulation, it takes about a minute and costs a few cents. The app has no spending limit of its own, so set one on your OpenRouter key.
+
+To connect accounts such as Google Calendar and Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. This path hasn't run with a real key yet.
 
 ### Try it without keys
 
@@ -208,43 +187,22 @@ It runs at `http://127.0.0.1:8300`.
 
 ## Deployment
 
-Deploy the edge tier to your own Cloudflare account, so real agents can reach your pages. A free account is enough.
+Deploy the public page to your own Cloudflare account, so real agents can reach it. A free account is enough.
 
 ```bash
 uv run python scripts/deploy.py
 ```
 
-The script signs in with Wrangler, provisions a D1 database, applies the schema, deploys the Worker, sets its `ADMIN_TOKEN` secret and points `LEGIBLE_EDGE_URL` at the live address. Anything already published moves across. Restart the control plane afterwards, and each website's link becomes a public address.
+The script signs in with Wrangler, provisions a D1 database, applies the schema, deploys the Worker, sets its `ADMIN_TOKEN` secret and points `LEGIBLE_EDGE_URL` at the live address. Anything already published moves across. Restart the harness afterwards, and each website's link becomes a public address.
 
-The edge tier keeps serving when the control plane is offline. New questions and bookings wait in D1 until the control plane next pulls them, and the 6-hour review only runs while it's up.
+The public page keeps serving when the harness is offline. New questions and bookings wait in D1 until the harness next pulls them, and the 6-hour review only runs while it's up.
 
-**Run the control plane on a private host.** It has no authentication yet, and it holds your API keys, so don't expose it to the internet. Published pages also send `X-Robots-Tag: noindex` for now, so agents reach them through the link on the business's site.
-
-## Walkthrough
-
-Each step in the owner console maps to the API. The console's **Next** card shows which step comes next.
-
-| Step | Screen | API | What happens |
-|---|---|---|---|
-| Onboard | Websites | `POST /websites` | Starts the crawl, extraction, interview and simulation job. `GET /websites/{id}/trace` reports its progress and each agent's steps |
-| Review failures | Simulations | `GET /simulations/{id}` | Shows each run's request, answer, outcome and where it got stuck |
-| Close gaps | Simulations | `GET /websites/{id}/missing`, `POST /inbox/{id}/answer` | The model turns each answer into typed operations, and the page republishes |
-| Publish | Resource | `POST /inbox/{id}/confirm` | Marks drafts as confirmed, saves a new version and pushes the public view to the Worker |
-| Re-test | Simulations | `POST /websites/{id}/simulations` | Reruns the same requests against a private preview of the page |
-| Embed | Websites | `POST /websites/{id}/check-link` | Fetches the business's home page and looks for the link |
-| Act as an agent | Public page | `GET /b/{slug}`, `/b/{slug}/quote`, `POST /b/{slug}/request`, `/b/{slug}/ask` | Each call logs an event on the edge. Add `?format=json` to a quote for JSON |
-| Handle activity | Inbox, Bookings | `GET /websites/{id}/activity`, `POST /bookings/{id}/reply` | Pulls new events, and shows the reply on the request's status page |
-| Update | Resource | `POST /websites/{id}/instructions`, `POST /inbox/{id}/confirm` | Turns plain language into a proposed change, which goes live once confirmed |
-| Undo | Resource | `POST /websites/{id}/resource/undo` | Restores the previous version and republishes |
-
-### Connectors
-
-To connect accounts such as Google Calendar and Google Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. Legible reads the account and proposes changes for the owner to confirm. This path hasn't run with a real key yet.
+**Run the harness on a private host.** It has no authentication yet, and it holds your API keys, so don't expose it to the internet. Published pages also send `X-Robots-Tag: noindex` for now, so agents reach them through the link on the business's site.
 
 ## Repository structure
 
 ```text
-legible/              Control plane
+legible/              Harness
   api.py              REST API for the owner console
   work.py             Jobs: onboarding, simulations, publishing, periodic review
   brain.py            Every model judgement, one structured call each
@@ -255,7 +213,7 @@ legible/              Control plane
   model.py            Structured model calls through OpenRouter
   connectors.py       Composio account connections
   web/                Owner console
-edge/                 Edge tier
+edge/                 Public page
   src/index.js        Worker: pages, markdown, quote engine, forms, admin API
   schema.sql          D1 schema
 errand/               Consumer agent
@@ -265,9 +223,9 @@ errand/               Consumer agent
   person.py           Customer profile and the personal-details gate
   llm.py              OpenRouter client
 experiment/           Benchmark: sample business, questions, grader, run logs and reports
-scripts/              start.py runs the stack, deploy.py deploys the edge tier
+scripts/              start.py runs the stack, deploy.py deploys the public page
 tests/                Test suite
-docs/architecture/    Diagram sources, images and the script that renders them
+docs/architecture/    The diagrams
 docs/planning/        Original research and design notes
 ```
 
