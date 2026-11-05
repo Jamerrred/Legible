@@ -122,8 +122,9 @@ async def holes_to_questions(record: dict, failures: list[dict], already: list[s
         "A simulated customer agent tried real requests on a business's website and couldn't settle them. Work out which missing facts stopped it, and turn each into one short "
         "question for the owner. Ask only about facts missing from the fact sheet. Don't repeat anything already asked. "
         'Reply as {"questions": [{"topic": "", "question": "", "why": "what the agent couldn\'t do, quoting the customer\'s situation briefly", '
-        '"unknown_statement": "one sentence for the public page, naming the business, saying the owner hasn\'t stated this"}]}.',
-        f"Already asked: {json.dumps(already)}\n\nFAILED RUNS\n{json.dumps(failures, ensure_ascii=False)[:40_000]}\n\nFACT SHEET\n{_compact(record)}",
+        '"unknown_statement": "one sentence for the public page, naming the business, saying the owner hasn\'t stated this", '
+        '"blocks": "a list of the zero-based numbers of the failed runs this fact would have unblocked"}]}.',
+        f"Already asked: {json.dumps(already)}\n\nFAILED RUNS, IN ORDER\n{json.dumps(failures, ensure_ascii=False)[:40_000]}\n\nFACT SHEET\n{_compact(record)}",
         max_tokens=6000,
     )
     return result.get("questions", [])
