@@ -136,13 +136,14 @@ def _site_view(site: dict) -> dict:
         "stage": site["stage"],
         "stage_note": site["stage_note"],
         "live": bool(site["published_version"]),
+        "link_placed": bool(site["link_placed"]),
         "link": link,
         "link_line": line,
         "link_line_html": f'<p>Prices, availability and booking requests for {name}: <a href="{link}">{link}</a></p>',
         "facts": facts,
         "checks": checks,
         "next": _next_step(site, needs, checks, facts),
-        "page_reads": store.one("SELECT COUNT(*) AS n FROM event WHERE website_id = ? AND event = 'page_hit'", site["id"])["n"],
+        "page_reads": sum(e["payload"].get("path") not in ACTION_PATHS for e in store.query("SELECT payload FROM event WHERE website_id = ? AND event = 'page_hit'", site["id"])),
         "open_inbox": store.one("SELECT COUNT(*) AS n FROM inbox_item WHERE website_id = ? AND status = 'open'", site["id"])["n"],
         "needs": needs,
         "connections": store.query("SELECT toolkit, status FROM connection WHERE website_id = ?", site["id"]),
@@ -247,7 +248,7 @@ async def check_link(website_id: str):
         async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
             response = await client.get(site["url"])
         found = link in response.text
-    if found and not site["link_placed"]:
+    if found and not site["link_placed"] and site["published_version"]:
         store.update("website", "id", website_id, link_placed=1)
         if demo.ENABLED:
             _background(demo.seed_activity(website_id))
@@ -397,6 +398,9 @@ async def reply(item_id: str, body: Reply):
 # ---------------------------------------------------------------- activity
 
 
+ACTION_PATHS = ("/quote", "/request", "/ask")
+
+
 def _agent_label(payload: dict) -> str:
     user_agent = (payload.get("user_agent") or "").lower()
     for term, label in (
@@ -426,6 +430,8 @@ async def activity(website_id: str, limit: int = 50):
     events = [e for e in events if not (e.get("user_agent") or "").startswith("legible")]  # The app's own preview reads.
     # A quote that ended in a dead end gave the agent no price, so it only counts as the dead end.
     events = [e for e in events if e["event"] != "quote" or e.get("status") in ("ok", "needs_info")]
+    # A quote, request or question already has its own event, so it doesn't also count as reading the page.
+    events = [e for e in events if e["event"] != "page_hit" or e.get("path") not in ACTION_PATHS]
     kinds = Counter(e["event"] for e in events)
     feed = []
     for event in events[:limit]:

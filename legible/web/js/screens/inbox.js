@@ -1,5 +1,5 @@
 // Inbox: only what agents did and asked. A funnel, their questions, a feed and unmet demand.
-import { actions, api, app, esc, forms, icon, money, post, roll, screens, startPoll, state, titled, toast, when, words } from "../core.js";
+import { actions, api, app, demoAgentsArrive, esc, forms, icon, money, post, roll, screens, startPoll, state, titled, toast, when, words } from "../core.js";
 
 function feedLine(event) {
   const job = event.inputs || {};
@@ -29,6 +29,7 @@ function agentQuestion(q) {
 
 screens.inbox = {
   async load() {
+    await demoAgentsArrive();
     const id = state.site.id;
     const [activity, items] = await Promise.all([api(`/websites/${id}/activity`), api(`/websites/${id}/inbox?kinds=agent_question`)]);
     return { activity, items };
