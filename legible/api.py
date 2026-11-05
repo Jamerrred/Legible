@@ -160,6 +160,9 @@ class NewWebsite(BaseModel):
 
 @app.post("/websites", status_code=202)
 async def add_website(body: NewWebsite):
+    if demo.ENABLED:
+        # A demo take has one business. Its script and sample visits all use the one public address.
+        await demo.reset()
     host = urlparse(body.url).hostname or body.url
     base = demo.SLUG if demo.ENABLED else slugify(body.name or host.removeprefix("www.").split(".")[0])
     slug, n = base, 2
@@ -295,7 +298,7 @@ async def instruct(website_id: str, body: Instruction):
     record = work.current_record(website_id)
     if demo.ENABLED:
         await asyncio.sleep(1.1)
-        plan = demo.plan_instruction(body.text, today_for(record))
+        plan = demo.plan_instruction(record, body.text, today_for(record))
     else:
         plan = await brain.instruction_to_ops(record, body.text, today_for(record))
     if plan.get("clarifying_question") or not plan.get("ops"):

@@ -99,6 +99,24 @@ def stamp_all(record: dict, *, status: str, source: str, today: str) -> dict:
     return out
 
 
+def _merge_variants(existing: list[dict], changes: list[dict]) -> list[dict]:
+    """A change to one size must not drop the others, so variants merge by id."""
+    by_id = {v.get("id"): v for v in changes}
+    merged = [{**v, **by_id.pop(v.get("id"), {})} for v in existing]
+    return merged + list(by_id.values())
+
+
+def _sync_price_range(item: dict) -> None:
+    """Keep the headline price and range in step with the variants they summarise."""
+    prices = [v["price"] for v in item["variants"] if isinstance(v.get("price"), int | float)]
+    if not prices:
+        return
+    if "price" in item:
+        item["price"] = min(prices)
+    if "price_high" in item:
+        item["price_high"] = max(prices)
+
+
 def apply_ops(record: dict, ops: list[dict], *, source: str = "owner", status: str = "confirmed") -> dict:
     """Return a new record with ops applied. Ops: upsert, delete and set."""
     out = copy.deepcopy(record)
@@ -130,7 +148,11 @@ def apply_ops(record: dict, ops: list[dict], *, source: str = "owner", status: s
                 stamp["confirmed_on"] = today
             for index, existing in enumerate(out[collection]):
                 if existing.get("id") == item_id:
-                    out[collection][index] = {**existing, **item, "id": item_id, **stamp}
+                    merged = {**existing, **item, "id": item_id, **stamp}
+                    if item.get("variants") and existing.get("variants"):
+                        merged["variants"] = _merge_variants(existing["variants"], item["variants"])
+                        _sync_price_range(merged)
+                    out[collection][index] = merged
                     break
             else:
                 out[collection].append({**item, "id": item_id, **stamp})

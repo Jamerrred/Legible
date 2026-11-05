@@ -14,7 +14,9 @@ import asyncio
 import json
 import os
 import random
+import re
 from datetime import date, timedelta
+from difflib import get_close_matches
 from pathlib import Path
 
 import httpx
@@ -283,8 +285,55 @@ def plan_answer(item: dict, text: str) -> dict:
     return {"summary": "Added to your page", "ops": [{"op": "upsert", "collection": "facts", "item": {"category": "other", "statement": f"{NAME}: {text}"}}]}
 
 
-def plan_instruction(text: str, today: str) -> dict:
+def _names_item(item: dict, lower: str, words: list[str]) -> bool:
+    name = (item.get("name") or item.get("label") or "").lower().removeprefix("the ").strip()
+    if not name:
+        return False
+    if name in lower:
+        return True
+    return " " not in name and bool(get_close_matches(name, words, n=1, cutoff=0.6))
+
+
+def _price_change(record: dict, text: str) -> dict | None:
+    """A plain price edit, such as "Class A of the Skiff from 69 to 70". The real app asks the model instead."""
     lower = text.lower()
+    target = re.search(r"\bto\s+\$?(\d+(?:\.\d+)?)", lower)
+    if not target:
+        return None
+    new = float(target.group(1))
+    before = re.search(r"\bfrom\s+\$?(\d+(?:\.\d+)?)", lower)
+    words = re.findall(r"[a-z]+", lower)
+    for collection in ("offerings", "addons", "fees"):
+        for item in record.get(collection, []):
+            if not _names_item(item, lower, words):
+                continue
+            name = item.get("name") or item.get("label")
+            if collection == "fees":
+                return {"summary": f"{name} goes from ${item.get('amount'):g} to ${new:g}", "ops": [{"op": "upsert", "collection": "fees", "item": {"id": item["id"], "amount": new}}]}
+            variants = item.get("variants") or []
+            if not variants:
+                return {"summary": f"{name} goes from ${item.get('price'):g} to ${new:g}", "ops": [{"op": "upsert", "collection": collection, "item": {"id": item["id"], "price": new}}]}
+            chosen = [v for v in variants if v.get("label", "").lower() in lower]
+            if not chosen and before:
+                chosen = [v for v in variants if v.get("price") == float(before.group(1))]
+            if len(chosen) != 1:
+                labels = ", ".join(v.get("label", "") for v in variants)
+                return {"clarifying_question": f"Which size of {name} should change: {labels}?"}
+            variant = chosen[0]
+            return {
+                "summary": f"{name}, {variant['label']}, goes from ${variant['price']:g} to ${new:g}",
+                "ops": [{"op": "upsert", "collection": collection, "item": {"id": item["id"], "variants": [{"id": variant["id"], "price": new}]}}],
+            }
+    return None
+
+
+def plan_instruction(record: dict, text: str, today: str) -> dict:
+    lower = text.lower()
+    change = _price_change(record, text)
+    if change:
+        return change
+    if re.search(r"\b(price|cost|charge|raise|lower|change)\b", lower):
+        return {"clarifying_question": "Which price should change? Name the service, the size and the new price, such as “Class A of the Skiff to $70”."}
     if "clos" in lower or "shut" in lower or "holiday" in lower:
         start = date.fromisoformat(today) + timedelta(days=1)
         end, back = start + timedelta(days=1), start + timedelta(days=2)
