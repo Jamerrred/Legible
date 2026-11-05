@@ -10,7 +10,6 @@ Give Legible a website. It reads the site, works out what's missing, asks the ow
 
 | You want to | Do this | Keys | Cost | Time |
 |---|---|---|---|---|
-| See the whole story quickly | [Run the demo copy](#try-the-demo-copy) | None | Free | About 3 minutes |
 | Use the real app on any website | [Run Legible](#run-legible) | OpenRouter and Exa | About $2 | About 15 minutes |
 | Check our results | [Grade the saved runs](#check-the-saved-results-free-no-keys) | None | Free | Under a minute |
 
@@ -90,7 +89,7 @@ Then open `.env` and fill in the keys. You bring your own, and the costs below c
 | `COMPOSIO_API_KEY` | Lets owners connect accounts such as Google Calendar | Optional, and not yet tested with a real key | [composio.dev](https://composio.dev) |
 | `LEGIBLE_ADMIN_TOKEN`, `LEGIBLE_EDGE_URL` | The private link between the app and the public page | Leave these alone: `scripts/start.py` fills them in | |
 
-The demo copy, the tests and re-checking the saved results need no keys at all.
+The tests and re-checking the saved results need no keys at all.
 
 ## Run Legible
 
@@ -145,18 +144,6 @@ uv run python scripts/mvp_demo.py --url https://sunrise-auto-detailers.jamerrred
 ### Connect accounts (optional)
 
 To let owners connect accounts such as Google Calendar and Google Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. Then go to **Websites**, press **Connect** beside an account, and follow the popup. Legible reads what you connect and proposes changes for you to confirm. This code hasn't been run with a real key yet, so expect rough edges.
-
-## Try the demo copy
-
-The demo copy plays the same story back in about 3 minutes, with no AI credit and no API keys. It's a separate mode that only runs when you ask for it, and its data stays apart from the real app's. You only need the install steps above.
-
-```bash
-uv run python scripts/start.py --demo
-```
-
-Open `http://127.0.0.1:8300` and follow the **Next** card. Crawling, questions and test customers are scripted from a real crawl and the demo business's facts. Publishing is real, so the public page and its quote, request and ask forms all work. The sidebar says it's sample data, and **Start over** resets it.
-
-[The walkthrough](docs/11-demo-walkthrough.md) gives every step and what to say, for anyone recording or presenting it.
 
 ## Reproduce the experiment
 
@@ -269,7 +256,7 @@ uv run ruff check .
 | A stage fails with an error from the model | Check your OpenRouter key and balance, then add the website again |
 | A test customer says "Agent crashed" | The AI provider returned an error. It doesn't count against the business, so run the check again |
 | The demo business's address doesn't load | Run `uv run python scripts/serve.py` and use `http://sunrise.localhost:8101` instead |
-| You want to start over | Stop Legible and delete `legible/legible.db`. The demo copy has **Start over** in its sidebar |
+| You want to start over | Stop Legible and delete `legible/legible.db`. |
 
 ## Limits
 
@@ -282,6 +269,5 @@ uv run ruff check .
 
 - [Experiment results](reports/first-demo-benchmark.md) and [how they were built](reports/first-demo.md)
 - [How the Legible app was built and tested](reports/legible-mvp.md)
-- [The demo walkthrough](docs/11-demo-walkthrough.md)
 - [Decisions, research and plan](docs/README.md)
 - [How to work in this repository](CLAUDE.md)

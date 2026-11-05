@@ -6,7 +6,7 @@ export const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ 
 export const icon = (name, cls = "") => `<svg class="i ${cls}" aria-hidden="true"><use href="vendor/icons.svg#${name}"></use></svg>`;
 export const plural = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
 
-export const state = { sites: [], site: null, config: null, selectedSim: null, selectedBooking: null, agentView: false, working: false, clarify: null, activeQuestion: null, lastAnswer: null, flash: null, quote: null };
+export const state = { sites: [], site: null, selectedSim: null, selectedBooking: null, agentView: false, working: false, clarify: null, activeQuestion: null, lastAnswer: null, flash: null, quote: null };
 
 export async function api(path, options = {}) {
   const init = { ...options };
@@ -99,14 +99,7 @@ export const startPoll = (fn, ms) => {
 };
 export const route = () => (location.hash.replace(/^#\/?/, "") || "websites").split("/")[0];
 export const isBusy = (site) => site && !["ready", "failed"].includes(site.stage);
-export const pollMs = () => (state.config?.demo ? 500 : 1200);
-
-// In the demo, agents arrive once the link is up. Opening Inbox or Bookings plays that step if it was skipped.
-export const demoAgentsArrive = async () => {
-  if (!state.config?.demo || !state.site?.live || state.site.link_placed) return;
-  state.site.link_placed = true;
-  await post(`/websites/${state.site.id}/check-link`);
-};
+export const pollMs = () => 1200;
 
 // Set by app.js, so screens can ask for a re-render without importing it.
 export const app = { render: async () => {}, refreshRail: async () => {} };

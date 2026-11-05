@@ -49,8 +49,6 @@
   a.next-card:hover { transform: translateY(-2px); }
   a.next-card:hover .i { transform: translateX(3px); }
 }
-.demo-note { font-size: 11.5px; line-height: 1.4; color: var(--muted); padding: 10px 4px 0; }
-.demo-note a { text-decoration: underline; text-underline-offset: 2px; }
 
 /* The sheet */
 .sheet { position: relative; min-width: 0; margin: 10px 10px 10px 0; background: var(--canvas); border: 1px solid var(--line); border-radius: var(--r-l); overflow: hidden; display: flex; }
@@ -95,7 +93,7 @@ body[data-route=resource] .toast { bottom: 88px; }
 @media (max-width: 860px) {
   .app { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; }
   .rail { order: 2; flex-direction: row; padding: 6px 6px calc(6px + env(safe-area-inset-bottom)); overflow: visible; border-top: 1px solid var(--line); }
-  .brand, .site-chip, .rail-add, .next-card, .demo-note, .rail-spacer, .thread::before, .thread-fill, .thread-ind, .step-text small, .step .count { display: none; }
+  .brand, .site-chip, .rail-add, .next-card, .rail-spacer, .thread::before, .thread-fill, .thread-ind, .step-text small, .step .count { display: none; }
   .thread { flex-direction: row; flex: 1; justify-content: space-between; gap: 0; }
   .step { grid-template-columns: 1fr; justify-items: center; row-gap: 3px; min-height: 0; padding: 5px 2px; flex: 1; }
   .step-text b { font-size: 11px; }
