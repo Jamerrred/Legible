@@ -30,7 +30,7 @@ Each is medium complexity: enough rules and options to defeat a quick read, but 
 - Calendar behind a name, address and phone form
 - A mock third-party listing that shows a wrong, older price
 
-**As built:** three pages (Home, FAQ, Book), with prices in a PNG, "starting at" text, vague conditions, rules in collapsed FAQ answers, a map image, a pop-up and a calendar behind a lead form. The exact list is in `demo_site/holes.json`, tagged with catalogue IDs. Those IDs never appear in the served pages.
+**As built:** three pages (Home, FAQ, Book), with prices in a PNG, "starting at" text, vague conditions, rules in collapsed FAQ answers, a map image, a pop-up and a calendar behind a lead form. The exact list is in `sample_site/holes.json`, tagged with catalogue IDs. Those IDs never appear in the served pages.
 
 ## 2. HVAC and plumbing
 

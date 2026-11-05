@@ -2,7 +2,7 @@
 
 *Last updated 4 November 2026.*
 
-On 4 November 2026 the founder asked Muse to find van cleaning with pet hair removal in San Francisco, under $150, within two days. They then asked Muse to explain its process and how businesses could prepare. The [full transcript](reference/muse-transcript.md) is saved separately.
+On 4 November 2026 the founder asked Muse to find van cleaning with pet hair removal in San Francisco, under $150, within two days. They then asked Muse to explain its process and how businesses could prepare. The full transcript is saved separately.
 
 **How to use this document:** treat it as one strong data point. It shows the kinds of failure an agent runs into and how one agent works. The wider set of roadblocks is in [05-roadblocks-and-queries.md](05-roadblocks-and-queries.md).
 

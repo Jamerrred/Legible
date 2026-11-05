@@ -23,7 +23,7 @@ This is the catalogue used to design mock sites and test queries. The Muse van c
 
 Each row says how much we actually know:
 
-- **T:** seen in the [Muse transcript](reference/muse-transcript.md).
+- **T:** seen in the founder's own test of Muse, summarised in [the Muse findings](02-muse-findings.md).
 - **S:** stated by a source we read, linked in the [research](07-consumer-agent-research.md) or the raw notes in `research_notes/Consumer agents/`.
 - **I:** our inference from general knowledge. It's plausible, but unchecked.
 

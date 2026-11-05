@@ -1,6 +1,6 @@
 # Legible project overview
 
-*Last updated 5 November 2026. The first local demo is built on one mock business: see [the benchmark](../reports/first-demo-benchmark.md). the Legible agent's backend is built as a prototype: see [its report](../reports/legible-mvp.md).*
+*Last updated 5 November 2026. The first local demo is built on one mock business: see [the benchmark](../../experiment/reports/first-demo-benchmark.md). the Legible agent's backend is built as a prototype: see [its report](../../experiment/reports/legible-mvp.md).*
 
 ## In one sentence
 

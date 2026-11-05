@@ -1,6 +1,6 @@
 # Build plan
 
-*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../reports/first-demo.md). On 5 November the founder chose to skip the rest of steps 5 and 6 and go straight to step 7, whose backend is now built as a prototype: see [its report](../reports/legible-mvp.md).*
+*Last updated 5 November 2026. The first demo covers steps 1 to 4 and the local half of step 5, running locally on one business: see [the report](../../experiment/reports/first-demo.md). On 5 November the founder chose to skip the rest of steps 5 and 6 and go straight to step 7, whose backend is now built as a prototype: see [its report](../../experiment/reports/legible-mvp.md).*
 
 ## The order
 
@@ -36,7 +36,7 @@ Two pieces get reused:
 | Sample queries | Used only to check the agent on the control page before the freeze. They're the start of a discovery set, not part of the benchmark |
 | Resource | Written from the facts file only, with no discovery findings in this round |
 | Profile | Hybrid only so far |
-| Hosting | Cloudflare Python Workers on the $5 plan, with no Docker. See [the deployment](../deploy/workers/README.md) |
+| Hosting | Cloudflare Python Workers on the $5 plan, with no Docker. See [the deployment](../../experiment/deploy/workers/README.md) |
 | Current scope | A minimum viable check only: a few agent runs with Exa, then 1 or 2 Muse searches with and without the resource. Everything from step 6 onward waits until the founder asks |
 
 **The real Muse test still needs:**

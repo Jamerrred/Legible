@@ -1,12 +1,14 @@
+> **Historical planning notes.** These record how the project was thought through, so some details are out of date. For how to run and use Legible, see [the main README](../../README.md).
+
 # Legible docs
 
-*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. the Legible agent's backend is built as a prototype: see [its report](../reports/legible-mvp.md).*
+*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. the Legible agent's backend is built as a prototype: see [its report](../../experiment/reports/legible-mvp.md).*
 
 ## Current position
 
 Legible gives a service business a small website that any AI agent can read and act on, plus a Legible agent that keeps it accurate. The goal right now is a working prototype, as fast as possible.
 
-**Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the Legible app backend with a public resource on Cloudflare ([report](../reports/legible-mvp.md)).
+**Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../../experiment/reports/first-demo-benchmark.md)), and the Legible app backend with a public resource on Cloudflare ([report](../../experiment/reports/legible-mvp.md)).
 
 **Next steps:** the [owner app](10-owner-app.md) is built and runs locally, with the scripted film copy kept on the `demo` branch, so next come connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
 
@@ -26,8 +28,6 @@ Legible gives a service business a small website that any AI agent can read and 
 | [08 Consumer agent design](08-consumer-agent-design.md) | What we'd build as our stand-in agent, including draft instructions |
 | [09 Legible agent](09-legible-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
 | [10 Owner app](10-owner-app.md) | The five screens, how they map to the API, and who can change what |
-
-Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names real businesses, so don't publish it as is.
 
 ## If you're coming from another chat
 

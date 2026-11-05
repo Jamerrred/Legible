@@ -1,6 +1,6 @@
 # The Legible agent
 
-*Last updated 5 November 2026. The backend is built as a prototype, in `legible/` and `edge/`: see [its report](../reports/legible-mvp.md). This spec is wider than the prototype, and the report says what was cut.*
+*Last updated 5 November 2026. The backend is built as a prototype, in `legible/` and `edge/`: see [its report](../../experiment/reports/legible-mvp.md). This spec is wider than the prototype, and the report says what was cut.*
 
 ## What it does
 

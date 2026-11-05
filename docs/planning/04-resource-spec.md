@@ -1,6 +1,6 @@
 # The resource (the "slug" website)
 
-*Last updated 5 November 2026. The first version is built for the mock detailing business, at `demo_resource/`, running locally at `http://agents.sunrise.localhost:8103`.*
+*Last updated 5 November 2026. The first version is built for the mock detailing business, at `sample_resource/`, running locally at `http://agents.sunrise.localhost:8103`.*
 
 ## What it is
 
@@ -84,7 +84,7 @@ Without a front desk agent, the log is how the Legible agent learns from real vi
 
 Logs show which pages were fetched, but not what a reading agent was trying to find out. Quotes and questions show intent, and the simulator fills the rest of the gap.
 
-These logs are structured JSONL from day one (`legible_core/logbook.py`), because the Legible agent's owner inbox reads them in Step 7.
+These logs are structured JSONL from day one (`business_core/logbook.py`), because the Legible agent's owner inbox reads them in Step 7.
 
 ## How an agent gets to it
 
