@@ -2,6 +2,10 @@
 
 **Legible is an agentic harness, powered by Muse Spark, that lets AI agents like Muse do business with small businesses.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page, which the owner embeds as a link on their website, social media or storefront. When a consumer agent like Muse arrives, it can use that page to answer the customer's questions, work out an all-in price and send a booking request.
 
+<a href="https://www.youtube.com/watch?v=BCvsijSwoW0"><img src="https://img.youtube.com/vi/BCvsijSwoW0/maxresdefault.jpg" alt="Watch the 3-minute Legible film on YouTube" width="640"></a>
+
+**[Watch the 3-minute film](https://www.youtube.com/watch?v=BCvsijSwoW0)**
+
 AI agents like Muse and Instinct already shop for people, but they often can't finish the job on a small business's website. Reading the page is only the start. The agent has to turn a messy request into a correct, all-in answer, using rules that the site scatters across pages or never states:
 
 - *"Inside and out on my Outback, with dog hair on the back seat, under $400 all in. Saturday or a weekday?"* The answer depends on the car's size class, an add-on, a Saturday fee, a travel zone and tax.
