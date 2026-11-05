@@ -1,5 +1,7 @@
 # Legible
 
+> **This is the `demo` branch: a scripted copy of Legible, kept for recording and showing the film's story without API keys. Its data is sample data.** For the real app, use [`main`](https://github.com/Jamerrred/Legible). This branch is never merged into `main`, and it doesn't get `main`'s later changes. To run it: `uv sync`, then `uv run python scripts/start.py --demo`, then open `http://127.0.0.1:8300`.
+
 **Make any small business readable to AI agents.**
 
 AI agents already shop for people, but they often can't finish the job on a small business's website. Prices are in images, rules are buried, and the agent gives up or guesses.
