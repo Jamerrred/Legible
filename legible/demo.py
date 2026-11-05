@@ -27,6 +27,7 @@ SLUG = "cormorant"
 SITE_URL = "https://cormorant-detailing.jamerrred-audiobooks.workers.dev"
 HERE = Path(__file__).resolve().parent
 NAME = "Cormorant Mobile Detailing"
+AGENT_SUGGESTIONS = {"golf": "We don't detail golf carts."}
 AGENT_UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140.0 Safari/537.36 PersonalAssistant/1.0"
 UNNAMED_UA = "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/140.0 Safari/537.36"
 
@@ -45,6 +46,7 @@ def _questions() -> dict[str, dict]:
     fact = lambda i, statement: {"op": "upsert", "collection": "facts", "item": {"id": i, "category": "policies", "statement": statement}}  # noqa: E731
     return {
         "fees": {
+            "chip": "Saturday and condition fees",
             "title": "Do you charge extra for Saturdays, evenings or very dirty cars? How much?",
             "why": "A test customer with a $400 budget couldn't tell whether a Saturday fits.",
             "suggested": "Saturdays add $25, the 5 to 6 pm evening window adds $30, a heavily soiled interior adds $75, and excessive pet hair adds $60.",
@@ -58,6 +60,7 @@ def _questions() -> dict[str, dict]:
             ],
         },
         "tax": {
+            "chip": "Tax and travel fees",
             "title": "Do you add sales tax, and what's your travel fee outside San Francisco?",
             "why": "Test customers couldn't work out an all-in price for Berkeley or Sausalito.",
             "suggested": "We add 8.625% sales tax, but not on travel. San Francisco has no travel fee, the Peninsula is $35, and Marin and the East Bay are $65.",
@@ -66,6 +69,7 @@ def _questions() -> dict[str, dict]:
             "ops": [{"op": "set", "path": "tax", "value": {"rate": 0.08625, "applies_to": "services, add-ons and surcharges, but not the travel fee"}}, *zone_ops],
         },
         "refuse": {
+            "chip": "What you refuse",
             "title": "What jobs do you refuse? A customer asked about cleaning up vomit.",
             "why": "A test customer's agent couldn't say no, because your site never lists what you don't do.",
             "suggested": "We don't clean vomit, blood, mould or other biohazards. We don't do ceramic coating, and we don't detail boats or RVs.",
@@ -79,6 +83,7 @@ def _questions() -> dict[str, dict]:
             ],
         },
         "discounts": {
+            "chip": "Discounts",
             "title": "Do you give discounts for several cars or regular visits?",
             "why": "Your website doesn't mention any, so agents can't quote fleets or repeat customers.",
             "suggested": "Yes. Three or more vehicles in one visit get 10% off, and regular visits get 15% off every 2 weeks or 10% off every 4 weeks.",
@@ -94,7 +99,8 @@ def _questions() -> dict[str, dict]:
 
 def _add_question(website_id: str, key: str, source: str) -> None:
     q = _questions()[key]
-    payload = {"demo_key": key, "unknown_statement": q["unknown"], "suggested": q["suggested"], "demo_ops": q["ops"], "demo_summary": q["summary"]}
+    blocks = [c["query"] for c in CUSTOMERS if key in c["needs"]]
+    payload = {"demo_key": key, "unknown_statement": q["unknown"], "suggested": q["suggested"], "demo_ops": q["ops"], "demo_summary": q["summary"], "chip": q["chip"], "blocks": blocks}
     store.add_inbox(website_id, "question", q["title"], q["why"], payload, source)
 
 
@@ -226,9 +232,10 @@ async def onboard(website_id: str, run_check: bool = True) -> None:
     store.update("website", "id", website_id, name=NAME)
     total = sum(len(record[c]) for c in ("offerings", "addons", "fees", "zones", "facts", "not_offered"))
     store.add_inbox(website_id, "review", f"Confirm {total} facts read from your website", "Nothing is public until you confirm it.", {"count": total})
+    await asyncio.sleep(3.0)  # Long enough to see the facts arrive.
 
     stage("interviewing", "Working out what's missing")
-    await asyncio.sleep(1.4)
+    await asyncio.sleep(2.0)
     _add_question(website_id, "discounts", "interview")
 
     if run_check:

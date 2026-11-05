@@ -1,4 +1,4 @@
-"""The owner app's API, shaped around its four screens: inbox, resource, simulations and websites.
+"""The owner app's API, shaped around its five screens: websites, simulations, resource, inbox and bookings.
 
 Run from the repo root: uv run uvicorn legible.api:app --port 8200
 The app is at /, and interactive API docs are at /docs. There's no login yet, so keep it on localhost.
@@ -14,7 +14,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import httpx
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -40,7 +40,7 @@ async def lifespan(_: FastAPI):
     cron.cancel()
 
 
-app = FastAPI(title="Legible Legible app", lifespan=lifespan)
+app = FastAPI(title="Legible app", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 
@@ -74,10 +74,57 @@ def _needs(website_id: str) -> dict:
     }
 
 
+def _checks(website_id: str) -> dict:
+    """The score the owner cares about: the first check, the latest check, and whether one is running."""
+    rows = store.query("SELECT id, label, target, status, summary, created_at FROM simulation WHERE website_id = ? ORDER BY created_at", website_id)
+    done = [r for r in rows if r["status"] == "done"]
+
+    def score(row: dict) -> dict:
+        summary = row["summary"] or {}
+        return {"id": row["id"], "label": row["label"], "target": row["target"], "answered": summary.get("answered", 0), "queries": summary.get("queries", 0)}
+
+    return {"first": score(done[0]) if done else None, "latest": score(done[-1]) if done else None, "count": len(done), "running": any(r["status"] == "running" for r in rows)}
+
+
+def _plural(n: int, word: str) -> str:
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+def _next_step(site: dict, needs: dict, checks: dict, facts: dict) -> dict | None:
+    """The one thing the owner should do now. The sidebar and the Websites screen both show it."""
+    if site["stage"] == "failed":
+        return {"screen": "websites/new", "label": "Try another address", "note": "This website couldn't be read."}
+    if site["stage"] != "ready":
+        return {"screen": "websites", "label": "Legible is reading your website", "note": "You can leave this page while it works.", "busy": True}
+    if needs["missing"]:
+        return {"screen": "simulations", "label": f"Answer {_plural(needs['missing'], 'question')}", "note": "Test customers got stuck on these."}
+    if needs["review"]:
+        return {"screen": "resource", "label": f"Confirm {_plural(facts['draft'], 'fact')}", "note": "Nothing is public until you do."}
+    if needs["proposals"]:
+        return {"screen": "resource", "label": f"Review {_plural(needs['proposals'], 'proposed change')}", "note": "These wait for your yes."}
+    if site["published_version"] and checks["latest"] and checks["latest"]["target"] != "resource" and not checks["running"]:
+        return {"screen": "simulations", "label": "Run the check again", "note": "See how far your score has moved."}
+    if needs["bookings"]:
+        return {"screen": "bookings", "label": f"Reply to {_plural(needs['bookings'], 'booking request')}", "note": "An agent is waiting on your answer."}
+    if needs["agent_questions"]:
+        return {"screen": "inbox", "label": f"Answer {_plural(needs['agent_questions'], 'agent question')}", "note": "Your answer shows on its status page."}
+    return None
+
+
+async def _publish_edit(website_id: str) -> dict | None:
+    """Publish an owner's edit, unless they haven't yet confirmed what was read from their website."""
+    if store.one("SELECT id FROM inbox_item WHERE website_id = ? AND kind = 'review' AND status = 'open'", website_id):
+        return None
+    return await work.publish(website_id)
+
+
 def _site_view(site: dict) -> dict:
     link = edge.link_for(site["slug"])
     record = work.current_record(site["id"])
     name = site["name"] or site["slug"]
+    needs = _needs(site["id"])
+    checks = _checks(site["id"])
+    facts = counts(record) if record else {"confirmed": 0, "draft": 0}
     line = f"Prices, availability and booking requests for {name}: {link}"
     return {
         "id": site["id"],
@@ -90,9 +137,12 @@ def _site_view(site: dict) -> dict:
         "link": link,
         "link_line": line,
         "link_line_html": f'<p>Prices, availability and booking requests for {name}: <a href="{link}">{link}</a></p>',
-        "facts": counts(record) if record else {"confirmed": 0, "draft": 0},
+        "facts": facts,
+        "checks": checks,
+        "next": _next_step(site, needs, checks, facts),
+        "page_reads": store.one("SELECT COUNT(*) AS n FROM event WHERE website_id = ? AND event = 'page_hit'", site["id"])["n"],
         "open_inbox": store.one("SELECT COUNT(*) AS n FROM inbox_item WHERE website_id = ? AND status = 'open'", site["id"])["n"],
-        "needs": _needs(site["id"]),
+        "needs": needs,
         "connections": store.query("SELECT toolkit, status FROM connection WHERE website_id = ?", site["id"]),
         "created_at": site["created_at"],
     }
@@ -141,9 +191,24 @@ def get_website(website_id: str):
     return {**_site_view(_site(website_id)), "pages": _site(website_id)["pages"]}
 
 
+def _fact_preview(record: dict | None) -> dict:
+    """A short taste of the fact sheet for the live onboarding view."""
+    if not record:
+        return {"count": 0, "lines": []}
+    symbol = {"USD": "$", "EUR": "€", "GBP": "£", "INR": "₹"}.get(record.get("currency") or "USD", "")
+    lines = []
+    for item in (record.get("offerings") or [])[:4]:
+        low, high = item.get("price"), item.get("price_high")
+        value = f"{symbol}{low} to {symbol}{high}" if low and high else f"{symbol}{low}" if low else "Price not stated"
+        lines.append({"text": item.get("name", ""), "value": value})
+    lines += [{"text": item.get("statement", "")[:120], "value": ""} for item in (record.get("facts") or [])[:6]]
+    tally = counts(record)
+    return {"count": tally["draft"] + tally["confirmed"], "lines": lines}
+
+
 @app.get("/websites/{website_id}/trace")
 def trace(website_id: str):
-    """Live progress for the app: the onboarding stage, pages read, and each test customer's steps."""
+    """Live progress for the app: the onboarding stage, pages read, facts found, and each test customer's steps."""
     site = _site(website_id)
     sim = store.one("SELECT id, label FROM simulation WHERE website_id = ? AND status = 'running' ORDER BY created_at DESC LIMIT 1", website_id)
     return {
@@ -151,6 +216,8 @@ def trace(website_id: str):
         "stage_note": site["stage_note"],
         "name": site["name"] or site["slug"],
         "pages": site["pages"],
+        "facts": _fact_preview(work.current_record(website_id)),
+        "questions": [q["title"] for q in work.open_questions(website_id)],
         "simulation": {"id": sim["id"], "label": sim["label"], "agents": work.sim_trace(sim["id"])} if sim else None,
     }
 
@@ -263,7 +330,7 @@ async def answer(item_id: str, body: Answer):
     remote_id = item["payload"].get("remote_id")
     if remote_id:
         await edge.reply(remote_id, "answered", body.text)
-    await work.publish(website_id)
+    await _publish_edit(website_id)
     return {"summary": plan.get("summary"), "ops": plan.get("ops", []), "version": store.latest_record(website_id)["version"]}
 
 
@@ -295,7 +362,7 @@ async def dismiss(item_id: str):
     item = _item(item_id)
     store.resolve_inbox(item_id, "dismissed", "dismissed")
     if item["kind"] == "question":
-        await work.publish(item["website_id"])
+        await _publish_edit(item["website_id"])
     return {"dismissed": True}
 
 
@@ -413,7 +480,7 @@ async def edit_resource(website_id: str, body: Edit):
     """Direct and programmatic edits. The owner made them, so they apply and publish at once."""
     _site(website_id)
     work.apply_and_save(website_id, body.ops, body.reason)
-    published = await work.publish(website_id)
+    published = await _publish_edit(website_id)
     return {"version": store.latest_record(website_id)["version"], "published": published}
 
 
@@ -424,7 +491,7 @@ async def undo(website_id: str):
     if len(versions) < 2:
         raise HTTPException(409, "There's no earlier version")
     store.save_record(website_id, versions[1]["record"], f"Undid: {versions[0]['reason']}")
-    await work.publish(website_id)
+    await _publish_edit(website_id)
     return {"version": store.latest_record(website_id)["version"], "restored": versions[1]["version"]}
 
 
@@ -445,6 +512,21 @@ async def agent_view(website_id: str):
     async with httpx.AsyncClient(timeout=20, headers={"user-agent": "legible-app"}) as client:
         response = await client.get(f"{edge.link_for(site['slug'])}/index.md")
     return {"live": response.status_code == 200, "text": response.text if response.status_code == 200 else ""}
+
+
+@app.get("/websites/{website_id}/resource/quote")
+async def try_quote(website_id: str, request: Request):
+    """Ask the live page for a quote exactly as an agent would. The Worker keeps this out of activity."""
+    site = _site(website_id)
+    if not site["published_version"]:
+        raise HTTPException(409, "Your page isn't live yet")
+    params = [(key, value) for key, value in request.query_params.multi_items() if value]
+    address = httpx.URL(f"{edge.link_for(site['slug'])}/quote", params=params)
+    async with httpx.AsyncClient(timeout=20, headers={"user-agent": "legible-app"}) as client:
+        response = await client.get(address, params=[*params, ("format", "json")])
+    if response.status_code >= 500:
+        raise HTTPException(502, "Your page didn't answer. Try again.")
+    return {"address": str(address), "quote": response.json()}
 
 
 @app.get("/websites/{website_id}/resource/versions")
@@ -480,7 +562,12 @@ def simulation(simulation_id: str):
     found = store.one("SELECT * FROM simulation WHERE id = ?", simulation_id)
     if not found:
         raise HTTPException(404, "No simulation has this ID")
-    return {**found, "runs": store.query("SELECT * FROM simulation_run WHERE simulation_id = ?", simulation_id)}
+    runs = store.query("SELECT * FROM simulation_run WHERE simulation_id = ?", simulation_id)
+    traces = work.sim_trace(simulation_id)
+    for run in runs:
+        match = next((t for t in traces if t["query"].startswith(run["query"])), None)
+        run["path"] = match["path"] if match else []
+    return {**found, "runs": runs}
 
 
 # ---------------------------------------------------------------- connected accounts
@@ -539,7 +626,7 @@ async def sync_account(website_id: str, toolkit: str, body: SyncAccount | None =
 
 @app.get("/config")
 def config():
-    return {"demo": demo.ENABLED, "demo_url": demo.SITE_URL if demo.ENABLED else None}
+    return {"demo": demo.ENABLED, "demo_url": demo.SITE_URL if demo.ENABLED else None, "suggestions": demo.AGENT_SUGGESTIONS if demo.ENABLED else {}}
 
 
 @app.get("/demo/reset")
