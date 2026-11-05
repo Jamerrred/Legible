@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 680" role="img" aria-labelledby="title desc">
+  <title id="title">Legible system overview</title>
+  <desc id="desc">A self-hosted control plane holds the owner console, API, Legible agent, simulation workers and SQLite. It calls external services and publishes confirmed facts over an authenticated API to an edge tier on Cloudflare, where outside AI agents read pages, get quotes, ask questions and send requests.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#55524A"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; text-anchor: middle; }
+      .name { font-size: 19px; font-weight: 600; }
+      .sub { font-size: 15.5px; }
+      .tier { font-size: 15px; font-weight: 600; letter-spacing: 0.04em; text-anchor: start; }
+      .label { font-size: 14.5px; fill: #55524A; }
+      .start { text-anchor: start; }
+      .end { text-anchor: end; }
+      .line { fill: none; stroke: #55524A; stroke-width: 1.8; marker-end: url(#arrow); }
+      .both { marker-start: url(#arrow); }
+      .dash { stroke-dasharray: 6 5; }
+    </style>
+  </defs>
+
+  <!-- Tiers -->
+  <rect x="215" y="30" width="800" height="395" rx="14" fill="#FFFAF6" stroke="#C8501A" stroke-width="1.5"/>
+  <text x="237" y="62" class="tier" fill="#8E3A12">CONTROL PLANE (SELF-HOSTED)</text>
+  <rect x="1085" y="30" width="285" height="395" rx="14" fill="#F5F9FF" stroke="#2F6FB3" stroke-width="1.5"/>
+  <text x="1107" y="62" class="tier" fill="#1F5288">EDGE TIER (CLOUDFLARE)</text>
+  <rect x="215" y="510" width="560" height="150" rx="14" fill="#FBFAF7" stroke="#8A877E" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="237" y="540" class="tier" fill="#55524A">EXTERNAL SERVICES</text>
+
+  <!-- Connections -->
+  <path class="line" d="M180 133 H238"/>
+  <path class="line" d="M425 133 H463"/>
+  <path class="line" d="M505 174 V220 H357 V263"/>
+  <path class="line both" d="M572 176 V253"/>
+  <path class="line" d="M640 174 V220 H837 V263"/>
+  <path class="line" d="M680 133 H1045 V300 H1108"/>
+  <text x="862" y="122" class="label">publish facts, pull events (bearer token)</text>
+  <path class="line" d="M990 345 H1108"/>
+  <text x="1049" y="336" class="label">test after</text>
+  <path class="line both" d="M1227 207 V263"/>
+  <path class="line" d="M300 385 V508"/>
+  <text x="310" y="482" class="label start">model calls, crawl, connectors</text>
+  <path class="line" d="M730 385 V508"/>
+  <text x="722" y="482" class="label end">model calls, web search</text>
+  <path class="line" d="M440 385 V458 H880 V518"/>
+  <text x="600" y="449" class="label">crawl</text>
+  <path class="line" d="M940 385 V518"/>
+  <text x="948" y="482" class="label start">test before</text>
+  <path class="line" d="M1110 595 H1012"/>
+  <text x="1060" y="586" class="label">read</text>
+  <path class="line dash" d="M1010 540 H1130 V397"/>
+  <text x="1070" y="531" class="label">one link</text>
+  <path class="line" d="M1290 558 V397"/>
+  <text x="1282" y="472" class="label end">read, quote,</text>
+  <text x="1282" y="491" class="label end">ask, request</text>
+
+  <!-- People and outside systems -->
+  <rect x="30" y="100" width="150" height="66" rx="33" fill="#FFFFFF" stroke="#33322E" stroke-width="1.5"/>
+  <text x="105" y="139" class="name" fill="#24231F" style="font-size:17px">Business owner</text>
+
+  <rect x="1110" y="560" width="240" height="90" rx="45" fill="#FFFFFF" stroke="#33322E" stroke-width="1.5"/>
+  <text x="1230" y="600" class="name" fill="#24231F">Customer's AI agent</text>
+  <text x="1230" y="624" class="sub" fill="#24231F">Muse, Instinct, ChatGPT</text>
+
+  <rect x="795" y="520" width="215" height="90" rx="8" fill="#F6F5F1" stroke="#8A877E" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="902" y="560" class="name" fill="#33322E">Business website</text>
+  <text x="902" y="584" class="sub" fill="#33322E">+ one link line</text>
+
+  <!-- Control plane -->
+  <rect x="240" y="92" width="185" height="82" rx="8" fill="#FFF4EC" stroke="#C8501A" stroke-width="1.5"/>
+  <text x="332" y="128" class="name" fill="#3A2A20">Owner console</text>
+  <text x="332" y="152" class="sub" fill="#3A2A20">single-page app</text>
+
+  <rect x="465" y="92" width="215" height="82" rx="8" fill="#FFF4EC" stroke="#C8501A" stroke-width="1.5"/>
+  <text x="572" y="128" class="name" fill="#3A2A20">API and job runner</text>
+  <text x="572" y="152" class="sub" fill="#3A2A20">FastAPI, asyncio</text>
+
+  <rect x="240" y="265" width="235" height="120" rx="8" fill="#FFF4EC" stroke="#C8501A" stroke-width="1.5"/>
+  <text x="357" y="310" class="name" fill="#3A2A20">Legible agent</text>
+  <text x="357" y="335" class="sub" fill="#3A2A20">crawl, extract,</text>
+  <text x="357" y="356" class="sub" fill="#3A2A20">interview, review</text>
+
+  <path d="M495 271 C495 247 655 247 655 271 V375 C655 399 495 399 495 375 Z" fill="#FFF4EC" stroke="#C8501A" stroke-width="1.5"/>
+  <path d="M495 271 C495 295 655 295 655 271" fill="none" stroke="#C8501A" stroke-width="1.5"/>
+  <text x="575" y="318" class="name" fill="#3A2A20">SQLite</text>
+  <text x="575" y="342" class="sub" fill="#3A2A20">fact sheet versions,</text>
+  <text x="575" y="362" class="sub" fill="#3A2A20">inbox, events</text>
+
+  <rect x="685" y="265" width="305" height="120" rx="8" fill="#F1EEFF" stroke="#6A57C7" stroke-width="1.5"/>
+  <text x="837" y="310" class="name" fill="#2C2360">Simulation workers</text>
+  <text x="837" y="335" class="sub" fill="#2C2360">Errand, one process per run</text>
+  <text x="837" y="356" class="sub" fill="#2C2360">5 at a time</text>
+
+  <!-- Edge tier -->
+  <path d="M1140 104 C1140 80 1315 80 1315 104 V183 C1315 207 1140 207 1140 183 Z" fill="#EAF3FF" stroke="#2F6FB3" stroke-width="1.5"/>
+  <path d="M1140 104 C1140 128 1315 128 1315 104" fill="none" stroke="#2F6FB3" stroke-width="1.5"/>
+  <text x="1227" y="142" class="name" fill="#16324F">D1</text>
+  <text x="1227" y="165" class="sub" fill="#16324F">published records,</text>
+  <text x="1227" y="185" class="sub" fill="#16324F">events, requests</text>
+
+  <rect x="1110" y="265" width="240" height="130" rx="8" fill="#EAF3FF" stroke="#2F6FB3" stroke-width="1.5"/>
+  <text x="1230" y="305" class="name" fill="#16324F">Public resource</text>
+  <text x="1230" y="328" class="name" fill="#16324F">Worker</text>
+  <text x="1230" y="353" class="sub" fill="#16324F">pages, markdown, /quote,</text>
+  <text x="1230" y="374" class="sub" fill="#16324F">/request, /ask</text>
+
+  <!-- External services -->
+  <rect x="235" y="555" width="165" height="88" rx="8" fill="#F6F5F1" stroke="#8A877E" stroke-width="1.5"/>
+  <text x="317" y="593" class="name" fill="#33322E">OpenRouter</text>
+  <text x="317" y="617" class="sub" fill="#33322E">Muse Spark</text>
+  <rect x="415" y="555" width="165" height="88" rx="8" fill="#F6F5F1" stroke="#8A877E" stroke-width="1.5"/>
+  <text x="497" y="593" class="name" fill="#33322E">Exa</text>
+  <text x="497" y="617" class="sub" fill="#33322E">crawl and search</text>
+  <rect x="595" y="555" width="165" height="88" rx="8" fill="#F6F5F1" stroke="#8A877E" stroke-width="1.5"/>
+  <text x="677" y="593" class="name" fill="#33322E">Composio</text>
+  <text x="677" y="617" class="sub" fill="#33322E">connectors</text>
+</svg>

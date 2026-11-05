@@ -107,48 +107,10 @@ Legible separates a private **control plane**, where the agents run and the owne
 
 ### System overview
 
-```mermaid
-flowchart TB
-  owner(["Business owner"])
-  agent(["Customer's AI agent<br/>Muse, Instinct, ChatGPT"])
-  site["Business website"]
-
-  subgraph control["Control plane (self-hosted)"]
-    console["Owner console<br/>ES modules, no framework"]
-    api["API and job runner<br/>FastAPI, asyncio"]
-    harness["Legible agent<br/>crawl, extract, interview, review"]
-    sims["Simulation workers<br/>Errand, one process per run"]
-    sqlite[("SQLite<br/>versioned fact sheets, inbox,<br/>simulations, events")]
-  end
-
-  subgraph edge["Edge tier (Cloudflare)"]
-    worker["Public resource Worker<br/>pages, markdown, /quote, /request, /ask"]
-    d1[("D1<br/>published records, events, requests")]
-  end
-
-  subgraph services["External services"]
-    openrouter["OpenRouter<br/>Muse Spark"]
-    exa["Exa<br/>crawl and search"]
-    composio["Composio<br/>account connectors"]
-  end
-
-  owner --> console --> api
-  api <--> sqlite
-  api --> harness
-  api --> sims
-  harness --> openrouter
-  harness --> exa
-  harness --> composio
-  harness -->|crawl| site
-  sims --> openrouter
-  sims -->|test before| site
-  sims -->|test after| worker
-  api -->|"publish facts, pull events<br/>(bearer token)"| worker
-  worker <--> d1
-  site -.->|one link line| worker
-  agent -->|reads| site
-  agent -->|"reads, quotes, asks, requests"| worker
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/system-overview-dark.svg">
+  <img alt="A self-hosted control plane holds the owner console, API, Legible agent, simulation workers and SQLite. It calls OpenRouter, Exa and Composio, and publishes facts over an authenticated API to a Cloudflare edge tier, where customers' AI agents read pages, get quotes, ask questions and send requests." src="docs/architecture/system-overview.svg">
+</picture>
 
 | Component | Code | What it does |
 |---|---|---|
@@ -161,35 +123,10 @@ flowchart TB
 
 ### From website to published page
 
-```mermaid
-sequenceDiagram
-  actor Owner
-  participant L as Legible agent
-  participant C as Exa + BFS crawler
-  participant M as Muse Spark
-  participant E as Errand workers
-  participant W as Edge Worker
-
-  Owner->>L: POST /websites
-  L->>C: Crawl site
-  C-->>L: Pages and images
-  L->>M: Transcribe images (vision)
-  L->>M: Extract typed fact sheet
-  Note over L: Save version 1, every item a draft
-  L->>M: Find blockers (at most 5 questions)
-  L->>M: Write customer requests
-  L->>E: Run agents on the website, 5 at a time
-  E-->>L: Answer, outcome, claims with evidence
-  L->>M: Map failed runs to missing facts
-  L-->>Owner: Questions, each linked to the runs it blocks
-  Owner->>L: Answer in plain language, confirm facts
-  L->>M: Answer to typed operations
-  L->>W: PUT /admin/businesses/{slug}, confirmed items only
-  Owner->>L: Run the check again
-  L->>W: Publish a private preview
-  L->>E: Same requests, now pointed at the preview
-  E-->>L: Compare the two scores
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/onboarding-dark.png">
+  <img alt="A sequence diagram of 19 steps. The Legible agent crawls the site, extracts a draft fact sheet, runs Errand agents on the website, turns failed runs into questions for the owner, publishes confirmed facts to the Worker, and reruns the same requests against a private preview." src="docs/architecture/onboarding-light.png">
+</picture>
 
 Rechecks reuse the first check's requests so that scores are comparable. They run against a separate preview page, which keeps test traffic out of the owner's analytics.
 
@@ -197,33 +134,10 @@ Rechecks reuse the first check's requests so that scores are comparable. They ru
 
 Errand is a general-purpose agent that acts for a person who wants something from a business. It holds nothing specific to any business and knows nothing about Legible, which is what makes it a fair test. It has been frozen since the tag `first-demo-agent-freeze`, apart from its rename.
 
-```mermaid
-flowchart LR
-  request["Customer request<br/>+ customer profile"] --> loop
-
-  subgraph errand["Errand"]
-    loop["Orchestrator tool loop<br/>Muse Spark, 15 tool calls, 6 minutes"]
-    privacy{{"Personal-details gate"}}
-    search["search_web<br/>Exa or saved corpus"]
-    read["read_page<br/>plain fetch, no JavaScript"]
-    browse["browse_task<br/>browser-use and Chromium, 2 workers"]
-    math["do_math<br/>totals and dates"]
-    ask["ask_person<br/>approvals"]
-    finish["finish<br/>answer and labelled claims"]
-    evidence{{"Evidence gate"}}
-  end
-
-  loop --> privacy
-  privacy --> search
-  privacy --> read
-  privacy --> browse
-  loop --> math
-  loop --> ask
-  loop --> finish --> evidence
-  evidence -->|"unsupported claim,<br/>up to 2 retries"| loop
-  evidence --> report["Report with sources"]
-  loop -.-> logs[("JSONL run log")]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/errand-dark.png">
+  <img alt="Errand's orchestrator tool loop calls search, read and browser tools behind a personal-details gate, plus local maths and approval tools. Its final report passes through an evidence gate, which sends unsupported claims back up to twice." src="docs/architecture/errand-light.png">
+</picture>
 
 - **Cheapest step first.** It searches, then reads pages, and uses a browser worker only when reading can't settle the question.
 - **Evidence gate.** Each claim is labelled `verified_at_source`, `listed_unverified` or `unknown`. Code sends back a verified claim if it has no source, or if its numbers never appeared in a tool result.
@@ -232,39 +146,10 @@ flowchart LR
 
 ### Serving agents and the feedback loop
 
-```mermaid
-sequenceDiagram
-  actor Customer
-  participant A as AI agent
-  participant S as Business website
-  participant W as Edge Worker
-  participant D as D1
-  participant L as Control plane
-  actor Owner
-
-  Customer->>A: Under $400 all in, Saturday or a weekday?
-  A->>S: Read site
-  S-->>A: One link line
-  A->>W: GET /b/{slug} (Accept: text/markdown)
-  W->>D: Load record, log page_hit
-  W-->>A: Confirmed facts and stated unknowns
-  A->>W: GET /quote?service=...&zip=...&format=json
-  Note over W: Deterministic: variants, add-ons,<br/>fees, zones, tax, closures
-  W->>D: Log quote, and dead_end if it can't proceed
-  W-->>A: Total, or the named blocker
-  A->>W: POST /request or /ask
-  W->>D: Store item, log event
-  L->>W: GET /admin/businesses/{slug}/events
-  L-->>Owner: Inbox and Bookings
-  Owner->>L: Reply
-  L->>W: POST /admin/items/{id}/reply
-  A->>W: GET /b/{slug}/r/{id}
-  W-->>A: Owner's reply
-  loop Every 6 hours
-    L->>L: Review dead ends, failed quotes and questions
-    L-->>Owner: New questions and unmet demand
-  end
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/architecture/serving-dark.png">
+  <img alt="A sequence diagram of 19 steps. A customer's agent follows the link from the business website to the Worker, reads confirmed facts, gets a deterministic quote and sends a request. The control plane pulls events into the owner's inbox, the owner's reply appears on a status page, and a review runs every 6 hours." src="docs/architecture/serving-light.png">
+</picture>
 
 ### Design rules
 
@@ -341,13 +226,13 @@ Each step in the owner console maps to the API. The console's **Next** card show
 
 | Step | Screen | API | What happens |
 |---|---|---|---|
-| Onboard | Websites | `POST /websites` | Starts the crawl, extraction, interview and simulation job. `GET /websites/{id}/trace` streams its progress and each agent's steps |
+| Onboard | Websites | `POST /websites` | Starts the crawl, extraction, interview and simulation job. `GET /websites/{id}/trace` reports its progress and each agent's steps |
 | Review failures | Simulations | `GET /simulations/{id}` | Shows each run's request, answer, outcome and where it got stuck |
 | Close gaps | Simulations | `GET /websites/{id}/missing`, `POST /inbox/{id}/answer` | The model turns each answer into typed operations, and the page republishes |
 | Publish | Resource | `POST /inbox/{id}/confirm` | Marks drafts as confirmed, saves a new version and pushes the public view to the Worker |
 | Re-test | Simulations | `POST /websites/{id}/simulations` | Reruns the same requests against a private preview of the page |
 | Embed | Websites | `POST /websites/{id}/check-link` | Fetches the business's home page and looks for the link |
-| Act as an agent | Public page | `GET /b/{slug}`, `/quote`, `POST /request`, `/ask` | Each call logs an event on the edge. Add `?format=json` to `/quote` for JSON |
+| Act as an agent | Public page | `GET /b/{slug}`, `/b/{slug}/quote`, `POST /b/{slug}/request`, `/b/{slug}/ask` | Each call logs an event on the edge. Add `?format=json` to a quote for JSON |
 | Handle activity | Inbox, Bookings | `GET /websites/{id}/activity`, `POST /bookings/{id}/reply` | Pulls new events, and shows the reply on the request's status page |
 | Update | Resource | `POST /websites/{id}/instructions`, `POST /inbox/{id}/confirm` | Turns plain language into a proposed change, which goes live once confirmed |
 | Undo | Resource | `POST /websites/{id}/resource/undo` | Restores the previous version and republishes |
@@ -382,6 +267,7 @@ errand/               Consumer agent
 experiment/           Benchmark: sample business, questions, grader, run logs and reports
 scripts/              start.py runs the stack, deploy.py deploys the edge tier
 tests/                Test suite
+docs/architecture/    Diagram sources, images and the script that renders them
 docs/planning/        Original research and design notes
 ```
 

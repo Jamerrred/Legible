@@ -1,0 +1,36 @@
+sequenceDiagram
+  autonumber
+  actor Customer
+  participant A as AI agent
+  participant S as Business website
+  box rgb(245,249,255) Edge tier
+    participant W as Worker
+    participant D as D1
+  end
+  box rgb(255,250,246) Control plane
+    participant L as Legible
+  end
+  actor Owner
+
+  Customer->>A: Under $400, Saturday or a weekday?
+  A->>S: Read the site
+  S-->>A: One link line
+  A->>W: GET /b/{slug} (Accept: text/markdown)
+  W->>D: Load record, log page_hit
+  W-->>A: Confirmed facts and stated unknowns
+  A->>W: GET /b/{slug}/quote?...&format=json
+  Note over W,D: Deterministic: variants, add-ons,<br/>fees, zones, tax, closures
+  W->>D: Log quote, and dead_end if stuck
+  W-->>A: Total, or the named blocker
+  A->>W: POST /b/{slug}/request or /ask
+  W->>D: Store item, log event
+  L->>W: GET /admin/businesses/{slug}/events
+  L-->>Owner: Inbox and Bookings
+  Owner->>L: Reply
+  L->>W: POST /admin/items/{id}/reply
+  A->>W: GET /b/{slug}/r/{id}
+  W-->>A: The owner's reply
+  loop Every 6 hours
+    L->>L: Review traces
+    L-->>Owner: New questions, unmet demand
+  end

@@ -37,6 +37,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 "experiment/scripts/scripted_owner.py" = ["E501"]
 "scripts/start.py" = ["E501"]
 "scripts/deploy.py" = ["E501"]
+"docs/architecture/render.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

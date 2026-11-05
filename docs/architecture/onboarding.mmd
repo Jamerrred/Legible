@@ -1,0 +1,35 @@
+sequenceDiagram
+  autonumber
+  actor Owner
+  box rgb(255,250,246) Control plane
+    participant L as Legible agent
+    participant E as Errand workers
+  end
+  box rgb(251,250,247) External services
+    participant C as Exa + BFS crawl
+    participant M as Muse Spark
+  end
+  box rgb(245,249,255) Edge tier
+    participant W as Worker
+  end
+
+  Owner->>L: POST /websites
+  L->>C: Crawl the site
+  C-->>L: Pages and images
+  L->>M: Transcribe images (vision)
+  L->>M: Extract typed fact sheet
+  Note over L,E: Save version 1, every item a draft
+  L->>M: Find blockers (at most 5 questions)
+  L->>M: Write customer requests
+  L->>E: Run agents on the website
+  E-->>L: Answer, outcome, claims with evidence
+  L->>M: Map failed runs to missing facts
+  L-->>Owner: Questions, linked to the runs they block
+  Owner->>L: Answer in plain language, confirm facts
+  L->>M: Turn answers into typed operations
+  L->>W: PUT /admin/businesses/{slug}, confirmed only
+  Owner->>L: Run the check again
+  L->>W: Publish a private preview
+  L->>E: Same requests, pointed at the preview
+  E-->>L: New results
+  L-->>Owner: Compare the two scores
