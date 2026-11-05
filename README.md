@@ -6,6 +6,8 @@ AI agents already shop for people, but they often can't finish the job on a smal
 
 Give Legible a website. It reads the site, works out what an agent couldn't, and asks the owner to fill the gaps. It then publishes a small page that the owner links from their site. Agents read the confirmed facts there, work out quotes and send booking requests. Only facts the owner has confirmed ever go public.
 
+**See one:** [a page Legible generated](https://legible.jamerrred-audiobooks.workers.dev/b/sunrise-auto-detailers) for a fictional business, from [its website](https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev).
+
 ## Does it help?
 
 We tested this on a fictional business with our own stand-in agent, once with the website alone and once with one added link to a page written for agents.
