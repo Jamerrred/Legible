@@ -213,7 +213,7 @@ To let owners connect accounts such as Google Calendar and Google Sheets through
 
 ## Record a demo
 
-A private demo copy plays the whole flow back in about a minute, with no AI credit. Crawling, questions and test customers are scripted from a real crawl and the demo business's facts. Publishing is real, so the public page and its quote, request and ask forms work. It runs separately from your real data:
+A private demo copy plays the whole flow back in about a minute, with no AI credit. Crawling, questions and test customers are scripted from a real crawl and the demo business's facts. Publishing is real, so the public page and its quote, request and ask forms work. It needs a Cloudflare Worker to publish to, so set `LEGIBLE_EDGE_URL` and `LEGIBLE_ADMIN_TOKEN` first, or run `scripts/start.py` alongside it:
 
 ```bash
 LEGIBLE_DEMO=1 LEGIBLE_DB_PATH=legible/demo.db uv run uvicorn legible.api:app --port 8300
