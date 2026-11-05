@@ -1,6 +1,6 @@
 # MuseFront project overview
 
-*Last updated 5 November 2026. The first local demo is built on one mock business: see [the benchmark](../reports/first-demo-benchmark.md). The back office agent isn't built yet.*
+*Last updated 5 November 2026. The first local demo is built on one mock business: see [the benchmark](../reports/first-demo-benchmark.md). The back office agent's backend is built as a prototype: see [its report](../reports/back-office-mvp.md).*
 
 ## In one sentence
 
@@ -37,7 +37,9 @@ A compelling, functional demo on mock businesses. There's no pilot with real bus
 | Connector application to Meta | **Dropped** |
 | MCP and Poppy | Optional, and only after the back office agent |
 | Owner account connectors | Composio |
-| Website crawling | Context.dev |
+| Website crawling | Exa, with a plain crawl as backup. This replaced Context.dev on 5 November |
+| Simulation | One check at onboarding, then a periodic review of real agent activity |
+| Hosting | The resource on a Cloudflare Worker with D1. The back office runs separately |
 | Roadblocks and queries | Wide and long-tail, not modelled on the van cleaning example alone |
 
 ## Proposed, not yet confirmed
@@ -70,7 +72,7 @@ Think of a shop. The resource is the sign in the window, the business record is 
 ```
 SOURCES                          BACK OFFICE AGENT             OUTPUT
 
-Website (Context.dev)    --->    Proposes changes     --->     Business record
+Website (Exa)            --->    Proposes changes     --->     Business record
 Owner accounts (Composio)        Asks the owner                facts, offerings,
 Files and interview              Applies instructions          actions, rules
 Owner instructions               Runs the simulator                  |
@@ -146,7 +148,7 @@ The demo and the Muse test can answer the second and third questions. The last t
 - **Link following:** an unmodified agent may never follow the link from the website to the resource. Step 5 of the build plan tests this.
 - **Social links:** Instagram's `robots.txt` blocks compliant crawlers, and we found no evidence either way that agents follow bio links. Don't claim an agent got there that way unless we see it happen.
 - **New sites and search:** a brand-new mock site probably won't appear in search results, so prompts give the agent the business's URL.
-- **Tools still to check:** which services Composio can connect, Context.dev's pricing, and Poppy's exact field names against its validator.
+- **Tools still to check:** which services Composio can connect, and Poppy's exact field names against its validator.
 
 ## Glossary
 
@@ -164,4 +166,3 @@ The demo and the Muse test can answer the second and third questions. The last t
 | MCP | A standard way for an agent to call a service's functions directly |
 | Poppy | The Personal Agent Protocol from Sierra and Meta, announced in October 2026 and still a draft |
 | Composio | A service for connecting an owner's accounts, such as a calendar |
-| Context.dev | A service for crawling public websites |

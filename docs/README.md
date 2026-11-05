@@ -1,14 +1,16 @@
 # MuseFront docs
 
-*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. The first local demo is built: see [its benchmark](../reports/first-demo-benchmark.md) and [build report](../reports/first-demo.md).*
+*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. The back office agent's backend is built as a prototype: see [its report](../reports/back-office-mvp.md).*
 
 ## Current position
 
-MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps it accurate. The goal is a compelling, functional demo on four mock service businesses.
+MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps it accurate. The goal right now is a working prototype, as fast as possible.
 
-**Done so far:** the first mock business (mobile detailing), its resource, the consumer agent and a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)).
+**Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the back office backend with a public resource on Cloudflare ([report](../reports/back-office-mvp.md)).
 
-**Next steps:** finish the 5 "before" queries that ran out of OpenRouter credit, then test on real Muse, which can't reach localhost, so it needs a public host and two live versions ([plan](03-build-plan.md#how-the-first-demo-changed-this)).
+**Next steps:** the founder's interface design, which the API then gets fitted to ([owner app](10-owner-app.md)), and connecting real accounts through Composio.
+
+**Skipped on the founder's direction, 5 November:** the 5 missing "before" runs, the real Muse check and the other three mock businesses. Whether real agents follow the link is still untested.
 
 ## Read these in order
 
@@ -23,6 +25,7 @@ MuseFront gives a service business a small website that any AI agent can read an
 | [07 Consumer agent research](07-consumer-agent-research.md) | How research agents, browser agents and harnesses are built, with sources |
 | [08 Consumer agent design](08-consumer-agent-design.md) | What we'd build as our stand-in agent, including draft instructions |
 | [09 Back office agent](09-back-office-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
+| [10 Owner app](10-owner-app.md) | The four screens, how they map to the API, and who can change what |
 
 Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names real businesses, so don't publish it as is.
 
@@ -37,6 +40,10 @@ Older material may say something different. These positions are current:
 - **The demo set is four service businesses**, not a car wash, HVAC company and online store.
 - **Roadblocks and queries are long-tail.** The van cleaning query is one example only.
 - **The earlier in-chat PRD is out of date.** These docs replace it.
+- **Exa reads websites**, not Context.dev, with a plain crawl as backup.
+- **There's one simulation at onboarding**, then a periodic review of real agent activity. Nothing simulates continuously.
+- **Analytics stay minimal:** a feed, a few counts and unmet demand.
+- **The resource is served by a Cloudflare Worker,** and the back office runs separately.
 
 [01 Project overview](01-project-overview.md#what-replaced-what) has the full list and the reasons.
 

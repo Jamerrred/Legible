@@ -1,6 +1,6 @@
 # The back office agent
 
-*Last updated 5 November 2026. This agent isn't built yet. It comes after the before-and-after test works, as set out in the [build plan](03-build-plan.md).*
+*Last updated 5 November 2026. The backend is built as a prototype, in `back_office/` and `edge/`: see [its report](../reports/back-office-mvp.md). This spec is wider than the prototype, and the report says what was cut.*
 
 ## What it does
 
@@ -55,12 +55,12 @@ Nothing runs constantly. Each business's agent is stored data that wakes on an e
 
 | Stage | What happens | Built on |
 |---|---|---|
-| Ingestion | Crawl the site and read price images and PDFs | Context.dev |
+| Ingestion | Crawl the site and read price images | Exa, with a plain crawl as backup |
 | Connectors | Read connected accounts such as a calendar or price sheet | Composio |
 | Interview | Ask only what's missing: "Do you go to customers' homes?" | Agent and owner chat |
 | Record | Store confirmed facts, offerings, actions and rules | Our database |
 | Generation | Build the resource from the record | Our code, not the model |
-| Simulation | Send consumer agents at the resource and find what fails | [The consumer agent](08-consumer-agent-design.md) |
+| Simulation | One check at onboarding: send consumer agents at the website and find what fails. The owner can run it again | [The consumer agent](08-consumer-agent-design.md) |
 | Inbox | Ask for confirmations and answers, and handle requests | Owner app |
 | Learning | Turn dead ends, questions and failures into owner questions | Activity log |
 
