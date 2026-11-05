@@ -3,32 +3,36 @@
   <desc id="desc">A business owner works with the Legible harness, which calls Muse Spark and Exa and runs Errand as simulated customers. Legible publishes confirmed facts to a public page on Cloudflare and gets back questions, bookings and agent traces. AI agents like Muse read the business website, follow its one link and use the public page.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#55524A"/>
+      <path d="M0 0 L10 5 L0 10 z" fill="#111111"/>
     </marker>
     <style>
       text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; text-anchor: middle; }
       .name { font-size: 23px; font-weight: 600; }
       .sub { font-size: 18px; }
-      .label { font-size: 16px; fill: #55524A; }
+      .label { font-size: 17px; font-weight: 600; fill: #111111; }
       .start { text-anchor: start; }
-      .line { fill: none; stroke: #55524A; stroke-width: 1.8; marker-end: url(#arrow); }
+      .line { fill: none; stroke: #111111; stroke-width: 2.4; marker-end: url(#arrow); }
       .both { marker-start: url(#arrow); }
       .dash { stroke-dasharray: 6 5; }
     </style>
   </defs>
 
+  <rect width="1360" height="480" fill="#FEFEFE"/>
+
   <!-- Connections -->
   <path class="line" d="M210 208 H338"/>
-  <text x="274" y="174" class="label">website,</text>
-  <text x="274" y="196" class="label">answers, updates</text>
+  <text x="274" y="150" class="label">website,</text>
+  <text x="274" y="172" class="label">answers,</text>
+  <text x="274" y="194" class="label">updates</text>
   <path class="line both" d="M500 76 V108"/>
   <path class="line both" d="M500 302 V370"/>
   <text x="512" y="342" class="label start">runs tests</text>
   <path class="line" d="M660 150 H818"/>
   <text x="740" y="138" class="label">confirmed facts</text>
   <path class="line" d="M820 215 H662"/>
-  <text x="740" y="240" class="label">questions, bookings,</text>
-  <text x="740" y="262" class="label">agent traces</text>
+  <text x="730" y="238" class="label">questions,</text>
+  <text x="730" y="258" class="label">bookings,</text>
+  <text x="730" y="278" class="label">agent traces</text>
   <path class="line" d="M660 395 H800 V285 H818"/>
   <text x="730" y="386" class="label">test after</text>
   <path class="line" d="M660 430 H818"/>
@@ -36,7 +40,8 @@
   <path class="line dash" d="M950 372 V302"/>
   <text x="962" y="343" class="label start">one link</text>
   <path class="line" d="M1170 205 H1082"/>
-  <text x="1126" y="172" class="label">read, quote,</text>
+  <text x="1126" y="150" class="label">read,</text>
+  <text x="1126" y="172" class="label">quote,</text>
   <text x="1126" y="194" class="label">book</text>
   <path class="line" d="M1257 256 V417 H1082"/>
   <text x="1170" y="407" class="label">read</text>

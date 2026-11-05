@@ -1,6 +1,6 @@
 # Legible
 
-**Legible is an agentic harness, powered by Muse Spark, that lets AI agents like Muse do business with small businesses.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page where Muse or any other agent can answer a customer, work out an all-in price and send a booking request.
+**Legible is an agentic harness, powered by Muse Spark, that lets AI agents like Muse do business with small businesses.** It reads the business's website and connected accounts, runs simulated customer agents against them, and interviews the owner about whatever stopped those agents. It then publishes a verified page, which the owner embeds as a link on their website, social media or storefront. When a consumer agent like Muse arrives, it can use that page to answer the customer's questions, work out an all-in price and send a booking request.
 
 AI agents like Muse and Instinct already shop for people, but they often can't finish the job on a small business's website. Reading the page is only the start. The agent has to turn a messy request into a correct, all-in answer, using rules that the site scatters across pages or never states:
 
@@ -24,7 +24,7 @@ A business owner gives Legible a website and other resources connected to their 
 
 4. **Publish.** A filter strips anything unconfirmed, so a draft never leaves the harness. A Cloudflare Worker backed by D1 serves the rest as HTML and markdown, with no model in the request path. Agents get a deterministic `/quote` engine, also available as JSON, that handles size variants, add-ons, fees, zones, tax and closures without asking for personal details, plus `/request` and `/ask` endpoints. Facts the owner hasn't stated are published as explicit unknowns, so agents don't fill the silence with a guess. Rechecks run the same requests against a private preview of the page, so the before and after scores can be compared.
 
-5. **Embed.** The owner adds one link line to their website or storefront. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
+5. **Embed.** The owner adds one link line to their website, social media or storefront. In [our benchmark](#benchmark-can-an-agent-finish-the-job), that one line took an agent from 3 of 7 correct answers to 7 of 7, about 5 times faster and 3.7 times cheaper, using a hand-written page of the same kind.
 
 6. **Run the agent inbox.** Questions and booking requests from outside agents reach the owner immediately. The owner's reply appears on a public status page that the agent can check.
 
@@ -55,7 +55,7 @@ We graded 31 runs. The website-alone version stopped at 7 questions when our API
 | Average time per run, same 7 | 165 s | **32 s** | 29 s |
 | Average cost per run, same 7 | $0.263 | **$0.071** | $0.041 |
 
-Errand found and used the page in 6 of those 7 runs, and 11 of all 12, without being told it exists.
+Errand found and used the page in 6 of those 7 runs, and 11 of all 12, without being told it exists. Across the 12 runs with the link, it read the page's facts to answer the customer in 11, called `/quote` to work out prices in 9, and sent a booking request in the one question that asked for it, after getting the customer's approval.
 
 ### What we asked
 
