@@ -8,7 +8,7 @@ MuseFront gives a service business a small website that any AI agent can read an
 
 **Done so far:** the first mock business (mobile detailing), its resource, the consumer agent and a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)).
 
-**Next steps:** finish the 5 "before" queries that ran out of OpenRouter credit, then test on real Muse, which can't reach localhost, so it needs a public host and two live versions ([plan](03-build-plan.md#how-the-first-demo-changed-this)).
+**Next steps:** a minimum viable check only: a few runs of the consumer agent with Exa against the [live site](../deploy/workers/README.md), then 1 or 2 searches on real Muse, with and without the resource. Other businesses and wider benchmarks wait until the founder asks for them.
 
 ## Read these in order
 

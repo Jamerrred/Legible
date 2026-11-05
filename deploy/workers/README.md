@@ -10,11 +10,11 @@ You need `uv`, Node and a Wrangler login, which `npx wrangler login` sets up. Th
 
 ## What it creates
 
-| Worker | What it is |
-|---|---|
-| `cormorant-detailing` | The site, "before" |
-| `cormorant-mobile-detailing` | The site, "after", which adds one link line |
-| `cormorant-agents` | The resource |
+| Worker | What it is | Live at |
+|---|---|---|
+| `cormorant-detailing` | The site, "before" | https://cormorant-detailing.jamerrred-audiobooks.workers.dev |
+| `cormorant-mobile-detailing` | The site, "after", which adds one link line | https://cormorant-mobile-detailing.jamerrred-audiobooks.workers.dev |
+| `cormorant-agents` | The resource | https://cormorant-agents.jamerrred-audiobooks.workers.dev |
 
 The names don't reveal which version is which, so a test doesn't give it away.
 

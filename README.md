@@ -2,7 +2,7 @@
 
 MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps that website accurate.
 
-**Status:** the first local demo is built on one fictional business, Cormorant Mobile Detailing. On the 7 queries run on both versions, a stand-in agent went from 3 correct to 7 correct after one link to a resource was added. That's a small test, and real Muse is untested: see [the benchmark](reports/first-demo-benchmark.md).
+**Status:** the first demo is built on one fictional business, Cormorant Mobile Detailing, and is [live on Cloudflare](deploy/workers/README.md). In local runs, on the 7 queries run on both versions, a stand-in agent went from 3 correct to 7 correct after one link to a resource was added. That's a small test, and real Muse is untested: see [the benchmark](reports/first-demo-benchmark.md).
 
 ## Quick start
 
@@ -61,6 +61,7 @@ uv run python -m bench.summarize --name first-demo
 | `demo_resource/` | The agent-readable resource, with quote, request and question forms |
 | `consumer_agent/` | The general stand-in agent. It knows nothing about this project or business |
 | `bench/` | Control page, mock web, queries, grader and benchmark runner |
+| [deploy/workers/](deploy/workers/README.md) | The Cloudflare deployment and its live addresses |
 | `scripts/` | The server launcher and the booking check |
 | `tests/` | Tests for the facts, site, resource and grader |
 | `corpus/` | Saved page copies for the agent's local search |
