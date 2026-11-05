@@ -16,10 +16,11 @@ from urllib.parse import urlparse
 import httpx
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from back_office import brain, connectors, edge, model, store, work
+from back_office import brain, connectors, demo, edge, model, store, work
 from back_office.record import confirm_drafts, counts, slugify, today_for
 
 _tasks: set[asyncio.Task] = set()
@@ -110,7 +111,7 @@ class NewWebsite(BaseModel):
 @app.post("/websites", status_code=202)
 async def add_website(body: NewWebsite):
     host = urlparse(body.url).hostname or body.url
-    base = slugify(body.name or host.removeprefix("www.").split(".")[0])
+    base = demo.SLUG if demo.ENABLED else slugify(body.name or host.removeprefix("www.").split(".")[0])
     slug, n = base, 2
     while store.one("SELECT id FROM website WHERE slug = ?", slug):
         slug, n = f"{base}-{n}", n + 1
@@ -126,7 +127,7 @@ async def add_website(body: NewWebsite):
         pages=[],
         created_at=store.now(),
     )
-    _background(work.onboard(website_id, body.run_check, body.sim_queries))
+    _background(demo.onboard(website_id, body.run_check) if demo.ENABLED else work.onboard(website_id, body.run_check, body.sim_queries))
     return _site_view(store.website(website_id))
 
 
@@ -225,7 +226,11 @@ async def instruct(website_id: str, body: Instruction):
     """Plain language in, a proposal out. Nothing changes until the owner confirms it."""
     _site(website_id)
     record = work.current_record(website_id)
-    plan = await brain.instruction_to_ops(record, body.text, today_for(record))
+    if demo.ENABLED:
+        await asyncio.sleep(1.1)
+        plan = demo.plan_instruction(body.text, today_for(record))
+    else:
+        plan = await brain.instruction_to_ops(record, body.text, today_for(record))
     if plan.get("clarifying_question") or not plan.get("ops"):
         question = plan.get("clarifying_question") or "That didn't map to a change. Could you say it another way?"
         return {"needs_clarifying": True, "question": question}
@@ -247,7 +252,7 @@ async def answer(item_id: str, body: Answer):
     plan = {"summary": "Replied without changing the record", "ops": []}
     if body.scope != "once":
         record = work.current_record(website_id)
-        plan = await brain.answer_to_ops(record, item["title"], body.text, today_for(record))
+        plan = demo.plan_answer(item, body.text) if demo.ENABLED else await brain.answer_to_ops(record, item["title"], body.text, today_for(record))
         statement = item["payload"].get("unknown_statement")
         if not plan.get("ops") and statement:
             # The owner has no answer yet, so the page keeps saying so plainly.
@@ -280,6 +285,8 @@ async def confirm(item_id: str, body: Confirm | None = None):
         raise HTTPException(409, "This item can't be confirmed")
     store.resolve_inbox(item_id, "confirmed")
     published = await work.publish(website_id) if item["kind"] != "insight" else None
+    if demo.ENABLED and item["kind"] == "review":
+        _background(demo.seed_activity(website_id))
     return {"confirmed": True, "version": store.latest_record(website_id)["version"], "published": published}
 
 
@@ -368,6 +375,9 @@ async def activity(website_id: str, limit: int = 50):
 async def revise_now(website_id: str):
     """Run the periodic review now, rather than waiting for the cron."""
     _site(website_id)
+    if demo.ENABLED:
+        await work.sync_activity(website_id)
+        return {"signals": 0, "questions": 0, "insights": 0}
     return await work.revise(website_id)
 
 
@@ -455,7 +465,7 @@ class NewCheck(BaseModel):
 @app.post("/websites/{website_id}/simulations", status_code=202)
 async def run_check(website_id: str, body: NewCheck):
     _site(website_id)
-    _background(work.run_simulation(website_id, target=body.target, n=body.n, profile=body.profile))
+    _background(demo.run_simulation(website_id, body.target) if demo.ENABLED else work.run_simulation(website_id, target=body.target, n=body.n, profile=body.profile))
     return {"started": True}
 
 
@@ -525,6 +535,20 @@ async def sync_account(website_id: str, toolkit: str, body: SyncAccount | None =
         return {"proposal": None, "summary": "Nothing new in this account"}
     item_id = store.add_inbox(website_id, "proposal", plan.get("summary", f"Changes from {toolkit}"), f"Read from {toolkit}.", {"ops": plan["ops"]}, "connector")
     return {"proposal": item_id, "summary": plan.get("summary")}
+
+
+@app.get("/config")
+def config():
+    return {"demo": demo.ENABLED, "demo_url": demo.SITE_URL if demo.ENABLED else None}
+
+
+@app.get("/demo/reset")
+async def demo_reset():
+    """Start a demo take over. It only works in the demo copy."""
+    if not demo.ENABLED:
+        raise HTTPException(404, "Not found")
+    await demo.reset()
+    return RedirectResponse("/")
 
 
 @app.get("/health")
