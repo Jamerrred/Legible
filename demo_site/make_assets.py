@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-from mf_core.business import load_facts
+from legible_core.business import load_facts
 
 OUT = Path(__file__).resolve().parent / "static" / "img"
 FONT_DIR = "/System/Library/Fonts/Supplemental/"

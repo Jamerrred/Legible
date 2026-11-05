@@ -1,4 +1,4 @@
-# Back office prototype: build report
+# Legible app prototype: build report
 
 *Run on 5 November 2026 on the fictional Cormorant Mobile Detailing, using the deployed site without the link. The consumer agent is unchanged since its freeze.*
 
@@ -54,7 +54,7 @@ The OpenRouter client, the Exa client, the page parser and the whole agent as th
 
 - **Quotes:** `/quote` handles base prices, variants, add-ons, fees, tax and zones. Rules like fleet discounts appear as text and aren't calculated.
 - **Availability:** stated hours and closures only, until a calendar is connected.
-- **Hosting:** the back office runs on the founder's Mac, so its 6-hourly review only runs while the Mac is on. The public resource doesn't depend on it.
+- **Hosting:** the Legible app runs on the founder's Mac, so its 6-hourly review only runs while the Mac is on. The public resource doesn't depend on it.
 - **Login:** the API has none, so it has to stay on localhost.
 - **Owner channels:** the API only, with no text or email.
 
@@ -71,7 +71,7 @@ This session used $5.77 of OpenRouter credit, across three full walkthroughs and
 
 ## Added afterwards: the owner app
 
-The app is in `back_office/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Cormorant record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect were tested later: see the next section.
+The app is in `legible/web/`, and the inbox was split into five tabs: see [the owner app doc](../docs/10-owner-app.md). Tested in a real browser on the live Cormorant record. That covered the Resource text box (propose, confirm, live, undo), direct edits, price edits, answering an agent's question, replying to a booking, and adding a website. Run check and Connect were tested later: see the next section.
 
 **Bugs that testing caught, all fixed:**
 

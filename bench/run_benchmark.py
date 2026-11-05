@@ -33,7 +33,7 @@ import httpx
 from dotenv import dotenv_values
 
 from bench.grade import grade, read_run
-from mf_core.logbook import read_events
+from legible_core.logbook import read_events
 
 ROOT = Path(__file__).resolve().parent.parent
 STREAMS = {"before": ["site-before"], "after": ["site-after", "resource"], "control": ["control"]}
@@ -93,7 +93,7 @@ def one_run(query: dict, variant: str, repeat: int, args: argparse.Namespace, re
     person_path = out / "person.json"
     person_path.write_text(json.dumps(person, indent=1))
     cmd = [
-        sys.executable, "-m", "consumer_agent.run", "--task", query["query"], "--person", str(person_path),
+        sys.executable, "-m", "errand.run", "--task", query["query"], "--person", str(person_path),
         "--search", "local", "--corpus", str(ROOT / "corpus" / variant), "--tier", args.tier, "--out", str(out),
     ]  # fmt: skip
     started = time.time()

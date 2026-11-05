@@ -204,7 +204,7 @@ wheels = [
 ]
 
 [[package]]
-name = "musefront-workers"
+name = "legible-workers"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

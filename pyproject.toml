@@ -1,7 +1,7 @@
 [project]
-name = "musefront"
+name = "legible"
 version = "0.1.0"
-description = "MuseFront first demo: mock detailing site, agent resource, consumer agent and benchmark"
+description = "Legible makes small businesses readable to AI agents. Includes Errand, a consumer agent, and the benchmark."
 requires-python = ">=3.12,<3.13"
 dependencies = [
     "beautifulsoup4>=4.15.0",
@@ -22,9 +22,9 @@ package = false
 [tool.ruff]
 line-length = 140
 target-version = "py312"
-# consumer_agent/ stays byte-identical to the tag first-demo-agent-freeze, so the benchmark's
+# errand/ matches the tag first-demo-agent-freeze apart from its module name, so the benchmark's
 # remaining runs use the same agent. Lint it only when the agent is deliberately changed.
-extend-exclude = ["consumer_agent", "research_notes"]
+extend-exclude = ["errand", "research_notes"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
@@ -33,7 +33,7 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 # These hold long runs of page text, where wrapping would hurt more than it helps.
 "demo_resource/*" = ["E501"]
 # Model prompts are long lines of plain text.
-"back_office/*" = ["E501"]
+"legible/*" = ["E501"]
 "scripts/mvp_demo.py" = ["E501"]
 "scripts/start.py" = ["E501"]
 

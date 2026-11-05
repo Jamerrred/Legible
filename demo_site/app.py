@@ -13,8 +13,8 @@ from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException
 
 from demo_site.booking import register_booking
-from mf_core.business import load_facts
-from mf_core.logbook import log_event
+from legible_core.business import load_facts
+from legible_core.logbook import log_event
 
 HERE = Path(__file__).resolve().parent
 PAGES = ["/", "/faq", "/book"]
@@ -46,7 +46,7 @@ def create_app(variant: str = "before") -> FastAPI:
     templates = Jinja2Templates(directory=HERE / "templates")
     templates.env.trim_blocks = True
     templates.env.lstrip_blocks = True
-    templates.env.globals["resource_url"] = os.environ.get("MF_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
+    templates.env.globals["resource_url"] = os.environ.get("LEGIBLE_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
     templates.env.globals.update(variant=variant, business=facts["business"])
 
     def render(request: Request, template_name: str, status_code: int = 200, **context):

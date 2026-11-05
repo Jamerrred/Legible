@@ -46,9 +46,9 @@ Yes, a long-tail "agent front door" category exists, but it is tiny, has no fund
 - AgenticPlug sells "agentic commerce optimization" pages for restaurants; not opened. [SNIPPET ONLY] — [AgenticPlug](https://agenticplug.ai/ai-search-optimization-for/restaurants)
 
 ### Inferences
-- The MuseFront output artifact (machine-facing profile plus read-only MCP) is already free or nearly free. Price anchors here are $0-$5/month, so the artifact alone cannot carry a subscription.
+- The Legible output artifact (machine-facing profile plus read-only MCP) is already free or nearly free. Price anchors here are $0-$5/month, so the artifact alone cannot carry a subscription.
 - Most live "booking" endpoints route the final step to a consumer-confirm link (Lokuli, ServeCounter, and Fresha below). The market has not yet solved safe agent-completed writes for services, which is where an owner approval flow could matter.
-- Every startup above needs businesses to adopt its booking system or join its directory. None was found sitting on top of a business's existing stack as an overlay, which is MuseFront's framing. That is differentiation, but it also means MuseFront inherits the vertical SaaS write-access problem in Q6.
+- Every startup above needs businesses to adopt its booking system or join its directory. None was found sitting on top of a business's existing stack as an overlay, which is Legible's framing. That is differentiation, but it also means Legible inherits the vertical SaaS write-access problem in Q6.
 
 ### Gaps
 - No systematic pass of YC W25-F26 batch lists or Product Hunt was possible after the search budget ran out; only two YC industry pages were opened.
@@ -104,7 +104,7 @@ Commerce platforms have made product agent-readiness a free default, so that par
 - NLWeb: open toolkit where each instance acts as an MCP server over Schema.org markup. About 6.3k stars, no formal releases listed, Microsoft support address — [GitHub](https://github.com/nlweb-ai/NLWeb)
 
 ### Inferences
-- For product merchants on major platforms, "agent-ready" is now a default setting. MuseFront should not compete here.
+- For product merchants on major platforms, "agent-ready" is now a default setting. Legible should not compete here.
 - For services, Google's phone path needs no endpoint at all, while OpenTable/Resy/Yelp/Fresha act as walled gateways. The open question is who speaks for the independent service business with no marketplace, or with a marketplace that has not connected.
 - Vertical SaaS's unopened consumer-agent access looks like a lag rather than a principled refusal. Fresha shows how quickly it can ship, so assume any overlay is on borrowed time in each vertical.
 
@@ -146,7 +146,7 @@ Sierra does not serve SMBs: no self-serve, no published price, reported six-figu
 
 ### Inferences
 - PAP's design makes "start with what you have" a selling point, and its `/.well-known` discovery file is exactly what a long-tail business cannot author. A hosted PAP publisher is a real product gap, but it also shows the category is a thin compliance layer, and Meta Business Agent is likely to get native PAP support given its stated involvement.
-- Meta's free agent is the closest overlap with MuseFront for businesses already run on WhatsApp and Instagram, and it now has the SMB's connected tools through Muse for Small Business.
+- Meta's free agent is the closest overlap with Legible for businesses already run on WhatsApp and Instagram, and it now has the SMB's connected tools through Muse for Small Business.
 - The apparent exclusion of health-related businesses from Meta's agent, if accurate, is a usable opening for clinics and possibly med spas, subject to compliance cost. It rests on one tracker.
 
 ### Gaps
@@ -158,7 +158,7 @@ Sierra does not serve SMBs: no self-serve, no published price, reported six-figu
 ## Q4. Adjacent categories: GEO/AEO, agent commerce infra, AI receptionists
 
 ### Takeaway
-GEO tools mostly do not serve agents; Scrunch's AXP (read-only, enterprise) is the exception. Commerce infra is real but crowded with payment rails and aimed at products, not service SMBs. AI receptionists already solve answer-and-book for humans at $49-$449/month with real budget, and they are the most credible competitor to absorb MuseFront's job, because a Google caller lands on them first.
+GEO tools mostly do not serve agents; Scrunch's AXP (read-only, enterprise) is the exception. Commerce infra is real but crowded with payment rails and aimed at products, not service SMBs. AI receptionists already solve answer-and-book for humans at $49-$449/month with real budget, and they are the most credible competitor to absorb Legible's job, because a Google caller lands on them first.
 
 ### Cited Findings
 
@@ -186,9 +186,9 @@ GEO tools mostly do not serve agents; Scrunch's AXP (read-only, enterprise) is t
 - Vertical SaaS is bundling this: Housecall Pro sells Voice and CSR AI add-ons by demo — [Housecall Pro](https://www.housecallpro.com/pricing/). Jobber's AI is in-app with beta voice on every plan — [Truto](https://truto.one/blog/connect-jobber-to-chatgpt-manage-leads-requests-and-job-status.md) [SNIPPET ONLY]
 
 ### Inferences
-- A consumer agent calling a business is, from the business's view, just another call. Receptionists already hold the policy knowledge, calendar connection, call transcripts and budget, so adding an agent-readable endpoint is a small extension for them. They also see the traces MuseFront needs.
+- A consumer agent calling a business is, from the business's view, just another call. Receptionists already hold the policy knowledge, calendar connection, call transcripts and budget, so adding an agent-readable endpoint is a small extension for them. They also see the traces Legible needs.
 - GEO vendors could add readiness cheaply (and already give away checks, per Q1), but their buyer is a marketer at a mid-size or larger brand, not a salon owner.
-- Commerce infra is complementary to MuseFront rather than competitive, and mostly irrelevant until agents pay for services in-channel.
+- Commerce infra is complementary to Legible rather than competitive, and mostly irrelevant until agents pay for services in-channel.
 
 ### Gaps
 - Daydream: not researched. Crossmint, Henry Labs and New Generation funding: not found.
@@ -198,7 +198,7 @@ GEO tools mostly do not serve agents; Scrunch's AXP (read-only, enterprise) is t
 ## Q5. SMB willingness to pay, adoption, and channels
 
 ### Takeaway
-Adoption depends heavily on definition, from 18-24% in hard data to 66-77% in opinion surveys. The actual spend is low: median about $28/month in bank data, $250/month among those who report paying. MuseFront has two plausible prices: under $50 for self-serve, or $100-$300 if bundled into answer-and-book or sold through agencies. Channel access is probably decisive, and it already belongs to HighLevel, GoDaddy, Wix, vcita-style white-label players and vertical SaaS.
+Adoption depends heavily on definition, from 18-24% in hard data to 66-77% in opinion surveys. The actual spend is low: median about $28/month in bank data, $250/month among those who report paying. Legible has two plausible prices: under $50 for self-serve, or $100-$300 if bundled into answer-and-book or sold through agencies. Channel access is probably decisive, and it already belongs to HighLevel, GoDaddy, Wix, vcita-style white-label players and vertical SaaS.
 
 ### Cited Findings
 
@@ -238,7 +238,7 @@ Adoption depends heavily on definition, from 18-24% in hard data to 66-77% in op
 - Birdeye: 30-tool MCP (3 Aug 2026) is owner-facing analytics for reputation and listings, not for consumer agents — [Birdeye](https://birdeye.com/blog/?p=72193)
 
 ### Inferences
-- The 41%-free plus $28 median pattern suggests self-serve MuseFront competes with "free default from my platform". Pricing near a receptionist needs a booked-job ROI story, and that story is hard because attribution is weak (see Q7).
+- The 41%-free plus $28 median pattern suggests self-serve Legible competes with "free default from my platform". Pricing near a receptionist needs a booked-job ROI story, and that story is hard because attribution is weak (see Q7).
 - With 64% relying on external tools and low skill confidence, the buyer who understands "adversarial agent simulation" is more likely to be an agency than an owner. Sell the simulation report as an agency audit deliverable, and let the agency own the recurring relationship.
 - Vendasta's unshipped MCP and customer pressure suggest reseller platforms want this but have not built it, making a white-label partner a realistic early route.
 
@@ -272,7 +272,7 @@ Restaurants and boutique retail are effectively closed. Salons are contested, an
 
 ### Inferences
 
-**Piece-by-piece verdict for MuseFront**
+**Piece-by-piece verdict for Legible**
 
 | Piece | Verdict | Why |
 |---|---|---|
@@ -283,7 +283,7 @@ Restaurants and boutique retail are effectively closed. Salons are contested, an
 | Standards publishing across ACP, UCP, PAP, WebMCP, ARD for a non-technical owner | **Open but thin** | Real pain, moving target; only valuable if agents consult it, and likely absorbed by platforms |
 | Adversarial simulation for missing business context | **White space, feature-sized** | I found no one offering it for SMBs. Easy to copy; strongest as a sales wedge or agency audit |
 | Owner approval inbox for agent-originated requests | **Mostly white space** | Consumer confirm links dominate; anewera has pre-approved actions; Yext's Action Center concerns marketing fixes. WTP unproven; receptionists and Meta can add it |
-| Self-improvement from agent traces | **White space with a data problem** | Traces only exist on channels MuseFront hosts, and Google-call, ChatGPT and Muse browsing traffic will largely bypass it |
+| Self-improvement from agent traces | **White space with a data problem** | Traces only exist on channels Legible hosts, and Google-call, ChatGPT and Muse browsing traffic will largely bypass it |
 
 **Recommended wedge hypothesis:** independent, phone-first home-service trades and pet care businesses on light tools, sold through agencies or receptionist vendors, with the promise "answer what Google's caller and other agents ask, correctly, with approval on anything binding". Start with the simulation as an audit, then publish the outcome across Business Profile, phone agent script, Meta and a PAP/MCP endpoint. The aim is to win on accurate quotes and policies, not on being an endpoint. This is inference and needs customer validation.
 
@@ -295,7 +295,7 @@ Restaurants and boutique retail are effectively closed. Salons are contested, an
 ## Q7. Disintermediation and the strongest bear case
 
 ### Takeaway
-The bear case is strong. Consumer agents can already reach long-tail businesses by phone or browser without any endpoint, platforms give away the structured layer, and the demand signal for protocol-based transactions is mixed. MuseFront's surviving thesis depends on accurate business context and owner control being scarce once agents arrive, and neither has yet been shown to be something small businesses pay for separately.
+The bear case is strong. Consumer agents can already reach long-tail businesses by phone or browser without any endpoint, platforms give away the structured layer, and the demand signal for protocol-based transactions is mixed. Legible's surviving thesis depends on accurate business context and owner control being scarce once agents arrive, and neither has yet been shown to be something small businesses pay for separately.
 
 ### Cited Findings
 
@@ -326,22 +326,22 @@ The bear case is strong. Consumer agents can already reach long-tail businesses 
 
 ### Inferences
 
-**Strongest bear case against MuseFront, in one argument**
-1. The consumer agent already has three free paths to a long-tail business: Google's phone call, its own browser, and marketplace gateways. None requires MuseFront.
+**Strongest bear case against Legible, in one argument**
+1. The consumer agent already has three free paths to a long-tail business: Google's phone call, its own browser, and marketplace gateways. None requires Legible.
 2. The business's structured layer is being generated for free by Wix, Shopify, Google Business Profile, Meta and vertical SaaS, using data they already hold.
-3. The traffic MuseFront would see is the residue the free paths miss. A long-tail business may see too few agent interactions on a hosted endpoint for traces to self-improve, or for an owner to justify payment. I have no measured volumes, so this is a reasoned estimate, but no vendor publishes contrary evidence.
+3. The traffic Legible would see is the residue the free paths miss. A long-tail business may see too few agent interactions on a hosted endpoint for traces to self-improve, or for an owner to justify payment. I have no measured volumes, so this is a reasoned estimate, but no vendor publishes contrary evidence.
 4. Businesses cannot see the benefit: no attribution, no discovery claim (explicitly out of scope), and a median budget nearer $30 than $300.
 5. Well-funded adjacent players can add the remaining pieces: Avoca with $125M+, Meta with distribution, GoDaddy with $100M+ Airo run rate and a stated "agentic OS" goal.
 6. Approval inboxes add work for owners whose stated problem is time, and Meta already markets to that exact shortage. Consumers can also approve at the agent side, reducing the owner's role.
-7. Therefore MuseFront risks being a feature with no distribution, in a category whose standards are still moving.
+7. Therefore Legible risks being a feature with no distribution, in a category whose standards are still moving.
 
-**What would have to be true for MuseFront to win**
+**What would have to be true for Legible to win**
 - Agent-originated requests reach high enough frequency in a specific vertical that errors are costly (mis-quotes, policy violations, double bookings).
 - Owners or agencies pay for accuracy and control across several surfaces, because no single platform wants to be neutral across Google, Meta, ChatGPT and vertical SaaS.
-- MuseFront gets traces via a partner that sees real traffic, such as a receptionist vendor or agency platform, rather than relying on its own endpoint.
+- Legible gets traces via a partner that sees real traffic, such as a receptionist vendor or agency platform, rather than relying on its own endpoint.
 - Cheap kill tests: run the adversarial simulation on 20 local businesses in one vertical, then measure whether owners or agencies pay for the fix. Separately, ask receptionist vendors whether AI callers are appearing in their logs.
 
-**Disintermediation assessment:** phone-based agents do not fully eliminate the need, since someone still has to supply answers at the moment of the call. But the supplier of those answers is likely to be whoever already answers the phone or holds the Business Profile. MuseFront's most realistic position is upstream of those systems as a context source, not in front of them as a gateway.
+**Disintermediation assessment:** phone-based agents do not fully eliminate the need, since someone still has to supply answers at the moment of the call. But the supplier of those answers is likely to be whoever already answers the phone or holds the Business Profile. Legible's most realistic position is upstream of those systems as a context source, not in front of them as a gateway.
 
 ### Gaps
 - Measured share of local-business calls or bookings coming from AI agents in the US: no reliable figure found.

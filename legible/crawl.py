@@ -10,7 +10,7 @@ from urllib.parse import urldefrag, urlparse
 
 import httpx
 
-from consumer_agent.tools import USER_AGENT, ExaBackend, parse_html
+from errand.tools import USER_AGENT, ExaBackend, parse_html
 
 SKIP_IMAGE = re.compile(r"(logo|icon|favicon|sprite|avatar|pixel|\.svg)", re.IGNORECASE)
 SKIP_LINK = re.compile(r"\.(pdf|zip|jpe?g|png|gif|svg|css|js|ico|xml)(\?|$)", re.IGNORECASE)

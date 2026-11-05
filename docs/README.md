@@ -1,12 +1,12 @@
-# MuseFront docs
+# Legible docs
 
-*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. The back office agent's backend is built as a prototype: see [its report](../reports/back-office-mvp.md).*
+*Last updated 5 November 2026. This folder holds the project's decisions, research and plan. the Legible agent's backend is built as a prototype: see [its report](../reports/legible-mvp.md).*
 
 ## Current position
 
-MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps it accurate. The goal right now is a working prototype, as fast as possible.
+Legible gives a service business a small website that any AI agent can read and act on, plus a Legible agent that keeps it accurate. The goal right now is a working prototype, as fast as possible.
 
-**Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the back office backend with a public resource on Cloudflare ([report](../reports/back-office-mvp.md)).
+**Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the Legible app backend with a public resource on Cloudflare ([report](../reports/legible-mvp.md)).
 
 **Next steps:** the [owner app](10-owner-app.md) is built and runs locally, so next come connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
 
@@ -24,7 +24,7 @@ MuseFront gives a service business a small website that any AI agent can read an
 | [06 Demo businesses](06-demo-businesses.md) | The four proposed businesses, their roadblocks, and the facts file |
 | [07 Consumer agent research](07-consumer-agent-research.md) | How research agents, browser agents and harnesses are built, with sources |
 | [08 Consumer agent design](08-consumer-agent-design.md) | What we'd build as our stand-in agent, including draft instructions |
-| [09 Back office agent](09-back-office-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
+| [09 Legible agent](09-legible-agent.md) | Spec for the product's one agent: use cases, limits, and how it learns |
 | [10 Owner app](10-owner-app.md) | The five screens, how they map to the API, and who can change what |
 
 Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names real businesses, so don't publish it as is.
@@ -34,16 +34,16 @@ Also: [the Muse transcript](reference/muse-transcript.md), unedited. It names re
 Older material may say something different. These positions are current:
 
 - **The front desk agent and the connector application are dropped.**
-- **MCP and Poppy are optional**, and come only after the back office agent.
-- **The first resource is written by hand**, by Claude. It's the answer key for the back office agent.
-- **The consumer agent is ours**, built on a tool loop with browser-use, and it doubles as the simulator. It runs on Muse Spark through OpenRouter.
+- **MCP and Poppy are optional**, and come only after the Legible agent.
+- **The first resource is written by hand**, by Claude. It's the answer key for the Legible agent.
+- **The consumer agent, Errand, is ours**, built on a tool loop with browser-use, and it doubles as the simulator. It runs on Muse Spark through OpenRouter.
 - **The demo set is four service businesses**, not a car wash, HVAC company and online store.
 - **Roadblocks and queries are long-tail.** The van cleaning query is one example only.
 - **The earlier in-chat PRD is out of date.** These docs replace it.
 - **Exa reads websites**, not Context.dev, with a plain crawl as backup.
 - **There's one simulation at onboarding**, then a periodic review of real agent activity. Nothing simulates continuously.
 - **Analytics stay minimal:** a feed, a few counts and unmet demand.
-- **The resource is served by a Cloudflare Worker,** and the back office runs separately.
+- **The resource is served by a Cloudflare Worker,** and the Legible app runs separately.
 
 [01 Project overview](01-project-overview.md#what-replaced-what) has the full list and the reasons.
 
@@ -59,4 +59,4 @@ Older material may say something different. These positions are current:
 | Folder | Status |
 |---|---|
 | `research_notes/Consumer agents/` | Raw notes behind docs 05, 07 and 08 |
-| `research_notes/Agentic commerce for long tail/` | Older notes. `competitors.md` and `harness_inbox_trust.md` were finished, while `protocols.md`, `consumer_agents.md` and `connectors_and_delivery.md` may be partial, since those tracks were stopped early |
+| `research_notes/Agentic commerce for long tail/` | Older notes. `competitors.md` and `harness_inbox_trust.md` were finished, while `protocols.md`, `errands.md` and `connectors_and_delivery.md` may be partial, since those tracks were stopped early |

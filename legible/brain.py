@@ -1,11 +1,11 @@
-"""Every judgement the back office agent makes, as one model call each."""
+"""Every judgement the Legible agent makes, as one model call each."""
 
 from __future__ import annotations
 
 import json
 
-from back_office.model import ask_json
-from back_office.record import CATEGORIES, RECORD_SHAPE, normalise
+from legible.model import ask_json
+from legible.record import CATEGORIES, RECORD_SHAPE, normalise
 
 # The needs from docs/04-resource-spec.md, which interview questions are checked against.
 NEEDS = """customer's words (synonyms that map onto the business's categories); price structure (fixed, from, range or quote-only, and what moves it);

@@ -123,7 +123,7 @@ uv run python -m bench.run_benchmark --variant before --name first-demo --resume
 Run one query by hand on the local web:
 
 ```bash
-uv run python -m consumer_agent.run --task "What does a full detail cost at Cormorant Mobile Detailing?" --search local --corpus corpus/after --out runs/adhoc
+uv run python -m errand.run --task "What does a full detail cost at Cormorant Mobile Detailing?" --search local --corpus corpus/after --out runs/adhoc
 ```
 
 Use `--search exa` for the public web. Results are in `runs/first-demo/results_*.json`, with each run's log beside them. Keep parallelism low on a small balance.

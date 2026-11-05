@@ -1,9 +1,9 @@
 """Walk one business through the whole product, with a scripted owner.
 
-The back office never sees the facts file. Only this scripted owner does, and it answers
+The Legible app never sees the facts file. Only this scripted owner does, and it answers
 only what it's asked, the way a real owner would.
 
-Start the API first: uv run uvicorn back_office.api:app --port 8200
+Start the API first: uv run uvicorn legible.api:app --port 8200
 Then: uv run python scripts/mvp_demo.py --url http://cormorant.localhost:8101 [--check] [--proof]
 
 --check runs the first simulation at onboarding, about $1.30. --proof runs 4 benchmark queries
@@ -25,8 +25,8 @@ import httpx
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from back_office.model import ask_json  # noqa: E402
 from bench.grade import content_checks, report_text  # noqa: E402
+from legible.model import ask_json  # noqa: E402
 
 API = "http://127.0.0.1:8200"
 client = httpx.Client(timeout=300)
@@ -86,14 +86,14 @@ def proof(link: str) -> None:
     passed = 0
     procs = []
     for qid in ("q01", "q02", "q03", "q05"):
-        out = ROOT / "runs" / "back-office" / "proof" / qid
+        out = ROOT / "runs" / "legible" / "proof" / qid
         out.mkdir(parents=True, exist_ok=True)
         for old in out.glob("*"):
             old.unlink()
         person = out / "person.json"
         person.write_text(json.dumps(queries[qid].get("person") or {}))
         task = f"{queries[qid]['query']} (The business's information page is {link})"
-        cmd = [sys.executable, "-m", "consumer_agent.run", "--task", task, "--person", str(person), "--search", "exa", "--out", str(out)]
+        cmd = [sys.executable, "-m", "errand.run", "--task", task, "--person", str(person), "--search", "exa", "--out", str(out)]
         procs.append((qid, out, subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)))
     total_cost = 0.0
     for qid, out, process in procs:
@@ -191,7 +191,7 @@ def main() -> None:
 
 
 async def _publish_preview(website_id: str) -> None:
-    from back_office import work
+    from legible import work
 
     await work.publish(website_id, preview=True)
 

@@ -1,10 +1,10 @@
-"""Start MuseFront on this computer with one command: uv run python scripts/start.py
+"""Start Legible on this computer with one command: uv run python scripts/start.py
 
 It prepares .env, then runs two things until you press Ctrl+C:
   - the public resource, a Cloudflare Worker running locally, at http://127.0.0.1:8787
   - the owner app, at http://127.0.0.1:8200
 
-No Cloudflare account is needed. Set MF_PORT to use a different port for the app.
+No Cloudflare account is needed. Set LEGIBLE_PORT to use a different port for the app.
 """
 
 from __future__ import annotations
@@ -50,10 +50,10 @@ def prepare_env() -> dict[str, str]:
         shutil.copy(ROOT / ".env.example", ENV)
         print("Created .env from .env.example")
     values = read_env()
-    if not values.get("MF_ADMIN_TOKEN"):
-        set_env("MF_ADMIN_TOKEN", secrets.token_urlsafe(32))
-    if not values.get("MF_EDGE_URL"):
-        set_env("MF_EDGE_URL", LOCAL_EDGE)
+    if not values.get("LEGIBLE_ADMIN_TOKEN"):
+        set_env("LEGIBLE_ADMIN_TOKEN", secrets.token_urlsafe(32))
+    if not values.get("LEGIBLE_EDGE_URL"):
+        set_env("LEGIBLE_EDGE_URL", LOCAL_EDGE)
     values = read_env()
     missing = [key for key in ("OPENROUTER_API_KEY", "EXA_API_KEY") if not values.get(key)]
     if missing:
@@ -76,18 +76,18 @@ def wait_for(url: str, seconds: int = 60) -> bool:
 
 def main() -> None:
     values = prepare_env()
-    edge_url = values["MF_EDGE_URL"].rstrip("/")
+    edge_url = values["LEGIBLE_EDGE_URL"].rstrip("/")
     edge_host = urlparse(edge_url)
     processes: list[subprocess.Popen] = []
 
     if edge_host.hostname in ("127.0.0.1", "localhost"):
         if not shutil.which("npx"):
             sys.exit("\nNode.js is needed for the local resource. Install it from https://nodejs.org, then run this again.\n")
-        (EDGE / ".dev.vars").write_text(f"ADMIN_TOKEN={values['MF_ADMIN_TOKEN']}\n")
+        (EDGE / ".dev.vars").write_text(f"ADMIN_TOKEN={values['LEGIBLE_ADMIN_TOKEN']}\n")
         env = {**os.environ, "WRANGLER_SEND_METRICS": "false"}
         print("Preparing the local resource. The first run downloads a few things...")
         subprocess.run(
-            ["npx", "--yes", "wrangler@4", "d1", "execute", "musefront", "--local", "--file=schema.sql"],
+            ["npx", "--yes", "wrangler@4", "d1", "execute", "legible", "--local", "--file=schema.sql"],
             cwd=EDGE, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT, check=True,
         )  # fmt: skip
         processes.append(
@@ -101,16 +101,16 @@ def main() -> None:
                 process.terminate()
             sys.exit(f"\nThe local resource didn't start at {edge_url}. Is another program using that port?\n")
 
-    port = os.environ.get("MF_PORT", "8200")
-    processes.append(subprocess.Popen([sys.executable, "-m", "uvicorn", "back_office.api:app", "--port", port, "--log-level", "warning"], cwd=ROOT))
+    port = os.environ.get("LEGIBLE_PORT", "8200")
+    processes.append(subprocess.Popen([sys.executable, "-m", "uvicorn", "legible.api:app", "--port", port, "--log-level", "warning"], cwd=ROOT))
     app_url = f"http://127.0.0.1:{port}"
     if not wait_for(f"{app_url}/health"):
         for process in processes:
             process.terminate()
         sys.exit(f"\nThe app didn't start. Is another program using port {port}?\n")
 
-    print(f"\nMuseFront is running.\n\n  Open the app:   {app_url}\n  Public pages:   {edge_url}/b/<your-website>\n\nKeep this window open. Press Ctrl+C to stop.\n")
-    if not os.environ.get("MF_NO_BROWSER"):
+    print(f"\nLegible is running.\n\n  Open the app:   {app_url}\n  Public pages:   {edge_url}/b/<your-website>\n\nKeep this window open. Press Ctrl+C to stop.\n")
+    if not os.environ.get("LEGIBLE_NO_BROWSER"):
         webbrowser.open(app_url)
 
     stop = {"now": False}

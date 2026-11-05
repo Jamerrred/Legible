@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from mf_core import logbook
+from legible_core import logbook
 
 
 @pytest.fixture(autouse=True)

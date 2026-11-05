@@ -1,4 +1,4 @@
-// The MuseFront owner app. Plain JS: each screen fetches its data and renders into #view.
+// The Legible owner app. Plain JS: each screen fetches its data and renders into #view.
 const $ = (s) => document.querySelector(s);
 const view = $("#view");
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -49,7 +49,7 @@ function renderRail() {
   $("#rail").innerHTML = `<div class="logo">M</div>` + NAV.map(([id, ic, label]) => `<a class="nav ${route() === id ? "on" : ""}" href="#/${id}">${icon(ic)}<span>${label}</span>${dots[id] ? '<span class="dot"></span>' : ""}</a>`).join("") + (state.site ? `<a class="switcher" href="#/websites" title="${esc(state.site.name)}">${esc((state.site.name || "?")[0])}</a>` : "");
 }
 const paint = (html) => { view.innerHTML = html; if (window.lucide) lucide.createIcons(); };
-const needSite = () => `<div class="center-pane"><div class="stack" style="max-width:420px;text-align:center"><h1 class="headline">Add a website first</h1><p class="soft">MuseFront starts by reading your website.</p><div><a class="btn primary" href="#/websites">Add a website</a></div></div></div>`;
+const needSite = () => `<div class="center-pane"><div class="stack" style="max-width:420px;text-align:center"><h1 class="headline">Add a website first</h1><p class="soft">Legible starts by reading your website.</p><div><a class="btn primary" href="#/websites">Add a website</a></div></div></div>`;
 
 async function render() {
   clearTimeout(poll);
@@ -121,7 +121,7 @@ async function pollTrace() {
 function addForm() {
   return `<div class="center-pane"><form class="stack" data-form="addSite" style="width:min(600px,100%)">
     <h1 class="headline">Which website should agents be able to read?</h1>
-    <p class="soft" style="margin:0;font-size:15.5px">MuseFront reads it, works out what's missing, and nothing goes public until you've confirmed it.</p>
+    <p class="soft" style="margin:0;font-size:15.5px">Legible reads it, works out what's missing, and nothing goes public until you've confirmed it.</p>
     <div class="field"><input name="url" type="url" required placeholder="https://yourbusiness.com" autofocus><button class="send" aria-label="Add website">${icon("arrow-up")}</button></div>
     <label class="row-flex small soft"><input type="checkbox" name="check" checked> Also test it with 5 customer agents, about 5 minutes</label>
   </form></div>`;
@@ -167,7 +167,7 @@ async function renderWebsites() {
       <div class="small soft">Or embed it as HTML:</div>
       <div class="paste-line"><span class="mono" style="font-size:12px">${esc(site.link_line_html)}</span><button class="btn ghost icon-btn" data-do="copy" data-text="${esc(site.link_line_html)}" data-label="HTML" aria-label="Copy HTML">${icon("copy")}</button></div>` : `<div class="empty" style="border:0;padding:0"><b>Your link appears once you've confirmed your facts</b>Nothing is public until then.</div>`}
     </div>
-    <div class="section-gap"><div class="between"><div><h2 class="section">Connected accounts</h2><p class="small soft" style="margin:4px 0 14px">Optional. MuseFront reads these and asks you before anything changes.</p></div><button class="btn" data-do="openConnect">${icon("plug")} Connect a resource</button></div>${accounts}</div>
+    <div class="section-gap"><div class="between"><div><h2 class="section">Connected accounts</h2><p class="small soft" style="margin:4px 0 14px">Optional. Legible reads these and asks you before anything changes.</p></div><button class="btn" data-do="openConnect">${icon("plug")} Connect a resource</button></div>${accounts}</div>
   </div></section>`);
 }
 
@@ -175,7 +175,7 @@ async function renderWebsites() {
 
 const connectState = { configured: false, rows: {} };
 function renderConnect() {
-  const notice = connectState.configured ? "" : `<div class="modal-note">Connecting accounts is optional, and MuseFront works without it. To turn it on, add <code>COMPOSIO_API_KEY</code> to your <code>.env</code> file and restart MuseFront.</div>`;
+  const notice = connectState.configured ? "" : `<div class="modal-note">Connecting accounts is optional, and Legible works without it. To turn it on, add <code>COMPOSIO_API_KEY</code> to your <code>.env</code> file and restart Legible.</div>`;
   const rows = ACCOUNTS.map(([id, ic, name, help]) => {
     const r = connectState.rows[id] || {};
     const isConnected = r.step === "done" || (state.site.connections || []).some((c) => c.toolkit === id && c.status === "connected");
@@ -183,7 +183,7 @@ function renderConnect() {
     const waiting = r.step === "waiting" ? `<div class="small soft">Finish signing in in the new window, then come back here.</div>${id === "googlesheets" ? `<input class="sheet" id="sheet-id" placeholder="Paste your spreadsheet's ID">` : ""}<div><button class="btn primary" data-do="finishConnect" data-id="${id}">I've connected it</button></div>` : "";
     return `<div class="modal-row"><div class="top">${icon(ic, "soft")}<div class="grow" style="flex:1;min-width:0"><div style="font-weight:500;font-size:14.5px">${name}</div><div class="small muted">${help}</div></div>${right}</div>${waiting}${r.error ? `<div class="err-text">${esc(r.error)}</div>` : ""}</div>`;
   }).join("");
-  $("#modal").innerHTML = `<div class="modal-back" data-do="closeConnect" data-self="1"><div class="modal" role="dialog" aria-modal="true" aria-label="Connect a resource"><div class="between"><h2 class="section">Connect a resource</h2><button class="btn ghost icon-btn" data-do="closeConnect" aria-label="Close">${icon("x")}</button></div><p class="small soft" style="margin:6px 0 0">MuseFront reads what you connect and proposes changes for you to confirm. Connections run through Composio.</p>${notice}<div style="margin-top:14px">${rows}</div></div></div>`;
+  $("#modal").innerHTML = `<div class="modal-back" data-do="closeConnect" data-self="1"><div class="modal" role="dialog" aria-modal="true" aria-label="Connect a resource"><div class="between"><h2 class="section">Connect a resource</h2><button class="btn ghost icon-btn" data-do="closeConnect" aria-label="Close">${icon("x")}</button></div><p class="small soft" style="margin:6px 0 0">Legible reads what you connect and proposes changes for you to confirm. Connections run through Composio.</p>${notice}<div style="margin-top:14px">${rows}</div></div></div>`;
   if (window.lucide) lucide.createIcons();
 }
 
@@ -274,7 +274,7 @@ function composerHtml(pending) {
   const cards = pending.map((p) => `<div class="proposal"><div class="title">${esc(p.title)}</div>${p.body ? `<div class="small muted">You said: “${esc(p.body)}”</div>` : ""}<div class="row-flex"><button class="btn primary" data-do="confirmChange" data-id="${p.id}">Confirm</button><button class="btn ghost" data-do="discardChange" data-id="${p.id}">Discard</button></div></div>`).join("");
   const clarify = state.clarify ? `<div class="proposal"><div class="title">${esc(state.clarify)}</div></div>` : "";
   const working = state.working ? `<div class="row-flex small soft" style="padding:0 4px">${icon("loader", "spin")} Working out the change</div>` : "";
-  return `<div class="composer">${cards}${clarify}${working}<form data-form="instruct"><div class="field"><input name="text" required autocomplete="off" placeholder="Tell MuseFront what to change, like “closed for the next 2 days”" ${state.working ? "disabled" : ""}><button class="send" aria-label="Send" ${state.working ? "disabled" : ""}>${icon("arrow-up")}</button></div></form></div>`;
+  return `<div class="composer">${cards}${clarify}${working}<form data-form="instruct"><div class="field"><input name="text" required autocomplete="off" placeholder="Tell Legible what to change, like “closed for the next 2 days”" ${state.working ? "disabled" : ""}><button class="send" aria-label="Send" ${state.working ? "disabled" : ""}>${icon("arrow-up")}</button></div></form></div>`;
 }
 
 async function renderResource() {
@@ -325,7 +325,7 @@ async function renderInbox() {
     ${asked ? `<div style="margin-bottom:40px"><h2 class="section" style="margin-bottom:6px">Agents are asking</h2>${asked}</div>` : ""}
     ${missing.open.length ? `<div style="margin-bottom:40px"><h2 class="section" style="margin-bottom:6px">Questions for you<span class="count-pill">${missing.open.length}</span></h2>${missing.open.map(questionBlock).join("")}</div>` : ""}
     <div class="zones"><div><h2 class="section" style="margin-bottom:12px">What agents did</h2>${feed || `<div class="empty"><b>No agents yet</b>Put your link on your website, and what agents do will show up here.</div>`}</div>
-    <aside><h2 class="section" style="margin-bottom:12px;font-size:19px">Wanted, but not offered</h2>${wanted || `<div class="empty small">Nothing yet.</div>`}<p class="small muted" style="margin-top:16px">You can only see agents that reach your MuseFront page. An agent that stops at your own website stays invisible.</p></aside></div>
+    <aside><h2 class="section" style="margin-bottom:12px;font-size:19px">Wanted, but not offered</h2>${wanted || `<div class="empty small">Nothing yet.</div>`}<p class="small muted" style="margin-top:16px">You can only see agents that reach your Legible page. An agent that stops at your own website stays invisible.</p></aside></div>
   </div></section>`);
 }
 

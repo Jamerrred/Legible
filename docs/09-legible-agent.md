@@ -1,10 +1,10 @@
-# The back office agent
+# The Legible agent
 
-*Last updated 5 November 2026. The backend is built as a prototype, in `back_office/` and `edge/`: see [its report](../reports/back-office-mvp.md). This spec is wider than the prototype, and the report says what was cut.*
+*Last updated 5 November 2026. The backend is built as a prototype, in `legible/` and `edge/`: see [its report](../reports/legible-mvp.md). This spec is wider than the prototype, and the report says what was cut.*
 
 ## What it does
 
-The back office agent runs on MuseFront's servers and keeps one business's resource accurate. It reads the business's sources, works with the owner, tests the result, and learns from what agents do.
+The Legible agent runs on Legible's servers and keeps one business's resource accurate. It reads the business's sources, works with the owner, tests the result, and learns from what agents do.
 
 **Its output is the resource.** The business gets a website, and an agent keeps it accurate.
 

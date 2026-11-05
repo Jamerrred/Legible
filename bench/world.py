@@ -11,7 +11,7 @@ from __future__ import annotations
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, PlainTextResponse
 
-from mf_core.business import load_facts
+from legible_core.business import load_facts
 
 WORLD_HOSTS = ["bayautopages.localhost", "sunsetshine.localhost", "ferrybuildingautocare.localhost", "peninsulasuds.localhost"]
 

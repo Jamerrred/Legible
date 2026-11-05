@@ -1,6 +1,6 @@
 """Light end-to-end checks against the throwaway bakery.
 
-uv run python -m consumer_agent.tests_fixture.smoke read search gate browse exa
+uv run python -m errand.tests_fixture.smoke read search gate browse exa
 """
 
 from __future__ import annotations
@@ -16,12 +16,12 @@ from pathlib import Path
 
 import httpx
 
-from consumer_agent.llm import load_env
-from consumer_agent.loop import Config
-from consumer_agent.person import Person
-from consumer_agent.run import run_task
-from consumer_agent.runlog import RunLog
-from consumer_agent.tools import ExaBackend, ToolBox, check_finish, do_math, number_forms, safe_eval
+from errand.llm import load_env
+from errand.loop import Config
+from errand.person import Person
+from errand.run import run_task
+from errand.runlog import RunLog
+from errand.tools import ExaBackend, ToolBox, check_finish, do_math, number_forms, safe_eval
 
 SITE = "http://bakery.localhost:8190"
 PERSON = {
@@ -145,7 +145,7 @@ def main() -> None:
     wanted = sys.argv[1:] or ["gate", "read", "search", "browse", "exa"]
     out = Path(tempfile.mkdtemp(prefix="agent-smoke-"))
     site_log = out / "site.jsonl"
-    server = subprocess.Popen([sys.executable, "-m", "consumer_agent.tests_fixture.bakery_server", "--log", str(site_log)])
+    server = subprocess.Popen([sys.executable, "-m", "errand.tests_fixture.bakery_server", "--log", str(site_log)])
     try:
         for _ in range(50):
             try:

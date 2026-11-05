@@ -103,7 +103,7 @@ Each business has one facts file, written before anything else. It's the single 
 | The hand-written resource | What the resource states |
 | The grader | The correct answer to each query |
 | Demo accounts | Calendar and price sheet content for Composio |
-| The back office agent's test | The answer key for what it should extract |
+| the Legible agent's test | The answer key for what it should extract |
 
 **It contains:** offerings, price rules, add-ons and their dependencies, defined conditions, eligibility, prerequisites, service area, staff differences, policies, hours, blackout dates and availability rules.
 
@@ -111,7 +111,7 @@ Each business has one facts file, written before anything else. It's the single 
 
 **Availability is generated, not written by hand.** Requests such as "in the next 2 days" depend on today's date, so slots need to roll forward. Otherwise the test goes stale.
 
-**Some facts stay unknown on purpose.** The owner may not have decided, or the answer may truly depend on an inspection. These test whether an agent admits what it doesn't know, and they give the back office agent something real to ask about.
+**Some facts stay unknown on purpose.** The owner may not have decided, or the answer may truly depend on an inspection. These test whether an agent admits what it doesn't know, and they give the Legible agent something real to ask about.
 
 ## Making a "before" site look real
 

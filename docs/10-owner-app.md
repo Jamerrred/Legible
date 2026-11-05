@@ -13,13 +13,13 @@ Very minimal, smooth and polished. Take Cursor's restraint and its always-availa
 
 ## The five screens
 
-A thin icon sidebar on the left holds these, in the order an owner works through them. It's built in `back_office/web/` as plain HTML, CSS and JS, and the API serves it at `http://127.0.0.1:8200`.
+A thin icon sidebar on the left holds these, in the order an owner works through them. It's built in `legible/web/` as plain HTML, CSS and JS, and the API serves it at `http://127.0.0.1:8200`.
 
 | Screen | What it holds | Main action |
 |---|---|---|
 | Websites | Each linked website, the copy-paste link, whether the link is on the site, and connected accounts | Add a website, connect an account |
 | Simulations | "What's missing", then each check with its score and answers | Answer a question, run a check |
-| Resource | The fact sheet, reading like a clean document, with where each line came from | A text box at the bottom to tell MuseFront what to change, or click a line to edit it |
+| Resource | The fact sheet, reading like a clean document, with where each line came from | A text box at the bottom to tell Legible what to change, or click a line to edit it |
 | Inbox | Only what agents did and asked: counts, questions, a feed and unmet demand | Answer an agent's question |
 | Bookings | Booking requests from agents, and the replies | Accept, suggest another time or decline |
 
