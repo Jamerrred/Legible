@@ -7,10 +7,9 @@ import re
 from pathlib import Path
 
 import pytest
+from business_core.business import load_facts
 from fastapi.testclient import TestClient
-
-from demo_site.app import create_app
-from legible_core.business import load_facts
+from sample_site.app import create_app
 from scripts.check_booking import LEAD, check
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -65,7 +64,7 @@ def test_site_has_only_three_pages(before):
 
 
 def test_every_hidden_fact_is_in_the_holes_list():
-    holes = json.loads((ROOT / "demo_site" / "holes.json").read_text())
+    holes = json.loads((ROOT / "experiment" / "sample_site" / "holes.json").read_text())
     listed = {fact_id for hole in holes for fact_id in hole["fact_ids"]}
     hidden = {fact["id"] for fact in load_facts()["facts"] if fact["before_site"]["placement"] == "hidden"}
     assert hidden <= listed

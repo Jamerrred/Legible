@@ -6,10 +6,9 @@ import re
 from pathlib import Path
 
 import pytest
+from business_core.business import load_facts, quote
 from fastapi.testclient import TestClient
-
-from demo_resource.app import app
-from legible_core.business import load_facts, quote
+from sample_resource.app import app
 
 ROOT = Path(__file__).resolve().parent.parent
 FACTS = load_facts()["facts"]

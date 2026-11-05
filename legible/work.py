@@ -143,7 +143,7 @@ async def _run_query(simulation_id: str, query: dict, task: str, site_url: str, 
     out.mkdir(parents=True, exist_ok=True)
     person_path = out / "person.json"
     person_path.write_text(json.dumps(PERSON))
-    corpus = ROOT / "corpus" / "before"
+    corpus = ROOT / "experiment" / "corpus" / "before"
     local_corpus = is_local(site_url) and "sunrise" in site_url and corpus.exists()
     cmd = [sys.executable, "-m", "errand.run", "--task", task, "--person", str(person_path), "--profile", profile, "--out", str(out)]
     cmd += ["--search", "local", "--corpus", str(corpus)] if local_corpus else ["--search", "exa"]

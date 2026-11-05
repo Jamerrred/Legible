@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 from bench.grade import grade, read_run
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -67,14 +66,14 @@ def test_action_needs_a_logged_request():
 @pytest.mark.parametrize("variant", ["control", "before", "after"])
 def test_saved_benchmark_results_regrade_the_same(variant):
     """Old results must stay reproducible, whatever today's calendar shows."""
-    base = ROOT / "runs" / "first-demo"
-    queries = {q["id"]: q for q in json.loads((ROOT / "bench" / "queries.json").read_text())}
+    base = ROOT / "experiment" / "runs" / "first-demo"
+    queries = {q["id"]: q for q in json.loads((ROOT / "experiment" / "bench" / "queries.json").read_text())}
     streams = {"control": ["control"], "before": ["site-before"], "after": ["site-after", "resource"]}[variant]
     events = [json.loads(line) for stream in streams for line in (base / "site-logs" / f"{stream}.jsonl").read_text().splitlines()]
     saved = json.loads((base / f"results_{variant}.json").read_text())
     valid = [row for row in saved if row["valid"]]
     assert valid
     for row in valid:
-        out = ROOT / row["out"]
+        out = ROOT / "experiment" / row["out"]
         run = {**read_run(out), "person": json.loads((out / "person.json").read_text())}
         assert grade(queries[row["query_id"]], run, variant, events)["result"] == row["result"], row["query_id"]

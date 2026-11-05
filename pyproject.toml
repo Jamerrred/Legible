@@ -31,15 +31,15 @@ select = ["E", "F", "I", "UP", "B", "SIM"]
 
 [tool.ruff.lint.per-file-ignores]
 # These hold long runs of page text, where wrapping would hurt more than it helps.
-"demo_resource/*" = ["E501"]
+"experiment/sample_resource/*" = ["E501"]
 # Model prompts are long lines of plain text.
 "legible/*" = ["E501"]
-"scripts/mvp_demo.py" = ["E501"]
+"experiment/scripts/scripted_owner.py" = ["E501"]
 "scripts/start.py" = ["E501"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["."]
+pythonpath = [".", "experiment"]
 
 [dependency-groups]
 dev = [

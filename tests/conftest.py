@@ -3,8 +3,7 @@
 from __future__ import annotations
 
 import pytest
-
-from legible_core import logbook
+from business_core import logbook
 
 
 @pytest.fixture(autouse=True)

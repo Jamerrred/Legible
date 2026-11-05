@@ -6,8 +6,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 import pytest
-
-from legible_core.business import load_facts, quote, slots
+from business_core.business import load_facts, quote, slots
 
 FACTS = load_facts()
 
