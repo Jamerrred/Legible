@@ -117,7 +117,8 @@ async def onboard(website_id: str, run_check: bool = True, sim_queries: int = 5,
         _stage(website_id, "ready", "Ready for you to confirm and answer")
     except Exception as error:
         traceback.print_exc()
-        _stage(website_id, "failed", f"{type(error).__name__}: {str(error)[:300]}")
+        keys = "status 401" in str(error) or "status 402" in str(error)
+        _stage(website_id, "failed", "OpenRouter refused the request. Check the key and balance in .env, then try again." if keys else f"{type(error).__name__}: {str(error)[:300]}")
 
 
 # ---------------------------------------------------------------- simulation
