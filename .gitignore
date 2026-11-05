@@ -34,6 +34,7 @@ edge/node_modules/
 legible/*.db*
 /runs/
 edge/.dev.vars
+edge/wrangler.deploy.toml
 
 # Kept outside this repository: old local databases, and the design and film working files
 /back_office/

@@ -6,6 +6,8 @@ AI agents already shop for people, but they often can't finish the job on a smal
 
 Give Legible a website. It reads the site, works out what an agent couldn't, and asks the owner to fill the gaps. It then publishes a small page that the owner links from their site. Agents read the confirmed facts there, work out quotes and send booking requests. Only facts the owner has confirmed ever go public.
 
+**See one:** [a page Legible generated](https://legible.jamerrred-audiobooks.workers.dev/b/sunrise-auto-detailers) for a fictional business, from [its website](https://sunrise-auto-detailers.jamerrred-audiobooks.workers.dev).
+
 ## Does it help?
 
 We tested this on a fictional business with our own stand-in agent, once with the website alone and once with one added link to a page written for agents.
@@ -47,7 +49,7 @@ flowchart LR
 
 - **The owner app** runs on your computer. It reads the site, builds a fact sheet, asks you what's missing and reviews what agents did.
 - **The test customers** are AI agents that try real customer requests on your site, then on your page, so you can compare the two.
-- **The public page** is built from the fact sheet and needs no AI to serve. It runs on your computer until you put it online.
+- **The public page** is built from the fact sheet and needs no AI to serve. It runs on your computer until you [put it online](#put-your-page-online).
 
 The agent changes the fact sheet and never the page, so every part of the page stays consistent. Nothing an outside agent says can change the facts.
 
@@ -135,6 +137,20 @@ The app has no spending limit of its own, so set a credit limit on your OpenRout
 
 To let owners connect accounts such as Google Calendar and Google Sheets through Composio, add `COMPOSIO_API_KEY` to `.env` and restart. Then go to **Websites** and press **Connect** beside an account. This code hasn't been run with a real key yet, so expect rough edges.
 
+## Put your page online
+
+Until now, your page has only been reachable from your own computer. To let real agents reach it, deploy it to your own Cloudflare account. A free account is enough.
+
+```bash
+uv run python scripts/deploy.py
+```
+
+This signs you in, creates the database, deploys the page and points Legible at its live address. Anything you've already published moves across. Then restart Legible, and your link becomes a real public address that you can add to your website.
+
+Only the public page goes online. The owner app stays on your computer, because it has no login and anyone who reached it could spend your AI credit. The page keeps working when your computer is off. New questions and bookings wait there until you next open the app, and the periodic review of what agents did only runs while the app is open.
+
+Pages tell search engines not to index them for now, so agents reach yours through the link on your site. To go back to a local page, set `LEGIBLE_EDGE_URL=http://127.0.0.1:8787` in `.env`.
+
 ## See it without keys
 
 The `demo` branch holds a scripted copy of the app that plays the same story back in about 3 minutes, with sample data, no API keys and no credit. It's the version our film was recorded from.
@@ -160,7 +176,7 @@ Open `http://127.0.0.1:8300`. Run `git switch main` to come back to the real app
 | [`legible/`](legible/) | The product: the owner app and the Legible agent |
 | [`edge/`](edge/) | The public page, a Cloudflare Worker |
 | [`errand/`](errand/) | The test customers: a general-purpose consumer agent that knows nothing about Legible |
-| [`scripts/`](scripts/) | Starts the app |
+| [`scripts/`](scripts/) | Starts the app, and deploys the public page |
 | [`tests/`](tests/) | Automated checks |
 | [`experiment/`](experiment/README.md) | The before-and-after test: its fictional business, questions, logs and reports |
 | [`docs/`](docs/) | How we work, plus the original planning notes |

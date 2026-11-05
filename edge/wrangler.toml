@@ -9,4 +9,4 @@ enabled = true
 [[d1_databases]]
 binding = "DB"
 database_name = "legible"
-database_id = "5334280f-96a2-443e-a690-32b264e385c5"
+database_id = "local"  # scripts/deploy.py uses your own database when you deploy
