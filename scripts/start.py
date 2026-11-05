@@ -17,6 +17,7 @@ import re
 import secrets
 import shutil
 import signal
+import socket
 import subprocess
 import sys
 import time
@@ -77,14 +78,25 @@ def wait_for(url: str, seconds: int = 60) -> bool:
     return False
 
 
+def port_in_use(port: int) -> bool:
+    with socket.socket() as probe:
+        probe.settimeout(0.5)
+        return probe.connect_ex(("127.0.0.1", port)) == 0
+
+
 def main() -> None:
     demo = "--demo" in sys.argv[1:]
     values = prepare_env(demo)
     edge_url = values["LEGIBLE_EDGE_URL"].rstrip("/")
     edge_host = urlparse(edge_url)
     processes: list[subprocess.Popen] = []
+    port = os.environ.get("LEGIBLE_PORT", "8300" if demo else "8200")
+    if port_in_use(int(port)):
+        sys.exit(f"\nAnother program is using port {port}. Close it, or choose another port: LEGIBLE_PORT=8400 uv run python scripts/start.py\n")
 
     if edge_host.hostname in ("127.0.0.1", "localhost"):
+        if port_in_use(edge_host.port or 8787):
+            sys.exit(f"\nAnother program is using port {edge_host.port or 8787}, which the local public page needs. Close it, or stop your other copy of Legible.\n")
         if not shutil.which("npx"):
             sys.exit("\nNode.js is needed for the local resource. Install it from https://nodejs.org, then run this again.\n")
         (EDGE / ".dev.vars").write_text(f"ADMIN_TOKEN={values['LEGIBLE_ADMIN_TOKEN']}\n")
@@ -105,7 +117,6 @@ def main() -> None:
                 process.terminate()
             sys.exit(f"\nThe local resource didn't start at {edge_url}. Is another program using that port?\n")
 
-    port = os.environ.get("LEGIBLE_PORT", "8300" if demo else "8200")
     app_env = {**os.environ, "LEGIBLE_DEMO": "1", "LEGIBLE_DB_PATH": "legible/demo.db", "LEGIBLE_CRON_HOURS": "999"} if demo else None
     processes.append(subprocess.Popen([sys.executable, "-m", "uvicorn", "legible.api:app", "--port", port, "--log-level", "warning"], cwd=ROOT, env=app_env))
     app_url = f"http://127.0.0.1:{port}"

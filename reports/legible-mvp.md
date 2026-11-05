@@ -1,12 +1,14 @@
 # Legible app prototype: build report
 
+*The fictional business was called Cormorant Mobile Detailing when this ran, and it is now Sunrise Auto Detailers. Quotes and names here use the new name. The raw logs in `runs/` keep the old one, unedited.*
+
 *Run on 5 November 2026 on the fictional Sunrise Auto Detailers, using the deployed site without the link. The consumer agent is unchanged since its freeze.*
 
 ## The result
 
 **The whole flow works end to end on a deployed site, and the generated resource got 3 of 4 test queries right.** That's one run per query with a scripted owner, so it shows the product works, not how accurate it is.
 
-Live resource: https://musefront.jamerrred-audiobooks.workers.dev/b/sunrise-auto-detailers
+The resource from this run was published to a Cloudflare Worker while the business had its earlier name.
 
 ## What happened in the run
 

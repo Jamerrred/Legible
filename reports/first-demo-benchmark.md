@@ -1,5 +1,7 @@
 # First demo benchmark: before and after
 
+*The fictional business was called Cormorant Mobile Detailing when this ran, and it is now Sunrise Auto Detailers. Quotes and names here use the new name. The raw logs in `runs/` keep the old one, unedited.*
+
 This is the source file for infographics and the demo. Every number comes from real runs, and every quote is copied from a run's final answer.
 
 | | |

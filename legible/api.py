@@ -424,6 +424,8 @@ async def activity(website_id: str, limit: int = 50):
     rows = store.query("SELECT * FROM event WHERE website_id = ? ORDER BY remote_id DESC", website_id)
     events = [{"id": r["remote_id"], "ts": r["ts"], "event": r["event"], **r["payload"]} for r in rows]
     events = [e for e in events if not (e.get("user_agent") or "").startswith("legible")]  # The app's own preview reads.
+    # A quote that ended in a dead end gave the agent no price, so it only counts as the dead end.
+    events = [e for e in events if e["event"] != "quote" or e.get("status") in ("ok", "needs_info")]
     kinds = Counter(e["event"] for e in events)
     feed = []
     for event in events[:limit]:

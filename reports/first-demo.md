@@ -1,5 +1,7 @@
 # First demo: build report
 
+*The fictional business was called Cormorant Mobile Detailing when this ran, and it is now Sunrise Auto Detailers. Quotes and names here use the new name. The raw logs in `runs/` keep the old one, unedited.*
+
 *Run on 5 November 2026 (India time), on the fictional Sunrise Auto Detailers, with everything local. The agent was frozen at commit `2c319fc`, tagged `first-demo-agent-freeze`. This report covers what was built, what passed, what failed and how to run it. For the numbers, see [first-demo-benchmark.md](first-demo-benchmark.md).*
 
 ## The result
