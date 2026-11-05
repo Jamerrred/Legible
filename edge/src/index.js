@@ -220,7 +220,8 @@ function evaluate(rec, job, day) {
 
   const when = parseWhen(job.when, day);
   if (when) {
-    const closure = list(rec.facts).find((f) => f.category === "closure" && inWindow(f, when));
+    // Only a dated closure rules out a date. "Closed Sundays" has no dates, and closed_weekdays covers it.
+    const closure = list(rec.facts).find((f) => f.category === "closure" && (f.valid_from || f.valid_to) && inWindow(f, when));
     if (closure) return stop("closed", closure.statement);
     const closedDays = list(rec.business?.closed_weekdays).map(norm);
     if (closedDays.includes(norm(weekdayOf(when)))) return stop("closed", `${rec.business?.name} is closed on ${weekdayOf(when)}s.`);
