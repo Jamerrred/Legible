@@ -46,7 +46,7 @@ This takes about 5 minutes. Everything runs on your own computer, and you don't 
 ### 2. Download the code
 
 ```bash
-git clone https://github.com/Jamerrred/Musefront.git legible
+git clone https://github.com/Jamerrred/Legible.git legible
 ```
 
 ```bash
