@@ -101,5 +101,12 @@ export const route = () => (location.hash.replace(/^#\/?/, "") || "websites").sp
 export const isBusy = (site) => site && !["ready", "failed"].includes(site.stage);
 export const pollMs = () => (state.config?.demo ? 500 : 1200);
 
+// In the demo, agents arrive once the link is up. Opening Inbox or Bookings plays that step if it was skipped.
+export const demoAgentsArrive = async () => {
+  if (!state.config?.demo || !state.site?.live || state.site.link_placed) return;
+  state.site.link_placed = true;
+  await post(`/websites/${state.site.id}/check-link`);
+};
+
 // Set by app.js, so screens can ask for a re-render without importing it.
 export const app = { render: async () => {}, refreshRail: async () => {} };

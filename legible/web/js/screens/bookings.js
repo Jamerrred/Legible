@@ -1,5 +1,5 @@
 // Bookings: each request reads like a ticket, with the bill the page worked out.
-import { actions, api, app, esc, forms, icon, money, post, screens, shortDate, startPoll, state, titled, toast, when } from "../core.js";
+import { actions, api, app, demoAgentsArrive, esc, forms, icon, money, post, screens, shortDate, startPoll, state, titled, toast, when } from "../core.js";
 
 const title = (b) => {
   const job = b.payload?.details?.inputs || {};
@@ -38,6 +38,7 @@ function ticket(b) {
 
 screens.bookings = {
   async load() {
+    await demoAgentsArrive();
     const rows = await api(`/websites/${state.site.id}/bookings`);
     if (!rows.some((b) => b.id === state.selectedBooking)) state.selectedBooking = rows[0]?.id || null;
     return { rows };

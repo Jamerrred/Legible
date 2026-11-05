@@ -136,6 +136,7 @@ def _site_view(site: dict) -> dict:
         "stage": site["stage"],
         "stage_note": site["stage_note"],
         "live": bool(site["published_version"]),
+        "link_placed": bool(site["link_placed"]),
         "link": link,
         "link_line": line,
         "link_line_html": f'<p>Prices, availability and booking requests for {name}: <a href="{link}">{link}</a></p>',
@@ -247,7 +248,7 @@ async def check_link(website_id: str):
         async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
             response = await client.get(site["url"])
         found = link in response.text
-    if found and not site["link_placed"]:
+    if found and not site["link_placed"] and site["published_version"]:
         store.update("website", "id", website_id, link_placed=1)
         if demo.ENABLED:
             _background(demo.seed_activity(website_id))
