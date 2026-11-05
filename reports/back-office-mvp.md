@@ -13,7 +13,7 @@ Live resource: https://musefront.jamerrred-audiobooks.workers.dev/b/cormorant-de
 | Step | Result |
 |---|---|
 | Read the website | 49 draft facts, in about a minute |
-| Interview in the inbox | 12 questions, all answered by the scripted owner, which raised it to 73 confirmed facts |
+| Interview in the inbox | 12 questions, all answered by the scripted owner, which raised it to 86 confirmed facts by the end of the run |
 | First check on the website | 3 of 5 settled, $1.41, about 6.5 minutes. 1 run was missing a fact, and 1 crashed on a provider error |
 | Publish and copy-paste link | Live, with a page, markdown and a link line |
 | "Closed for the next 2 days" | Proposed with absolute dates, confirmed, shown on the page, then undone and gone |
