@@ -5,9 +5,6 @@ It prepares .env, then runs two things until you press Ctrl+C:
   - the owner app, at http://127.0.0.1:8200
 
 No Cloudflare account is needed. Set LEGIBLE_PORT to use a different port for the app.
-
-Add --demo to run the scripted demo copy instead, on port 8300. It plays back sample data, spends
-no AI credit and needs no API keys. Open /demo/reset to start a new take.
 """
 
 from __future__ import annotations
@@ -49,7 +46,7 @@ def set_env(key: str, value: str) -> None:
     ENV.write_text(text)
 
 
-def prepare_env(demo: bool = False) -> dict[str, str]:
+def prepare_env() -> dict[str, str]:
     if not ENV.exists():
         shutil.copy(ROOT / ".env.example", ENV)
         print("Created .env from .env.example")
@@ -60,7 +57,7 @@ def prepare_env(demo: bool = False) -> dict[str, str]:
         set_env("LEGIBLE_EDGE_URL", LOCAL_EDGE)
     values = read_env()
     missing = [key for key in ("OPENROUTER_API_KEY", "EXA_API_KEY") if not values.get(key)]
-    if missing and not demo:
+    if missing:
         sys.exit(f"\nAdd {' and '.join(missing)} to .env, then run this again.\nThe README says where to get them.\n")
     return values
 
@@ -85,12 +82,11 @@ def port_in_use(port: int) -> bool:
 
 
 def main() -> None:
-    demo = "--demo" in sys.argv[1:]
-    values = prepare_env(demo)
+    values = prepare_env()
     edge_url = values["LEGIBLE_EDGE_URL"].rstrip("/")
     edge_host = urlparse(edge_url)
     processes: list[subprocess.Popen] = []
-    port = os.environ.get("LEGIBLE_PORT", "8300" if demo else "8200")
+    port = os.environ.get("LEGIBLE_PORT", "8200")
     if port_in_use(int(port)):
         sys.exit(f"\nAnother program is using port {port}. Close it, or choose another port: LEGIBLE_PORT=8400 uv run python scripts/start.py\n")
 
@@ -117,8 +113,7 @@ def main() -> None:
                 process.terminate()
             sys.exit(f"\nThe local resource didn't start at {edge_url}. Is another program using that port?\n")
 
-    app_env = {**os.environ, "LEGIBLE_DEMO": "1", "LEGIBLE_DB_PATH": "legible/demo.db", "LEGIBLE_CRON_HOURS": "999"} if demo else None
-    processes.append(subprocess.Popen([sys.executable, "-m", "uvicorn", "legible.api:app", "--port", port, "--log-level", "warning"], cwd=ROOT, env=app_env))
+    processes.append(subprocess.Popen([sys.executable, "-m", "uvicorn", "legible.api:app", "--port", port, "--log-level", "warning"], cwd=ROOT))
     app_url = f"http://127.0.0.1:{port}"
     if not wait_for(f"{app_url}/health"):
         for process in processes:

@@ -118,21 +118,21 @@ function runQuote(rec, delay = 160) {
 
 // ---- The prompt bar
 
-function composerHtml(pending, demo) {
+function composerHtml(pending) {
   const cards = pending.map((p) => {
     const ops = (p.payload?.ops || []).map((op) => op.item?.statement || op.item?.label || op.item?.name).filter(Boolean);
     return `<div class="proposal" id="prop-${p.id}"><span class="eyebrow">Proposed change. Nothing is public until you confirm.</span><div class="proposal-title">${esc(p.title)}</div>${ops.length ? `<div class="proposal-ops">${ops.map((o) => `<div>+ ${esc(o)}</div>`).join("")}</div>` : ""}<div class="row"><button class="btn btn--primary btn--sm" data-do="confirmChange" data-id="${p.id}">${icon("check")} Confirm and publish</button><button class="btn btn--ghost btn--sm" data-do="discardChange" data-id="${p.id}">Discard</button></div></div>`;
   }).join("");
   const clarify = state.clarify ? `<div class="proposal"><div class="proposal-title">${esc(state.clarify)}</div></div>` : "";
   const working = state.working ? `<div class="proposal"><div class="row small"><span class="ring"></span><span class="shimmer">Working out the change</span></div></div>` : "";
-  const hints = demo && !pending.length && !state.working ? `<div class="composer-hints"><button type="button" class="composer-hint" data-do="useHint" data-text="Closed for the next 2 days">Closed for the next 2 days</button><button type="button" class="composer-hint" data-do="useHint" data-text="Class A of the Skiff is now $70">Class A of the Skiff is now $70</button></div>` : "";
+  const hints = !pending.length && !state.working ? `<div class="composer-hints"><button type="button" class="composer-hint" data-do="useHint" data-text="Closed for the next 2 days">Closed for the next 2 days</button><button type="button" class="composer-hint" data-do="useHint" data-text="We now take Apple Pay">We now take Apple Pay</button></div>` : "";
   return `<div class="composer">${cards}${clarify}${working}${hints}<form data-form="instruct"><div class="field"><input name="text" required autocomplete="off" aria-label="Tell Legible what changed" placeholder="Tell Legible what changed, in plain words" ${state.working ? "disabled" : ""}><button class="send" aria-label="Send" ${state.working ? "disabled" : ""}>${icon("arrow-up")}</button></div></form></div>`;
 }
 
 async function refreshComposer() {
   const changes = await api(`/websites/${state.site.id}/resource/changes`);
   const el = $("#composer");
-  if (el) morph(el, composerHtml(changes.filter((c) => c.status === "open"), state.config?.demo));
+  if (el) morph(el, composerHtml(changes.filter((c) => c.status === "open")));
 }
 
 // ---- The lens
@@ -212,7 +212,7 @@ screens.resource = {
             <div class="lens-agent agent-surface">${agentHtml(site, agent)}</div>
           </div></div>
           <div class="lens-handle" id="lens-handle" aria-hidden="true"><b></b></div>
-          <div class="composer-wrap" id="composer">${composerHtml(pending, state.config?.demo)}</div>
+          <div class="composer-wrap" id="composer">${composerHtml(pending)}</div>
         </div>
         ${consoleHtml(site, res.record)}
       </div>

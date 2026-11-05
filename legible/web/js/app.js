@@ -13,7 +13,6 @@ const NAV = [["websites", "globe", "Websites"], ["simulations", "flask-conical",
 const BRAND = "Legible".split("").map((c, i) => `<span style="--i:${i}">${c}</span>`).join("");
 
 async function loadSites() {
-  if (!state.config) state.config = await api("/config");
   state.sites = await api("/websites");
   const wanted = localStorage.getItem("legible.site");
   state.site = state.sites.find((s) => s.id === wanted) || state.sites[0] || null;
@@ -60,8 +59,7 @@ function railHtml() {
       const [line, needs, count] = steps[id];
       return `<a class="step ${now === id ? "on" : ""} ${i < reached ? "done" : ""} ${needs ? "needs" : ""}" href="#/${id}" id="nav-${id}" ${now === id ? 'aria-current="page"' : ""}><span class="step-node">${icon(ic)}</span><span class="step-text"><b>${label}</b>${line ? `<small>${esc(line)}</small>` : ""}</span>${count ? `<span class="count">${count}</span>` : ""}</a>`;
     }).join("")}</div>
-    <div class="rail-spacer"></div>${nextCard}
-    ${state.config?.demo ? `<p class="demo-note">Demo copy: sample data, sped up. <a href="/demo/reset">Start over</a></p>` : ""}`;
+    <div class="rail-spacer"></div>${nextCard}`;
 }
 
 function syncIndicator() {

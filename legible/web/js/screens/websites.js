@@ -13,8 +13,8 @@ function startView() {
     <form class="start-form" data-form="addSite">
       <h1 class="t-hero focus-in">Which website should agents read?</h1>
       <p>Legible reads your site, tests it with customer agents and asks you what's missing. Nothing goes public until you confirm it.</p>
-      <div class="field field--xl"><input name="url" type="url" required aria-label="Your website address" placeholder="https://yourbusiness.com" value="${esc(state.config?.demo_url || "")}" autofocus><button class="send" aria-label="Read this website">${icon("arrow-up", "i--lg")}</button></div>
-      <label class="switch"><input type="checkbox" name="check" checked><span class="track"></span>Also test it with customer agents${state.config?.demo ? "" : ", about 5 minutes"}</label>
+      <div class="field field--xl"><input name="url" type="url" required aria-label="Your website address" placeholder="https://yourbusiness.com" autofocus><button class="send" aria-label="Read this website">${icon("arrow-up", "i--lg")}</button></div>
+      <label class="switch"><input type="checkbox" name="check" checked><span class="track"></span>Also test it with customer agents, about 5 minutes</label>
     </form>
   </section>`;
 }
@@ -55,7 +55,7 @@ function factFeed(trace) {
 }
 
 function theatreBody(trace) {
-  if (trace.stage === "checking" || trace.simulation) return `<div class="stack" style="gap:14px"><p class="soft">${state.config?.demo ? "Each one plays a customer's agent" : "Each one is a real agent"}, asking what a real customer asks. They only have what's on your website.</p>${liveTrace(trace.simulation)}</div>`;
+  if (trace.stage === "checking" || trace.simulation) return `<div class="stack" style="gap:14px"><p class="soft">Each one is a real agent, asking what a real customer asks. They only have what's on your website.</p>${liveTrace(trace.simulation)}</div>`;
   const pages = trace.pages || [];
   const reading = trace.stage === "crawling" || trace.stage === "queued";
   const cards = pages.map((p, i) => pageCard(p, reading && i === pages.length - 1)).join("");

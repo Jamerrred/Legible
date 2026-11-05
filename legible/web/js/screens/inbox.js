@@ -1,5 +1,5 @@
 // Inbox: only what agents did and asked. A funnel, their questions, a feed and unmet demand.
-import { actions, api, app, demoAgentsArrive, esc, forms, icon, money, post, roll, screens, startPoll, state, titled, toast, when, words } from "../core.js";
+import { actions, api, app, esc, forms, icon, money, post, roll, screens, startPoll, state, titled, toast, when, words } from "../core.js";
 
 function feedLine(event) {
   const job = event.inputs || {};
@@ -20,16 +20,13 @@ function funnelStep(n, label, glyph, top, dead = false) {
 }
 
 function agentQuestion(q) {
-  const hint = Object.entries(state.config?.suggestions || {}).find(([term]) => q.title.toLowerCase().includes(term))?.[1];
   return `<article class="q-card" id="q-${q.id}" style="margin-bottom:10px"><span class="q-source" style="color:var(--agent)"><span class="dot dot--agent"></span>An agent asked this for a customer</span><h3>${esc(q.title)}</h3><p class="q-why">Your answer shows on the status page that agent checks.</p>
-    ${hint ? `<button class="chip" type="button" data-do="useSuggested" data-text="${esc(hint)}">${esc(hint)}</button>` : ""}
     <form data-form="answer" data-id="${q.id}" class="stack" style="gap:9px"><div class="field"><input name="text" required placeholder="Answer in your own words" autocomplete="off" aria-label="Your answer"><button class="send" aria-label="Send answer">${icon("arrow-up")}</button></div>
     <label class="switch small"><input type="checkbox" name="once"><span class="track"></span>Just this once, don't add it to my page</label></form></article>`;
 }
 
 screens.inbox = {
   async load() {
-    await demoAgentsArrive();
     const id = state.site.id;
     const [activity, items] = await Promise.all([api(`/websites/${id}/activity`), api(`/websites/${id}/inbox?kinds=agent_question`)]);
     return { activity, items };
