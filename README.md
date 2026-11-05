@@ -2,7 +2,7 @@
 
 MuseFront gives a service business a small website that any AI agent can read and act on, plus a back office agent that keeps that website accurate.
 
-**Status:** the back office backend is built as a prototype, and it publishes a public resource to a Cloudflare Worker: see [its report](reports/back-office-mvp.md). It has no interface yet. The first local demo, on the fictional Cormorant Mobile Detailing, is [here](reports/first-demo-benchmark.md). Real Muse is untested.
+**Status:** the back office backend is built as a prototype, and it publishes a public resource to a Cloudflare Worker: see [its report](reports/back-office-mvp.md). It has no interface yet. The first demo, on the fictional Cormorant Mobile Detailing, is [live on Cloudflare](deploy/workers/README.md), and its local results are [here](reports/first-demo-benchmark.md). Real Muse is untested.
 
 ## Run the back office
 
@@ -85,6 +85,7 @@ For the first demo, `businesses/cormorant/facts.json` is the single source of tr
 | `demo_resource/` | The hand-written resource, with quote, request and question forms. It's the answer key |
 | `consumer_agent/` | The general stand-in agent. It knows nothing about this project or business |
 | `bench/` | Control page, mock web, queries, grader and benchmark runner |
+| [deploy/workers/](deploy/workers/README.md) | The Cloudflare deployment of the first demo's site and hand-written resource, and their live addresses |
 | `scripts/` | The server launcher, the booking check and the scripted owner |
 | `tests/` | Tests for the facts, site, resource and grader |
 | `corpus/` | Saved page copies for the agent's local search |

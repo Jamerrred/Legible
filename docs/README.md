@@ -8,9 +8,9 @@ MuseFront gives a service business a small website that any AI agent can read an
 
 **Done so far:** the first mock business (mobile detailing), its hand-written resource, the consumer agent, a local before-and-after test ([benchmark](../reports/first-demo-benchmark.md)), and the back office backend with a public resource on Cloudflare ([report](../reports/back-office-mvp.md)).
 
-**Next steps:** the founder's interface design, which the API then gets fitted to ([owner app](10-owner-app.md)), and connecting real accounts through Composio.
+**Next steps:** the founder's interface design, which the API then gets fitted to ([owner app](10-owner-app.md)), connecting real accounts through Composio, and 1 or 2 searches on real Muse with and without the resource.
 
-**Skipped on the founder's direction, 5 November:** the 5 missing "before" runs, the real Muse check and the other three mock businesses. Whether real agents follow the link is still untested.
+**Skipped on the founder's direction, 5 November:** the 5 missing "before" runs and the other three mock businesses, which wait until the founder asks for them. Whether real agents follow the link is still untested.
 
 ## Read these in order
 

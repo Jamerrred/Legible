@@ -36,10 +36,12 @@ Two pieces get reused:
 | Sample queries | Used only to check the agent on the control page before the freeze. They're the start of a discovery set, not part of the benchmark |
 | Resource | Written from the facts file only, with no discovery findings in this round |
 | Profile | Hybrid only so far |
+| Hosting | Cloudflare Python Workers on the $5 plan, with no Docker. See [the deployment](../deploy/workers/README.md) |
+| Current scope | A minimum viable check only: a few agent runs with Exa, then 1 or 2 Muse searches with and without the resource. Everything from step 6 onward waits until the founder asks |
 
 **The real Muse test still needs:**
 
-- **Hosting:** a host that can run a small server, because forms and logs need one. A static-only deploy won't work.
+- **Hosting:** done. The two versions and the resource are live on Cloudflare.
 - **Two live versions:** they differ only by the link and the resource. An optional third run gives Muse the resource URL directly, which separates "can't find it" from "can't use it".
 - **Clean runs:** fresh chats, a clean account or cleared memory if possible, and several repeats of each query.
 - **Who runs it:** the founder, by hand at first, since Muse is logged in on Brave and computer use can't click or type in a browser.

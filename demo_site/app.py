@@ -42,7 +42,7 @@ def create_app(variant: str = "before") -> FastAPI:
     addons = [addon["label"] for addon in model["addons"].values()]
 
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
-    app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
+    app.mount("/static", StaticFiles(directory=HERE / "static", check_dir=False), name="static")
     templates = Jinja2Templates(directory=HERE / "templates")
     templates.env.trim_blocks = True
     templates.env.lstrip_blocks = True
