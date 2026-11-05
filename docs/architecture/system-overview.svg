@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1360 480" role="img" aria-labelledby="title desc">
+  <title id="title">Legible at a glance</title>
+  <desc id="desc">A business owner works with the Legible harness, which calls Muse Spark and Exa and runs Errand as simulated customers. Legible publishes confirmed facts to a public page on Cloudflare and gets back questions, bookings and agent traces. AI agents like Muse read the business website, follow its one link and use the public page.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#111111"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; text-anchor: middle; }
+      .name { font-size: 23px; font-weight: 600; }
+      .sub { font-size: 18px; }
+      .label { font-size: 17px; font-weight: 600; fill: #111111; }
+      .start { text-anchor: start; }
+      .line { fill: none; stroke: #111111; stroke-width: 2.4; marker-end: url(#arrow); }
+      .both { marker-start: url(#arrow); }
+      .dash { stroke-dasharray: 6 5; }
+    </style>
+  </defs>
+
+  <rect width="1360" height="480" fill="#FEFEFE"/>
+
+  <!-- Connections -->
+  <path class="line" d="M210 208 H338"/>
+  <text x="274" y="150" class="label">website,</text>
+  <text x="274" y="172" class="label">answers,</text>
+  <text x="274" y="194" class="label">updates</text>
+  <path class="line both" d="M500 76 V108"/>
+  <path class="line both" d="M500 302 V370"/>
+  <text x="512" y="342" class="label start">runs tests</text>
+  <path class="line" d="M660 150 H818"/>
+  <text x="740" y="138" class="label">confirmed facts</text>
+  <path class="line" d="M820 215 H662"/>
+  <text x="730" y="238" class="label">questions,</text>
+  <text x="730" y="258" class="label">bookings,</text>
+  <text x="730" y="278" class="label">agent traces</text>
+  <path class="line" d="M660 395 H800 V285 H818"/>
+  <text x="730" y="386" class="label">test after</text>
+  <path class="line" d="M660 430 H818"/>
+  <text x="740" y="420" class="label">test before</text>
+  <path class="line dash" d="M950 372 V302"/>
+  <text x="962" y="343" class="label start">one link</text>
+  <path class="line" d="M1170 205 H1082"/>
+  <text x="1126" y="150" class="label">read,</text>
+  <text x="1126" y="172" class="label">quote,</text>
+  <text x="1126" y="194" class="label">book</text>
+  <path class="line" d="M1257 256 V417 H1082"/>
+  <text x="1170" y="407" class="label">read</text>
+
+  <!-- People -->
+  <rect x="20" y="170" width="190" height="76" rx="38" fill="#FFFFFF" stroke="#33322E" stroke-width="1.5"/>
+  <text x="115" y="215" class="name" fill="#24231F" style="font-size:20px">Business owner</text>
+  <rect x="1170" y="158" width="175" height="98" rx="49" fill="#FFFFFF" stroke="#33322E" stroke-width="1.5"/>
+  <text x="1257" y="202" class="name" fill="#24231F" style="font-size:21px">AI agents</text>
+  <text x="1257" y="228" class="sub" fill="#24231F">like Muse</text>
+
+  <!-- Legible -->
+  <rect x="340" y="110" width="320" height="190" rx="10" fill="#FFF4EC" stroke="#C8501A" stroke-width="2"/>
+  <text x="500" y="160" class="name" fill="#3A2A20" style="font-size:27px">Legible</text>
+  <text x="500" y="190" class="sub" fill="#3A2A20" style="font-weight:600">agentic harness</text>
+  <text x="500" y="228" class="sub" fill="#3A2A20">crawls, extracts, interviews,</text>
+  <text x="500" y="254" class="sub" fill="#3A2A20">reviews agent traces</text>
+
+  <rect x="340" y="14" width="320" height="60" rx="8" fill="#F6F5F1" stroke="#8A877E" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="500" y="51" class="sub" fill="#33322E" style="font-weight:600">Muse Spark and Exa</text>
+
+  <rect x="340" y="372" width="320" height="90" rx="10" fill="#F1EEFF" stroke="#6A57C7" stroke-width="2"/>
+  <text x="500" y="411" class="name" fill="#2C2360">Errand</text>
+  <text x="500" y="439" class="sub" fill="#2C2360">simulated customer agents</text>
+
+  <!-- Public page -->
+  <rect x="820" y="110" width="260" height="190" rx="10" fill="#EAF3FF" stroke="#2F6FB3" stroke-width="2"/>
+  <text x="950" y="160" class="name" fill="#16324F" style="font-size:25px">Public page</text>
+  <text x="950" y="190" class="sub" fill="#16324F" style="font-weight:600">Cloudflare Worker + D1</text>
+  <text x="950" y="228" class="sub" fill="#16324F">facts, quotes,</text>
+  <text x="950" y="254" class="sub" fill="#16324F">questions, bookings</text>
+
+  <rect x="820" y="372" width="260" height="90" rx="10" fill="#F6F5F1" stroke="#8A877E" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="950" y="411" class="name" fill="#33322E" style="font-size:21px">Business website</text>
+  <text x="950" y="439" class="sub" fill="#33322E">+ one link line</text>
+</svg>

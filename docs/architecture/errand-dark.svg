@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1165 335" role="img" aria-labelledby="title desc">
+  <title id="title">How Errand works</title>
+  <desc id="desc">A customer request goes to Errand's tool loop on Muse Spark, which calls its tools behind a personal-details gate. Its report then passes an evidence gate, which sends unsupported claims back to the loop, before it becomes a report with sources.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#FFFFFF"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; text-anchor: middle; }
+      .name { font-size: 21px; font-weight: 600; }
+      .sub { font-size: 17px; }
+      .label { font-size: 17px; font-weight: 600; fill: #FFFFFF; }
+      .start { text-anchor: start; }
+      .line { fill: none; stroke: #FFFFFF; stroke-width: 2.4; marker-end: url(#arrow); }
+      .both { marker-start: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1165" height="335" fill="#0D1117"/>
+
+  <!-- Connections -->
+  <path class="line" d="M205 195 H283"/>
+  <path class="line both" d="M410 92 V138"/>
+  <text x="422" y="120" class="label start">personal-details gate</text>
+  <path class="line" d="M535 195 H618"/>
+  <path class="line" d="M830 195 H928"/>
+  <path class="line" d="M725 240 V310 H410 V252"/>
+  <text x="567" y="300" class="label">unsupported claim: up to 2 retries</text>
+
+  <!-- Boxes -->
+  <rect x="160" y="12" width="500" height="78" rx="8" fill="#2A2922" stroke="#A3A097" stroke-width="1.5"/>
+  <text x="410" y="45" class="sub" fill="#ECEBE4">search_web, read_page, browse_task,</text>
+  <text x="410" y="72" class="sub" fill="#ECEBE4">do_math, ask_person</text>
+
+  <rect x="15" y="150" width="190" height="90" rx="10" fill="#1F1E18" stroke="#ECEBE4" stroke-width="1.5"/>
+  <text x="110" y="189" class="name" fill="#ECEBE4">Customer</text>
+  <text x="110" y="215" class="name" fill="#ECEBE4">request</text>
+
+  <rect x="285" y="140" width="250" height="110" rx="10" fill="#2A2350" stroke="#A99BF0" stroke-width="2"/>
+  <text x="410" y="180" class="name" fill="#EDEAFF">Tool loop</text>
+  <text x="410" y="207" class="sub" fill="#EDEAFF">Muse Spark</text>
+  <text x="410" y="231" class="sub" fill="#EDEAFF">15 calls, 6 minutes</text>
+
+  <polygon points="650,150 800,150 830,195 800,240 650,240 620,195" fill="#3A2F10" stroke="#E0B45F" stroke-width="2"/>
+  <text x="725" y="202" class="name" fill="#FBEFCF">Evidence gate</text>
+
+  <rect x="930" y="150" width="220" height="90" rx="10" fill="#1F1E18" stroke="#ECEBE4" stroke-width="1.5"/>
+  <text x="1040" y="189" class="name" fill="#ECEBE4">Report</text>
+  <text x="1040" y="215" class="sub" fill="#ECEBE4">with sources</text>
+</svg>
