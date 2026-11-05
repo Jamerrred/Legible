@@ -10,7 +10,7 @@ import pytest
 from bench.grade import grade, read_run
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "http://cormorant.localhost:8101/"
+SITE = "http://sunrise.localhost:8101/"
 QUERY = {"id": "t1", "fact_ids": [], "expected_outcome": "answered", "checks": {"all_of": ["\\$100"], "none_of": ["\\$50"]}}
 PERSON = {"profile": {"email": "someone.t1@example.com"}}
 

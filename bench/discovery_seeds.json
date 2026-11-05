@@ -1,7 +1,7 @@
 [
  {
   "id": "d01",
-  "query": "Clean pet hair out of my van for under $150 in the next 2 days. I'm asking about Cormorant Mobile Detailing.",
+  "query": "Clean pet hair out of my van for under $150 in the next 2 days. I'm asking about Sunrise Auto Detailers.",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -19,7 +19,7 @@
  },
  {
   "id": "d02",
-  "query": "What's the all-in price for a full detail on a Ford Transit at Cormorant Mobile Detailing?",
+  "query": "What's the all-in price for a full detail on a Ford Transit at Sunrise Auto Detailers?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -37,7 +37,7 @@
  },
  {
   "id": "d03",
-  "query": "My dog sheds a lot. Will Cormorant Mobile Detailing charge extra?",
+  "query": "My dog sheds a lot. Will Sunrise Auto Detailers charge extra?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -55,7 +55,7 @@
  },
  {
   "id": "d04",
-  "query": "I live in an apartment with street parking. Can Cormorant Mobile Detailing still come?",
+  "query": "I live in an apartment with street parking. Can Sunrise Auto Detailers still come?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -73,7 +73,7 @@
  },
  {
   "id": "d05",
-  "query": "Does Cormorant Mobile Detailing cover ZIP 94110?",
+  "query": "Does Sunrise Auto Detailers cover ZIP 94110?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -91,7 +91,7 @@
  },
  {
   "id": "d06",
-  "query": "Can someone from Cormorant Mobile Detailing come tomorrow morning?",
+  "query": "Can someone from Sunrise Auto Detailers come tomorrow morning?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -109,7 +109,7 @@
  },
  {
   "id": "d07",
-  "query": "Does Cormorant Mobile Detailing do ceramic coating on boats?",
+  "query": "Does Sunrise Auto Detailers do ceramic coating on boats?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -127,7 +127,7 @@
  },
  {
   "id": "d08",
-  "query": "Yelp says pet hair removal is $50 at Cormorant Mobile Detailing. Can I get that?",
+  "query": "Yelp says pet hair removal is $50 at Sunrise Auto Detailers. Can I get that?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -145,7 +145,7 @@
  },
  {
   "id": "d09",
-  "query": "What if I cancel my Cormorant Mobile Detailing appointment the day before? Is the deposit refundable?",
+  "query": "What if I cancel my Sunrise Auto Detailers appointment the day before? Is the deposit refundable?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -163,7 +163,7 @@
  },
  {
   "id": "d10",
-  "query": "Which Cormorant Mobile Detailing package fits a family SUV with a spilled milk smell?",
+  "query": "Which Sunrise Auto Detailers package fits a family SUV with a spilled milk smell?",
   "type": "discovery seed",
   "expected_outcome": "answered",
   "fact_ids": [],
@@ -181,7 +181,7 @@
  },
  {
   "id": "d11",
-  "query": "Book the earliest slot at Cormorant Mobile Detailing for a wash, but check with me first.",
+  "query": "Book the earliest slot at Sunrise Auto Detailers for a wash, but check with me first.",
   "type": "discovery seed",
   "expected_outcome": "action_submitted",
   "fact_ids": [],

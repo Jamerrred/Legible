@@ -111,7 +111,7 @@ function sections(rec, base, day) {
 
   const zones = servable(rec.zones, day).map((z) => {
     const zips = list(z.zips).join(", ");
-    const fee = z.fee ? `a ${money(rec, z.fee)} travel fee` : "no travel fee";
+    const fee = z.fee ? `a ${money(rec, z.fee)} travel fee` : z.fee === 0 ? "no travel fee" : "a travel fee the owner hasn't stated";
     return `${z.label}${zips ? ` (ZIP ${zips})` : ""}: ${fee}.` + confirmed(z);
   });
   add("area", CATEGORY_TITLES.service_area, [...zones, ...facts.filter((f) => f.category === "service_area").map((f) => f.statement + confirmed(f))]);
@@ -305,6 +305,7 @@ function evaluate(rec, job, day) {
         r.notes.push(`ZIP ${code} isn't on a list, so this assumes it's in ${unlisted.map((z) => z.label).join(" or ")}. The owner can confirm.`);
       }
       if (zone.fee) push(`Travel fee (${zone.label})`, { low: Number(zone.fee), high: Number(zone.fee) }, false);
+      else if (zone.fee !== 0) r.notes.push(`The owner hasn't stated the travel fee for ${zone.label}, so this total leaves it out.`);
     }
   }
 

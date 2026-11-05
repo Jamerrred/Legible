@@ -4,7 +4,7 @@ The Legible app never sees the facts file. Only this scripted owner does, and it
 only what it's asked, the way a real owner would.
 
 Start the API first: uv run uvicorn legible.api:app --port 8200
-Then: uv run python scripts/mvp_demo.py --url http://cormorant.localhost:8101 [--check] [--proof]
+Then: uv run python scripts/mvp_demo.py --url http://sunrise.localhost:8101 [--check] [--proof]
 
 --check runs the first simulation at onboarding, about $1.30. --proof runs 4 benchmark queries
 against the generated resource, about $0.50. Neither runs by default.
@@ -110,8 +110,8 @@ def proof(link: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--url", default="http://cormorant.localhost:8101")
-    parser.add_argument("--facts", default="cormorant", help="Which business's facts the scripted owner knows")
+    parser.add_argument("--url", default="http://sunrise.localhost:8101")
+    parser.add_argument("--facts", default="sunrise", help="Which business's facts the scripted owner knows")
     parser.add_argument("--website-id", help="Reuse a website that's already onboarded")
     parser.add_argument("--check", action="store_true", help="Run the first simulation at onboarding")
     parser.add_argument("--proof", action="store_true", help="Run 4 benchmark queries on the generated resource")

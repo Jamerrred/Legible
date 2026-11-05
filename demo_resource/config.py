@@ -7,9 +7,9 @@ from zoneinfo import ZoneInfo
 
 from legible_core.business import load_facts
 
-SLUG = "cormorant"
+SLUG = "sunrise"
 STREAM = "resource"
-BASE_URL = os.environ.get("LEGIBLE_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
+BASE_URL = os.environ.get("LEGIBLE_RESOURCE_BASE_URL", "http://agents.sunrise.localhost:8103")
 SLOT_DAYS = 21
 QUOTE_VALID_DAYS = 7  # This site's own limit. The facts don't set a quote validity period.
 

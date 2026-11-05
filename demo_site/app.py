@@ -1,4 +1,4 @@
-"""The Cormorant Mobile Detailing site: Home, FAQ and Book."""
+"""The Sunrise Auto Detailers site: Home, FAQ and Book."""
 
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def create_app(variant: str = "before") -> FastAPI:
     if variant not in ("before", "after"):
         raise ValueError("variant must be 'before' or 'after'")
     stream = f"site-{variant}"
-    facts = load_facts("cormorant")
+    facts = load_facts("sunrise")
     model = facts["pricing_model"]
     starting = {key: service["prices"]["small"] for key, service in model["services"].items()}
     packages = [service["marketing_name"] for service in model["services"].values()]
@@ -46,7 +46,7 @@ def create_app(variant: str = "before") -> FastAPI:
     templates = Jinja2Templates(directory=HERE / "templates")
     templates.env.trim_blocks = True
     templates.env.lstrip_blocks = True
-    templates.env.globals["resource_url"] = os.environ.get("LEGIBLE_RESOURCE_BASE_URL", "http://agents.cormorant.localhost:8103")
+    templates.env.globals["resource_url"] = os.environ.get("LEGIBLE_RESOURCE_BASE_URL", "http://agents.sunrise.localhost:8103")
     templates.env.globals.update(variant=variant, business=facts["business"])
 
     def render(request: Request, template_name: str, status_code: int = 200, **context):

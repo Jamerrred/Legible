@@ -66,7 +66,7 @@ def snapshot(variant: str) -> int:
     shutil.rmtree(out, ignore_errors=True)
     out.mkdir(parents=True)
     fetched_at = datetime.now(UTC).date().isoformat()
-    total = crawl(f"http://cormorant.localhost:{SITE[variant]}/", out, fetched_at)
+    total = crawl(f"http://sunrise.localhost:{SITE[variant]}/", out, fetched_at)
     for host in WORLD_HOSTS:
         total += crawl(f"http://{host}:{WORLD[variant]}/", out, fetched_at)
     return total

@@ -85,7 +85,7 @@ function factFeed(trace) {
 }
 
 function theatreBody(trace) {
-  if (trace.stage === "checking" || trace.simulation) return `<div class="stack" style="gap:14px"><p class="soft">Each one is a real agent, asking what a real customer asks. They only have what's on your website.</p>${liveTrace(trace.simulation)}</div>`;
+  if (trace.stage === "checking" || trace.simulation) return `<div class="stack" style="gap:14px"><p class="soft">${state.config?.demo ? "Each one plays a customer's agent" : "Each one is a real agent"}, asking what a real customer asks. They only have what's on your website.</p>${liveTrace(trace.simulation)}</div>`;
   const pages = trace.pages || [];
   const reading = trace.stage === "crawling" || trace.stage === "queued";
   const cards = pages.map((p, i) => pageCard(p, reading && i === pages.length - 1)).join("");
@@ -127,7 +127,7 @@ function deskView(site) {
     : `<article class="pass pass--off"><span class="row strong">${icon("lock")} Your link</span>
         <div class="pass-link" aria-hidden="true">${esc(domain(site.link))}</div>
         <p class="pass-note">This comes into focus once you've confirmed your facts. Nothing is public until then.</p>
-        ${site.facts.draft ? `<div><a class="btn btn--primary" href="#/resource">${icon("check")} Confirm ${plural(site.facts.draft, "fact")}</a></div>` : ""}</article>`;
+        ${site.next && !site.next.busy && ["simulations", "resource"].includes(site.next.screen) ? `<div><a class="btn btn--primary" href="#/${site.next.screen}">${esc(site.next.label)}</a></div>` : ""}</article>`;
   const scoreTile = score
     ? `<a class="score-tile" href="#/simulations"><div class="between"><span class="strong">Test customers</span>${checks.count > 1 && checks.first.answered !== score.answered ? `<span class="badge badge--ok">Up from ${checks.first.answered}</span>` : ""}</div>
         <div class="score-big">${roll(score.answered)}<span class="of">of ${score.queries}</span></div>
@@ -227,7 +227,8 @@ Object.assign(actions, {
   },
   checkLink: async () => {
     const result = await post(`/websites/${state.site.id}/check-link`);
-    toast(result.found ? "Found it on your website" : "It's not on your website's home page yet");
+    toast(result.found ? "Found it on your website. Agents can reach your page now" : "It's not on your website's home page yet");
+    if (result.found) app.render();
   },
 });
 

@@ -2,13 +2,13 @@
   "schema_version": 1,
   "as_of": "2026-11-05",
   "business": {
-    "name": "Cormorant Mobile Detailing",
-    "slug": "cormorant",
+    "name": "Sunrise Auto Detailers",
+    "slug": "sunrise",
     "owner": "Ines Calloway",
     "tagline": "Showroom shine, wherever you park.",
     "timezone": "America/Los_Angeles",
     "phone": "415-555-0142",
-    "email": "cormorant@example.com",
+    "email": "sunrise@example.com",
     "hours": {
       "office": {
         "days": "Monday to Saturday",
@@ -32,7 +32,7 @@
       "id": "vocabulary.service-words",
       "category": "vocabulary",
       "status": "known",
-      "statement": "At Cormorant Mobile Detailing, a \"wash\" or \"just the outside\" means the exterior wash (The Skiff), \"just the inside\" or an \"interior clean\" means the interior detail (The Cutter), \"inside and out\" means the full detail (The Schooner), and a \"polish and seal\" means The Flagship.",
+      "statement": "At Sunrise Auto Detailers, a \"wash\" or \"just the outside\" means the exterior wash (The Skiff), \"just the inside\" or an \"interior clean\" means the interior detail (The Cutter), \"inside and out\" means the full detail (The Schooner), and a \"polish and seal\" means The Flagship.",
       "value": {
         "exterior": [
           "wash",
@@ -65,7 +65,7 @@
       "id": "vocabulary.van",
       "category": "vocabulary",
       "status": "known",
-      "statement": "At Cormorant Mobile Detailing, a \"van\" with no other detail means a full-size van such as a Ford Transit or Mercedes Sprinter, which is the oversized class, while a minivan or a compact van such as a Ford Transit Connect is the large class.",
+      "statement": "At Sunrise Auto Detailers, a \"van\" with no other detail means a full-size van such as a Ford Transit or Mercedes Sprinter, which is the oversized class, while a minivan or a compact van such as a Ford Transit Connect is the large class.",
       "value": {
         "van": "oversized",
         "minivan": "large",
@@ -86,7 +86,7 @@
       "id": "services.exterior",
       "category": "services",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's exterior wash, sold as The Skiff, is a foam hand wash with wheels and tires, door jambs, outside glass and a hand dry, and it doesn't touch the inside of the vehicle.",
+      "statement": "Sunrise Auto Detailers' exterior wash, sold as The Skiff, is a foam hand wash with wheels and tires, door jambs, outside glass and a hand dry, and it doesn't touch the inside of the vehicle.",
       "value": {
         "marketing_name": "The Skiff",
         "includes": [
@@ -112,7 +112,7 @@
       "id": "services.interior",
       "category": "services",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's interior detail, sold as The Cutter, covers vacuuming the seats, carpets, mats and trunk, wiping down the dash, console and door panels, inside glass and spot-cleaning, and it doesn't include shampoo, pet hair removal or any exterior work.",
+      "statement": "Sunrise Auto Detailers' interior detail, sold as The Cutter, covers vacuuming the seats, carpets, mats and trunk, wiping down the dash, console and door panels, inside glass and spot-cleaning, and it doesn't include shampoo, pet hair removal or any exterior work.",
       "value": {
         "marketing_name": "The Cutter",
         "includes": [
@@ -143,7 +143,7 @@
       "id": "services.full",
       "category": "services",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's full detail, sold as The Schooner, is everything in the exterior wash and the interior detail plus a spray wax.",
+      "statement": "Sunrise Auto Detailers' full detail, sold as The Schooner, is everything in the exterior wash and the interior detail plus a spray wax.",
       "value": {
         "marketing_name": "The Schooner",
         "includes": [
@@ -164,7 +164,7 @@
       "id": "services.flagship",
       "category": "services",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's top package, sold as The Flagship, is everything in the full detail plus a clay bar treatment, a one-step machine polish, a 6-month paint sealant and an upholstery and carpet shampoo, while pet hair removal and odour treatment still cost extra.",
+      "statement": "Sunrise Auto Detailers' top package, sold as The Flagship, is everything in the full detail plus a clay bar treatment, a one-step machine polish, a 6-month paint sealant and an upholstery and carpet shampoo, while pet hair removal and odour treatment still cost extra.",
       "value": {
         "marketing_name": "The Flagship",
         "includes": [
@@ -192,7 +192,7 @@
       "id": "services.scratch-outcome",
       "category": "services",
       "status": "unknown",
-      "statement": "Whether The Flagship's one-step polish at Cormorant Mobile Detailing will remove a particular scratch isn't known until a technician inspects it, because the answer depends on whether the scratch has gone through the clear coat.",
+      "statement": "Whether The Flagship's one-step polish at Sunrise Auto Detailers will remove a particular scratch isn't known until a technician inspects it, because the answer depends on whether the scratch has gone through the clear coat.",
       "value": {
         "unknown": "whether a given scratch comes out",
         "settled_by": "a technician inspecting the scratch on site"
@@ -211,7 +211,7 @@
       "id": "size_classes.small",
       "category": "size_classes",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's small class, shown as Class A on its site, covers coupes, hatchbacks and compact cars such as a Honda Civic, Toyota Corolla, Mini Cooper or Mazda3.",
+      "statement": "Sunrise Auto Detailers' small class, shown as Class A on its site, covers coupes, hatchbacks and compact cars such as a Honda Civic, Toyota Corolla, Mini Cooper or Mazda3.",
       "value": {
         "site_label": "Class A",
         "examples": [
@@ -251,7 +251,7 @@
       "id": "size_classes.midsize",
       "category": "size_classes",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's midsize class, shown as Class B on its site, covers sedans, crossovers and two-row SUVs such as a Toyota Camry, Tesla Model 3, Tesla Model Y, Honda CR-V or Subaru Outback.",
+      "statement": "Sunrise Auto Detailers' midsize class, shown as Class B on its site, covers sedans, crossovers and two-row SUVs such as a Toyota Camry, Tesla Model 3, Tesla Model Y, Honda CR-V or Subaru Outback.",
       "value": {
         "site_label": "Class B",
         "examples": [
@@ -304,7 +304,7 @@
       "id": "size_classes.large",
       "category": "size_classes",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's large class, shown as Class C on its site, covers three-row SUVs, minivans, compact vans and standard pickups such as a Toyota Highlander, Chevrolet Tahoe, Honda Odyssey, Ford Transit Connect, Toyota Tacoma, Ford F-150 or Ram 1500.",
+      "statement": "Sunrise Auto Detailers' large class, shown as Class C on its site, covers three-row SUVs, minivans, compact vans and standard pickups such as a Toyota Highlander, Chevrolet Tahoe, Honda Odyssey, Ford Transit Connect, Toyota Tacoma, Ford F-150 or Ram 1500.",
       "value": {
         "site_label": "Class C",
         "examples": [
@@ -387,7 +387,7 @@
       "id": "size_classes.oversized",
       "category": "size_classes",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's oversized class, shown as Class D on its site, covers full-size cargo and passenger vans, extended-length SUVs and heavy-duty pickups such as a Ford Transit, Mercedes Sprinter, Ram ProMaster, Chevrolet Express, Chevrolet Suburban, Ford F-250 or Ram 2500.",
+      "statement": "Sunrise Auto Detailers' oversized class, shown as Class D on its site, covers full-size cargo and passenger vans, extended-length SUVs and heavy-duty pickups such as a Ford Transit, Mercedes Sprinter, Ram ProMaster, Chevrolet Express, Chevrolet Suburban, Ford F-250 or Ram 2500.",
       "value": {
         "site_label": "Class D",
         "examples": [
@@ -451,7 +451,7 @@
       "id": "pricing.exterior",
       "category": "pricing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's exterior wash (The Skiff) costs $69 for a small vehicle, $79 for a midsize vehicle, $99 for a large vehicle and $139 for an oversized vehicle, before any add-ons, fees and tax.",
+      "statement": "Sunrise Auto Detailers' exterior wash (The Skiff) costs $69 for a small vehicle, $79 for a midsize vehicle, $99 for a large vehicle and $139 for an oversized vehicle, before any add-ons, fees and tax.",
       "value": {
         "prices": {
           "small": 69,
@@ -476,7 +476,7 @@
       "id": "pricing.interior",
       "category": "pricing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's interior detail (The Cutter) costs $159 for a small vehicle, $179 for a midsize vehicle, $219 for a large vehicle and $289 for an oversized vehicle, before any add-ons, fees and tax.",
+      "statement": "Sunrise Auto Detailers' interior detail (The Cutter) costs $159 for a small vehicle, $179 for a midsize vehicle, $219 for a large vehicle and $289 for an oversized vehicle, before any add-ons, fees and tax.",
       "value": {
         "prices": {
           "small": 159,
@@ -501,7 +501,7 @@
       "id": "pricing.full",
       "category": "pricing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's full detail (The Schooner) costs $219 for a small vehicle, $249 for a midsize vehicle, $299 for a large vehicle and $399 for an oversized vehicle, before any add-ons, fees and tax.",
+      "statement": "Sunrise Auto Detailers' full detail (The Schooner) costs $219 for a small vehicle, $249 for a midsize vehicle, $299 for a large vehicle and $399 for an oversized vehicle, before any add-ons, fees and tax.",
       "value": {
         "prices": {
           "small": 219,
@@ -526,7 +526,7 @@
       "id": "pricing.flagship",
       "category": "pricing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's polish-and-seal detail (The Flagship) costs $549 for a small vehicle, $629 for a midsize vehicle, $759 for a large vehicle and $949 for an oversized vehicle, before any add-ons, fees and tax.",
+      "statement": "Sunrise Auto Detailers' polish-and-seal detail (The Flagship) costs $549 for a small vehicle, $629 for a midsize vehicle, $759 for a large vehicle and $949 for an oversized vehicle, before any add-ons, fees and tax.",
       "value": {
         "prices": {
           "small": 549,
@@ -551,7 +551,7 @@
       "id": "pricing.starting-at",
       "category": "pricing",
       "status": "known",
-      "statement": "The \"starting at\" prices on Cormorant Mobile Detailing's site are the small-class prices of $69 for the exterior wash, $159 for the interior detail, $219 for the full detail and $549 for The Flagship, and any larger vehicle costs more.",
+      "statement": "The \"starting at\" prices on Sunrise Auto Detailers' site are the small-class prices of $69 for the exterior wash, $159 for the interior detail, $219 for the full detail and $549 for The Flagship, and any larger vehicle costs more.",
       "value": {
         "exterior": 69,
         "interior": 159,
@@ -572,7 +572,7 @@
       "id": "pricing.structure",
       "category": "pricing",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing total is the service price for the vehicle's size class plus add-ons, condition surcharges, any generator fee, any Saturday, after-hours or same-day fee, the travel fee and sales tax, and every part is a fixed amount except odour treatment, which is a range.",
+      "statement": "A Sunrise Auto Detailers total is the service price for the vehicle's size class plus add-ons, condition surcharges, any generator fee, any Saturday, after-hours or same-day fee, the travel fee and sales tax, and every part is a fixed amount except odour treatment, which is a range.",
       "value": {
         "order": [
           "service",
@@ -604,7 +604,7 @@
       "id": "pricing.2027-prices",
       "category": "pricing",
       "status": "unknown",
-      "statement": "Cormorant Mobile Detailing's owner hasn't decided whether prices will change for jobs from 1 January 2027, and that will be settled when she finishes the 2027 price sheet.",
+      "statement": "Sunrise Auto Detailers' owner hasn't decided whether prices will change for jobs from 1 January 2027, and that will be settled when she finishes the 2027 price sheet.",
       "value": {
         "unknown": "whether prices change",
         "affects_jobs_from": "2027-01-01",
@@ -625,7 +625,7 @@
       "id": "addons.pet-hair",
       "category": "addons",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's pet hair removal add-on (dog hair, cat hair) costs $55 for a small vehicle, $55 for a midsize vehicle, $75 for a large vehicle and $95 for an oversized vehicle, adds about 30 minutes, and can only be added to the interior detail, full detail or The Flagship, never to an exterior wash or on its own.",
+      "statement": "Sunrise Auto Detailers' pet hair removal add-on (dog hair, cat hair) costs $55 for a small vehicle, $55 for a midsize vehicle, $75 for a large vehicle and $95 for an oversized vehicle, adds about 30 minutes, and can only be added to the interior detail, full detail or The Flagship, never to an exterior wash or on its own.",
       "value": {
         "prices": {
           "small": 55,
@@ -654,7 +654,7 @@
       "id": "addons.shampoo",
       "category": "addons",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's upholstery and carpet shampoo add-on costs $65 for a small vehicle, $75 for a midsize vehicle, $95 for a large vehicle and $125 for an oversized vehicle, adds about 60 minutes, can only be added to the interior detail or full detail, and is already included in The Flagship.",
+      "statement": "Sunrise Auto Detailers' upholstery and carpet shampoo add-on costs $65 for a small vehicle, $75 for a midsize vehicle, $95 for a large vehicle and $125 for an oversized vehicle, adds about 60 minutes, can only be added to the interior detail or full detail, and is already included in The Flagship.",
       "value": {
         "prices": {
           "small": 65,
@@ -686,7 +686,7 @@
       "id": "addons.odor",
       "category": "addons",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's odour treatment add-on (smoke smell, mildew smell, musty car) costs $90 for a 1-hour ozone treatment or $140 for a 2-hour ozone treatment, which the technician chooses after a smell test on arrival, and it can only be added to the interior detail, full detail or The Flagship.",
+      "statement": "Sunrise Auto Detailers' odour treatment add-on (smoke smell, mildew smell, musty car) costs $90 for a 1-hour ozone treatment or $140 for a 2-hour ozone treatment, which the technician chooses after a smell test on arrival, and it can only be added to the interior detail, full detail or The Flagship.",
       "value": {
         "low": 90,
         "high": 140,
@@ -715,7 +715,7 @@
       "id": "addons.clay",
       "category": "addons",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's clay bar add-on, which lifts bonded grit off the paint, costs $60 for a small vehicle, $70 for a midsize vehicle, $85 for a large vehicle and $110 for an oversized vehicle, adds about 45 minutes, can only be added to the exterior wash or full detail, and is already included in The Flagship.",
+      "statement": "Sunrise Auto Detailers' clay bar add-on, which lifts bonded grit off the paint, costs $60 for a small vehicle, $70 for a midsize vehicle, $85 for a large vehicle and $110 for an oversized vehicle, adds about 45 minutes, can only be added to the exterior wash or full detail, and is already included in The Flagship.",
       "value": {
         "prices": {
           "small": 60,
@@ -747,7 +747,7 @@
       "id": "addons.sealant",
       "category": "addons",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's 6-month paint sealant add-on (wax, paint protection) costs $95 for a small vehicle, $115 for a midsize vehicle, $135 for a large vehicle and $175 for an oversized vehicle, adds about 45 minutes, can only be bought together with the clay bar add-on on an exterior wash or full detail, and is already included in The Flagship.",
+      "statement": "Sunrise Auto Detailers' 6-month paint sealant add-on (wax, paint protection) costs $95 for a small vehicle, $115 for a midsize vehicle, $135 for a large vehicle and $175 for an oversized vehicle, adds about 45 minutes, can only be bought together with the clay bar add-on on an exterior wash or full detail, and is already included in The Flagship.",
       "value": {
         "prices": {
           "small": 95,
@@ -783,7 +783,7 @@
       "id": "addons.headlights",
       "category": "addons",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's headlight restoration (foggy or yellowed headlights) costs $85 per pair at any vehicle size, takes about 45 minutes, can be booked on its own with no other service, and carries the usual travel fee but no deposit.",
+      "statement": "Sunrise Auto Detailers' headlight restoration (foggy or yellowed headlights) costs $85 per pair at any vehicle size, takes about 45 minutes, can be booked on its own with no other service, and carries the usual travel fee but no deposit.",
       "value": {
         "flat": 85,
         "unit": "pair",
@@ -807,7 +807,7 @@
       "id": "conditions.excessive-pet-hair",
       "category": "conditions",
       "status": "known",
-      "statement": "At Cormorant Mobile Detailing, pet hair counts as excessive when it's embedded in the fabric of 3 or more seating positions or across more than half of the cargo or trunk floor, which adds a $60 surcharge on top of the required pet hair removal add-on.",
+      "statement": "At Sunrise Auto Detailers, pet hair counts as excessive when it's embedded in the fabric of 3 or more seating positions or across more than half of the cargo or trunk floor, which adds a $60 surcharge on top of the required pet hair removal add-on.",
       "value": {
         "seating_positions_min": 3,
         "cargo_floor_share_over": "half",
@@ -830,7 +830,7 @@
       "id": "conditions.heavily-soiled",
       "category": "conditions",
       "status": "known",
-      "statement": "At Cormorant Mobile Detailing, an interior counts as heavily soiled when mud or sand covers more than half of the floor area, dried spills mark 2 or more seats, or loose trash fills more than one 13-gallon bag, which adds a $75 surcharge.",
+      "statement": "At Sunrise Auto Detailers, an interior counts as heavily soiled when mud or sand covers more than half of the floor area, dried spills mark 2 or more seats, or loose trash fills more than one 13-gallon bag, which adds a $75 surcharge.",
       "value": {
         "floor_share_over": "half",
         "seats_with_spills_min": 2,
@@ -855,7 +855,7 @@
       "id": "conditions.heavy-contamination",
       "category": "conditions",
       "status": "known",
-      "statement": "At Cormorant Mobile Detailing, an exterior counts as heavily contaminated when tree sap, road tar or etched bird droppings are on 3 or more body panels, which adds a $50 surcharge to any service that includes the exterior.",
+      "statement": "At Sunrise Auto Detailers, an exterior counts as heavily contaminated when tree sap, road tar or etched bird droppings are on 3 or more body panels, which adds a $50 surcharge to any service that includes the exterior.",
       "value": {
         "panels_min": 3,
         "surcharge": 50,
@@ -876,7 +876,7 @@
       "id": "conditions.assessed-on-arrival",
       "category": "conditions",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing technician checks the size class and any surcharge condition before starting, shows the customer photos and the new price if anything differs from the booking, and a customer who declines doesn't get the job done and doesn't get the deposit back.",
+      "statement": "A Sunrise Auto Detailers technician checks the size class and any surcharge condition before starting, shows the customer photos and the new price if anything differs from the booking, and a customer who declines doesn't get the job done and doesn't get the deposit back.",
       "value": {
         "checked_before_start": true,
         "photos_shown": true,
@@ -898,7 +898,7 @@
       "id": "eligibility.served",
       "category": "eligibility",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing serves passenger cars, SUVs, pickups, minivans and cargo or passenger vans up to 24 feet long, 10 feet tall and a 14,000 lb gross weight rating, including electric vehicles and soft-top convertibles, and it will wash the outside of a camper van conversion at the oversized price.",
+      "statement": "Sunrise Auto Detailers serves passenger cars, SUVs, pickups, minivans and cargo or passenger vans up to 24 feet long, 10 feet tall and a 14,000 lb gross weight rating, including electric vehicles and soft-top convertibles, and it will wash the outside of a camper van conversion at the oversized price.",
       "value": {
         "max_length_feet": 24,
         "max_height_feet": 10,
@@ -922,7 +922,7 @@
       "id": "eligibility.matte-wrap",
       "category": "eligibility",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing doesn't clay, polish or seal matte paint, satin paint or vinyl wraps, so The Flagship and the clay bar and paint sealant add-ons aren't available on those vehicles, while the exterior wash, interior detail and full detail are.",
+      "statement": "Sunrise Auto Detailers doesn't clay, polish or seal matte paint, satin paint or vinyl wraps, so The Flagship and the clay bar and paint sealant add-ons aren't available on those vehicles, while the exterior wash, interior detail and full detail are.",
       "value": {
         "blocked_services": [
           "flagship"
@@ -953,7 +953,7 @@
       "id": "eligibility.camper-interior",
       "category": "eligibility",
       "status": "unknown",
-      "statement": "Cormorant Mobile Detailing's owner hasn't decided whether to clean the living quarters of camper van conversions, and that will be settled once she has tried one and worked out the time it takes.",
+      "statement": "Sunrise Auto Detailers' owner hasn't decided whether to clean the living quarters of camper van conversions, and that will be settled once she has tried one and worked out the time it takes.",
       "value": {
         "unknown": "whether camper van living quarters are cleaned",
         "settled_by": "the owner trying one and timing it"
@@ -973,7 +973,7 @@
       "id": "eligibility.cybertruck",
       "category": "eligibility",
       "status": "unknown",
-      "statement": "Cormorant Mobile Detailing's owner hasn't decided which size class a Tesla Cybertruck belongs in or whether its stainless steel panels can be polished, and that will be settled once she has inspected one.",
+      "statement": "Sunrise Auto Detailers' owner hasn't decided which size class a Tesla Cybertruck belongs in or whether its stainless steel panels can be polished, and that will be settled once she has inspected one.",
       "value": {
         "unknown": [
           "size class",
@@ -996,7 +996,7 @@
       "id": "prerequisites.water",
       "category": "prerequisites",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing brings its own water in a 65-gallon tank, so a customer doesn't need to provide water for up to 2 vehicles, but a job of 3 or more vehicles needs a working spigot within 100 feet.",
+      "statement": "Sunrise Auto Detailers brings its own water in a 65-gallon tank, so a customer doesn't need to provide water for up to 2 vehicles, but a job of 3 or more vehicles needs a working spigot within 100 feet.",
       "value": {
         "tank_gallons": 65,
         "no_water_needed_up_to_vehicles": 2,
@@ -1019,7 +1019,7 @@
       "id": "prerequisites.power",
       "category": "prerequisites",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's interior detail, full detail and The Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or a $30 generator fee, and because the generator can't run in an enclosed or underground garage those services can't be done there without an outlet, while the exterior wash needs no power.",
+      "statement": "Sunrise Auto Detailers' interior detail, full detail and The Flagship need a grounded 120-volt outlet within 75 feet of the vehicle, or a $30 generator fee, and because the generator can't run in an enclosed or underground garage those services can't be done there without an outlet, while the exterior wash needs no power.",
       "value": {
         "outlet_volts": 120,
         "outlet_within_feet": 75,
@@ -1043,7 +1043,7 @@
       "id": "prerequisites.parking",
       "category": "prerequisites",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing needs the vehicle in a driveway, private lot, open garage or street space that stays legal for the whole job, with at least 3 feet clear on both sides, plus somewhere within 100 feet for its work van, which is 20 feet long and 7 feet 2 inches tall.",
+      "statement": "Sunrise Auto Detailers needs the vehicle in a driveway, private lot, open garage or street space that stays legal for the whole job, with at least 3 feet clear on both sides, plus somewhere within 100 feet for its work van, which is 20 feet long and 7 feet 2 inches tall.",
       "value": {
         "clear_feet_each_side": 3,
         "van_within_feet": 100,
@@ -1070,7 +1070,7 @@
       "id": "prerequisites.permission",
       "category": "prerequisites",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing customer parked at an apartment building, condo or HOA-managed lot must get the building manager's permission for the work before booking, because Cormorant doesn't contact managers and a refusal on the day counts as a no-show.",
+      "statement": "A Sunrise Auto Detailers customer parked at an apartment building, condo or HOA-managed lot must get the building manager's permission for the work before booking, because Sunrise doesn't contact managers and a refusal on the day counts as a no-show.",
       "value": {
         "customer_gets_permission": true,
         "refusal_counts_as": "no-show"
@@ -1091,7 +1091,7 @@
       "id": "prerequisites.belongings-keys",
       "category": "prerequisites",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing customer must remove personal belongings, child seats and cargo before arrival, and an adult must hand over the keys at the start and stay reachable until the end, because areas still full of belongings aren't cleaned and the price doesn't drop.",
+      "statement": "A Sunrise Auto Detailers customer must remove personal belongings, child seats and cargo before arrival, and an adult must hand over the keys at the start and stay reachable until the end, because areas still full of belongings aren't cleaned and the price doesn't drop.",
       "value": {
         "customer_clears": [
           "belongings",
@@ -1117,7 +1117,7 @@
       "id": "service_area.zone-1",
       "category": "service_area",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing serves these San Francisco ZIP codes with no travel fee: 94102, 94103, 94104, 94105, 94107, 94108, 94109, 94110, 94111, 94112, 94114, 94115, 94116, 94117, 94118, 94121, 94122, 94123, 94124, 94127, 94129, 94131, 94132, 94133, 94134, 94158.",
+      "statement": "Sunrise Auto Detailers serves these San Francisco ZIP codes with no travel fee: 94102, 94103, 94104, 94105, 94107, 94108, 94109, 94110, 94111, 94112, 94114, 94115, 94116, 94117, 94118, 94121, 94122, 94123, 94124, 94127, 94129, 94131, 94132, 94133, 94134, 94158.",
       "value": {
         "zips": [
           "94102",
@@ -1164,7 +1164,7 @@
       "id": "service_area.zone-2",
       "category": "service_area",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing serves these Peninsula and Treasure Island ZIP codes for a $35 travel fee per visit: 94005, 94010, 94014, 94015, 94030, 94044, 94066, 94080, 94130.",
+      "statement": "Sunrise Auto Detailers serves these Peninsula and Treasure Island ZIP codes for a $35 travel fee per visit: 94005, 94010, 94014, 94015, 94030, 94044, 94066, 94080, 94130.",
       "value": {
         "zips": [
           "94005",
@@ -1197,7 +1197,7 @@
       "id": "service_area.zone-3",
       "category": "service_area",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing serves these Marin and East Bay ZIP codes for a $65 travel fee per visit, which includes the bridge toll: 94607, 94608, 94609, 94610, 94611, 94612, 94618, 94704, 94705, 94920, 94941, 94965.",
+      "statement": "Sunrise Auto Detailers serves these Marin and East Bay ZIP codes for a $65 travel fee per visit, which includes the bridge toll: 94607, 94608, 94609, 94610, 94611, 94612, 94618, 94704, 94705, 94920, 94941, 94965.",
       "value": {
         "zips": [
           "94607",
@@ -1234,7 +1234,7 @@
       "id": "service_area.outside",
       "category": "service_area",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing doesn't go to any ZIP code outside its list of 47, for example 94401 in San Mateo, 94501 in Alameda or 94901 in San Rafael, and it makes no exceptions for one-off jobs.",
+      "statement": "Sunrise Auto Detailers doesn't go to any ZIP code outside its list of 47, for example 94401 in San Mateo, 94501 in Alameda or 94901 in San Rafael, and it makes no exceptions for one-off jobs.",
       "value": {
         "listed_zip_count": 47,
         "examples_outside": [
@@ -1259,7 +1259,7 @@
       "id": "availability.days-windows",
       "category": "availability",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing works Tuesday to Saturday and is closed Sunday and Monday, with a morning arrival window of 8:00 am to 9:30 am and an afternoon arrival window of 1:00 pm to 2:30 pm on Tuesday to Friday, and only the morning window on Saturday.",
+      "statement": "Sunrise Auto Detailers works Tuesday to Saturday and is closed Sunday and Monday, with a morning arrival window of 8:00 am to 9:30 am and an afternoon arrival window of 1:00 pm to 2:30 pm on Tuesday to Friday, and only the morning window on Saturday.",
       "value": {
         "closed": [
           "Sunday",
@@ -1293,7 +1293,7 @@
       "id": "availability.durations",
       "category": "availability",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing job takes about 1 to 1.5 hours for the exterior wash, 2 to 4 hours for the interior detail, 3 to 5 hours for the full detail and 6 to 8 hours for The Flagship depending on size, and any job of 5 hours or more including add-ons must start in the morning window.",
+      "statement": "A Sunrise Auto Detailers job takes about 1 to 1.5 hours for the exterior wash, 2 to 4 hours for the interior detail, 3 to 5 hours for the full detail and 6 to 8 hours for The Flagship depending on size, and any job of 5 hours or more including add-ons must start in the morning window.",
       "value": {
         "hours": {
           "exterior": {
@@ -1339,7 +1339,7 @@
       "id": "availability.lead-time",
       "category": "availability",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing needs at least 24 hours' notice before the start of an arrival window, apart from its same-day phone rule.",
+      "statement": "Sunrise Auto Detailers needs at least 24 hours' notice before the start of an arrival window, apart from its same-day phone rule.",
       "value": {
         "lead_time_hours": 24
       },
@@ -1359,7 +1359,7 @@
       "id": "availability.same-day",
       "category": "availability",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing takes same-day work only by phone before 10:00 am, only for the exterior wash or interior detail, only in that day's afternoon window and only if a technician is free, and it adds a $40 same-day fee.",
+      "statement": "Sunrise Auto Detailers takes same-day work only by phone before 10:00 am, only for the exterior wash or interior detail, only in that day's afternoon window and only if a technician is free, and it adds a $40 same-day fee.",
       "value": {
         "cutoff": "10:00",
         "services": [
@@ -1388,7 +1388,7 @@
       "id": "availability.live-calendar",
       "category": "availability",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's current open arrival windows are shown on its booking calendar, where a window is open when at least one of its technicians is free.",
+      "statement": "Sunrise Auto Detailers' current open arrival windows are shown on its booking calendar, where a window is open when at least one of its technicians is free.",
       "value": {
         "source": "booking calendar",
         "open_means": "at least one technician free"
@@ -1408,7 +1408,7 @@
       "id": "staff.who",
       "category": "staff",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing has 2 technicians, owner Ines Calloway and Theo Brandt, and Ines does every Flagship herself on Wednesday, Thursday and Friday mornings only, while either technician does all other work at the same price and customers can't choose which one comes.",
+      "statement": "Sunrise Auto Detailers has 2 technicians, owner Ines Calloway and Theo Brandt, and Ines does every Flagship herself on Wednesday, Thursday and Friday mornings only, while either technician does all other work at the same price and customers can't choose which one comes.",
       "value": {
         "technicians": 2,
         "names": [
@@ -1439,7 +1439,7 @@
       "id": "policies.deposit",
       "category": "policies",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing takes a $50 deposit to book any job, or $150 for The Flagship, with no deposit on a headlight-only visit, and the deposit counts toward the total.",
+      "statement": "Sunrise Auto Detailers takes a $50 deposit to book any job, or $150 for The Flagship, with no deposit on a headlight-only visit, and the deposit counts toward the total.",
       "value": {
         "standard": 50,
         "flagship": 150,
@@ -1462,7 +1462,7 @@
       "id": "policies.cancellation",
       "category": "policies",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing customer who cancels at least 48 hours before the start of the arrival window gets the full deposit back, between 24 and 48 hours gets half back, and under 24 hours gets nothing back.",
+      "statement": "A Sunrise Auto Detailers customer who cancels at least 48 hours before the start of the arrival window gets the full deposit back, between 24 and 48 hours gets half back, and under 24 hours gets nothing back.",
       "value": {
         "full_refund_hours": 48,
         "half_refund_hours": 24,
@@ -1484,7 +1484,7 @@
       "id": "policies.reschedule",
       "category": "policies",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing customer can reschedule once for free with at least 24 hours' notice, by phone or text only, and any later or shorter-notice change counts as a cancellation.",
+      "statement": "A Sunrise Auto Detailers customer can reschedule once for free with at least 24 hours' notice, by phone or text only, and any later or shorter-notice change counts as a cancellation.",
       "value": {
         "free_reschedules": 1,
         "notice_hours": 24,
@@ -1509,7 +1509,7 @@
       "id": "policies.no-show",
       "category": "policies",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing technician waits 20 minutes at the appointment, and if the vehicle, the keys or access still aren't available the visit counts as a no-show and the whole deposit is kept.",
+      "statement": "A Sunrise Auto Detailers technician waits 20 minutes at the appointment, and if the vehicle, the keys or access still aren't available the visit counts as a no-show and the whole deposit is kept.",
       "value": {
         "wait_minutes": 20,
         "deposit_kept": "all"
@@ -1529,7 +1529,7 @@
       "id": "policies.weather",
       "category": "policies",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing moves exterior work when the National Weather Service forecast shows a 50% or higher chance of rain for the job's ZIP code, tells the customer by 7:00 pm the evening before, and offers a free new date or a full deposit refund, while interior-only jobs go ahead.",
+      "statement": "Sunrise Auto Detailers moves exterior work when the National Weather Service forecast shows a 50% or higher chance of rain for the job's ZIP code, tells the customer by 7:00 pm the evening before, and offers a free new date or a full deposit refund, while interior-only jobs go ahead.",
       "value": {
         "rain_chance_pct": 50,
         "decided_by": "19:00",
@@ -1554,7 +1554,7 @@
       "id": "policies.guarantee",
       "category": "policies",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing comes back and redoes a missed area for free if the customer sends a photo within 48 hours of the job, with no cash refunds, and this doesn't cover stains or scratches that were already there.",
+      "statement": "Sunrise Auto Detailers comes back and redoes a missed area for free if the customer sends a photo within 48 hours of the job, with no cash refunds, and this doesn't cover stains or scratches that were already there.",
       "value": {
         "report_within_hours": 48,
         "remedy": "redo missed area free",
@@ -1579,7 +1579,7 @@
       "id": "payment.methods",
       "category": "payment",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing takes Visa, Mastercard, American Express, Discover, Apple Pay and Google Pay, with the deposit paid by card link and the balance due when the job is finished, in cash if the customer prefers, and it doesn't take checks from non-fleet customers, doesn't offer financing or payment plans, and never adds a tip to the total.",
+      "statement": "Sunrise Auto Detailers takes Visa, Mastercard, American Express, Discover, Apple Pay and Google Pay, with the deposit paid by card link and the balance due when the job is finished, in cash if the customer prefers, and it doesn't take checks from non-fleet customers, doesn't offer financing or payment plans, and never adds a tip to the total.",
       "value": {
         "cards": [
           "Visa",
@@ -1613,7 +1613,7 @@
       "id": "tax.sales-tax",
       "category": "tax",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing adds 8.625% sales tax in every ZIP code to services, add-ons, surcharges, the generator fee and timing fees, but not to the travel fee or to gift card purchases.",
+      "statement": "Sunrise Auto Detailers adds 8.625% sales tax in every ZIP code to services, add-ons, surcharges, the generator fee and timing fees, but not to the travel fee or to gift card purchases.",
       "value": {
         "rate_pct": 8.625,
         "taxable": [
@@ -1643,7 +1643,7 @@
       "id": "timing.saturday-fee",
       "category": "timing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing adds a $25 Saturday fee to any job done on a Saturday.",
+      "statement": "Sunrise Auto Detailers adds a $25 Saturday fee to any job done on a Saturday.",
       "value": {
         "fee": 25,
         "per": "visit"
@@ -1664,7 +1664,7 @@
       "id": "timing.evening",
       "category": "timing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing offers an after-hours evening arrival window of 5:00 pm to 6:00 pm on Tuesdays and Thursdays, for the exterior wash only with no add-ons, only in its no-travel-fee San Francisco ZIP codes, for a $30 after-hours fee.",
+      "statement": "Sunrise Auto Detailers offers an after-hours evening arrival window of 5:00 pm to 6:00 pm on Tuesdays and Thursdays, for the exterior wash only with no add-ons, only in its no-travel-fee San Francisco ZIP codes, for a $30 after-hours fee.",
       "value": {
         "start": "17:00",
         "end": "18:00",
@@ -1696,7 +1696,7 @@
       "id": "timing.blackouts",
       "category": "timing",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing is closed on 11 November 2026, 26 to 27 November 2026, 24 December 2026 to 1 January 2027, and 16 to 18 February 2027.",
+      "statement": "Sunrise Auto Detailers is closed on 11 November 2026, 26 to 27 November 2026, 24 December 2026 to 1 January 2027, and 16 to 18 February 2027.",
       "value": {
         "ranges": [
           {
@@ -1736,7 +1736,7 @@
       "id": "recurring.plan",
       "category": "recurring",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's recurring plan takes 15% off the service price for visits every 2 weeks or 10% off for visits every 4 weeks, on the exterior wash, interior detail or full detail for one vehicle at one address, with the first visit at full price, at least 3 visits, and no discount on add-ons or fees.",
+      "statement": "Sunrise Auto Detailers' recurring plan takes 15% off the service price for visits every 2 weeks or 10% off for visits every 4 weeks, on the exterior wash, interior detail or full detail for one vehicle at one address, with the first visit at full price, at least 3 visits, and no discount on add-ons or fees.",
       "value": {
         "every_2_weeks_pct": 15,
         "every_4_weeks_pct": 10,
@@ -1767,7 +1767,7 @@
       "id": "fleet.discount",
       "category": "fleet",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing treats 3 or more vehicles at one address on one day as a fleet job, taking 10% off the service price for 3 to 4 vehicles and 15% off for 5 to 10 vehicles, on the exterior wash, interior detail or full detail only, and discounts don't combine.",
+      "statement": "Sunrise Auto Detailers treats 3 or more vehicles at one address on one day as a fleet job, taking 10% off the service price for 3 to 4 vehicles and 15% off for 5 to 10 vehicles, on the exterior wash, interior detail or full detail only, and discounts don't combine.",
       "value": {
         "min_vehicles": 3,
         "tiers": [
@@ -1804,7 +1804,7 @@
       "id": "fleet.terms",
       "category": "fleet",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing's fleet jobs run Tuesday to Friday only, pay one travel fee per visit however many vehicles are done, and can be invoiced at net 15 for accounts of 5 or more vehicles with a signed agreement.",
+      "statement": "Sunrise Auto Detailers' fleet jobs run Tuesday to Friday only, pay one travel fee per visit however many vehicles are done, and can be invoiced at net 15 for accounts of 5 or more vehicles with a signed agreement.",
       "value": {
         "weekdays": [
           "Tuesday",
@@ -1831,7 +1831,7 @@
       "id": "fleet.over-10",
       "category": "fleet",
       "status": "unknown",
-      "statement": "Cormorant Mobile Detailing's owner hasn't set a price or discount for more than 10 vehicles at once, and that will be settled by her reply to the specific request.",
+      "statement": "Sunrise Auto Detailers' owner hasn't set a price or discount for more than 10 vehicles at once, and that will be settled by her reply to the specific request.",
       "value": {
         "unknown": "price and discount above the limit",
         "limit_vehicles": 10,
@@ -1851,7 +1851,7 @@
       "id": "gift_cards.basics",
       "category": "gift_cards",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing sells emailed gift cards in any whole-dollar amount from $50 to $1,000 that never expire, can pay for any job including deposits and fees, and are cashed out only when the remaining balance is under $10.",
+      "statement": "Sunrise Auto Detailers sells emailed gift cards in any whole-dollar amount from $50 to $1,000 that never expire, can pay for any job including deposits and fees, and are cashed out only when the remaining balance is under $10.",
       "value": {
         "min": 50,
         "max": 1000,
@@ -1879,7 +1879,7 @@
       "id": "gift_cards.holiday-bonus",
       "category": "gift_cards",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing adds a free $25 bonus gift card to any gift card purchase of $200 or more made by 31 December 2026.",
+      "statement": "Sunrise Auto Detailers adds a free $25 bonus gift card to any gift card purchase of $200 or more made by 31 December 2026.",
       "value": {
         "bonus": 25,
         "min_purchase": 200,
@@ -1900,7 +1900,7 @@
       "id": "not_offered.boats-motorcycles",
       "category": "not_offered",
       "status": "not_offered",
-      "statement": "Cormorant Mobile Detailing doesn't detail boats, jet skis or motorcycles.",
+      "statement": "Sunrise Auto Detailers doesn't detail boats, jet skis or motorcycles.",
       "value": {
         "items": [
           "boats",
@@ -1922,7 +1922,7 @@
       "id": "not_offered.rvs-large-trucks",
       "category": "not_offered",
       "status": "not_offered",
-      "statement": "Cormorant Mobile Detailing doesn't detail RVs, motorhomes, trailers, buses, box trucks or semi trucks.",
+      "statement": "Sunrise Auto Detailers doesn't detail RVs, motorhomes, trailers, buses, box trucks or semi trucks.",
       "value": {
         "items": [
           "RVs",
@@ -1947,7 +1947,7 @@
       "id": "not_offered.ceramic-coating",
       "category": "not_offered",
       "status": "not_offered",
-      "statement": "Cormorant Mobile Detailing doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant.",
+      "statement": "Sunrise Auto Detailers doesn't do ceramic coating, and its longest-lasting paint protection is the 6-month paint sealant.",
       "value": {
         "items": [
           "ceramic coating"
@@ -1969,7 +1969,7 @@
       "id": "not_offered.paint-correction",
       "category": "not_offered",
       "status": "not_offered",
-      "statement": "Cormorant Mobile Detailing doesn't do multi-stage paint correction, and for anyone asking for buffing, polish or swirl removal, its only machine polish is the one-step polish in The Flagship.",
+      "statement": "Sunrise Auto Detailers doesn't do multi-stage paint correction, and for anyone asking for buffing, polish or swirl removal, its only machine polish is the one-step polish in The Flagship.",
       "value": {
         "items": [
           "multi-stage paint correction"
@@ -1991,7 +1991,7 @@
       "id": "not_offered.other-work",
       "category": "not_offered",
       "status": "not_offered",
-      "statement": "Cormorant Mobile Detailing doesn't clean engine bays, apply paint protection film, tint windows or repair dents.",
+      "statement": "Sunrise Auto Detailers doesn't clean engine bays, apply paint protection film, tint windows or repair dents.",
       "value": {
         "items": [
           "engine bay cleaning",
@@ -2014,7 +2014,7 @@
       "id": "not_offered.biohazard",
       "category": "not_offered",
       "status": "not_offered",
-      "statement": "Cormorant Mobile Detailing doesn't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste.",
+      "statement": "Sunrise Auto Detailers doesn't clean biohazards, meaning visible mould, blood, vomit, or human or animal waste.",
       "value": {
         "items": [
           "visible mould",
@@ -2037,7 +2037,7 @@
       "id": "credentials.licence-insurance",
       "category": "credentials",
       "status": "known",
-      "statement": "Cormorant Mobile Detailing holds San Francisco business licence FICTIONAL-SFBL-0142 and carries $1,000,000 of general liability and garagekeepers insurance per occurrence with Pelican Harbor Mutual under policy FICTIONAL-GL-0142, both fictional records.",
+      "statement": "Sunrise Auto Detailers holds San Francisco business licence FICTIONAL-SFBL-0142 and carries $1,000,000 of general liability and garagekeepers insurance per occurrence with Pelican Harbor Mutual under policy FICTIONAL-GL-0142, both fictional records.",
       "value": {
         "licence": "FICTIONAL-SFBL-0142",
         "insurer": "Pelican Harbor Mutual",
@@ -2063,7 +2063,7 @@
       "id": "next_step.reply",
       "category": "next_step",
       "status": "known",
-      "statement": "After a request, Cormorant Mobile Detailing's owner Ines Calloway replies by text or email within 4 business hours, with business hours being Monday to Saturday from 8:00 am to 6:00 pm.",
+      "statement": "After a request, Sunrise Auto Detailers' owner Ines Calloway replies by text or email within 4 business hours, with business hours being Monday to Saturday from 8:00 am to 6:00 pm.",
       "value": {
         "replied_by": "Ines Calloway",
         "channels": [
@@ -2092,7 +2092,7 @@
       "id": "next_step.slot-not-held",
       "category": "next_step",
       "status": "known",
-      "statement": "A Cormorant Mobile Detailing request doesn't hold a slot, the job is booked only when the deposit is paid through the link in the owner's reply, and that link lasts 12 hours.",
+      "statement": "A Sunrise Auto Detailers request doesn't hold a slot, the job is booked only when the deposit is paid through the link in the owner's reply, and that link lasts 12 hours.",
       "value": {
         "slot_held_by_request": false,
         "booked_when": "deposit paid",
@@ -2113,10 +2113,10 @@
       "id": "third_party.listing-price",
       "category": "third_party",
       "status": "false_third_party_claim",
-      "statement": "The Bay Auto Pages directory listing for Cormorant Mobile Detailing, last updated in March 2023, says a full detail costs a flat $129, which is false because the real full detail costs $219 to $399 depending on size class.",
+      "statement": "The Bay Auto Pages directory listing for Sunrise Auto Detailers, last updated in March 2023, says a full detail costs a flat $129, which is false because the real full detail costs $219 to $399 depending on size class.",
       "value": {
         "listing": "Bay Auto Pages",
-        "listing_url": "https://bay-auto-pages.example.com/cormorant-mobile-detailing",
+        "listing_url": "https://bay-auto-pages.example.com/sunrise-auto-detailers",
         "last_updated": "March 2023",
         "last_updated_year": 2023,
         "claimed_price": 129,
@@ -2138,10 +2138,10 @@
       "id": "third_party.listing-services",
       "category": "third_party",
       "status": "false_third_party_claim",
-      "statement": "The Bay Auto Pages directory listing for Cormorant Mobile Detailing, last updated in March 2023, says the business details boats, does ceramic coating and opens on Sundays, all of which is false.",
+      "statement": "The Bay Auto Pages directory listing for Sunrise Auto Detailers, last updated in March 2023, says the business details boats, does ceramic coating and opens on Sundays, all of which is false.",
       "value": {
         "listing": "Bay Auto Pages",
-        "listing_url": "https://bay-auto-pages.example.com/cormorant-mobile-detailing",
+        "listing_url": "https://bay-auto-pages.example.com/sunrise-auto-detailers",
         "last_updated": "March 2023",
         "last_updated_year": 2023,
         "claimed": [

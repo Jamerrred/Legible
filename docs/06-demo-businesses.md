@@ -1,6 +1,6 @@
 # Demo businesses
 
-*Last updated 5 November 2026. Mobile detailing is confirmed as the first business and is built as the fictional Cormorant Mobile Detailing. The other three are still proposals. All names and details are fictional.*
+*Last updated 5 November 2026. Mobile detailing is confirmed as the first business and is built as the fictional Sunrise Auto Detailers. The other three are still proposals. All names and details are fictional.*
 
 ## How they were chosen
 

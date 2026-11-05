@@ -35,7 +35,7 @@ def test_booking_flow_works_end_to_end(variant):
 @pytest.mark.parametrize("path", ["/", "/faq", "/book"])
 def test_after_differs_from_before_only_by_the_link_line(before, after, path):
     with_link = after.get(path).text
-    assert "http://agents.cormorant.localhost:8103" in with_link
+    assert "http://agents.sunrise.localhost:8103" in with_link
     assert LINK_LINE.sub("", with_link).split() == before.get(path).text.split()
 
 
@@ -54,7 +54,7 @@ def test_booking_steps_differ_only_by_the_link_line(before, after):
 @pytest.mark.parametrize("path", ["/", "/faq", "/book"])
 def test_before_has_no_trace_of_the_resource_or_the_test(before, path):
     page = before.get(path).text.lower()
-    for word in ("agents.cormorant", "legible", "data-hole", "benchmark"):
+    for word in ("agents.sunrise", "legible", "data-hole", "benchmark"):
         assert word not in page
 
 

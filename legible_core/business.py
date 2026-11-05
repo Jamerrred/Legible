@@ -23,7 +23,7 @@ CENT = Decimal("0.01")
 STATUS_ORDER = ("not_offered", "out_of_area", "invalid_combination", "needs_info", "ok")
 
 
-def load_facts(slug="cormorant"):
+def load_facts(slug="sunrise"):
     """Return the parsed facts file for one business."""
     with (BUSINESSES_DIR / slug / "facts.json").open(encoding="utf-8") as handle:
         return json.load(handle)
@@ -71,7 +71,7 @@ def _is_booked(rules, day, window, days_out):
     return score < share
 
 
-def slots(slug="cormorant", now=None, days=21):
+def slots(slug="sunrise", now=None, days=21):
     """List arrival windows for the next `days` calendar days, starting today.
 
     Closed weekdays and blackout dates are left out. Windows inside the lead time and
@@ -211,7 +211,7 @@ def _usd(value):
 
 
 def quote(
-    slug="cormorant",
+    slug="sunrise",
     service=None,
     size=None,
     addons=(),

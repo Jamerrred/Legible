@@ -40,7 +40,7 @@ def clock(hhmm: str) -> str:
 def calendar_days() -> list[dict]:
     """Group the rolling arrival windows by date for the step 2 calendar."""
     days: dict[str, dict] = {}
-    for slot in slots("cormorant"):
+    for slot in slots("sunrise"):
         day = date.fromisoformat(slot["date"])
         entry = days.setdefault(
             slot["date"],
@@ -63,7 +63,7 @@ def calendar_days() -> list[dict]:
 
 
 def open_slot_values() -> set[str]:
-    return {f"{s['date']}|{s['window']}" for s in slots("cormorant") if s["open"]}
+    return {f"{s['date']}|{s['window']}" for s in slots("sunrise") if s["open"]}
 
 
 def clean(form, name: str) -> str:

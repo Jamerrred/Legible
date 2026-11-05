@@ -1,6 +1,8 @@
 # First demo: build report
 
-*Run on 5 November 2026 (India time), on the fictional Cormorant Mobile Detailing, with everything local. The agent was frozen at commit `2c319fc`, tagged `first-demo-agent-freeze`. This report covers what was built, what passed, what failed and how to run it. For the numbers, see [first-demo-benchmark.md](first-demo-benchmark.md).*
+*The fictional business was called Cormorant Mobile Detailing when this ran, and it is now Sunrise Auto Detailers. Quotes and names here use the new name. The raw logs in `runs/` keep the old one, unedited.*
+
+*Run on 5 November 2026 (India time), on the fictional Sunrise Auto Detailers, with everything local. The agent was frozen at commit `2c319fc`, tagged `first-demo-agent-freeze`. This report covers what was built, what passed, what failed and how to run it. For the numbers, see [first-demo-benchmark.md](first-demo-benchmark.md).*
 
 ## The result
 
@@ -87,15 +89,15 @@ uv run python scripts/serve.py
 
 | Address | What it is |
 |---|---|
-| `http://cormorant.localhost:8101` | "Before" site |
-| `http://cormorant.localhost:8102` | "After" site |
-| `http://agents.cormorant.localhost:8103` | Resource |
-| `http://cormorant.localhost:8104` | Control page |
+| `http://sunrise.localhost:8101` | "Before" site |
+| `http://sunrise.localhost:8102` | "After" site |
+| `http://agents.sunrise.localhost:8103` | Resource |
+| `http://sunrise.localhost:8104` | Control page |
 
 In another terminal, check the booking flow:
 
 ```bash
-uv run python scripts/check_booking.py http://cormorant.localhost:8101
+uv run python scripts/check_booking.py http://sunrise.localhost:8101
 ```
 
 Re-grade the saved runs and print their tables. Neither of these calls a model, so they're free:
@@ -123,7 +125,7 @@ uv run python -m bench.run_benchmark --variant before --name first-demo --resume
 Run one query by hand on the local web:
 
 ```bash
-uv run python -m errand.run --task "What does a full detail cost at Cormorant Mobile Detailing?" --search local --corpus corpus/after --out runs/adhoc
+uv run python -m errand.run --task "What does a full detail cost at Sunrise Auto Detailers?" --search local --corpus corpus/after --out runs/adhoc
 ```
 
 Use `--search exa` for the public web. Results are in `runs/first-demo/results_*.json`, with each run's log beside them. Keep parallelism low on a small balance.

@@ -31,7 +31,7 @@ def font(size: int, bold: bool = False):
 
 
 def price_board() -> None:
-    model = load_facts("cormorant")["pricing_model"]
+    model = load_facts("sunrise")["pricing_model"]
     image = Image.new("RGB", (1100, 1130), "white")
     draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, 1100, 100), fill=NAVY)

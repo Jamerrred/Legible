@@ -108,6 +108,8 @@ def _next_step(site: dict, needs: dict, checks: dict, facts: dict) -> dict | Non
         return {"screen": "bookings", "label": f"Reply to {_plural(needs['bookings'], 'booking request')}", "note": "An agent is waiting on your answer."}
     if needs["agent_questions"]:
         return {"screen": "inbox", "label": f"Answer {_plural(needs['agent_questions'], 'agent question')}", "note": "Your answer shows on its status page."}
+    if site["published_version"] and not site["link_placed"]:
+        return {"screen": "websites", "label": "Put your link on your website", "note": "That's how agents find your page."}
     return None
 
 
@@ -239,9 +241,17 @@ async def check_link(website_id: str):
     """Does the owner's site carry the resource link yet? A plain fetch of the home page."""
     site = _site(website_id)
     link = edge.link_for(site["slug"])
-    async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
-        response = await client.get(site["url"])
-    return {"link": link, "found": link in response.text}
+    if demo.ENABLED:
+        found = True  # The demo plays the owner adding the link, and that's when agents start arriving.
+    else:
+        async with httpx.AsyncClient(timeout=20, follow_redirects=True) as client:
+            response = await client.get(site["url"])
+        found = link in response.text
+    if found and not site["link_placed"]:
+        store.update("website", "id", website_id, link_placed=1)
+        if demo.ENABLED:
+            _background(demo.seed_activity(website_id))
+    return {"link": link, "found": found}
 
 
 # ---------------------------------------------------------------- inbox
@@ -355,8 +365,6 @@ async def confirm(item_id: str, body: Confirm | None = None):
         raise HTTPException(409, "This item can't be confirmed")
     store.resolve_inbox(item_id, "confirmed")
     published = await work.publish(website_id) if item["kind"] != "insight" else None
-    if demo.ENABLED and item["kind"] == "review":
-        _background(demo.seed_activity(website_id))
     return {"confirmed": True, "version": store.latest_record(website_id)["version"], "published": published}
 
 
@@ -416,6 +424,8 @@ async def activity(website_id: str, limit: int = 50):
     rows = store.query("SELECT * FROM event WHERE website_id = ? ORDER BY remote_id DESC", website_id)
     events = [{"id": r["remote_id"], "ts": r["ts"], "event": r["event"], **r["payload"]} for r in rows]
     events = [e for e in events if not (e.get("user_agent") or "").startswith("legible")]  # The app's own preview reads.
+    # A quote that ended in a dead end gave the agent no price, so it only counts as the dead end.
+    events = [e for e in events if e["event"] != "quote" or e.get("status") in ("ok", "needs_info")]
     kinds = Counter(e["event"] for e in events)
     feed = []
     for event in events[:limit]:
