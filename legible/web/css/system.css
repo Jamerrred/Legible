@@ -1,47 +1,51 @@
 /* Legible's design system.
-   Colours follow Interfere (interfere.com): near-black neutrals, soft white text and one gradient
-   from orange through pink and purple to blue. Type is the system font, so it reads as ordinary
-   software on any computer. The colours each do one job:
-     gradient   anything an agent sees or does
-     pen        where something got stuck, or what needs the owner
+   Colours follow Cursor (cursor.com): warm off-white or warm off-black, cards one shade away from the
+   page, hairline borders, solid pill buttons and one orange accent, used sparingly. It follows the
+   computer's light or dark setting. Type is the system font. Each colour does one job:
+     ink        text and the main button
+     accent     what needs the owner, and what has focus
      green      answered, live
-     highlight  what just changed, briefly
+     dusk       the one gradient, for the moment a page goes live
    Motion numbers: quick hover steps, soft landings, no bounce. */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light dark;
   --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --display-weight: 550;
+  --display-weight: 500;
   --display-tracking: -0.022em;
   --display-tracking-xl: -0.028em;
 
-  --bg: #0b0b0b;
-  --surface: #1c1c1c;
-  --paper: #141414;
-  --ink: #ededed;
-  --ink-2: #b0b0b0;
-  --muted: #8c8c8c;
-  --on-ink: #0b0b0b;
-  --ink-fill: #272727;
-  --line: rgb(255 255 255 / .09);
-  --line-2: rgb(255 255 255 / .17);
+  --canvas: #f7f7f4;
+  --paper: #f2f1ed;
+  --bg: #ebeae5;
+  --surface: #e6e5e0;
+  --ink: #26251e;
+  --on-ink: #f7f7f4;
+  --accent: #c93f00;
+  --ok: #1a7a59;
 
-  --spectrum: rgb(255 59 0), rgb(246 0 157) 38%, rgb(151 62 198) 71%, rgb(0 142 255);
-  --agent: #5ba1ff;
-  --agent-deep: #0b0b0b;
-  --agent-fill: linear-gradient(90deg, rgb(255 59 0 / .62), rgb(246 0 157 / .62) 38%, rgb(151 62 198 / .62) 71%, rgb(0 142 255 / .62)), #141414;
-  --agent-wash: linear-gradient(90deg, rgb(255 59 0 / .2), rgb(246 0 157 / .2) 38%, rgb(151 62 198 / .2) 71%, rgb(0 142 255 / .2)), #141414;
-  --agent-ink: #ffffff;
-  --agent-soft: rgb(255 255 255 / .78);
-  --agent-line: rgb(255 255 255 / .22);
+  --ink-2: color-mix(in oklab, var(--ink) 76%, var(--canvas));
+  --muted: color-mix(in oklab, var(--ink) 64%, var(--canvas));
+  --line: color-mix(in oklab, var(--ink) 10%, transparent);
+  --line-2: color-mix(in oklab, var(--ink) 20%, transparent);
+  --tint: color-mix(in oklab, var(--ink) 7%, transparent);
+  --ink-fill: var(--ink);
 
-  --pen: #ff9574;
-  --pen-soft: rgb(255 149 116 / .14);
-  --ok: #6fd392;
-  --ok-soft: rgb(111 211 146 / .14);
-  --hl: rgb(246 0 157 / .34);
+  --agent: var(--accent);
+  --agent-deep: var(--on-ink);
+  --agent-fill: var(--ink);
+  --agent-wash: var(--paper);
+  --agent-ink: var(--ink);
+  --agent-soft: var(--ink-2);
+  --agent-line: var(--line-2);
+
+  --pen: var(--accent);
+  --pen-soft: color-mix(in oklab, var(--accent) 12%, transparent);
+  --ok-soft: color-mix(in oklab, var(--ok) 14%, transparent);
+  --hl: color-mix(in oklab, var(--accent) 22%, transparent);
+  --dusk: linear-gradient(115deg, #d5cabb, #bbb1ae 48%, #9ea1aa);
 
   --r-s: 7px; --r-m: 12px; --r-l: 18px; --r-xl: 24px;
 
@@ -51,10 +55,23 @@
   --m-roll: cubic-bezier(.22, 1, .36, 1);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #14120b;
+    --paper: #1b1913;
+    --bg: #201e18;
+    --surface: #26241e;
+    --ink: #edecec;
+    --on-ink: #14120b;
+    --accent: #f54e00;
+    --ok: #4cc79b;
+  }
+}
+
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
 html { view-transition-name: none; }
-body { background: var(--bg); color: var(--ink); font: 400 15px/1.5 var(--font-text); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; }
+body { background: var(--canvas); color: var(--ink); font: 400 15px/1.5 var(--font-text); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow: hidden; }
 button, input, textarea, select { font: inherit; color: inherit; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, p { margin: 0; }
@@ -92,29 +109,29 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Buttons. Hover lifts 1px and shifts the fill; press sinks 1px. */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 38px; padding: 0 15px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--paper); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), color var(--m-out) var(--m-ease), border-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--paper); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), color var(--m-out) var(--m-ease), border-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
 .btn:active { transform: translateY(1px) scale(.985); }
 .btn--primary { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
-.btn--agent { background: var(--agent-fill); border-color: transparent; color: #fff; }
-.btn--on-agent { background: #fff; border-color: #fff; color: var(--agent-deep); }
-.btn--ghost-agent { background: transparent; border-color: var(--agent-line); color: #fff; }
+.btn--agent { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.btn--on-agent { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.btn--ghost-agent { background: transparent; border-color: var(--line-2); color: var(--ink); }
 .btn--ghost { background: transparent; border-color: transparent; color: var(--ink-2); }
-.btn--sm { height: 32px; padding: 0 11px; font-size: 13px; border-radius: 8px; }
-.btn--lg { height: 46px; padding: 0 20px; font-size: 15px; border-radius: 12px; }
+.btn--sm { height: 32px; padding: 0 13px; font-size: 13px; }
+.btn--lg { height: 46px; padding: 0 22px; font-size: 15px; }
 .btn--icon { width: 36px; padding: 0; }
 .btn[disabled] { opacity: .45; cursor: default; }
 @media (hover: hover) and (pointer: fine) {
   .btn:hover { transform: translateY(-1px); background: color-mix(in oklab, var(--paper) 92%, var(--ink)); border-color: color-mix(in oklab, var(--ink) 30%, transparent); transition-duration: var(--m-in), var(--m-in), var(--m-in), var(--m-press), var(--m-in); }
-  .btn--primary:hover { background: #fff; border-color: #fff; }
-  .btn--agent:hover { filter: brightness(1.15); border-color: transparent; }
-  .btn--on-agent:hover { background: color-mix(in oklab, #fff 88%, var(--agent)); border-color: transparent; }
-  .btn--ghost-agent:hover { background: rgb(255 255 255 / .12); border-color: rgb(255 255 255 / .4); }
-  .btn--ghost:hover { background: rgb(255 255 255 / .07); border-color: transparent; }
+  .btn--primary:hover { background: color-mix(in oklab, var(--ink) 86%, var(--canvas)); border-color: transparent; }
+  .btn--agent:hover { background: color-mix(in oklab, var(--ink) 86%, var(--canvas)); border-color: transparent; }
+  .btn--on-agent:hover { background: color-mix(in oklab, var(--ink) 86%, var(--canvas)); border-color: transparent; }
+  .btn--ghost-agent:hover { background: var(--tint); border-color: var(--line-2); }
+  .btn--ghost:hover { background: var(--tint); border-color: transparent; }
   .btn:active, .btn:hover:active { transform: translateY(1px) scale(.985); }
   .btn[disabled]:hover { transform: none; }
 }
 :focus-visible { outline: 2px solid var(--agent); outline-offset: 2px; border-radius: 6px; }
-.agent-surface :focus-visible { outline-color: #fff; }
+
 
 /* Copy buttons swap their icon for a tick */
 .copy-swap { position: relative; display: inline-grid; width: 16px; height: 16px; }
@@ -125,25 +142,25 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* Fields */
 .field { display: flex; align-items: center; gap: 10px; padding: 7px 7px 7px 15px; background: var(--paper); border: 1px solid var(--line-2); border-radius: 13px; transition: border-color var(--m-out) var(--m-ease), box-shadow var(--m-out) var(--m-ease); }
-.field:focus-within { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(91 161 255 / .13); transition-duration: var(--m-in); }
+.field:focus-within { border-color: var(--agent); box-shadow: 0 0 0 3px var(--hl); transition-duration: var(--m-in); }
 .field input, .field textarea { flex: 1; min-width: 0; border: 0; outline: 0; background: none; font-size: 15px; }
 .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
-.send { width: 34px; height: 34px; flex: none; border: 0; border-radius: 10px; background: var(--ink); color: var(--on-ink); display: grid; place-items: center; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
+.send { width: 34px; height: 34px; flex: none; border: 0; border-radius: 50%; background: var(--ink); color: var(--on-ink); display: grid; place-items: center; cursor: pointer; transition: background-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease), opacity var(--m-out); }
 .send:active { transform: translateY(1px) scale(.96); }
 .send[disabled] { opacity: .4; cursor: default; }
-@media (hover: hover) and (pointer: fine) { .send:hover { background: #fff; } }
-.field--xl { padding: 11px 11px 11px 22px; border-radius: 18px; box-shadow: 0 1px 0 rgb(11 12 14 / .03), 0 18px 50px -24px rgb(11 12 14 / .22); }
+@media (hover: hover) and (pointer: fine) { .send:hover { background: color-mix(in oklab, var(--ink) 86%, var(--canvas)); } }
+.field--xl { padding: 11px 11px 11px 22px; border-radius: 18px; }
 .field--xl input { font-size: 19px; letter-spacing: -.012em; }
-.field--xl .send { width: 44px; height: 44px; border-radius: 12px; }
+.field--xl .send { width: 44px; height: 44px; }
 
 textarea.note { width: 100%; min-height: 72px; padding: 11px 14px; border: 1px solid var(--line-2); border-radius: var(--r-m); background: var(--paper); outline: 0; resize: vertical; transition: border-color var(--m-out), box-shadow var(--m-out); }
-textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(91 161 255 / .13); }
+textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px var(--hl); }
 
 .switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: var(--ink-2); user-select: none; }
 .switch input { position: absolute; opacity: 0; width: 0; height: 0; }
 .switch .track { width: 34px; height: 20px; border-radius: 10px; background: var(--line-2); position: relative; transition: background-color var(--m-out) var(--m-ease); flex: none; }
-.switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 8px; background: #f2f2f2; box-shadow: 0 1px 2px rgb(0 0 0 / .25); transition: transform 180ms var(--m-ease), width 90ms var(--m-ease); }
-.switch input:checked + .track { background: var(--agent-fill); }
+.switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 8px; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .25); transition: transform 180ms var(--m-ease), width 90ms var(--m-ease); }
+.switch input:checked + .track { background: var(--accent); }
 .switch input:checked + .track::after { transform: translateX(14px); }
 .switch:active .track::after { width: 20px; }
 .switch input:focus-visible + .track { outline: 2px solid var(--agent); outline-offset: 2px; }
@@ -154,11 +171,11 @@ textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(91 1
 .badge--ok { background: var(--ok-soft); color: var(--ok); }
 .badge--pen { background: var(--pen-soft); color: var(--pen); }
 .badge--muted { background: var(--bg); color: var(--ink-2); }
-.badge--agent { background: rgb(255 255 255 / .15); color: #fff; }
+.badge--agent { background: var(--tint); color: var(--ink); }
 .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-2); flex: none; }
-.dot--live { background: var(--ok); box-shadow: 0 0 0 3px rgb(15 125 69 / .14); }
+.dot--live { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft); }
 .dot--pen { background: var(--pen); }
-.dot--agent { background: var(--agent-fill); }
+.dot--agent { background: var(--accent); }
 .count { display: inline-grid; place-items: center; min-width: 21px; height: 21px; padding: 0 6px; border-radius: 7px; background: var(--pen-soft); color: var(--pen); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
 
 /* Digits that roll to their value. The transition is on the column, so any re-render animates it. */
@@ -188,10 +205,10 @@ textarea.note:focus { border-color: var(--agent); box-shadow: 0 0 0 3px rgb(91 1
 .focus-in { animation: focus-in 620ms var(--m-ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
 @keyframes focus-in { from { opacity: .15; filter: blur(9px); } to { opacity: 1; filter: blur(0); } }
 .shimmer { background: linear-gradient(90deg, var(--muted) 30%, var(--ink) 50%, var(--muted) 70%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 1.8s linear infinite; }
-.agent-surface .shimmer { background-image: linear-gradient(90deg, var(--agent-soft) 30%, #fff 50%, var(--agent-soft) 70%); }
+.agent-surface .shimmer { background-image: linear-gradient(90deg, var(--muted) 30%, var(--ink) 50%, var(--muted) 70%); }
 @keyframes shimmer { from { background-position: 120% 0; } to { background-position: -120% 0; } }
 .ring { display: inline-block; flex: none; width: 15px; height: 15px; border: 2px solid var(--line-2); border-top-color: var(--agent); border-radius: 50%; animation: spin .8s linear infinite; }
-.agent-surface .ring { border-color: var(--agent-line); border-top-color: #fff; }
+
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Route changes: the sheet's content swaps, and everything else holds still */
