@@ -26,6 +26,8 @@ uv run python scripts/start.py --demo
 
 Open `http://127.0.0.1:8300`, and press **Start over** in the sidebar if you've used it before. Use a browser window around 1280 by 800, and close other tabs.
 
+To get back to the first screen at any point, press the Legible logo or **Add a website** in the sidebar. In the demo copy, adding a website starts a new take and replaces the current one.
+
 Pause after each action. The numbers and traces animate, and they're the most persuasive part of the video.
 
 ## The walkthrough
